@@ -2,9 +2,14 @@
   "name": "libs",
   "private": true,
   "scripts": {
-    "build": "rm -rf ./dist && tsc -p tsconfig.json",
+    "install": "lerna bootstrap",
+    "change": "lerna changed",
+    "diff": "lerna diff",
     "release": "lerna version --conventional-commits --yes",
-    "pub": "lerna publish from-git"
+    "test": "jest --forceExit --coverage",
+    "prebuild": "git clean -fdx packages/component/*/tsconfig.tsbuildinfo -e packages/component/*/node_modules",
+    "build": "yarn tsc -b",
+    "publish": "yarn test && yarn build && yarn release && lerna publish --force-publish"
   },
   "homepage": "https://github.com/tethys-org/libs#readme",
   "repository": {
@@ -38,17 +43,22 @@
     "packages/component/*"
   ],
   "devDependencies": {
-    "eslint": "^7.28.0",
-    "lerna": "^4.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
+    "@types/jest": "^27.0.2",
     "@types/node": "^15.12.2",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "clean-webpack-plugin": "^4.0.0",
     "cz-lerna-changelog": "^2.0.3",
+    "eslint": "^7.28.0",
+    "eslint-plugin-jest": "^24.5.2",
     "husky": "^6.0.0",
+    "jest": "^27.2.4",
+    "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
     "standard-version": "^9.3.0",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.3.2"
   }
 }
