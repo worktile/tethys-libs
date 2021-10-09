@@ -1,18 +1,11 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "declaration": true,
-    "outDir": "./dist",
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true
-  },
-  "include": ["packages"],
-  "exclude": ["node_modules"]
+  "files": [],
+  "references": [
+      {
+          "path": "packages/component/auth"
+      },
+      {
+          "path": "packages/component/cache"
+      },
+  ]
 }
