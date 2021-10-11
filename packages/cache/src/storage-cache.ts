@@ -1,6 +1,5 @@
 import { isString, isNumber } from '@tethys/cdk/is';
 
-// const _ = lodash;
 const NUMBER_PREFIX = '____n____';
 const SupportedStorage = window && window.localStorage;
 const storageSource = window.localStorage || window.sessionStorage;
