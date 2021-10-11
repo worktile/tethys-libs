@@ -7,7 +7,7 @@
     "diff": "lerna diff",
     "release": "lerna version --conventional-commits --yes",
     "test": "jest --forceExit --coverage",
-    "prebuild": "git clean -fdx packages/component/*/tsconfig.tsbuildinfo -e packages/component/*/node_modules",
+    "prebuild": "git clean -fdx packages/*/tsconfig.tsbuildinfo -e packages/*/node_modules",
     "build": "yarn tsc -b",
     "publish": "yarn test && yarn build && yarn release && lerna publish --force-publish"
   },
@@ -20,7 +20,10 @@
     "url": "https://github.com/tethys-org/libs/issues"
   },
   "publishConfig": {},
-  "dependencies": {},
+  "dependencies": {
+    "@angular/core": "^12.2.9",
+    "@tethys/cdk": "^12.0.0"
+  },
   "eslintConfig": {
     "extends": "eslint:recommended",
     "env": {
@@ -40,7 +43,7 @@
     }
   },
   "workspaces": [
-    "packages/component/*"
+    "packages/*"
   ],
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

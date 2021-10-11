@@ -2,10 +2,10 @@
   "files": [],
   "references": [
       {
-          "path": "packages/component/auth"
+          "path": "packages/auth"
       },
       {
-          "path": "packages/component/cache"
+          "path": "packages/cache"
       },
   ]
 }
