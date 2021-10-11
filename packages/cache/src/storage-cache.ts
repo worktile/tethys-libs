@@ -35,9 +35,8 @@ const cache = {
      * cache.get('key1', false);
      *
      * @param key string
-     * @param compress compress data default true
      */
-  get<TValue = string>(key: string, compress = true): TValue {
+  get<TValue = string>(key: string): TValue {
     if (SupportedStorage) {
       let value = storageSource.getItem(key);
       if (value) {
