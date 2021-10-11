@@ -73,7 +73,7 @@ describe('#cache', () => {
 
     it('should get number 10 when storage number 10 without compress', () => {
       cache.set('key1', 10);
-      const result = cache.get<number>('key1', false);
+      const result = cache.get<number>('key1');
       expect(result).toEqual(10);
     });
 
