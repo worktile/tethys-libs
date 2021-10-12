@@ -1,5 +1,4 @@
 import { cache } from '../src/storage-cache';
-import * as LZString from 'lz-string';
 const NUMBER_PREFIX = '____n____';
 
 describe('#cache', () => {
@@ -8,39 +7,39 @@ describe('#cache', () => {
       const value = 'value for test local data';
       cache.set('key', value);
       const result = localStorage.getItem('key');
-      expect(result).toEqual(LZString.compressToUTF16(value));
+      expect(result).toEqual(value);
     });
 
     it('should get 10 when storage number 10', () => {
       cache.set('key', 10);
       const result = localStorage.getItem('key');
-      expect(result).toEqual(LZString.compressToUTF16(`${NUMBER_PREFIX}10`));
+      expect(result).toEqual(`${NUMBER_PREFIX}10`);
     });
 
     it('should get object when storage object', () => {
       const value = { name: 'name1', age: 12 };
       cache.set('key', value);
       const result = localStorage.getItem('key');
-      expect(result).toEqual(LZString.compressToUTF16(JSON.stringify(value)));
+      expect(result).toEqual(JSON.stringify(value));
     });
 
     it('should get array when storage array', () => {
       const value = [{ name: 'name1', age: 12 }, { name: 'name2', age: 13 }];
       cache.set('key', value);
       const result = localStorage.getItem('key');
-      expect(result).toEqual(LZString.compressToUTF16(JSON.stringify(value)));
+      expect(result).toEqual(JSON.stringify(value));
     });
 
     it('set string without compress', () => {
       const value = 'value for test local data';
-      cache.set('key', value, false);
+      cache.set('key', value);
       const result = localStorage.getItem('key');
       expect(result).toEqual(value);
     });
 
     it('set number 10 without compress', () => {
       const value = 10;
-      cache.set('key', value, false);
+      cache.set('key', value);
       const result = localStorage.getItem('key');
       expect(result).toEqual(`${NUMBER_PREFIX}10`);
     });
@@ -61,7 +60,7 @@ describe('#cache', () => {
 
     it('should get \'value for test local data\' when storage string without compress', () => {
       const value = 'value for test local data';
-      cache.set('key', value, false);
+      cache.set('key', value);
       const result = cache.get('key');
       expect(result).toEqual(result);
     });
@@ -73,8 +72,8 @@ describe('#cache', () => {
     });
 
     it('should get number 10 when storage number 10 without compress', () => {
-      cache.set('key1', 10, false);
-      const result = cache.get<number>('key1', false);
+      cache.set('key1', 10);
+      const result = cache.get<number>('key1');
       expect(result).toEqual(10);
     });
 

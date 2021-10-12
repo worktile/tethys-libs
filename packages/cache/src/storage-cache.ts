@@ -1,9 +1,6 @@
-import * as LZString from 'lz-string';
-import * as lodash from 'lodash';
+import { isString, isNumber } from '@tethys/cdk/is';
 
-const _ = lodash;
 const NUMBER_PREFIX = '____n____';
-
 const SupportedStorage = window && window.localStorage;
 const storageSource = window.localStorage || window.sessionStorage;
 
@@ -20,11 +17,8 @@ const cache = {
      * @param value string | number | object
      * @param compress compress data default true
      */
-  set<TValue = string>(key: string, value: TValue, compress = true) {
-    let itemValue = _.isString(value) ? value : _.isNumber(value) ? `${NUMBER_PREFIX}${value}` : JSON.stringify(value);
-    if (compress) {
-      itemValue = LZString.compressToUTF16(itemValue);
-    }
+  set<TValue = string>(key: string, value: TValue) {
+    let itemValue = isString(value) ? value : isNumber(value) ? `${NUMBER_PREFIX}${value}` : JSON.stringify(value);
     if (SupportedStorage) {
       storageSource.setItem(key, itemValue as string);
     }
@@ -40,20 +34,16 @@ const cache = {
      * cache.get('key1', false);
      *
      * @param key string
-     * @param compress compress data default true
      */
-  get<TValue = string>(key: string, compress = true): TValue {
+  get<TValue = string>(key: string): TValue {
     if (SupportedStorage) {
       let value = storageSource.getItem(key);
       if (value) {
-        if (compress) {
-          value = LZString.decompressFromUTF16(value);
-        }
         try {
           const result = JSON.parse(value as string);
           return result;
         } catch (error) {
-          if (_.isString(value) && value.includes(NUMBER_PREFIX)) {
+          if (isString(value) && value.includes(NUMBER_PREFIX)) {
             return parseInt(value.replace(NUMBER_PREFIX, ''), 10) as any;
           } else {
             return value as any;
