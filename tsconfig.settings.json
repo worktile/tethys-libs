@@ -23,6 +23,7 @@
     "listFiles": false /* Print names of files part of the compilation. */,
     "pretty": true /* Stylize errors and messages using color and context. */,
     "suppressImplicitAnyIndexErrors": true,
+    "experimentalDecorators": true,
     "lib": ["ES2020", "DOM"],
     "types": [
       "@types/jasmine",

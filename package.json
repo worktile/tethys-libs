@@ -22,8 +22,13 @@
   },
   "publishConfig": {},
   "dependencies": {
-    "@angular/core": "^12.2.9",
-    "@tethys/cdk": "^12.0.0"
+    "@angular/common": "12.2.0",
+    "@angular/core": "12.2.0",
+    "@angular/router": "12.2.0",
+    "@tethys/cdk": "^12.0.0",
+    "@types/extend": "^3.0.1",
+    "extend": "^3.0.2",
+    "rxjs": "6.6.3"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
