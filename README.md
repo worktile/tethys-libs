@@ -1,14 +1,20 @@
-# 安装项目依赖
-`yarn install` 或 `lerna bootstrap`
+A set of foundational libs for tethys-pro.
 
-# 为所有的包增加依赖
-`lerna add lodash`
+## Installation
 
-# 单独安装某个包的依赖
-`lerna add lz-string --scope=@tethys/cache`
+```
+npm i @tethys/auth @tethys/cache --save
+// or 
+yarn add @tethys/auth @tethys/cache
+```
+ ## Development
 
-# 编译发布
-`yarn run publish`
+ ```
+yarn install    // install all deps or lerna bootstrap
+yarn release    // bump version for release
+yarn pub        // publish
+```
+
 
 
 
