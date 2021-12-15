@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="header">
+    <img src="assets/images/logo.svg" class="logo" />
+    <span class="title">TETHYS PRO</span>
+  </div>
+  <div class="body">
+    <form thyForm name="demoForm" #demoForm="thyForm">
+      <thy-form-group thyLabelText="用户名" thyLabelRequired>
+        <input thyInput name="username" [(ngModel)]="model.name" required placeholder="请输入用户名" />
+      </thy-form-group>
+      <thy-form-group thyLabelText="密码" thyLabelRequired>
+        <input thyInput type="password" name="password" [(ngModel)]="model.password" required placeholder="请输入登录密码" />
+      </thy-form-group>
+      <thy-form-group>
+        <button thyButton="primary" [thyLoading]="saving" thyLoadingText="Login" (thyFormSubmit)="login()" [thyBlock]="true">登录</button>
+      </thy-form-group>
+    </form>
+  </div>
+</div>

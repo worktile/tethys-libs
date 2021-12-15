@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-tethys/styles/index.scss';
+
+html,
+body {
+    height: 100%;
+}
+
+$menu-color: #fff;
+
+.thy-menu {
+    .thy-menu-group {
+        .thy-menu-group-header {
+            &:hover {
+                background: #48525c;
+                .thy-menu-group-title {
+                    color: $menu-color;
+                }
+            }
+            .thy-menu-group-title {
+                color: $menu-color;
+            }
+        }
+    }
+    .thy-menu-item {
+        &:hover {
+            background: #48525c;
+            .thy-menu-item-name {
+                color: $menu-color;
+            }
+        }
+        .thy-menu-item-content {
+            &:hover {
+                background: #48525c;
+            }
+        }
+        .thy-menu-item-name {
+            color: $menu-color;
+        }
+        &.active {
+            .thy-menu-item-name {
+                color: $menu-color;
+            }
+        }
+    }
+}
