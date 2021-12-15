@@ -1,0 +1,23 @@
+:host {
+    display: flex;
+    flex: auto;
+    align-items: center;
+    .container {
+        width: 400px;
+    }
+
+    .header {
+        display: flex;
+        height: 60px;
+        align-items: center;
+        justify-content: center;
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .title {
+            margin-left: 10px;
+        }
+    }
+}

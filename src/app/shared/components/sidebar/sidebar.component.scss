@@ -1,0 +1,39 @@
+:host {
+    background: #48525c;
+    color: #fff;
+
+    .menu {
+        color: #fff;
+        .thy-menu-group-title {
+            color: #fff;
+        }
+        .thy-menu {
+            .thy-menu-group {
+                .thy-menu-group-header {
+                    .thy-menu-group-title {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+   
+}
+
+.header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    .title {
+        margin-left: 10px;
+    }
+}
+
+
