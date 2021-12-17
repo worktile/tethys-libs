@@ -10,7 +10,3 @@ export * from './token/jwt/jwt.guard';
 export * from './token/jwt/jwt.helper';
 export * from './token/jwt/jwt.interceptor';
 export * from './token/jwt/jwt.model';
-export * from './token/simple/simple.guard';
-export * from './token/simple/simple.interceptor';
-export * from './token/simple/simple.model';
-

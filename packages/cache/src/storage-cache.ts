@@ -5,7 +5,7 @@ const SupportedStorage = window && window.localStorage;
 const storageSource = window.localStorage || window.sessionStorage;
 
 const cache = {
-  /**
+    /**
      * set item to local storage
      *
      * @example
@@ -17,13 +17,13 @@ const cache = {
      * @param value string | number | object
      * @param compress compress data default true
      */
-  set<TValue = string>(key: string, value: TValue) {
-    let itemValue = isString(value) ? value : isNumber(value) ? `${NUMBER_PREFIX}${value}` : JSON.stringify(value);
-    if (SupportedStorage) {
-      storageSource.setItem(key, itemValue as string);
-    }
-  },
-  /**
+    set<TValue = string>(key: string, value: TValue) {
+        let itemValue = isString(value) ? value : isNumber(value) ? `${NUMBER_PREFIX}${value}` : JSON.stringify(value);
+        if (SupportedStorage) {
+            storageSource.setItem(key, itemValue as string);
+        }
+    },
+    /**
      * get item from local storage
      *
      * @example
@@ -35,44 +35,44 @@ const cache = {
      *
      * @param key string
      */
-  get<TValue = string>(key: string): TValue {
-    if (SupportedStorage) {
-      let value = storageSource.getItem(key);
-      if (value) {
-        try {
-          const result = JSON.parse(value as string);
-          return result;
-        } catch (error) {
-          if (isString(value) && value.includes(NUMBER_PREFIX)) {
-            return parseInt(value.replace(NUMBER_PREFIX, ''), 10) as any;
-          } else {
-            return value as any;
-          }
+    get<TValue = string>(key: string): TValue {
+        if (SupportedStorage) {
+            let value = storageSource.getItem(key);
+            if (value) {
+                try {
+                    const result = JSON.parse(value as string);
+                    return result;
+                } catch (error) {
+                    if (isString(value) && value.includes(NUMBER_PREFIX)) {
+                        return parseInt(value.replace(NUMBER_PREFIX, ''), 10) as any;
+                    } else {
+                        return value as any;
+                    }
+                }
+            } else {
+                return undefined as any;
+            }
+        } else {
+            return undefined as any;
         }
-      } else {
-        return undefined as any;
-      }
-    } else {
-      return undefined as any;
-    }
-  },
-  /**
+    },
+    /**
      * remove key from storage
      * @param key cache key
      */
-  remove(key: string) {
-    if (SupportedStorage) {
-      storageSource.removeItem(key);
-    }
-  },
-  /**
+    remove(key: string) {
+        if (SupportedStorage) {
+            storageSource.removeItem(key);
+        }
+    },
+    /**
      * clear all storage
      */
-  clear() {
-    if (SupportedStorage) {
-      storageSource.clear();
+    clear() {
+        if (SupportedStorage) {
+            storageSource.clear();
+        }
     }
-  }
 };
 
 export { cache };

@@ -11,6 +11,8 @@ import { SharedModule } from './shared';
 import { registerLocaleData } from '@angular/common';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AUTH_CONFIG, JWTInterceptor } from '@tethys/auth';
 
 registerLocaleData(localeZH);
 
@@ -23,6 +25,16 @@ registerLocaleData(localeZH);
             useValue: {
                 layout: 'vertical',
                 footerAlign: 'left'
+            }
+        },
+        {   provide: HTTP_INTERCEPTORS, 
+            useClass: JWTInterceptor, 
+            multi: true 
+        },
+        {
+            provide: AUTH_CONFIG,
+            useValue: {
+                storeKey: 'demo_token'
             }
         }
     ],
