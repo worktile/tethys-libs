@@ -2,7 +2,7 @@ export * from './interface';
 export * from './auth.config';
 export * from './store/interface';
 export * from './store/local-storage.service';
-export * from './store/member.service';
+export * from './store/memory.service';
 export * from './store/session-storage.service';
 export * from './token/token.service';
 export * from './token/base.interceptor';
