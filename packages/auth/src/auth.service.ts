@@ -41,20 +41,20 @@ export class ThyAuthService {
         return of(token);
     }
 
-    authenticate(userInfo: SafeAny): Observable<SafeAny> {
-        return this.processResultToken(userInfo);
+    authenticate(token: string): Observable<SafeAny> {
+        return this.processResultToken(token);
     }
 
-    private processResultToken(userInfo: SafeAny) {
-        const token = createToken(this.fallbackClass, userInfo);
-        if (token.getValue()) {
-            return this.tokenService.set(token).pipe(
+    private processResultToken(token: string) {
+        const processToken = createToken(this.fallbackClass, token);
+        if (processToken.getValue()) {
+            return this.tokenService.set(processToken).pipe(
                 map(() => {
-                    return token;
+                    return processToken;
                 })
             );
         }
-        return of(token);
+        return of(processToken);
     }
 
     /**
