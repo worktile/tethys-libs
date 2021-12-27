@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { CanActivate, CanActivateChild, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ThyAuthService } from '../auth.service';
 import { ThyAuthConfig } from '../interface';
 import { ThyTokenService } from '../token/token.service';
@@ -17,14 +17,13 @@ export class ThyAuthJWTGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     private process(): Observable<boolean> {
-        const isAuthenticated = this.authService.isAuthenticated();
-        isAuthenticated.subscribe((res) => {
-            if (!res) {
-                redirectToLogin(this.config, this.injector, this.url);
-            }
-            return res;
-        });
-        return isAuthenticated;
+        return this.authService.isAuthenticated().pipe(
+            tap((authenticated) => {
+                if (!authenticated) {
+                    redirectToLogin(this.config, this.injector, this.url);
+                }
+            })
+        );
     }
 
     // lazy loading
