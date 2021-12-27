@@ -1,11 +1,10 @@
-import { AuthConfig } from './interface';
+import { InjectionToken } from '@angular/core';
+import { ThyAuthConfig } from './interface';
 
-export const DEFAULT_CONFIG: AuthConfig = {
-    storeKey: '_token',
+export const DEFAULT_CONFIG: ThyAuthConfig = {
+    tokenStoreKey: '_token',
     tokenInvalidRedirect: true,
     tokenExpOffset: 10,
-    tokenSendKey: 'token',
-    tokenSendTemplate: '${token}',
     loginUrl: '/login',
     referrerKey: 'redirect_uri',
     ignores: [/\/login/, /assets\//, /passport\//],
@@ -13,6 +12,8 @@ export const DEFAULT_CONFIG: AuthConfig = {
     refreshOffset: 6000
 };
 
-export function mergeConfig(config?: AuthConfig): AuthConfig {
+export function mergeConfig(config?: ThyAuthConfig): ThyAuthConfig {
     return Object.assign(DEFAULT_CONFIG, config);
 }
+
+export const THY_AUTH_CONFIG = new InjectionToken<ThyAuthConfig>('THY_AUTH_CONFIG');

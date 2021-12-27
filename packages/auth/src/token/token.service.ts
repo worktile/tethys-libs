@@ -1,69 +1,84 @@
-import { Inject, inject, Injectable, InjectionToken, OnDestroy, Optional } from '@angular/core';
-import { BehaviorSubject, interval, Observable, Subject, Subscription } from 'rxjs';
-import { filter, map, share } from 'rxjs/operators';
-import { mergeConfig } from '../auth.config';
-import { AuthConfig, AuthSafeAny, AuthTokenModel, AuthTokenService, AUTH_CONFIG } from '../interface';
-import { AuthStore, AUTH_STORE_TOKEN } from '../store/interface';
+import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
+import { BehaviorSubject, filter, interval, map, Observable, of, share, Subject, Subscription } from 'rxjs';
+import { ThyTokenStorage } from './token-storage.service';
+import { ThyAuthToken } from './token';
+import { mergeConfig, THY_AUTH_CONFIG } from '../auth.config';
+import { SafeAny } from '../types';
+import { ThyAuthConfig } from '../interface';
 
-export function AUTH_SERVICE_TOKEN_FACTORY(): AuthTokenService {
-    return new TokenService(inject(AUTH_STORE_TOKEN), inject(AUTH_CONFIG));
-}
-
-export const AUTH_SERVICE_TOKEN = new InjectionToken<AuthTokenService>('AUTH_SERVICE_TOKEN', {
-    providedIn: 'root',
-    factory: AUTH_SERVICE_TOKEN_FACTORY
-});
-
-@Injectable({ providedIn: 'root' })
-export class TokenService implements AuthTokenService, OnDestroy {
-    private refresh$ = new Subject<AuthTokenModel>();
-    private change$ = new BehaviorSubject<AuthTokenModel | null>(null);
+@Injectable()
+export class ThyTokenService implements OnDestroy {
+    protected token$ = new BehaviorSubject<ThyAuthToken | null>(null);
+    private _options: ThyAuthConfig;
     private interval$: Subscription = new Subscription();
-    private _options: AuthConfig;
+    private refresh$ = new Subject<ThyAuthToken>();
 
-    constructor(@Inject(AUTH_STORE_TOKEN) private store: AuthStore, @Optional() @Inject(AUTH_CONFIG) defaultConfig?: AuthConfig) {
-        this._options = mergeConfig(defaultConfig);
+    constructor(protected tokenStorage: ThyTokenStorage, @Optional() @Inject(THY_AUTH_CONFIG) config?: ThyAuthConfig) {
+        this._options = mergeConfig(config);
+        this.publishStoredToken();
     }
 
-    get refresh(): Observable<AuthTokenModel> {
+    get refresh(): Observable<ThyAuthToken> {
         this.builderRefresh();
         return this.refresh$.pipe(share());
     }
 
-    get loginUrl(): string | undefined {
-        return this._options.loginUrl;
-    }
-
-    get options(): AuthConfig {
+    get options(): ThyAuthConfig {
         return this._options;
     }
 
-    set(data: AuthTokenModel): boolean {
-        const res = this.store.set(this._options.storeKey!, data);
-        this.change$.next(data);
-        return res;
+    get loginUrl(): string {
+        return this._options.loginUrl!;
     }
 
-    get(type?: AuthSafeAny): AuthSafeAny;
-    get<T extends AuthTokenModel>(type?: new () => T): T {
-        const data = this.store.get(this._options.storeKey!);
-        return type ? (Object.assign(new type(), data) as T) : (data as T);
+    get(type?: SafeAny): SafeAny;
+
+    /**
+     * Returns observable of current token
+     * @returns {Observable<ThyAuthToken>}
+     */
+    get(): Observable<ThyAuthToken> {
+        const token = this.tokenStorage.get(this.options.tokenStoreKey!);
+        return of(token);
     }
 
-    clear(options: { onlyToken: boolean } = { onlyToken: false }): void {
-        let data: AuthTokenModel | null = null;
-        if (options.onlyToken === true) {
-            data = this.get() as AuthTokenModel;
-            data.token = '';
-            this.set(data);
-        } else {
-            this.store.remove(this._options.storeKey!);
-        }
-        this.change$.next(data);
+    /**
+     * Sets a token into the storage. This method is used by the NbAuthService automatically.
+     *
+     * @param {ThyAuthToken} token
+     * @returns {Observable<any>}
+     */
+    set(token: ThyAuthToken): Observable<null> {
+        this.tokenStorage.set(this.options.tokenStoreKey!, token);
+        this.publishStoredToken();
+        return of(null);
     }
 
-    change(): Observable<AuthTokenModel | null> {
-        return this.change$.pipe(share());
+    /**
+     * Removes the token and published token value
+     *
+     * @returns {Observable<any>}
+     */
+
+    clear(): Observable<null> {
+        this.tokenStorage.clear(this.options.tokenStoreKey!);
+        this.publishStoredToken();
+        return of(null);
+    }
+
+    /**
+     * Publishes token when it changes.
+     * @returns {Observable<ThyAuthToken>}
+     */
+    tokenChange(): Observable<ThyAuthToken | null> {
+        return this.token$.pipe(
+            filter((value) => !!value),
+            share()
+        );
+    }
+
+    protected publishStoredToken() {
+        this.token$.next(this.tokenStorage.get(this.options.tokenStoreKey!));
     }
 
     private cleanRefresh(): void {
@@ -78,8 +93,8 @@ export class TokenService implements AuthTokenService, OnDestroy {
         this.interval$ = interval(refreshTime)
             .pipe(
                 map(() => {
-                    const item = this.get() as AuthTokenModel;
-                    const expired = item.expired || item['exp'] || 0;
+                    const item = this.get() as any;
+                    const expired = item.getTokenExpDate() || 0;
                     if (expired <= 0) {
                         return null;
                     }

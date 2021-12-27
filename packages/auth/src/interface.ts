@@ -1,11 +1,10 @@
-import { InjectionToken } from '@angular/core';
-import { Observable } from 'rxjs';
+import { SafeAny } from './types';
 
-export interface AuthConfig {
+export interface ThyAuthConfig {
     /**
      * 存储KEY值，默认：`_token`
      */
-    storeKey?: string;
+    tokenStoreKey?: string;
     /**
      * 无效时跳转至登录页，默认：`true`，包括：
      * - 无效token值
@@ -16,16 +15,6 @@ export interface AuthConfig {
      * token过期时间偏移值，默认：`10` 秒（单位：秒）
      */
     tokenExpOffset?: number;
-    /**
-     * 发送token参数名，默认：·
-     */
-    tokenSendKey?: string;
-    /**
-     * 发送token模板（默认为：`'${token}'`），使用 `${token}` 表示token点位符（**注意：**请务必使用 \`\` 包裹），例如：
-     *
-     * - `Bearer ${token}`
-     */
-    tokenSendTemplate?: string;
     /**
      * 登录页路由地址，默认：`/login`
      */
@@ -48,72 +37,44 @@ export interface AuthConfig {
      */
     refreshOffset?: number;
 }
-export interface AuthTokenModel {
-    [key: string]: AuthSafeAny;
-    token: string | null | undefined;
+
+export interface JWT {
     /**
-     * 过期时间，单位：ms
-     * - 不管Simple、JWT模式都必须指定
+     * Issuerd
+     * jwt签发者
      */
-    expired?: number;
+    iss: string;
+    /**
+     * Issued At
+     * jwt的签发时间
+     */
+    iat: string;
+    /**
+     * Subject
+     * jwt所面向的用户
+     */
+    sub: string;
+    /**
+     * Expiration Time
+     * jwt的过期时间，这个过期时间必须要大于签发时间
+     */
+    exp: number;
+    /**
+     * Audience
+     * 接收jwt的一方
+     */
+    aud: string;
+    /**
+     * Not Before
+     * 定义在什么时间之前，该jwt都是不可用的.
+     */
+    nbf: string;
+    /**
+     * JWT ID
+     * jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。
+     */
+    jti: string;
+
+    [key: string]: SafeAny;
+    [key: number]: SafeAny;
 }
-
-export interface AuthTokenService {
-    /**
-     * 授权失败后跳转路由路径（支持外部链接地址），通过设置[全局配置]来改变
-     */
-    readonly loginUrl: string | undefined;
-
-    readonly options: AuthConfig;
-
-    /**
-     * 订阅刷新，订阅时会自动产生一个定时器，每隔一段时间进行一些校验
-     * - **注意** 会多次触发，请务必做好业务判断
-     */
-    readonly refresh: Observable<AuthTokenModel>;
-
-    /**
-     * 设置 Token 信息，当用户 Token 发生变动时都需要调用此方法重新刷新
-     * - 如果需要监听过期，需要传递 `expired` 值
-     */
-    set(data: AuthTokenModel | null): boolean;
-
-    /**
-     * 获取Token，形式包括：
-     * - `get()` 获取 Simple Token
-     * - `get<JWTTokenModel>(JWTTokenModel)` 获取 JWT Token
-     */
-    get(type?: AuthSafeAny): AuthTokenModel | null;
-
-    /**
-     * 获取Token，形式包括：
-     * - `get()` 获取 Simple Token
-     * - `get<JWTTokenModel>(JWTTokenModel)` 获取 JWT Token
-     */
-    get<T extends AuthTokenModel>(type?: AuthSafeAny): T;
-
-    /**
-     * 清除 Token 信息，当用户退出登录时调用。
-     * ```
-     * // 清除所有 Token 信息
-     * tokenService.clear();
-     * // 只清除 token 字段
-     * tokenService.clear({ onlyToken: true });
-     * ```
-     */
-    clear(options?: { onlyToken: boolean }): void;
-
-    /**
-     * 订阅 Token 对象变更通知
-     */
-    change(): Observable<AuthTokenModel | null>;
-}
-
-export const AUTH_CONFIG = new InjectionToken<AuthConfig>('AUTH_CONFIG');
-
-export const AUTH_CONFIG_FACTORY = {
-    provide: AUTH_CONFIG,
-    useValue: {}
-};
-
-export declare type AuthSafeAny = any;
