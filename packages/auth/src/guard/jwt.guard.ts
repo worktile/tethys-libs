@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { CanActivate, CanActivateChild, CanLoad, Route, UrlSegment, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { ThyAuthService } from '../auth.service';
-import { ThyAuthConfig } from '../interface';
+import { ThyAuthConfig } from '../auth.config';
 import { ThyTokenService } from '../token/token.service';
 import { redirectToLogin } from '../utils';
 

@@ -10,8 +10,7 @@ import { redirectToLogin } from '../utils';
 
 @Injectable()
 export class ThyAuthJWTInterceptor implements HttpInterceptor {
-    constructor(
-        private injector: Injector) {}
+    constructor(private injector: Injector) {}
 
     intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         const options = mergeConfig(this.injector.get(ThyTokenService).options);
@@ -25,10 +24,10 @@ export class ThyAuthJWTInterceptor implements HttpInterceptor {
                 if (authenticated) {
                     return this.authService.getToken().pipe(
                         switchMap((token: ThyAuthToken) => {
-                            const JWT = `Bearer ${token.getValue()}`;
+                            const authorizationStr = `Bearer ${token.getValue()}`;
                             req = req.clone({
                                 setHeaders: {
-                                    Authorization: JWT
+                                    Authorization: authorizationStr
                                 }
                             });
                             return next.handle(req);

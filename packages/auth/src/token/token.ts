@@ -20,7 +20,7 @@ export function thyAuthCreateToken<T extends ThyAuthToken>(tokenClass: ThyAuthTo
     return new tokenClass(value, createdAt);
 }
 
-export class ThyAuthBaseToken<T = unknown> extends ThyAuthToken<T> {
+export class ThyAuthTokenBase<T = unknown> extends ThyAuthToken<T> {
     constructor(protected readonly token: string, protected createdAt?: Date) {
         super();
         try {

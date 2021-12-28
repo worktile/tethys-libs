@@ -1,8 +1,8 @@
-import { JWT } from '../interface';
+import { JWTPayload } from '../types';
 import { decodeJwtPayload } from '../utils';
-import { ThyAuthBaseToken, ThyAuthTokenNotFoundError } from './token';
+import { ThyAuthTokenBase, ThyAuthTokenNotFoundError } from './token';
 
-export class ThyAuthJWTToken extends ThyAuthBaseToken<JWT> {
+export class ThyAuthJWTToken extends ThyAuthTokenBase<JWTPayload> {
     /**
      * for JWT token, the iat (issued at) field of the token payload contains the creation Date
      */
@@ -41,6 +41,6 @@ export class ThyAuthJWTToken extends ThyAuthBaseToken<JWT> {
      * @returns {boolean}
      */
     override isValid(): boolean {
-        return super.isValid() && (!this.getTokenExpDate() || (new Date() < this.getTokenExpDate()!));
+        return super.isValid() && (!this.getTokenExpDate() || new Date() < this.getTokenExpDate()!);
     }
 }
