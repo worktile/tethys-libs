@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ThyAuthJWTGuard } from '@tethys/auth';
 import { HomeComponent } from './layout/home/home.component';
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
         children: [
             {
                 path: 'dashboard',
+                canActivate: [ThyAuthJWTGuard],
                 loadChildren: () => import('./features/dashboard/dashboard.module').then((m) => m.DashboardModule)
             },
             {

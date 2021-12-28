@@ -1,99 +1,113 @@
-import { Inject, inject, Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, interval, Observable, Subject, Subscription } from 'rxjs';
-import { filter, map, share } from 'rxjs/operators';
-import { mergeConfig } from '../auth.config';
-import { AuthConfig, AuthReferrer, AuthSafeAny, AuthTokenModel, AuthTokenService } from '../interface';
-import { AuthStore, AUTH_STORE_TOKEN } from '../store/interface';
-import { ConfigService } from '../util/config/config.service';
-
-export function AUTH_SERVICE_TOKEN_FACTORY(): AuthTokenService {
-  return new TokenService(inject(ConfigService), inject(AUTH_STORE_TOKEN));
-}
+import { Inject, Injectable, OnDestroy, Optional } from '@angular/core';
+import { BehaviorSubject, filter, interval, map, Observable, of, share, Subject, Subscription } from 'rxjs';
+import { ThyTokenStorage } from './token-storage.service';
+import { ThyAuthToken } from './token';
+import { mergeConfig, THY_AUTH_CONFIG } from '../auth.config';
+import { SafeAny } from '../types';
+import { ThyAuthConfig } from '../interface';
 
 @Injectable()
-export class TokenService implements AuthTokenService, OnDestroy {
-  private refresh$ = new Subject<AuthTokenModel>();
-  private change$ = new BehaviorSubject<AuthTokenModel | null>(null);
-  private interval$: Subscription = new Subscription();
-  private _options: AuthConfig;
-  private _referrer: AuthReferrer = {};
+export class ThyTokenService implements OnDestroy {
+    protected token$ = new BehaviorSubject<ThyAuthToken | null>(null);
+    private _options: ThyAuthConfig;
+    private interval$: Subscription = new Subscription();
+    private refresh$ = new Subject<ThyAuthToken>();
 
-  constructor(configSrv: ConfigService, @Inject(AUTH_STORE_TOKEN) private store: AuthStore) {
-    this._options = mergeConfig(configSrv);
-  }
-
-  get refresh(): Observable<AuthTokenModel> {
-    this.builderRefresh();
-    return this.refresh$.pipe(share());
-  }
-
-  get login_url(): string | undefined {
-    return this._options.login_url;
-  }
-
-  get referrer(): AuthReferrer {
-    return this._referrer;
-  }
-
-  get options(): AuthConfig {
-    return this._options;
-  }
-
-  set(data: AuthTokenModel): boolean {
-    const res = this.store.set(this._options.store_key!, data);
-    this.change$.next(data);
-    return res;
-  }
-
-  get(type?: AuthSafeAny): AuthSafeAny;
-  get<T extends AuthTokenModel>(type?: new () => T): T {
-    const data = this.store.get(this._options.store_key!);
-    return type ? (Object.assign(new type(), data) as T) : (data as T);
-  }
-
-  clear(options: { onlyToken: boolean } = { onlyToken: false }): void {
-    let data: AuthTokenModel | null = null;
-    if (options.onlyToken === true) {
-      data = this.get() as AuthTokenModel;
-      data.token = '';
-      this.set(data);
-    } else {
-      this.store.remove(this._options.store_key!);
+    constructor(protected tokenStorage: ThyTokenStorage, @Optional() @Inject(THY_AUTH_CONFIG) config?: ThyAuthConfig) {
+        this._options = mergeConfig(config);
+        this.publishStoredToken();
     }
-    this.change$.next(data);
-  }
 
-  change(): Observable<AuthTokenModel | null> {
-    return this.change$.pipe(share());
-  }
-
-  private cleanRefresh(): void {
-    if (this.interval$ && !this.interval$.closed) {
-      this.interval$.unsubscribe();
+    get refresh(): Observable<ThyAuthToken> {
+        this.builderRefresh();
+        return this.refresh$.pipe(share());
     }
-  }
 
-  private builderRefresh(): void {
-    const { refreshTime, refreshOffset } = this._options;
-    this.cleanRefresh();
-    this.interval$ = interval(refreshTime)
-      .pipe(
-        map(() => {
-          const item = this.get() as AuthTokenModel;
-          const expired = item.expired || item.exp || 0;
-          if (expired <= 0) {
-            return null;
-          }
+    get options(): ThyAuthConfig {
+        return this._options;
+    }
 
-          const curTime = new Date().valueOf() + refreshOffset!;
-          return expired <= curTime ? item : null;
-        }),
-        filter((v) => v != null),
-      )
-      .subscribe((res) => this.refresh$.next(res!));
-  }
+    get loginUrl(): string {
+        return this._options.loginUrl!;
+    }
 
-  ngOnDestroy(): void {
-    this.cleanRefresh();
-  }
+    get(type?: SafeAny): SafeAny;
+
+    /**
+     * Returns observable of current token
+     * @returns {Observable<ThyAuthToken>}
+     */
+    get(): Observable<ThyAuthToken> {
+        const token = this.tokenStorage.get(this.options.tokenStoreKey!);
+        return of(token);
+    }
+
+    /**
+     * Sets a token into the storage. This method is used by the NbAuthService automatically.
+     *
+     * @param {ThyAuthToken} token
+     * @returns {Observable<any>}
+     */
+    set(token: ThyAuthToken): Observable<null> {
+        this.tokenStorage.set(this.options.tokenStoreKey!, token);
+        this.publishStoredToken();
+        return of(null);
+    }
+
+    /**
+     * Removes the token and published token value
+     *
+     * @returns {Observable<any>}
+     */
+
+    clear(): Observable<null> {
+        this.tokenStorage.clear(this.options.tokenStoreKey!);
+        this.publishStoredToken();
+        return of(null);
+    }
+
+    /**
+     * Publishes token when it changes.
+     * @returns {Observable<ThyAuthToken>}
+     */
+    tokenChange(): Observable<ThyAuthToken | null> {
+        return this.token$.pipe(
+            filter((value) => !!value),
+            share()
+        );
+    }
+
+    protected publishStoredToken() {
+        this.token$.next(this.tokenStorage.get(this.options.tokenStoreKey!));
+    }
+
+    private cleanRefresh(): void {
+        if (this.interval$ && !this.interval$.closed) {
+            this.interval$.unsubscribe();
+        }
+    }
+
+    private builderRefresh(): void {
+        const { refreshTime, refreshOffset } = this._options;
+        this.cleanRefresh();
+        this.interval$ = interval(refreshTime)
+            .pipe(
+                map(() => {
+                    const item = this.get() as any;
+                    const expired = item.getTokenExpDate() || 0;
+                    if (expired <= 0) {
+                        return null;
+                    }
+
+                    const curTime = new Date().valueOf() + refreshOffset!;
+                    return expired <= curTime ? item : null;
+                }),
+                filter((v) => v != null)
+            )
+            .subscribe((res) => this.refresh$.next(res!));
+    }
+
+    ngOnDestroy(): void {
+        this.cleanRefresh();
+    }
 }
