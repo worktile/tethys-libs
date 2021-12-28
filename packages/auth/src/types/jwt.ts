@@ -1,6 +1,6 @@
 export interface JWTPayload {
     /**
-     * Issuerd
+     * Issued
      * jwt签发者
      */
     iss: string;
