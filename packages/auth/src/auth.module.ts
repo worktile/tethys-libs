@@ -1,8 +1,7 @@
 import { HttpRequest } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { SafeAny } from './types';
-import { THY_AUTH_CONFIG } from './auth.config';
-import { ThyAuthConfig } from './interface';
+import { THY_AUTH_CONFIG, ThyAuthConfig } from './auth.config';
 import { ThyAuthService } from './auth.service';
 import { ThyTokenService } from './token/token.service';
 import { ThyTokenLocalStorage, ThyTokenStorage, THY_AUTH_FALLBACK_TOKEN } from './token/token-storage.service';
@@ -23,7 +22,7 @@ export class ThyAuthModule {
             ngModule: ThyAuthModule,
             providers: [
                 { provide: THY_AUTH_CONFIG, useValue: thyAuthOptions },
-                { provide: THY_AUTH_FALLBACK_TOKEN, useValue: ThyAuthJWTToken},
+                { provide: THY_AUTH_FALLBACK_TOKEN, useValue: ThyAuthJWTToken },
                 { provide: ThyTokenStorage, useClass: ThyTokenLocalStorage },
                 ThyAuthService,
                 ThyTokenService,

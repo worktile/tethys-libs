@@ -1,7 +1,6 @@
-export * from './interface';
+
 export * from './auth.config';
 export * from './auth.service';
-export * from './interface';
 export * from './types';
 export * from './token/token.service';
 export * from './token/token-storage.service';

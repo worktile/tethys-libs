@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { ThyAuthConfig } from './interface';
+import { ThyAuthConfig } from './auth.config';
 import { thyAuthCreateToken, ThyAuthIllegalJWTTokenError, ThyAuthToken, ThyAuthTokenClass } from './token/token';
 import { SafeAny } from './types';
 

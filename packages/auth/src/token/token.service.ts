@@ -4,7 +4,7 @@ import { ThyTokenStorage } from './token-storage.service';
 import { ThyAuthToken } from './token';
 import { mergeConfig, THY_AUTH_CONFIG } from '../auth.config';
 import { SafeAny } from '../types';
-import { ThyAuthConfig } from '../interface';
+import { ThyAuthConfig } from '../auth.config';
 
 @Injectable()
 export class ThyTokenService implements OnDestroy {
