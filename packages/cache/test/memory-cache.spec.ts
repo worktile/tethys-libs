@@ -1,13 +1,17 @@
 import { memoryCache } from '../src/memory-cache';
 
 describe('memory-cache', () => {
-    it('should set \'key1\' value is string', () => {
+    beforeEach(() => {
+        memoryCache.clear();
+    });
+
+    it("should set 'key1' value is string", () => {
         memoryCache.set('key1', 'key1-value');
         const value = memoryCache.get('key1');
         expect(value).toBe('key1-value');
     });
 
-    it('should set \'key-object\' value is object', () => {
+    it("should set 'key-object' value is object", () => {
         const user = { name: 'name1', id: '1' };
         memoryCache.set('key-object', user);
         const value = memoryCache.get<{ name: string; id: string }>('key-object');
@@ -32,7 +36,7 @@ describe('memory-cache', () => {
         expect(memoryCache.has('key2')).toBe(false);
     });
 
-    it('should auto remove min hits cache key:\'key:2\'', () => {
+    it("should auto remove min hits cache key:'key:2'", () => {
         memoryCache.clear();
         for (let i = 1; i <= 1000; i++) {
             memoryCache.set(`key:${i}`, `value:${i}`);

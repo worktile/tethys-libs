@@ -2,8 +2,12 @@ import { cache } from '../src/storage-cache';
 const NUMBER_PREFIX = '____n____';
 
 describe('#cache', () => {
+    beforeEach(() => {
+        cache.clear();
+    });
+
     describe('#set', () => {
-        it('should get \'value for test local data\' when storage string', () => {
+        it("should get 'value for test local data' when storage string", () => {
             const value = 'value for test local data';
             cache.set('key', value);
             const result = localStorage.getItem('key');
@@ -24,7 +28,10 @@ describe('#cache', () => {
         });
 
         it('should get array when storage array', () => {
-            const value = [{ name: 'name1', age: 12 }, { name: 'name2', age: 13 }];
+            const value = [
+                { name: 'name1', age: 12 },
+                { name: 'name2', age: 13 }
+            ];
             cache.set('key', value);
             const result = localStorage.getItem('key');
             expect(result).toEqual(JSON.stringify(value));
@@ -51,14 +58,14 @@ describe('#cache', () => {
             age: number;
         }
 
-        it('should get \'value for test local data\' when storage string', () => {
+        it("should get 'value for test local data' when storage string", () => {
             const value = 'value for test local data';
             cache.set('key', value);
             const result = cache.get('key');
             expect(result).toEqual(result);
         });
 
-        it('should get \'value for test local data\' when storage string without compress', () => {
+        it("should get 'value for test local data' when storage string without compress", () => {
             const value = 'value for test local data';
             cache.set('key', value);
             const result = cache.get('key');
@@ -91,7 +98,10 @@ describe('#cache', () => {
         });
 
         it('should get array when storage array', () => {
-            const value = [{ name: 'name1', age: 12 }, { name: 'name2', age: 13 }];
+            const value = [
+                { name: 'name1', age: 12 },
+                { name: 'name2', age: 13 }
+            ];
             cache.set('key', value);
             const result = cache.get<User[]>('key');
             expect(result).toEqual(value);
