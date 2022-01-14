@@ -12,7 +12,6 @@ module.exports = {
         'eol-last': 0,
         semi: ['error', 'always'],
         quotes: ['error', 'single'],
-        'no-console': ['error', { allow: ['log', 'warn'] }],
         'arrow-parens': 0,
         'comma-dangle': [2, 'never'],
         'no-undef': 0

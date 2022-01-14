@@ -8,12 +8,11 @@
     "install": "lerna bootstrap",
     "change": "lerna changed",
     "diff": "lerna diff",
-    "release": "lerna version --conventional-commits --yes",
-    "test": "ng test",
+    "release": "yarn test && yarn build && lerna version --conventional-commits --yes",
+    "test": "ng test tethys",
     "test:node": "ts-node ./node_modules/jasmine/bin/jasmine --config=jasmine.json",
-    "prebuild": "git clean -fdx packages/*/tsconfig.tsbuildinfo -e packages/*/node_modules",
-    "build": "yarn tsc -b",
-    "publish": "yarn test && yarn build && yarn release && lerna publish --force-publish"
+    "build": "ts-node --project ./scripts/tsconfig.json ./scripts/build-packages.ts",
+    "publish": "lerna publish --force-publish"
   },
   "homepage": "https://github.com/tethys-org/libs#readme",
   "repository": {
@@ -60,6 +59,7 @@
     "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
+    "ng-packagr": "~13.0.1",
     "clean-webpack-plugin": "^4.0.0",
     "cz-lerna-changelog": "^2.0.3",
     "eslint": "^7.28.0",
@@ -69,7 +69,6 @@
     "karma-typescript": "^5.5.2",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
-    "standard-version": "^9.3.0",
     "typescript": "^4.3.2"
   },
   "eslintConfig": {

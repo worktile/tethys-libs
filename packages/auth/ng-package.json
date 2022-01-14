@@ -1,0 +1,9 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@tethys/auth",
+  "deleteDestPath": true,
+  "lib": {
+    "flatModuleFile": "auth",
+    "entryFile": "index.ts"
+  }
+}
