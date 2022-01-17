@@ -4,7 +4,6 @@
   "useWorkspaces": true,
   "command": {
     "version": {
-      "allowBranch": ["master", "walker/*"],
       "conventionalCommits": true,
       "exact": true,
       "ignoreChanges": ["**/*.md"],
