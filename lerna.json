@@ -7,7 +7,8 @@
       "conventionalCommits": true,
       "exact": true,
       "ignoreChanges": ["**/*.md"],
-      "message": "build: release version %v"
+      "message": "build: release version %v",
+      "yes": true
     },
     "publish": {
       "message": "chore(release): publish",
