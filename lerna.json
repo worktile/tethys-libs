@@ -5,19 +5,23 @@
   "command": {
     "version": {
       "conventionalCommits": true,
-      "exact": true,
-      "ignoreChanges": ["**/*.md"],
-      "message": "build: release version %v",
-      "push":true,
+      "gitTagVersion": false,
+      "push": false,
       "yes": true
     },
     "publish": {
       "message": "chore(release): publish",
-      "ignoreChanges": [".gitignore", "*.log", "*.md"]
+      "ignoreChanges": [
+        ".gitignore",
+        "*.log",
+        "*.md"
+      ]
     },
     "bootstrap": {
       "ignore": "npm-*",
-      "npmClientArgs": ["--no-package-lock"]
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
     }
   }
 }
