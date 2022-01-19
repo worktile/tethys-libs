@@ -8,6 +8,7 @@
       "exact": true,
       "ignoreChanges": ["**/*.md"],
       "message": "build: release version %v",
+      "push":true,
       "yes": true
     },
     "publish": {
