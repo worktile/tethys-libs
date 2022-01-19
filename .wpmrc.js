@@ -3,7 +3,7 @@ module.exports = {
     bumpFiles: ['package.json'],
     skip: {
         changelog: true,
-        commit: true
+        // commit: true
     },
     commitAll: true,
     hooks: {
