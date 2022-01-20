@@ -13,7 +13,7 @@
     "test": "ng test tethys",
     "test:node": "ts-node ./node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "build": "ts-node --project ./scripts/tsconfig.json ./scripts/build-packages.ts",
-    "publish": "lerna publish --force-publish"
+    "pub": "ts-node --project ./scripts/tsconfig.json ./scripts/npm-publish.ts"
   },
   "homepage": "https://github.com/tethys-org/libs#readme",
   "repository": {
@@ -71,7 +71,8 @@
     "karma-typescript": "^5.5.2",
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.2",
+    "shelljs": "0.8.4"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
