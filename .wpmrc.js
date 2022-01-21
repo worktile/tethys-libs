@@ -1,5 +1,5 @@
 module.exports = {
-    allowBranch: ['master', 'walker/*'],
+    allowBranch: ['master', 'release-*'],
     bumpFiles: ['package.json'],
     skip: {
         changelog: true
