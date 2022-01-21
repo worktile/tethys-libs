@@ -2,14 +2,11 @@
   "name": "@tethys/cache",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-  },
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "@angular/cdk": "*"
   },
   "repository": {
     "type": "git",
