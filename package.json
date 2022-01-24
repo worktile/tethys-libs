@@ -16,6 +16,11 @@
     "pub-only": "ts-node --project ./scripts/tsconfig.json ./scripts/npm-publish.ts",
     "pub": "wpm publish"
   },
+  "engines": {
+    "node": "^14.15.0 || ^16.10.0",
+    "yarn": ">=1.21.1 <2",
+    "npm": "Please use yarn instead of NPM to install dependencies"
+  },
   "homepage": "https://github.com/tethys-org/libs#readme",
   "repository": {
     "type": "git",
