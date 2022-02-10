@@ -1,0 +1,15 @@
+<thy-dialog-header thyTitle="新建用户"> </thy-dialog-header>
+<form thyForm>
+  <thy-dialog-body>
+    <thy-form-group thyLabelText="用户名">
+      <input thyInput name="username" placeholder="输入用户名" />
+    </thy-form-group>
+    <thy-form-group isHorizontal="true" thyLabelText="用户名">
+        <input thyInput name="username" placeholder="输入用户名" />
+      </thy-form-group>
+  </thy-dialog-body>
+  <thy-dialog-footer [thyDivided]="true">
+    <button thyButton="primary">确定</button>
+    <button thyButton="link-secondary" (click)="cancel()">取消</button>
+  </thy-dialog-footer>
+</form>

@@ -1,0 +1,34 @@
+<thy-layout>
+  <thy-sidebar>
+    <app-sidebar></app-sidebar>
+  </thy-sidebar>
+  <thy-layout>
+    <thy-header thyTitle="" thyHasBorder="true">
+      <ng-template #headerTitle>
+        <thy-icon-nav>
+          <a href="javascript:;" thyTooltip="收起" thyIconNavLink thyIconNavLinkIcon="float-right"></a>
+        </thy-icon-nav>
+      </ng-template>
+      <ng-template #headerOperation>
+        <thy-icon-nav>
+          <a href="javascript:;" thyTooltip="通知" thyIconNavLink thyIconNavLinkIcon="bell"></a>
+          <a href="javascript:;" thyTooltip="帮助" thyIconNavLink><thy-icon thyIconName="question-circle"></thy-icon></a>
+          <a href="javascript:;" thyTooltip="设置" thyIconNavLink><thy-icon thyIconName="settings"></thy-icon></a>
+        </thy-icon-nav>
+        <thy-avatar
+          class="current-user"
+          [thyShowName]="true"
+          thyName="Admin"
+          thySize="sm"
+          thySrc="https://pic2.zhimg.com/ccf676352_is.jpg"
+        ></thy-avatar>
+      </ng-template>
+    </thy-header>
+    <thy-layout>
+      <thy-header thySize="sm" thyTitle="二级标题"></thy-header>
+      <thy-content>
+        <router-outlet></router-outlet>
+      </thy-content>
+    </thy-layout>
+  </thy-layout>
+</thy-layout>

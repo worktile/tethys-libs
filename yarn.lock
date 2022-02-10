@@ -2526,6 +2526,13 @@
     import-from "^3.0.0"
     lodash "^4.17.4"
 
+"@tethys/cdk@^11.0.3":
+  version "11.0.5"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-11.0.5.tgz#f0a652bb8c51e036decd0776c90b81796ff1659b"
+  integrity sha512-NnYCc4z3nBgaxrBAfHcuTxk55ISCPzRK8iAtwmJoJq+3REzPpgp8WmkKMjQ+2onIJGIbwSyQdkA1kxahZCc2QQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@tethys/cdk@^12.0.0":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@tethys/cdk/-/cdk-12.0.0.tgz#18d0522b431c1063bf20c545b5b0fa493ebd5d0d"
@@ -2537,6 +2544,14 @@
   version "1.1.103"
   resolved "https://registry.yarnpkg.com/@tethys/icons/-/icons-1.1.103.tgz#e3fd85988678c6a87b4552cf3fc109df27b38c33"
   integrity sha512-mYuUTOD5EkiGZ7cguGbIPruVAEwBUlHjG+78Bl+/dh4ahwLRY4K04yE/pAr49MtCpPN41n8UiGkWlb32D2N13w==
+
+"@tethys/store@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-11.0.0.tgz#6258957b42c2e70cdad01fce839a92e701a15ff4"
+  integrity sha512-TnlZO5FO1TYK4u7m+WjD2CuX5/gBQDIT39RcO/OvQSbSPdCsqGl8Brat7Ant331GgOMmLl0n3jyLzu9q1lJeVQ==
+  dependencies:
+    "@tethys/cdk" "^11.0.3"
+    tslib "^2.0.0"
 
 "@tootallnate/once@1":
   version "1.1.2"

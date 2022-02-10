@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared';
-import { HomeComponent } from './home/home.component';
+import { BasicLayoutComponent } from './basic/basic.component';
 
 @NgModule({
-    declarations: [HomeComponent],
+    declarations: [BasicLayoutComponent],
     imports: [RouterModule, SharedModule]
 })
 export class LayoutModule {}

@@ -5,7 +5,7 @@
 <div class="body">
   <thy-menu class="menu">
     <thy-menu-group thyTitle="工作台" [thyExpand]="true">
-      <a thyMenuItem [routerLink]="['/dashboard']" routerLinkActive="active" >
+      <a thyMenuItem [routerLink]="['/dashboard']" routerLinkActive="active">
         <span thyMenuItemIcon>
           <thy-icon thyIconName="user-check-fill"></thy-icon>
         </span>
@@ -21,6 +21,16 @@
         <!-- <span thyMenuItemAction><thy-icon thyIconName="more"></thy-icon></span> -->
       </a>
     </thy-menu-group>
-
+    <thy-menu-group thyTitle="列表" [thyExpand]="true">
+        <a thyMenuItem [routerLink]="['/users']" routerLinkActive="active">
+            <span thyMenuItemIcon>
+              <thy-icon thyIconName="user-check-fill"></thy-icon>
+            </span>
+            <span thyMenuItemName> 用户管理 </span>
+            <!-- <span thyMenuItemAction>
+              <thy-icon thyIconName="more"></thy-icon>
+            </span> -->
+          </a>
+    </thy-menu-group>
   </thy-menu>
 </div>
