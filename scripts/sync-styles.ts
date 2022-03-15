@@ -2,7 +2,7 @@ import * as shell from 'shelljs';
 
 const packages = ['components'];
 
-async function publish() {
+async function sync() {
     for (const pkg of packages) {
         console.log(`sync @tethys/${pkg} styles ...`);
         shell.exec(`cd packages/${pkg} && cpx '**/*.scss' '../../dist/@tethys/${pkg}'`);
@@ -10,4 +10,4 @@ async function publish() {
     }
 }
 
-publish();
+sync();
