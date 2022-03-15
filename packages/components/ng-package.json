@@ -1,0 +1,9 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/@tethys/components",
+  "deleteDestPath": true,
+  "lib": {
+    "flatModuleFile": "components",
+    "entryFile": "index.ts"
+  }
+}

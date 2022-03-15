@@ -15,6 +15,9 @@ import { ThyNavModule } from 'ngx-tethys/nav';
 import { ThyAvatarModule } from 'ngx-tethys/avatar';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TethysComponentsModule } from '@tethys/pro';
+import { ThyStepperModule } from 'ngx-tethys/stepper';
+import { ThySharedModule } from 'ngx-tethys/shared';
 
 const TETHYS_MODULES = [
     ThyLayoutModule,
@@ -23,6 +26,8 @@ const TETHYS_MODULES = [
     ThyIconModule,
     ThyFormModule,
     ThyInputModule,
+    ThyStepperModule,
+    ThySharedModule,
     ThyTableModule,
     ThySpaceModule,
     ThyDialogModule,
@@ -30,11 +35,12 @@ const TETHYS_MODULES = [
     ThyAvatarModule,
     ThyTooltipModule
 ];
+const PRO_MODULES = [TethysComponentsModule];
 
 @NgModule({
     declarations: [SidebarComponent],
-    imports: [CommonModule, FormsModule, RouterModule, ...TETHYS_MODULES],
-    exports: [CommonModule, FormsModule, RouterModule, ...TETHYS_MODULES, SidebarComponent],
+    imports: [CommonModule, FormsModule, RouterModule, ...TETHYS_MODULES, ...PRO_MODULES],
+    exports: [CommonModule, FormsModule, RouterModule, ...TETHYS_MODULES, ...PRO_MODULES, SidebarComponent],
     providers: [
         {
             provide: THY_FORM_CONFIG,

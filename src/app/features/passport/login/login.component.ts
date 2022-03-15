@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     model: {
         name?: string;
         password?: string;
+        mobile?: string;
+        code?: string;
     } = {};
 
     constructor(public router: Router, protected authService: ThyAuthService) {}
@@ -23,9 +25,12 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {}
 
     login() {
-        this.authService.authenticate('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c').subscribe(()=>{
-            this.router.navigateByUrl('/dashboard');
-
-        });
+        this.authService
+            .authenticate(
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+            )
+            .subscribe(() => {
+                this.router.navigateByUrl('/dashboard');
+            });
     }
 }

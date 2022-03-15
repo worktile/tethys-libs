@@ -11,10 +11,12 @@
     "diff": "lerna diff",
     "test": "ng test tethys",
     "test:node": "ts-node ./node_modules/jasmine/bin/jasmine --config=jasmine.json",
-    "build": "ts-node --project ./scripts/tsconfig.json ./scripts/build-packages.ts",
+    "build": "npm-run-all build:libs sync-styles",
+    "build:libs": "ts-node --project ./scripts/tsconfig.json ./scripts/build-packages.ts",
     "release": "wpm release",
     "pub-only": "ts-node --project ./scripts/tsconfig.json ./scripts/npm-publish.ts",
-    "pub": "wpm publish"
+    "pub": "wpm publish",
+    "sync-styles": "ts-node --project ./scripts/tsconfig.json ./scripts/sync-styles.ts"
   },
   "engines": {
     "node": "^14.15.0 || ^16.10.0",
@@ -63,6 +65,7 @@
     "@typescript-eslint/parser": "^4.27.0",
     "@worktile/pkg-manager": "^0.0.5",
     "clean-webpack-plugin": "^4.0.0",
+    "cpx": "^1.5.0",
     "cz-lerna-changelog": "^2.0.3",
     "eslint": "^7.28.0",
     "husky": "^6.0.0",
@@ -78,6 +81,7 @@
     "lerna": "^4.0.0",
     "lint-staged": "^11.0.0",
     "ng-packagr": "~13.0.1",
+    "npm-run-all": "^4.1.5",
     "shelljs": "0.8.4",
     "typescript": "^4.3.2"
   },

@@ -7,7 +7,9 @@ const packages = fs.readdirSync(packagesPath).filter((name) => fs.statSync(path.
 
 async function publish() {
     for (const pkg of packages) {
+        console.log(`@tethys/${pkg} publishing ...`);
         shell.exec(`cd dist/@tethys/${pkg} && npm publish --access=public`);
+        console.log(`@tethys/${pkg} published.`);
     }
 }
 
