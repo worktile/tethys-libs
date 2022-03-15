@@ -8,6 +8,12 @@ import { ThyMenuModule } from 'ngx-tethys/menu';
 import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyFormModule, THY_FORM_CONFIG } from 'ngx-tethys/form';
 import { ThyInputModule } from 'ngx-tethys/input';
+import { ThyTableModule } from 'ngx-tethys/table';
+import { ThySpaceModule } from 'ngx-tethys/space';
+import { ThyDialogModule } from 'ngx-tethys/dialog';
+import { ThyNavModule } from 'ngx-tethys/nav';
+import { ThyAvatarModule } from 'ngx-tethys/avatar';
+import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TethysComponentsModule } from '@tethys/pro';
 import { ThyStepperModule } from 'ngx-tethys/stepper';
@@ -21,7 +27,13 @@ const TETHYS_MODULES = [
     ThyFormModule,
     ThyInputModule,
     ThyStepperModule,
-    ThySharedModule
+    ThySharedModule,
+    ThyTableModule,
+    ThySpaceModule,
+    ThyDialogModule,
+    ThyNavModule,
+    ThyAvatarModule,
+    ThyTooltipModule
 ];
 const PRO_MODULES = [TethysComponentsModule];
 
