@@ -4,16 +4,47 @@
     <span class="title">TETHYS PRO</span>
   </div>
   <div class="body">
-    <form thyForm name="demoForm" #demoForm="thyForm">
-      <thy-form-group thyLabelText="用户名" thyLabelRequired>
-        <input thyInput name="username" [(ngModel)]="model.name" required placeholder="请输入用户名" />
-      </thy-form-group>
-      <thy-form-group thyLabelText="密码" thyLabelRequired>
-        <input thyInput type="password" name="password" [(ngModel)]="model.password" required placeholder="请输入登录密码" />
-      </thy-form-group>
-      <thy-form-group>
-        <button thyButton="primary" [thyLoading]="saving" thyLoadingText="Login" (thyFormSubmit)="login()" [thyBlock]="true">登录</button>
-      </thy-form-group>
-    </form>
+    <thy-stepper #stepper [thyShowStepHeader]="false">
+      <thy-step #step1>
+        <form thyForm name="accountLoginForm" #accountLoginForm="thyForm">
+          <thy-form-group thyLabelText="用户名" thyLabelRequired>
+            <input thyInput name="username" [(ngModel)]="model.name" required placeholder="请输入用户名" [thyAutofocus]="stepper.selected === step1" />
+          </thy-form-group>
+          <thy-form-group thyLabelText="密码" thyLabelRequired>
+            <input thyInput type="password" name="password" [(ngModel)]="model.password" required placeholder="请输入登录密码" />
+          </thy-form-group>
+          <thy-form-group>
+            <a href="javascript:;" (click)="stepper.next()">手机验证码登录</a>
+          </thy-form-group>
+          <thy-form-group>
+            <button thyButton="primary" [thyLoading]="saving" thyLoadingText="Login" (thyFormSubmit)="login()" [thyBlock]="true">
+              登录
+            </button>
+          </thy-form-group>
+        </form>
+      </thy-step>
+      <thy-step #step2>
+        <form thyForm name="mobileLoginForm" #mobileLoginForm="thyForm">
+          <thy-form-group thyLabelText="手机号" thyLabelRequired>
+            <input thyInput type="mobile" name="mobile" [(ngModel)]="model.mobile" required placeholder="请输入手机号"  [thyAutofocus]="stepper.selected === step2"/>
+          </thy-form-group>
+          <thy-form-group thyLabelText="验证码" thyLabelRequired>
+            <thy-input type="code" name="code" [(ngModel)]="model.code" required placeholder="请输入验证码">
+              <ng-template #append>
+                <countdown></countdown>
+              </ng-template>
+            </thy-input>
+          </thy-form-group>
+          <thy-form-group>
+            <a href="javascript:;" (click)="stepper.previous()">帐号密码登录</a>
+          </thy-form-group>
+          <thy-form-group>
+            <button thyButton="primary" [thyLoading]="saving" thyLoadingText="Login" (thyFormSubmit)="login()" [thyBlock]="true">
+              登录
+            </button>
+          </thy-form-group>
+        </form>
+      </thy-step>
+    </thy-stepper>
   </div>
 </div>
