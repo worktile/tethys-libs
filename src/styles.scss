@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @use '~ngx-tethys/styles/index.scss';
-@use '../packages/components/styles/index.scss';
+@use '../packages/components/src/styles/index.scss' as proComponents;
 
 html,
 body {
@@ -56,10 +56,12 @@ $menu-color: #fff;
 
 .content-main-header {
     padding: 20px;
+
     .input-search-container {
         width: 360px;
     }
 }
+
 .content-main-body {
     padding: 0 20px 20px 20px;
 }
