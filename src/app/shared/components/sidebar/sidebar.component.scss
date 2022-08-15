@@ -1,23 +1,7 @@
-:host {
-    background: #48525c;
-    color: #fff;
+@use 'ngx-tethys/styles/basic.scss';
 
-    .menu {
-        color: #fff;
-        .thy-menu-group-title {
-            color: #fff;
-        }
-        .thy-menu {
-            .thy-menu-group {
-                .thy-menu-group-header {
-                    .thy-menu-group-title {
-                        color: #fff;
-                    }
-                }
-            }
-        }
-    }
-   
+:host {
+    background: basic.$dark;
 }
 
 .header {
@@ -33,7 +17,6 @@
 
     .title {
         margin-left: 10px;
+        color: basic.$white;
     }
 }
-
-

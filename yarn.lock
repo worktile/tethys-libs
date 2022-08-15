@@ -1384,13 +1384,6 @@
   dependencies:
     "@commitlint/config-angular-type-enum" "^16.2.1"
 
-"@commitlint/config-conventional@^12.1.4":
-  version "12.1.4"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-12.1.4.tgz#95bbab622f117a8a3e49f95917b08655040c66a8"
-  integrity sha512-ZIdzmdy4o4WyqywMEpprRCrehjCSQrHkaRTVZV411GyLigFQHlEBSJITAihLAWe88Qy/8SyoIe5uKvAsV5vRqQ==
-  dependencies:
-    conventional-changelog-conventionalcommits "^4.3.1"
-
 "@commitlint/config-validator@^16.2.1":
   version "16.2.1"
   resolved "https://registry.npmjs.org/@commitlint/config-validator/-/config-validator-16.2.1.tgz#794e769afd4756e4cf1bfd823b6612932e39c56d"
@@ -2572,10 +2565,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@tethys/cdk@^12.0.0":
-  version "12.0.0"
-  resolved "https://registry.yarnpkg.com/@tethys/cdk/-/cdk-12.0.0.tgz#18d0522b431c1063bf20c545b5b0fa493ebd5d0d"
-  integrity sha512-6OapxrIXhxhNToyOUSDlQTD8kegvQ1prmv9FtjyF/v+nTn3E65KaHYPqTLZIrySRsIXjMjxTxYgw0aZNlwEn0g==
+"@tethys/cdk@^13.0.0":
+  version "13.1.2"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-13.1.2.tgz#25917ea41b0f1824fc09c864345fb77e268da7f8"
+  integrity sha512-fE2vpEIxZHeEVxUreaaJmYbPJZKokjWC4IXkEAR4jn/ztRmFvsbhP3uShIciSw1InABo37x1B7SccyxOTMyrdA==
   dependencies:
     tslib "^2.3.0"
 
@@ -4407,7 +4400,7 @@ conventional-changelog-config-spec@2.1.0:
   resolved "https://registry.yarnpkg.com/conventional-changelog-config-spec/-/conventional-changelog-config-spec-2.1.0.tgz#874a635287ef8b581fd8558532bf655d4fb59f2d"
   integrity sha512-IpVePh16EbbB02V+UA+HQnnPIohgXvJRxHcS5+Uwk4AT5LjzCZJm5sp/yqs5C6KZJ1jMsV4paEV13BN1pvDuxQ==
 
-conventional-changelog-conventionalcommits@4.6.1, conventional-changelog-conventionalcommits@^4.3.1:
+conventional-changelog-conventionalcommits@4.6.1:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/conventional-changelog-conventionalcommits/-/conventional-changelog-conventionalcommits-4.6.1.tgz#f4c0921937050674e578dc7875f908351ccf4014"
   integrity sha512-lzWJpPZhbM1R0PIzkwzGBCnAkH5RKJzJfFQZcl/D+2lsJxAwGnDKBqn/F4C1RD31GJNn8NuKWQzAZDAVXPp2Mw==
@@ -8920,10 +8913,10 @@ ng-packagr@~13.0.1:
   optionalDependencies:
     esbuild "^0.13.0"
 
-ngx-tethys@12.1.1:
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/ngx-tethys/-/ngx-tethys-12.1.1.tgz#a164dad6ac3f60503b4dfb329b402467aff32668"
-  integrity sha512-LHyLKiTEKwE0fVCcBbDR084uaRzXKKo/U9S8ddDdmD5iXRFFHme1WpDZOw17lMIlmMUOQiTm/TASgkXuhoQ5iQ==
+ngx-tethys@^13.1.1:
+  version "13.1.2"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-13.1.2.tgz#e7bdc00cf197f4aff3e473a53b8dd24be34e45c0"
+  integrity sha512-hWVvqnyiBB6SsE0NhVJSROIG4Sf15rYgyuJSaqYNeZNC0HM1wfRQgd3UnpfP+iv/TU5Y5BS7uA7PDqV988DBaw==
   dependencies:
     cyia-code-util "^1.0.4"
     tslib "^2.3.0"
