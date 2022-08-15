@@ -1,36 +1,43 @@
-<div class="header">
+<!-- <div class="header">
   <img class="logo" src="assets/images/logo.svg" />
   <span class="title">TETHYS PRO</span>
-</div>
-<div class="body">
-  <thy-menu class="menu">
-    <thy-menu-group thyTitle="工作台" [thyExpand]="true">
-      <a thyMenuItem [routerLink]="['/dashboard']" routerLinkActive="active">
-        <span thyMenuItemIcon>
-          <thy-icon thyIconName="user-check-fill"></thy-icon>
-        </span>
-        <span thyMenuItemName> 仪表盘 </span>
-        <!-- <span thyMenuItemAction>
-          <thy-icon thyIconName="more"></thy-icon>
-        </span> -->
-      </a>
+</div> -->
+<thy-sidebar>
+  <thy-sidebar-header class="header">
+    <img class="logo" src="assets/images/logo.svg" />
+    <span class="title">TETHYS PRO</span>
+  </thy-sidebar-header>
 
-      <a thyMenuItem class="active" href="javascript:;">
-        <span thyMenuItemIcon><thy-icon thyIconName="pie-fill"></thy-icon></span>
-        <span thyMenuItemName> 统计报表 </span>
-        <!-- <span thyMenuItemAction><thy-icon thyIconName="more"></thy-icon></span> -->
-      </a>
-    </thy-menu-group>
-    <thy-menu-group thyTitle="列表" [thyExpand]="true">
+  <thy-sidebar-content>
+    <thy-menu [thyCollapsed]="false" class="menu" thyTheme="dark">
+      <thy-menu-group thyTitle="工作台" [thyExpand]="true">
+        <a thyMenuItem [routerLink]="['/dashboard']" routerLinkActive="active">
+          <span thyMenuItemIcon>
+            <thy-icon thyIconName="user-check-fill"></thy-icon>
+          </span>
+          <span thyMenuItemName> 仪表盘 </span>
+          <!-- <span thyMenuItemAction>
+                <thy-icon thyIconName="more"></thy-icon>
+              </span> -->
+        </a>
+
+        <a thyMenuItem href="javascript:;">
+          <span thyMenuItemIcon><thy-icon thyIconName="pie-fill"></thy-icon></span>
+          <span thyMenuItemName> 统计报表 </span>
+          <!-- <span thyMenuItemAction><thy-icon thyIconName="more"></thy-icon></span> -->
+        </a>
+      </thy-menu-group>
+      <thy-menu-group thyTitle="列表" [thyExpand]="true">
         <a thyMenuItem [routerLink]="['/users']" routerLinkActive="active">
-            <span thyMenuItemIcon>
-              <thy-icon thyIconName="user-check-fill"></thy-icon>
-            </span>
-            <span thyMenuItemName> 用户管理 </span>
-            <!-- <span thyMenuItemAction>
-              <thy-icon thyIconName="more"></thy-icon>
-            </span> -->
-          </a>
-    </thy-menu-group>
-  </thy-menu>
-</div>
+          <span thyMenuItemIcon>
+            <thy-icon thyIconName="user-check-fill"></thy-icon>
+          </span>
+          <span thyMenuItemName> 用户管理 </span>
+          <!-- <span thyMenuItemAction>
+                    <thy-icon thyIconName="more"></thy-icon>
+                  </span> -->
+        </a>
+      </thy-menu-group>
+    </thy-menu>
+  </thy-sidebar-content>
+</thy-sidebar>

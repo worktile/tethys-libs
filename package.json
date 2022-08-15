@@ -22,7 +22,7 @@
     "commit-msg": "commitlint --config ./commitlint.config.js -e"
   },
   "engines": {
-    "node": "^14.15.0 || ^16.10.0",
+    "node": ">16.10.0",
     "yarn": ">=1.21.1 <2",
     "npm": "Please use yarn instead of NPM to install dependencies"
   },
@@ -45,13 +45,13 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
-    "@tethys/cdk": "^12.0.0",
+    "@tethys/cdk": "^13.0.0",
     "@tethys/icons": "1.1.103",
     "@tethys/store": "^11.0.0",
     "@types/extend": "^3.0.1",
     "date-fns": "^2.6.0",
     "extend": "^3.0.2",
-    "ngx-tethys": "12.1.1",
+    "ngx-tethys": "^13.1.1",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

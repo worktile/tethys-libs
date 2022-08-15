@@ -18,6 +18,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TethysComponentsModule } from '@tethys/pro';
 import { ThyStepperModule } from 'ngx-tethys/stepper';
 import { ThySharedModule } from 'ngx-tethys/shared';
+import { ThyActionModule } from 'ngx-tethys/action';
 
 const TETHYS_MODULES = [
     ThyLayoutModule,
@@ -33,7 +34,8 @@ const TETHYS_MODULES = [
     ThyDialogModule,
     ThyNavModule,
     ThyAvatarModule,
-    ThyTooltipModule
+    ThyTooltipModule,
+    ThyActionModule
 ];
 const PRO_MODULES = [TethysComponentsModule];
 
