@@ -1,7 +1,7 @@
 <thy-header thyDivided="true">
   <ng-template #headerTitle>
     <a class="ml-n2" thyAction href="javascript:;" thyTooltip="收起" thyIcon="float-right"></a>
-    <span class="title-name ml-1">{{ globalStore.snapshot.activeMenu?.data?.title }}</span>
+    <span class="title-name ml-1">{{ (title$ | async)?.data?.title }}</span>
   </ng-template>
   <ng-template #headerOperation>
     <ng-container *ngIf="headerRightContentTemplate" [ngTemplateOutlet]="headerRightContentTemplate"></ng-container>

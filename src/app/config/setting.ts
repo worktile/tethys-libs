@@ -1,6 +1,6 @@
-import { SiteSettings } from '@tethys/pro';
+import { ThySiteSettings } from '@tethys/pro';
 
-export const DEFAULT_GLOBAL_SETTING: SiteSettings = {
+export const DEFAULT_GLOBAL_SETTING: ThySiteSettings = {
     theme: 'light',
     primaryColor: '#6698ff',
     layout: 'side',
