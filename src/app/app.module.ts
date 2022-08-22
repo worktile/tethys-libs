@@ -12,7 +12,7 @@ import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ThyAuthJWTInterceptor, ThyAuthModule } from '@tethys/auth';
-
+import { UserModule } from './features/user/user.module';
 
 registerLocaleData(localeZH);
 
@@ -25,6 +25,7 @@ registerLocaleData(localeZH);
         CoreModule,
         LayoutModule,
         SharedModule,
+        UserModule,
         ThyAuthModule.forRoot({
             tokenStoreKey: 'demo_token'
         })
