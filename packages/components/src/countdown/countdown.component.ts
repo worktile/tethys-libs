@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'countdown',
+    selector: 'thy-countdown',
     templateUrl: 'countdown.component.html'
 })
-export class CountdownComponent implements OnInit {
+export class ThyCountdownComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}

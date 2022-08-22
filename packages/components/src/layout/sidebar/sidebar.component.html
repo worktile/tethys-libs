@@ -1,0 +1,34 @@
+<thy-sidebar-header class="thy-pro-sidebar-header">
+  <ng-container
+    *ngIf="headerTemplate"
+    [ngTemplateOutlet]="headerTemplate"
+    [ngTemplateOutletContext]="{ value: { logo: this.logo, title: this.title } }"
+  ></ng-container>
+  <ng-container *ngIf="!headerTemplate">
+    <img class="thy-pro-sidebar-header-logo" [src]="logo" />
+    <span class="thy-pro-sidebar-header-title">{{ title }}</span>
+  </ng-container>
+</thy-sidebar-header>
+<thy-sidebar-content>
+  <ng-container *ngIf="menuTemplate" [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ menus }"> </ng-container>
+  <ng-container *ngIf="!menuTemplate">
+    <!-- 目前的写法只能显示到二级菜单 -->
+    <thy-menu [thyCollapsed]="false" class="menu" thyTheme="dark">
+      <ng-container *ngFor="let menu of menus">
+        <thy-menu-group [thyTitle]="menu.data?.title || ''" [thyExpand]="true">
+          <ng-container *ngFor="let menuIem of menu.children">
+            <a thyMenuItem [routerLink]="[menu.path, menuIem?.path]" (click)="setActiveMenu(menuIem)" routerLinkActive="active">
+              <span thyMenuItemIcon>
+                <thy-icon [thyIconName]="menuIem.data?.icon || ''"></thy-icon>
+              </span>
+              <span thyMenuItemName> {{ menuIem.data?.title }} </span>
+            </a>
+          </ng-container>
+        </thy-menu-group>
+      </ng-container>
+    </thy-menu>
+  </ng-container>
+</thy-sidebar-content>
+<thy-sidebar-footer>
+  <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
+</thy-sidebar-footer>

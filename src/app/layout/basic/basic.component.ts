@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThyGlobalStore } from '@tethys/pro';
 
 @Component({
     selector: 'app-basic-layout',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
     }
 })
 export class BasicLayoutComponent implements OnInit {
-    constructor() {}
+    constructor(public globalStore: ThyGlobalStore) {}
 
     ngOnInit(): void {}
 }

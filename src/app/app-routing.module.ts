@@ -1,35 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ThyAuthJWTGuard } from '@tethys/auth';
-import { BasicLayoutComponent } from './layout/basic/basic.component';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { ROUTES } from './config/routes';
 
-const routes: Routes = [
-    {
-        path: 'login',
-        loadChildren: () => import('./features/passport/passport.module').then((m) => m.PassportModule)
-    },
-
-    {
-        path: '',
-        component: BasicLayoutComponent,
-        children: [
-            {
-                path: 'dashboard',
-                canActivate: [ThyAuthJWTGuard],
-                loadChildren: () => import('./features/dashboard/dashboard.module').then((m) => m.DashboardModule)
-            },
-            {
-                path: 'users',
-                loadChildren: () => import('./features/user/user.module').then((m) => m.UserModule)
-            },
-            {
-                path: '',
-                redirectTo: 'dashboard',
-                pathMatch: 'full'
-            }
-        ]
-    }
-];
+const routes: Routes = ROUTES;
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

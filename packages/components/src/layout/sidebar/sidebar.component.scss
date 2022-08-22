@@ -1,0 +1,24 @@
+@use 'ngx-tethys/styles/basic.scss';
+
+.thy-pro-sidebar {
+    background: basic.$dark;
+    &-header {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+
+        &-logo {
+            width: 30px;
+            height: 30px;
+        }
+
+        &-title {
+            margin-left: 10px;
+            color: basic.$white;
+        }
+    }
+    .sidebar-footer {
+        border-top: none;
+    }
+}
