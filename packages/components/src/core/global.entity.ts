@@ -15,7 +15,7 @@ type Theme = 'light' | 'dark' | 'auto';
 
 type Layout = 'side' | 'top' | 'mix';
 
-export interface SiteSettings {
+export interface ThySiteSettings {
     theme: Theme; // 整体风格
     primaryColor: string; // 主题色
     layout: Layout; // layout 的菜单模式, side：右侧导航，top：顶部导航，mix： 混合
@@ -26,8 +26,8 @@ export interface SiteSettings {
     splitMenu: boolean; // 是否分割菜单（mix 模式下生效）
 }
 
-export interface GlobalInfo {
-    config: SiteSettings;
+export interface ThyGlobalInfo {
+    config: ThySiteSettings;
     menus: Routes;
     activeMenu?: Route;
 }

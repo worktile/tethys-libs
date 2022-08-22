@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ChangeDetectorRef, NgZone } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { Route, Routes, ThyGlobalStore } from '../../core';
 
 @Component({

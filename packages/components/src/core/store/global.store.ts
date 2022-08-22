@@ -1,18 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Action, Store } from '@tethys/store';
-import { GlobalInfo, Route, Routes, SiteSettings } from '../global.entity';
+import { ThyGlobalInfo, Route, Routes, ThySiteSettings } from '../global.entity';
+import { THY_SITE_SETTINGS } from '../settins.config';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ThyGlobalStore extends Store<GlobalInfo> {
-    constructor() {
+export class ThyGlobalStore extends Store<ThyGlobalInfo> {
+    constructor(@Inject(THY_SITE_SETTINGS) public config: ThySiteSettings) {
         super({});
-    }
-
-    @Action()
-    initializeConfig(config: SiteSettings) {
-        this.setState({ config });
     }
 
     @Action()
@@ -26,7 +22,7 @@ export class ThyGlobalStore extends Store<GlobalInfo> {
     }
 
     @Action()
-    pureUpdateSettings(config: Partial<SiteSettings>) {
+    pureUpdateSettings(config: Partial<ThySiteSettings>) {
         this.setState({
             config: {
                 ...this.snapshot.config,

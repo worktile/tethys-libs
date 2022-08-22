@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Inject, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Routes, SiteSettings, ThyGlobalStore, THY_SITE_SETTINGS } from '../core';
+import { Routes, ThyGlobalStore } from '../core';
 
 @Component({
     selector: 'thy-pro-layout',
@@ -60,17 +60,11 @@ export class ThyProLayoutComponent implements OnInit {
 
     public menus!: Routes;
 
-    constructor(
-        public globalStore: ThyGlobalStore,
-        private router: Router,
-        public route: ActivatedRoute,
-        @Inject(THY_SITE_SETTINGS) private settingsConfig: SiteSettings
-    ) {
+    constructor(public globalStore: ThyGlobalStore, private router: Router, public route: ActivatedRoute) {
         const routes = this.router.config[1];
         if (routes.children?.length) {
             this.globalStore.initializeMenus(routes.children?.filter((item) => item.path) as Routes);
         }
-        this.globalStore.initializeConfig(this.settingsConfig);
     }
 
     ngOnInit(): void {
