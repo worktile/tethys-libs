@@ -1,25 +1,23 @@
+<thy-sidebar>
+  <thy-pro-sidebar
+    [menus]="menus"
+    [logo]="thyLogo"
+    [title]="thyTitle"
+    [headerTemplate]="menuHeaderTemplate"
+    [menuTemplate]="menuTemplate"
+    [footerTemplate]="menuFooterTemplate"
+  >
+  </thy-pro-sidebar>
+</thy-sidebar>
 <thy-layout>
-  <thy-sidebar>
-    <thy-pro-sidebar
-      [menus]="menus"
-      [logo]="thyLogo"
-      [title]="thyTitle"
-      [headerTemplate]="menuHeaderTemplate"
-      [menuTemplate]="menuTemplate"
-      [footerTemplate]="menuFooterTemplate"
-    >
-    </thy-pro-sidebar>
-  </thy-sidebar>
+  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate"></thy-pro-header>
   <thy-layout>
-    <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate"></thy-pro-header>
-    <thy-layout>
-      <thy-header thySize="sm" thyTitle="二级标题" thyDivided="true"></thy-header>
-      <thy-content>
-        <router-outlet></router-outlet>
-      </thy-content>
-      <thy-sidebar-footer>
-        <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
-      </thy-sidebar-footer>
-    </thy-layout>
+    <thy-header thySize="sm" thyTitle="二级标题" thyDivided="true"></thy-header>
+    <thy-content>
+      <router-outlet></router-outlet>
+    </thy-content>
+    <thy-sidebar-footer>
+      <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
+    </thy-sidebar-footer>
   </thy-layout>
 </thy-layout>

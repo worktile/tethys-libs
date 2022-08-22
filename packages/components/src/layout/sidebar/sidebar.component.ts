@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { GlobalStore } from '../../core';
-import { Route, Routes } from '../../entities';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Route, Routes, ThyGlobalStore } from '../../core';
 
 @Component({
     selector: 'thy-pro-sidebar',
@@ -23,11 +22,11 @@ export class ThyProSidebarComponent implements OnInit {
 
     @Input() public footerTemplate!: TemplateRef<HTMLElement>;
 
-    constructor(public globalConfigStore: GlobalStore) {}
+    constructor(public globalStore: ThyGlobalStore) {}
 
     ngOnInit(): void {}
 
     setActiveMenu(activeMenu: Route) {
-        this.globalConfigStore.pureUpdateActiveMenu(activeMenu);
+        this.globalStore.pureUpdateActiveMenu(activeMenu);
     }
 }

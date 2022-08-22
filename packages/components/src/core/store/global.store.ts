@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Action, Store } from '@tethys/store';
-import { GlobalConfig, Route, Routes, SiteSettings } from '../../entities';
+import { GlobalInfo, Route, Routes, SiteSettings } from '../global.entity';
 
 @Injectable({
     providedIn: 'root'
 })
-export class GlobalStore extends Store<GlobalConfig> {
+export class ThyGlobalStore extends Store<GlobalInfo> {
     constructor() {
         super({});
     }

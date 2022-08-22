@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { GlobalStore } from '@tethys/pro';
-import { DEFAULT_GLOBAL_SETTING } from '../../config/setting';
+import { ThyGlobalStore } from '@tethys/pro';
 
 @Component({
     selector: 'app-basic-layout',
@@ -12,9 +10,7 @@ import { DEFAULT_GLOBAL_SETTING } from '../../config/setting';
     }
 })
 export class BasicLayoutComponent implements OnInit {
-    constructor(public globalConfigStore: GlobalStore) {}
+    constructor(public globalStore: ThyGlobalStore) {}
 
-    ngOnInit(): void {
-        this.globalConfigStore.initializeConfig(DEFAULT_GLOBAL_SETTING);
-    }
+    ngOnInit(): void {}
 }

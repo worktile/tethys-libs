@@ -13,6 +13,7 @@ import { LayoutModule } from './layout/layout.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ThyAuthJWTInterceptor, ThyAuthModule } from '@tethys/auth';
 import { UserModule } from './features/user/user.module';
+import { THY_SITE_SETTINGS } from '@tethys/pro';
 
 registerLocaleData(localeZH);
 
@@ -38,7 +39,20 @@ registerLocaleData(localeZH);
                 footerAlign: 'left'
             }
         },
-        { provide: HTTP_INTERCEPTORS, useClass: ThyAuthJWTInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ThyAuthJWTInterceptor, multi: true },
+        {
+            provide: THY_SITE_SETTINGS,
+            useValue: {
+                theme: 'light',
+                primaryColor: '#6698ff',
+                layout: 'side',
+                showHeader: true,
+                showFooter: true,
+                fixSiderbar: true,
+                fixedHeader: true,
+                splitMenu: false
+            }
+        }
     ],
     bootstrap: [AppComponent]
 })
