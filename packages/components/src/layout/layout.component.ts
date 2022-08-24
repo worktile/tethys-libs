@@ -69,7 +69,7 @@ export class ThyProLayoutComponent implements OnInit {
         if (routes.children?.length) {
             this.globalStore.initializeMenus(filterRoutes);
         }
-        // 获取路由信息，初始化到 ThyGlobalStore 的 ActiveMenu
+        // 获取路由信息，初始化到 ThyGlobalStore 的 activeMenu
         this.globalStore.pureUpdateActiveMenu(this.route.firstChild?.firstChild?.routeConfig as Route);
     }
 

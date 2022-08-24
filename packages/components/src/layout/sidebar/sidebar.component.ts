@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
 import { Route, ThyGlobalStore } from '../../core';
-import { MenusMap } from '../../utils';
+import { menusMap } from '../../utils';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
 
 @Component({
@@ -43,9 +43,9 @@ export class ThyProSidebarComponent implements OnInit {
     }
 
     initCurrentGroupMenu() {
-        // 初始化的时候，根据T hyGlobalStore 的 activeMenu 获取 menuGroup 的路由，设置高亮状态
+        // 初始化的时候，根据 ThyGlobalStore 的 activeMenu 获取 menuGroup 的路由，设置高亮状态
         const activeRoute = this.globalStore.snapshot.activeMenu;
-        const activeRouteWidthParent = MenusMap.get(activeRoute?.path as string) as Route & { groupMenu: Route };
+        const activeRouteWidthParent = menusMap.get(activeRoute?.path as string) as Route & { groupMenu: Route };
         this.currentGroupMenu = activeRouteWidthParent.groupMenu;
     }
 
