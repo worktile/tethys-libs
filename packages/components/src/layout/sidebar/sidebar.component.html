@@ -16,6 +16,7 @@
     <thy-menu [thyCollapsed]="sidebarCollapsed" thyTheme="dark">
       <ng-container *ngFor="let menu of menus">
         <thy-menu-group
+          #menuGroup
           [thyShowIcon]="true"
           [thyCollapsed]="menu.isCollapsed || false"
           [thyCollapsible]="true"
@@ -31,6 +32,7 @@
           [thyConfig]="{
             placement: 'rightTop',
             insideClosable: true,
+            origin: menuGroupElement.nativeElement,
             initialState: { menu: this.menu }
           }"
         >
