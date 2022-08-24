@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
-import { ThyMenuGroupComponent } from 'ngx-tethys/menu';
 import { Route, ThyGlobalStore } from '../../core';
 import { menusMap } from '../../utils';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
