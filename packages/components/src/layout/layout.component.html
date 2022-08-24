@@ -1,8 +1,9 @@
-<thy-sidebar>
+<thy-sidebar [thyCollapsible]="true" [thyCollapsed]="isCollapsed" [thyCollapsedWidth]="61" [thyTrigger]="null">
   <thy-pro-sidebar
     [menus]="menus"
     [logo]="thyLogo"
     [title]="thyTitle"
+    [isCollapsed]="isCollapsed"
     [headerTemplate]="menuHeaderTemplate"
     [menuTemplate]="menuTemplate"
     [footerTemplate]="menuFooterTemplate"
@@ -10,7 +11,7 @@
   </thy-pro-sidebar>
 </thy-sidebar>
 <thy-layout>
-  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate"></thy-pro-header>
+  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate" (collapsedChange)="collapsedChange($event)"></thy-pro-header>
   <thy-layout>
     <thy-header thySize="sm" thyTitle="二级标题" thyDivided="true"></thy-header>
     <thy-content>

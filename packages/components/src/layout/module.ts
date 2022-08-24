@@ -10,10 +10,22 @@ import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProLayoutComponent } from './layout.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 import { THY_SITE_SETTINGS_PROVIDER } from '../core';
+import { ThyTooltipModule } from 'ngx-tethys/tooltip';
+import { ThyPopoverModule } from 'ngx-tethys/popover';
+import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 
 const COMPONENTS = [ThyProHeaderComponent, ThyProLayoutComponent, ThyProSidebarComponent];
 
-const TETHYS_MODULES = [ThyLayoutModule, ThyMenuModule, ThyIconModule, ThyActionModule, ThyAvatarModule];
+const TETHYS_MODULES = [
+    ThyLayoutModule,
+    ThyMenuModule,
+    ThyIconModule,
+    ThyPopoverModule,
+    ThyActionModule,
+    ThyAvatarModule,
+    ThyTooltipModule,
+    ThyDropdownModule
+];
 
 @NgModule({
     declarations: [...COMPONENTS],

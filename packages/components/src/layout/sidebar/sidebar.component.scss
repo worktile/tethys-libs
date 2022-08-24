@@ -2,22 +2,26 @@
 
 .thy-pro-sidebar {
     background: basic.$dark;
-    &-header {
-        height: 60px;
-        display: flex;
-        align-items: center;
-        padding: 10px;
+    .thy-layout-sidebar &-header {
+        min-height: 70px;
 
-        &-logo {
+        .header-logo {
             width: 30px;
             height: 30px;
         }
 
-        &-title {
+        .header-title {
             margin-left: 10px;
+            font-size: 18px;
             color: basic.$white;
+            display: inline-block;
         }
     }
+    .thy-popover-origin-active,
+    &-menu-group.active {
+        background: basic.$menu-theme-dark-hover-bg-color;
+    }
+
     .sidebar-footer {
         border-top: none;
     }

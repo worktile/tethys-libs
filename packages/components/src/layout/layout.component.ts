@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Route } from '@angular/router';
 import { Routes, ThyGlobalStore } from '../core';
+import { filterEmptyRoutePath } from '../utils';
 
 @Component({
     selector: 'thy-pro-layout',
     templateUrl: './layout.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'thy-layout  thy-layout--has-sidebar'
+        class: 'thy-layout thy-layout--has-sidebar thy-pro-layout'
     }
 })
 export class ThyProLayoutComponent implements OnInit {
@@ -60,14 +61,23 @@ export class ThyProLayoutComponent implements OnInit {
 
     public menus!: Routes;
 
+    public isCollapsed: boolean = false;
+
     constructor(public globalStore: ThyGlobalStore, private router: Router, public route: ActivatedRoute) {
-        const routes = this.router.config[1];
+        const routes = this.router.config[1] as Route;
+        const filterRoutes = filterEmptyRoutePath(routes);
         if (routes.children?.length) {
-            this.globalStore.initializeMenus(routes.children?.filter((item) => item.path) as Routes);
+            this.globalStore.initializeMenus(filterRoutes);
         }
+        // 获取路由信息，初始化到 ThyGlobalStore 的 ActiveMenu
+        this.globalStore.pureUpdateActiveMenu(this.route.firstChild?.firstChild?.routeConfig as Route);
     }
 
     ngOnInit(): void {
         this.menus = this.thyMenus && this.thyMenus.length ? this.thyMenus : this.globalStore.snapshot.menus;
+    }
+
+    collapsedChange(isCollapsed: boolean) {
+        this.isCollapsed = isCollapsed;
     }
 }

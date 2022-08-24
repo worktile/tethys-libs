@@ -17,9 +17,15 @@ export const ROUTES: Routes = [
                 path: 'dashboard',
                 canActivate: [ThyAuthJWTGuard],
                 data: {
-                    title: '工作台'
+                    title: '工作台',
+                    icon: 'dashboard'
                 },
                 children: [
+                    {
+                        path: '',
+                        redirectTo: 'basic',
+                        pathMatch: 'full'
+                    },
                     {
                         path: 'basic',
                         component: WorkplaceComponent,
@@ -40,9 +46,15 @@ export const ROUTES: Routes = [
             {
                 path: 'users',
                 data: {
-                    title: '列表'
+                    title: '列表',
+                    icon: 'list'
                 },
                 children: [
+                    {
+                        path: '',
+                        redirectTo: 'manage',
+                        pathMatch: 'full'
+                    },
                     {
                         path: 'manage',
                         data: {

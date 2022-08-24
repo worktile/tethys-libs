@@ -1,34 +1,66 @@
-<thy-sidebar-header class="thy-pro-sidebar-header">
+<thy-sidebar-header class="thy-pro-sidebar-header" [ngClass]="{ 'justify-content-center': sidebarCollapsed }">
   <ng-container
     *ngIf="headerTemplate"
     [ngTemplateOutlet]="headerTemplate"
     [ngTemplateOutletContext]="{ value: { logo: this.logo, title: this.title } }"
   ></ng-container>
   <ng-container *ngIf="!headerTemplate">
-    <img class="thy-pro-sidebar-header-logo" [src]="logo" />
-    <span class="thy-pro-sidebar-header-title">{{ title }}</span>
+    <img class="header-logo" [src]="logo" />
+    <span class="header-title text-truncate" *ngIf="!sidebarCollapsed">{{ title }}</span>
   </ng-container>
 </thy-sidebar-header>
 <thy-sidebar-content>
   <ng-container *ngIf="menuTemplate" [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ menus }"> </ng-container>
   <ng-container *ngIf="!menuTemplate">
     <!-- 目前的写法只能显示到二级菜单 -->
-    <thy-menu [thyCollapsed]="false" class="menu" thyTheme="dark">
+    <thy-menu [thyCollapsed]="sidebarCollapsed" thyTheme="dark">
       <ng-container *ngFor="let menu of menus">
-        <thy-menu-group [thyTitle]="menu.data?.title || ''" [thyExpand]="true">
-          <ng-container *ngFor="let menuIem of menu.children">
-            <a thyMenuItem [routerLink]="[menu.path, menuIem?.path]" (click)="setActiveMenu(menuIem)" routerLinkActive="active">
-              <span thyMenuItemIcon>
-                <thy-icon [thyIconName]="menuIem.data?.icon || ''"></thy-icon>
-              </span>
-              <span thyMenuItemName> {{ menuIem.data?.title }} </span>
-            </a>
-          </ng-container>
+        <thy-menu-group
+          [thyShowIcon]="true"
+          [thyCollapsed]="menu.isCollapsed || false"
+          [thyCollapsible]="true"
+          [thyIcon]="menu.data?.icon!"
+          [thyTitle]="menu.data?.title!"
+          [thyPopover]="collapsedMenuList"
+          [thyTrigger]="'hover'"
+          [thyDisabled]="!sidebarCollapsed"
+          [thyPlacement]="'rightTop'"
+          (thyCollapsedChange)="menuGroupCollapsedChange($event, menu)"
+          class="thy-pro-sidebar-menu-group"
+          [class.active]="sidebarCollapsed && currentGroupMenu === menu"
+          [thyConfig]="{
+            placement: 'rightTop',
+            insideClosable: true,
+            initialState: { menu: this.menu }
+          }"
+        >
+          <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menu }"></ng-template>
         </thy-menu-group>
       </ng-container>
     </thy-menu>
   </ng-container>
 </thy-sidebar-content>
+
 <thy-sidebar-footer>
   <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
 </thy-sidebar-footer>
+
+<ng-template #menuItems let-menu>
+  <ng-container *ngFor="let menuItem of menu.children">
+    <a
+      thyMenuItem
+      class="ml-2"
+      [routerLink]="[menu.path, menuItem?.path]"
+      (click)="setActiveMenu(menu, menuItem)"
+      routerLinkActive="active"
+    >
+      <span thyMenuItemName> {{ menuItem.data?.title }} </span>
+    </a>
+  </ng-container>
+</ng-template>
+
+<ng-template #collapsedMenuList let-value>
+  <thy-menu thyTheme="dark" class="action-menu">
+    <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: value.menu }"></ng-template>
+  </thy-menu>
+</ng-template>

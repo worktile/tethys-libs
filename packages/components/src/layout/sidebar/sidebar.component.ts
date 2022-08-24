@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { Route, Routes, ThyGlobalStore } from '../../core';
+import { InputBoolean } from 'ngx-tethys/core';
+import { Route, ThyGlobalStore } from '../../core';
+import { MenusMap } from '../../utils';
+import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
 
 @Component({
     selector: 'thy-pro-sidebar',
@@ -10,11 +13,18 @@ import { Route, Routes, ThyGlobalStore } from '../../core';
     }
 })
 export class ThyProSidebarComponent implements OnInit {
-    @Input() menus!: Routes;
+    @Input() menus!: ThyProLayoutMenus;
 
     @Input() logo!: string;
 
     @Input() title!: string;
+
+    @Input() @InputBoolean() set isCollapsed(value: boolean) {
+        this.sidebarCollapsed = value;
+        if (this.currentGroupMenu) {
+            this.currentGroupMenu.isCollapsed = value;
+        }
+    }
 
     @Input() public headerTemplate!: TemplateRef<HTMLElement>;
 
@@ -22,11 +32,30 @@ export class ThyProSidebarComponent implements OnInit {
 
     @Input() public footerTemplate!: TemplateRef<HTMLElement>;
 
+    public currentGroupMenu!: ThyProLayoutMenu;
+
+    public sidebarCollapsed!: boolean;
+
     constructor(public globalStore: ThyGlobalStore) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.initCurrentGroupMenu();
+    }
 
-    setActiveMenu(activeMenu: Route) {
-        this.globalStore.pureUpdateActiveMenu(activeMenu);
+    initCurrentGroupMenu() {
+        // 初始化的时候，根据T hyGlobalStore 的 activeMenu 获取 menuGroup 的路由，设置高亮状态
+        const activeRoute = this.globalStore.snapshot.activeMenu;
+        const activeRouteWidthParent = MenusMap.get(activeRoute?.path as string) as Route & { groupMenu: Route };
+        this.currentGroupMenu = activeRouteWidthParent.groupMenu;
+    }
+
+    setActiveMenu(groupMenu: ThyProLayoutMenu, activeLinkMenu: Route) {
+        groupMenu.isCollapsed = false;
+        this.currentGroupMenu = groupMenu;
+        this.globalStore.pureUpdateActiveMenu(activeLinkMenu);
+    }
+
+    menuGroupCollapsedChange(isCollapsed: boolean, groupMenu: ThyProLayoutMenu) {
+        groupMenu.isCollapsed = isCollapsed;
     }
 }

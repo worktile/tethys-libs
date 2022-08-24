@@ -8913,10 +8913,10 @@ ng-packagr@~13.0.1:
   optionalDependencies:
     esbuild "^0.13.0"
 
-ngx-tethys@^13.1.1:
-  version "13.1.2"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-13.1.2.tgz#e7bdc00cf197f4aff3e473a53b8dd24be34e45c0"
-  integrity sha512-hWVvqnyiBB6SsE0NhVJSROIG4Sf15rYgyuJSaqYNeZNC0HM1wfRQgd3UnpfP+iv/TU5Y5BS7uA7PDqV988DBaw==
+ngx-tethys@^13.2.5:
+  version "13.2.5"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-13.2.5.tgz#a387481e369716d955970e1cd23b62bd27b0255b"
+  integrity sha512-3kV6zKhrfNt8tSXcHBsZEMGqtBLbnGqNjt+vRUU1D7BtrDFfz1GSLbddwRN2XlL4lHa+mlB/RvyyQZtbZwNAoA==
   dependencies:
     cyia-code-util "^1.0.4"
     tslib "^2.3.0"
