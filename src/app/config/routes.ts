@@ -17,9 +17,15 @@ export const ROUTES: Routes = [
                 path: 'dashboard',
                 canActivate: [ThyAuthJWTGuard],
                 data: {
-                    title: '工作台'
+                    title: '工作台',
+                    icon: 'dashboard'
                 },
                 children: [
+                    {
+                        path: '',
+                        redirectTo: 'basic',
+                        pathMatch: 'full'
+                    },
                     {
                         path: 'basic',
                         component: WorkplaceComponent,
@@ -40,15 +46,37 @@ export const ROUTES: Routes = [
             {
                 path: 'users',
                 data: {
-                    title: '列表'
+                    title: '列表',
+                    icon: 'list'
                 },
                 children: [
+                    {
+                        path: '',
+                        redirectTo: 'manage',
+                        pathMatch: 'full'
+                    },
                     {
                         path: 'manage',
                         data: {
                             title: '用户管理'
                         },
                         component: UserListComponent
+                    },
+                    {
+                        path: 'search',
+                        data: {
+                            title: '搜索列表'
+                        },
+                        component: UserListComponent,
+                        children: [
+                            {
+                                path: 'articles',
+                                data: {
+                                    title: '搜索文章'
+                                },
+                                component: UserListComponent
+                            }
+                        ]
                     }
                 ]
                 // loadChildren: () => import('../features/user/user.module').then((m) => m.UserModule)
