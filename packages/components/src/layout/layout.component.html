@@ -10,8 +10,8 @@
   </thy-pro-sidebar>
 </thy-sidebar>
 <thy-layout>
-  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate"></thy-pro-header>
-  <thy-layout>
+  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate" (collapsedChange)="collapsedChange($event)"></thy-pro-header>
+  <thy-layout class="thy-pro-layout-content">
     <thy-header thySize="sm" thyTitle="二级标题" thyDivided="true"></thy-header>
     <thy-content>
       <router-outlet></router-outlet>

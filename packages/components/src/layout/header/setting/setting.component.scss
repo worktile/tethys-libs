@@ -1,0 +1,17 @@
+@use 'ngx-tethys/styles/basic.scss';
+
+.thy-pro-setting {
+    .thy-theme-setting-layout {
+        width: 70px;
+        height: 50px;
+        cursor: pointer;
+        border: 1px solid basic.$black;
+        margin-right: 15px;
+        &:last-child {
+            border-color: basic.$primary;
+        }
+        &.active {
+            background: basic.$success;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<thy-slide-layout>
+  <thy-slide-header thyTitle="页面设置"></thy-slide-header>
+  <thy-slide-body>
+    <div class="py-4 px-0">
+      <span class="text-muted font-size-base">风格设置</span>
+      <div class="thy-theme-setting d-flex mt-2">
+        <ng-container *ngFor="let theme of themes">
+          <div
+            (click)="changeTheme(theme)"
+            class="thy-theme-setting-layout"
+            [class.active]="globalStore.snapshot.config?.theme === theme.key"
+          >
+            {{ theme.name }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </thy-slide-body>
+</thy-slide-layout>

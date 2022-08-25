@@ -9,6 +9,9 @@ import { THY_SITE_SETTINGS } from '../settins.config';
 export class ThyGlobalStore extends Store<ThyGlobalInfo> {
     constructor(@Inject(THY_SITE_SETTINGS) public config: ThySiteSettings) {
         super({});
+        this.setState({
+            config: this.config
+        });
     }
 
     @Action()
@@ -31,7 +34,7 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
         });
         for (const key in config) {
             if (key === 'layout') {
-                this.changeTheme();
+                this.changeLayout();
             }
             if (key === 'primaryColor') {
                 this.changePrimaryColor();
@@ -39,8 +42,8 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
         }
     }
 
-    // 切换主题
-    changeTheme() {}
+    // 切换布局
+    changeLayout() {}
 
     // 切换主色
     changePrimaryColor() {}

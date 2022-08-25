@@ -11,14 +11,14 @@ export interface Route extends AngularRoute {
 
 export declare type Routes = Route[];
 
-type Theme = 'light' | 'dark' | 'auto';
+export type ThyTheme = 'light' | 'dark' | 'auto';
 
-type Layout = 'side' | 'top' | 'mix';
+export type ThyLayout = 'side' | 'top' | 'mix';
 
 export interface ThySiteSettings {
-    theme: Theme; // 整体风格
+    theme: ThyTheme; // 整体风格
     primaryColor: string; // 主题色
-    layout: Layout; // layout 的菜单模式, side：右侧导航，top：顶部导航，mix： 混合
+    layout: ThyLayout; // layout 的菜单模式, side：右侧导航，top：顶部导航，mix： 混合
     showHeader: boolean; // 是否展示 Header
     showFooter: boolean; // 是否展示 Footer
     fixSiderbar: boolean; // 是否固定侧边菜单
