@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, TemplateRef } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
 import { Route, ThyGlobalStore } from '../../core';
 import { menusMap } from '../../utils';
@@ -37,7 +37,7 @@ export class ThyProSidebarComponent implements OnInit {
 
     public sidebarCollapsed!: boolean;
 
-    @ViewChild('menuGroup') menuGroupElement!: ElementRef<SafeAny>;
+    public popoverOrigin!: ElementRef<SafeAny>;
 
     constructor(public globalStore: ThyGlobalStore) {}
 
