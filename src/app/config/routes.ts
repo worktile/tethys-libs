@@ -61,6 +61,22 @@ export const ROUTES: Routes = [
                             title: '用户管理'
                         },
                         component: UserListComponent
+                    },
+                    {
+                        path: 'search',
+                        data: {
+                            title: '搜索列表'
+                        },
+                        component: UserListComponent,
+                        children: [
+                            {
+                                path: 'articles',
+                                data: {
+                                    title: '搜索文章'
+                                },
+                                component: UserListComponent
+                            }
+                        ]
                     }
                 ]
                 // loadChildren: () => import('../features/user/user.module').then((m) => m.UserModule)

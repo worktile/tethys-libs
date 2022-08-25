@@ -22,6 +22,12 @@
         background: basic.$menu-theme-dark-hover-bg-color;
     }
 
+    .thy-pro-sidebar-submenu.thy-menu-group {
+        .thy-menu-group-header .thy-menu-group-title {
+            color: basic.$gray-300;
+        }
+    }
+
     .sidebar-footer {
         border-top: none;
     }

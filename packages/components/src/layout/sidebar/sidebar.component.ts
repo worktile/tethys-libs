@@ -21,8 +21,8 @@ export class ThyProSidebarComponent implements OnInit {
 
     @Input() @InputBoolean() set isCollapsed(value: boolean) {
         this.sidebarCollapsed = value;
-        if (this.currentMenuGroup) {
-            this.changeMenuGroupCollapsed(this.currentMenuGroup, false);
+        if (this.currentRootMenuGroup) {
+            this.changeMenuGroupCollapsed(this.currentRootMenuGroup, false);
         }
     }
 
@@ -32,7 +32,7 @@ export class ThyProSidebarComponent implements OnInit {
 
     @Input() public footerTemplate!: TemplateRef<HTMLElement>;
 
-    public currentMenuGroup!: ThyProLayoutMenu;
+    public currentRootMenuGroup!: ThyProLayoutMenu;
 
     public sidebarCollapsed!: boolean;
 
@@ -53,13 +53,12 @@ export class ThyProSidebarComponent implements OnInit {
     initCurrentMenuGroup() {
         // 初始化的时候，根据 ThyGlobalStore 的 activeMenu 获取 menuGroup 的路由，设置高亮状态
         const activeRoute = this.globalStore.snapshot.activeMenu;
-        const activeRouteWidthParent = menusMap.get(activeRoute?.path as string) as Route & { menuGroup: Route };
-        this.currentMenuGroup = activeRouteWidthParent.menuGroup;
+        this.getCurrentRootMenuGroup(activeRoute as Route);
     }
 
     setActiveMenu(menuGroup: ThyProLayoutMenu, activeLinkMenu: Route) {
         this.changeMenuGroupCollapsed(menuGroup, false);
-        this.currentMenuGroup = menuGroup;
+        this.getCurrentRootMenuGroup(activeLinkMenu);
         this.globalStore.pureUpdateActiveMenu(activeLinkMenu);
     }
 
@@ -69,5 +68,10 @@ export class ThyProSidebarComponent implements OnInit {
 
     changeMenuGroupCollapsed(menuGroup: ThyProLayoutMenu, isCollapsed: boolean) {
         menuGroup.isCollapsed = isCollapsed;
+    }
+
+    getCurrentRootMenuGroup(activeRoute: Route) {
+        const activeRouteWidthParent = menusMap.get(activeRoute?.path as string) as Route & { rootMenu: Route };
+        this.currentRootMenuGroup = activeRouteWidthParent.rootMenu;
     }
 }
