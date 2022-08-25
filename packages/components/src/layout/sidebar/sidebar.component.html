@@ -27,11 +27,12 @@
           [thyPlacement]="'rightTop'"
           (thyCollapsedChange)="menuGroupCollapsedChange($event, menu)"
           class="thy-pro-sidebar-menu-group"
-          [class.active]="sidebarCollapsed && currentGroupMenu === menu"
+          [class.active]="sidebarCollapsed && currentMenuGroup === menu"
+          (mouseenter)="getMenuGroupElement($event)"
           [thyConfig]="{
             placement: 'rightTop',
             insideClosable: true,
-            origin: popoverOrigin,
+            origin: menuGroupElement,
             initialState: { menu: this.menu }
           }"
         >

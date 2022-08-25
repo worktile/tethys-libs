@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
 import { Route, ThyGlobalStore } from '../../core';
 import { menusMap } from '../../utils';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
-import { SafeAny } from 'ngx-tethys/types';
 
 @Component({
     selector: 'thy-pro-sidebar',
@@ -22,8 +21,8 @@ export class ThyProSidebarComponent implements OnInit {
 
     @Input() @InputBoolean() set isCollapsed(value: boolean) {
         this.sidebarCollapsed = value;
-        if (this.currentGroupMenu) {
-            this.currentGroupMenu.isCollapsed = value;
+        if (this.currentMenuGroup) {
+            this.changeMenuGroupCollapsed(this.currentMenuGroup, false);
         }
     }
 
@@ -33,32 +32,42 @@ export class ThyProSidebarComponent implements OnInit {
 
     @Input() public footerTemplate!: TemplateRef<HTMLElement>;
 
-    public currentGroupMenu!: ThyProLayoutMenu;
+    public currentMenuGroup!: ThyProLayoutMenu;
 
     public sidebarCollapsed!: boolean;
 
-    public popoverOrigin!: ElementRef<SafeAny>;
+    public menuGroupElement!: HTMLElement;
 
     constructor(public globalStore: ThyGlobalStore) {}
 
     ngOnInit(): void {
-        this.initCurrentGroupMenu();
+        this.initCurrentMenuGroup();
     }
 
-    initCurrentGroupMenu() {
+    getMenuGroupElement(event: MouseEvent) {
+        if (this.isCollapsed) {
+            this.menuGroupElement = event.target as HTMLElement;
+        }
+    }
+
+    initCurrentMenuGroup() {
         // 初始化的时候，根据 ThyGlobalStore 的 activeMenu 获取 menuGroup 的路由，设置高亮状态
         const activeRoute = this.globalStore.snapshot.activeMenu;
-        const activeRouteWidthParent = menusMap.get(activeRoute?.path as string) as Route & { groupMenu: Route };
-        this.currentGroupMenu = activeRouteWidthParent.groupMenu;
+        const activeRouteWidthParent = menusMap.get(activeRoute?.path as string) as Route & { menuGroup: Route };
+        this.currentMenuGroup = activeRouteWidthParent.menuGroup;
     }
 
-    setActiveMenu(groupMenu: ThyProLayoutMenu, activeLinkMenu: Route) {
-        groupMenu.isCollapsed = false;
-        this.currentGroupMenu = groupMenu;
+    setActiveMenu(menuGroup: ThyProLayoutMenu, activeLinkMenu: Route) {
+        this.changeMenuGroupCollapsed(menuGroup, false);
+        this.currentMenuGroup = menuGroup;
         this.globalStore.pureUpdateActiveMenu(activeLinkMenu);
     }
 
-    menuGroupCollapsedChange(isCollapsed: boolean, groupMenu: ThyProLayoutMenu) {
-        groupMenu.isCollapsed = isCollapsed;
+    menuGroupCollapsedChange(isCollapsed: boolean, menuGroup: ThyProLayoutMenu) {
+        this.changeMenuGroupCollapsed(menuGroup, isCollapsed);
+    }
+
+    changeMenuGroupCollapsed(menuGroup: ThyProLayoutMenu, isCollapsed: boolean) {
+        menuGroup.isCollapsed = isCollapsed;
     }
 }
