@@ -43,7 +43,14 @@
 
 <ng-template #menuItems let-menu let-path="path">
   <ng-container *ngFor="let menuItem of menu.children">
-    <a thyMenuItem *ngIf="!menuItem.children?.length" class="ml-2" (click)="setActiveMenu(menu, menuItem)">
+    <a
+      thyMenuItem
+      *ngIf="!menuItem.children?.length"
+      class="ml-2"
+      [routerLink]="[path, menuItem?.path]"
+      (click)="setActiveMenu(menu, menuItem)"
+      routerLinkActive="active"
+    >
       <span thyMenuItemName> {{ menuItem.data?.title }} </span>
     </a>
     <ng-template
