@@ -12,7 +12,6 @@ import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 import { THY_SITE_SETTINGS_PROVIDER } from '../core';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { ThyPopoverModule } from 'ngx-tethys/popover';
-import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 
 const COMPONENTS = [ThyProHeaderComponent, ThyProLayoutComponent, ThyProSidebarComponent];
 
@@ -23,8 +22,7 @@ const TETHYS_MODULES = [
     ThyPopoverModule,
     ThyActionModule,
     ThyAvatarModule,
-    ThyTooltipModule,
-    ThyDropdownModule
+    ThyTooltipModule
 ];
 
 @NgModule({

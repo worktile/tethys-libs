@@ -23,39 +23,27 @@
           [thyPopover]="collapsedMenuList"
           [thyTrigger]="'hover'"
           [thyDisabled]="!sidebarCollapsed"
-          [thyPlacement]="'rightTop'"
           (thyCollapsedChange)="menuGroupCollapsedChange($event, menu)"
           class="thy-pro-sidebar-menu-group"
           [class.active]="sidebarCollapsed && currentRootMenuGroup === menu"
           (mouseenter)="getMenuGroupElement($event)"
           [thyConfig]="{
             placement: 'rightTop',
-            insideClosable: true,
             origin: menuGroupElement,
+            panelClass: 'thy-menu-grop-popover',
             initialState: { menu: this.menu }
           }"
         >
-          <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menu, path: menu.path }"></ng-template>
+          <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menu, path: menu.path }"> </ng-template>
         </thy-menu-group>
       </ng-container>
     </thy-menu>
   </ng-container>
 </thy-sidebar-content>
 
-<thy-sidebar-footer>
-  <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
-</thy-sidebar-footer>
-
 <ng-template #menuItems let-menu let-path="path">
   <ng-container *ngFor="let menuItem of menu.children">
-    <a
-      thyMenuItem
-      *ngIf="!menuItem.children?.length"
-      class="ml-2"
-      [routerLink]="[path, menuItem?.path]"
-      (click)="setActiveMenu(menu, menuItem)"
-      routerLinkActive="active"
-    >
+    <a thyMenuItem *ngIf="!menuItem.children?.length" class="ml-2" (click)="setActiveMenu(menu, menuItem)">
       <span thyMenuItemName> {{ menuItem.data?.title }} </span>
     </a>
     <ng-template
@@ -69,12 +57,16 @@
 
 <ng-template #submenuGroup let-menuItem let-path="path">
   <thy-menu-group class="px-2 thy-pro-sidebar-submenu" [thyCollapsed]="false" [thyCollapsible]="true" [thyTitle]="menuItem?.data.title!">
-    <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menuItem, path: path }"></ng-template>
+    <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menuItem, path: path }"> </ng-template>
   </thy-menu-group>
 </ng-template>
 
 <ng-template #collapsedMenuList let-value>
   <thy-menu thyTheme="dark" class="action-menu">
-    <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: value.menu }"></ng-template>
+    <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: value.menu, path: value.menu.path }"></ng-template>
   </thy-menu>
 </ng-template>
+
+<thy-sidebar-footer>
+  <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
+</thy-sidebar-footer>

@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, QueryList, TemplateRef, ViewChildren } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
 import { Route, ThyGlobalStore } from '../../core';
 import { menusMap } from '../../utils';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
+import { ThyPopoverConfig, ThyPopoverDirective } from 'ngx-tethys/popover';
 
 @Component({
     selector: 'thy-pro-sidebar',
@@ -38,6 +39,8 @@ export class ThyProSidebarComponent implements OnInit {
 
     public menuGroupElement!: HTMLElement;
 
+    @ViewChildren(ThyPopoverDirective) menuPopovers!: QueryList<ThyPopoverDirective>;
+
     constructor(public globalStore: ThyGlobalStore) {}
 
     ngOnInit(): void {
@@ -57,6 +60,9 @@ export class ThyProSidebarComponent implements OnInit {
     }
 
     setActiveMenu(menuGroup: ThyProLayoutMenu, activeLinkMenu: Route) {
+        this.menuPopovers?.forEach((item) => {
+            item.popoverOpened && item.hide();
+        });
         this.changeMenuGroupCollapsed(menuGroup, false);
         this.getCurrentRootMenuGroup(activeLinkMenu);
         this.globalStore.pureUpdateActiveMenu(activeLinkMenu);

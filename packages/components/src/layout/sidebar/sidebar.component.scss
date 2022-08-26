@@ -32,3 +32,12 @@
         border-top: none;
     }
 }
+
+.thy-menu-grop-popover {
+    .thy-menu .thy-menu-group .thy-menu-group-header {
+        font-size: basic.$font-size-base;
+        .thy-menu-group-title {
+            color: basic.$gray-300;
+        }
+    }
+}
