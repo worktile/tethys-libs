@@ -1,1 +1,10 @@
-<a href="javascript:;">59秒后重新获取 </a>
+<ng-container *ngIf="seconds === 0; else progress">
+  <button [disabled]="disabled" thyButton="primary" thySize="sm" (click)="onClick()">
+    {{ text }}
+  </button>
+</ng-container>
+<ng-template #progress>
+  <span class="countdown-progress"
+    >已发送，<span class="text-primary">{{ seconds }}</span> 秒后重新获取</span
+  >
+</ng-template>

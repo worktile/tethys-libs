@@ -1,37 +1,63 @@
-<div class="container">
-  <div class="header">
-    <img src="assets/images/logo.svg" class="logo" />
-    <span class="title">TETHYS PRO</span>
-  </div>
-  <div class="body">
+<div class="header">
+  <img src="assets/images/logo.svg" class="logo" />
+  <span class="title">TETHYS Pro</span>
+</div>
+<div class="body">
+  <div class="content">
+    <div class="header-title">登录</div>
     <thy-stepper #stepper [thyShowStepHeader]="false">
       <thy-step #step1>
-        <form thyForm name="accountLoginForm" #accountLoginForm="thyForm">
+        <form thyForm name="accountLoginForm" #accountLoginForm="thyForm" [thyFormValidatorConfig]="validateConfig">
+          <thy-form-group>
+            <div class="text-muted">
+              通过帐号密码登录团队，或切换为
+              <a href="javascript:;" (click)="stepper.next()">手机验证码登录</a>
+            </div>
+          </thy-form-group>
+          <thy-form-group-error></thy-form-group-error>
           <thy-form-group thyLabelText="用户名" thyLabelRequired>
             <input
               thyInput
               name="username"
               [(ngModel)]="model.name"
               required
-              placeholder="请输入用户名"
+              placeholder="用户名：admin"
               [thyAutofocus]="stepper.selected === step1"
             />
           </thy-form-group>
           <thy-form-group thyLabelText="密码" thyLabelRequired>
-            <input thyInput type="password" name="password" [(ngModel)]="model.password" required placeholder="请输入登录密码" />
+            <thy-input type="password" name="password" [(ngModel)]="model.password" required placeholder="密码：admin"></thy-input>
           </thy-form-group>
+
           <thy-form-group>
-            <a href="javascript:;" (click)="stepper.next()">手机验证码登录</a>
+            <div class="remember-pwd">
+              <label name="code1" thyCheckbox thyLabelText="记住帐号" [(ngModel)]="model.rememberAccount"></label>
+              <a href="javascript:;">忘记帐号?</a>
+            </div>
           </thy-form-group>
+
           <thy-form-group>
-            <button thyButton="primary" [thyLoading]="saving" thyLoadingText="Login" (thyFormSubmit)="login()" [thyBlock]="true">
+            <button
+              class="login-button"
+              thyButton="primary"
+              [thyLoading]="saving"
+              thyLoadingText="Login"
+              (thyFormSubmit)="login(accountLoginForm)"
+              [thyBlock]="true"
+            >
               登录
             </button>
           </thy-form-group>
         </form>
       </thy-step>
       <thy-step #step2>
-        <form thyForm name="mobileLoginForm" #mobileLoginForm="thyForm">
+        <form thyForm name="mobileLoginForm" #form="ngForm" #mobileLoginForm="thyForm" [thyFormValidatorConfig]="validateConfig">
+          <thy-form-group>
+            <div class="text-muted">
+              通过手机验证码登录团队，或切换为
+              <a href="javascript:;" (click)="stepper.previous()">帐号密码登录</a>
+            </div>
+          </thy-form-group>
           <thy-form-group thyLabelText="手机号" thyLabelRequired>
             <input
               thyInput
@@ -39,6 +65,7 @@
               name="mobile"
               [(ngModel)]="model.mobile"
               required
+              [pattern]="mobilePattern"
               placeholder="请输入手机号"
               [thyAutofocus]="stepper.selected === step2"
             />
@@ -46,20 +73,39 @@
           <thy-form-group thyLabelText="验证码" thyLabelRequired>
             <thy-input type="code" name="code" [(ngModel)]="model.code" required placeholder="请输入验证码">
               <ng-template #append>
-                <thy-countdown></thy-countdown>
+                <thy-countdown [disabled]="!!form.controls['mobile']?.invalid" [sendAction]="sendAction"></thy-countdown>
               </ng-template>
             </thy-input>
           </thy-form-group>
           <thy-form-group>
-            <a href="javascript:;" (click)="stepper.previous()">帐号密码登录</a>
+            <div class="remember-pwd">
+              <label name="rememberAccount" thyCheckbox thyLabelText="记住帐号" [(ngModel)]="model.rememberAccount"></label>
+              <a href="javascript:;">忘记帐号?</a>
+            </div>
           </thy-form-group>
           <thy-form-group>
-            <button thyButton="primary" [thyLoading]="saving" thyLoadingText="Login" (thyFormSubmit)="login()" [thyBlock]="true">
+            <button
+              class="login-button"
+              thyButton="primary"
+              [thyLoading]="saving"
+              thyLoadingText="Login"
+              (thyFormSubmit)="login(mobileLoginForm)"
+              [thyBlock]="true"
+            >
               登录
             </button>
           </thy-form-group>
         </form>
       </thy-step>
     </thy-stepper>
+
+    <thy-divider [thyTextDirection]="'center'" thyText="第三方帐号登录"></thy-divider>
+    <div class="third-party">
+      <div class="login-type"></div>
+      <div class="login-type"></div>
+      <div class="login-type"></div>
+      <div class="login-type"></div>
+    </div>
   </div>
+  <div class="copy-right text-desc">Copyright @ 2021-2022 PingCode & Worktile. All Rights Reserved</div>
 </div>
