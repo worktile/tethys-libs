@@ -22,7 +22,7 @@
           <thy-icon thyIconName="settings"></thy-icon>
         </a>
       </thy-actions>
-      <thy-avatar class="current-user" thyName="Admin" thySize="sm" thySrc="https://pic2.zhimg.com/ccf676352_is.jpg"> </thy-avatar>
+      <thy-avatar class="current-user" [thyName]="globalStore.user.name" thySize="sm" [thySrc]="globalStore.user.name"> </thy-avatar>
     </ng-container>
   </ng-template>
 </thy-header>

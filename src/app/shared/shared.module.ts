@@ -1,23 +1,26 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { TethysComponentsModule } from '@tethys/pro';
+import { ThyActionModule } from 'ngx-tethys/action';
+import { ThyAvatarModule } from 'ngx-tethys/avatar';
 import { ThyButtonModule } from 'ngx-tethys/button';
+import { ThyCardModule } from 'ngx-tethys/card';
+import { ThyCheckboxModule } from 'ngx-tethys/checkbox';
+import { ThyDialogModule } from 'ngx-tethys/dialog';
+import { ThyDividerModule } from 'ngx-tethys/divider';
+import { ThyFormModule, THY_FORM_CONFIG } from 'ngx-tethys/form';
+import { ThyIconModule } from 'ngx-tethys/icon';
+import { ThyInputModule } from 'ngx-tethys/input';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
 import { ThyMenuModule } from 'ngx-tethys/menu';
-import { ThyIconModule } from 'ngx-tethys/icon';
-import { ThyFormModule, THY_FORM_CONFIG } from 'ngx-tethys/form';
-import { ThyInputModule } from 'ngx-tethys/input';
-import { ThyTableModule } from 'ngx-tethys/table';
-import { ThySpaceModule } from 'ngx-tethys/space';
-import { ThyDialogModule } from 'ngx-tethys/dialog';
 import { ThyNavModule } from 'ngx-tethys/nav';
-import { ThyAvatarModule } from 'ngx-tethys/avatar';
-import { ThyTooltipModule } from 'ngx-tethys/tooltip';
-import { TethysComponentsModule } from '@tethys/pro';
-import { ThyStepperModule } from 'ngx-tethys/stepper';
 import { ThySharedModule } from 'ngx-tethys/shared';
-import { ThyActionModule } from 'ngx-tethys/action';
+import { ThySpaceModule } from 'ngx-tethys/space';
+import { ThyStepperModule } from 'ngx-tethys/stepper';
+import { ThyTableModule } from 'ngx-tethys/table';
+import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 
 const TETHYS_MODULES = [
     ThyLayoutModule,
@@ -34,7 +37,10 @@ const TETHYS_MODULES = [
     ThyNavModule,
     ThyAvatarModule,
     ThyTooltipModule,
-    ThyActionModule
+    ThyActionModule,
+    ThyCardModule,
+    ThyCheckboxModule,
+    ThyDividerModule
 ];
 const PRO_MODULES = [TethysComponentsModule];
 
