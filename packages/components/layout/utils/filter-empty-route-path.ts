@@ -1,5 +1,5 @@
 import { Data } from '@angular/router';
-import { Route } from '../core';
+import { Route } from '@tethys/pro/core';
 
 export const menusMap: Map<string, Route & { rootMenu?: Data }> = new Map();
 

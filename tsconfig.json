@@ -19,7 +19,7 @@
     "paths": {
       "@tethys/auth": ["./packages/auth/index"],
       "@tethys/cache": ["./packages/cache/index"],
-      "@tethys/pro": ["./packages/components/index"]
+      "@tethys/pro/*": ["./packages/components/*"]
     }
   },
   "angularCompilerOptions": {

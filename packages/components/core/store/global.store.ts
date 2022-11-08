@@ -3,7 +3,7 @@ import { cache } from '@tethys/cache';
 import { Action, Store } from '@tethys/store';
 import { SafeAny } from 'ngx-tethys/types';
 import { Route, Routes, ThyGlobalInfo, ThyMemberInfo, ThySiteSettings } from '../global.entity';
-import { SettingsKeys, THY_SETTING_KEYS, THY_SITE_SETTINGS } from '../settins.config';
+import { THY_SITE_SETTINGS } from '../settins.config';
 
 @Injectable({
     providedIn: 'root'
@@ -11,16 +11,8 @@ import { SettingsKeys, THY_SETTING_KEYS, THY_SITE_SETTINGS } from '../settins.co
 export class ThyGlobalStore extends Store<ThyGlobalInfo> {
     private _user: ThyMemberInfo | null = null;
 
-    constructor(@Inject(THY_SITE_SETTINGS) public config: ThySiteSettings, @Inject(THY_SETTING_KEYS) private keys: SettingsKeys) {
+    constructor(@Inject(THY_SITE_SETTINGS) public config: ThySiteSettings) {
         super({});
-    }
-
-    get user(): ThyMemberInfo {
-        if (!this._user) {
-            this._user = { ...this.getData(this.keys.user) };
-            this.setData(this.keys.user, this._user);
-        }
-        return this._user as ThyMemberInfo;
     }
 
     @Action()
@@ -49,17 +41,6 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
                 this.changePrimaryColor();
             }
         }
-    }
-
-    @Action()
-    setUser(me: ThyMemberInfo) {
-        this.setState({ me });
-        this.setData(this.keys.user, me);
-    }
-
-    @Action()
-    getUser() {
-        return this._user;
     }
 
     getData(key: string): SafeAny {
