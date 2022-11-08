@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TethysComponentsModule } from '@tethys/pro';
+import { ThyProLayoutModule } from '@tethys/pro/layout';
+import { ThyProCountdownModule } from '@tethys/pro/countdown';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyAvatarModule } from 'ngx-tethys/avatar';
 import { ThyButtonModule } from 'ngx-tethys/button';
@@ -21,6 +22,8 @@ import { ThySpaceModule } from 'ngx-tethys/space';
 import { ThyStepperModule } from 'ngx-tethys/stepper';
 import { ThyTableModule } from 'ngx-tethys/table';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
+import { ThyResultModule } from 'ngx-tethys/result';
+import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 
 const TETHYS_MODULES = [
     ThyLayoutModule,
@@ -40,9 +43,12 @@ const TETHYS_MODULES = [
     ThyActionModule,
     ThyCardModule,
     ThyCheckboxModule,
-    ThyDividerModule
+    ThyDividerModule,
+    ThyResultModule,
+    ThyDropdownModule
 ];
-const PRO_MODULES = [TethysComponentsModule];
+
+const PRO_MODULES = [ThyProLayoutModule, ThyProCountdownModule];
 
 const SHARED_COMPONENT: never[] = [];
 

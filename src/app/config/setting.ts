@@ -1,4 +1,4 @@
-import { ThySiteSettings } from '@tethys/pro';
+import { ThySiteSettings } from '@tethys/pro/core';
 
 export const DEFAULT_GLOBAL_SETTING: ThySiteSettings = {
     theme: 'light',

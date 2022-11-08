@@ -16,10 +16,3 @@ export const THY_SITE_SETTINGS_PROVIDER = {
         splitMenu: false
     }
 };
-
-export interface SettingsKeys {
-    layout: string;
-    user: string;
-}
-
-export const THY_SETTING_KEYS = new InjectionToken<SettingsKeys>('THY_SETTING_KEYS');
