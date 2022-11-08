@@ -1,0 +1,37 @@
+@use '~ngx-tethys/styles/basic.scss';
+
+:host {
+    display: flex;
+    flex: auto;
+    flex-direction: column;
+    background-image: url('../../../assets/images/login.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: auto;
+
+    .header {
+        padding: 50px;
+        display: flex;
+        height: 60px;
+        align-items: center;
+
+        .logo {
+            width: 40px;
+            height: 40px;
+        }
+
+        .title {
+            margin-left: 10px;
+            font-size: 26px;
+            line-height: 1;
+        }
+    }
+    .body {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
+        margin-right: 6%;
+    }
+}

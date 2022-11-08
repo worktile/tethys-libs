@@ -1,0 +1,6 @@
+<div class="panel-title">{{ headerTitle }}</div>
+<div class="panel-description text-muted" *ngIf="descriptionTemplateRef">
+  <ng-template [ngTemplateOutlet]="descriptionTemplateRef"></ng-template>
+</div>
+<ng-content></ng-content>
+<div class="panel-copyright text-desc">Copyright @ 2021-2022 PingCode & Worktile. All Rights Reserved</div>

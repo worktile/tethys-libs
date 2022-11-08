@@ -1,85 +1,19 @@
-@use '~ngx-tethys/styles/basic.scss';
-
-:host {
+.sso {
     display: flex;
-    flex: auto;
-    flex-direction: column;
-    background-image: url('../../../../assets/images/login.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    overflow-y: auto;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
 
-    .header {
-        padding: 50px;
-        display: flex;
-        height: 60px;
-        align-items: center;
-        .logo {
-            width: 40px;
-            height: 40px;
-        }
-
-        .title {
-            margin-left: 10px;
-            font-size: 26px;
-            line-height: 1;
-        }
+    > div {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
     }
-    .body {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        flex-direction: column;
-        margin-right: 6%;
-        .content {
-            width: 420px;
-            padding: 30px;
-            background-color: basic.$white;
-            border-radius: 10px;
-            .header-title {
-                font-size: 32px;
-                line-height: 48px;
-                margin-bottom: 16px;
-            }
-            .remember-pwd {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .form-control {
-                padding: 0.5625rem 0.75rem;
-            }
 
-            .thy-input,
-            .login-button {
-                height: 44px;
-            }
-        }
-
-        .third-party {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            .login-type {
-                cursor: pointer;
-                width: 24px;
-                height: 24px;
-                margin-right: 20px;
-                background-image: url('../../../../assets/images/wechat.svg');
-
-                &:hover {
-                    background-image: url('../../../../assets/images/wechat-hover.svg');
-                }
-            }
-        }
-
-        .copy-right {
-            width: 420px;
-            margin-top: 40px;
-            font-size: 0.75rem;
-            margin-bottom: 24px;
-            text-align: center;
+    .wechat {
+        background-image: url('../../../../assets/images/wechat.svg');
+        &:hover {
+            background-image: url('../../../../assets/images/wechat-hover.svg');
         }
     }
 }

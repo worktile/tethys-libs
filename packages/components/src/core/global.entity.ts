@@ -30,11 +30,4 @@ export interface ThyGlobalInfo {
     config: ThySiteSettings;
     menus: Routes;
     activeMenu?: Route;
-    me: ThyMemberInfo;
-}
-
-export interface ThyMemberInfo {
-    uid?: string;
-
-    name: string;
 }

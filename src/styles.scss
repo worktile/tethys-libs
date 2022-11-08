@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+// padding: 0.5625rem 0.75rem;
+@use 'ngx-tethys/styles/variables.scss' with (
+    $input-font-size-lg: 14px,
+    $input-padding-x-lg: 0.75rem,
+    $input-padding-y-lg: 0.5625rem,
+    $btn-padding-y-lg: 0.565rem,
+    $btn-font-size-lg: 16px
+);
 @use '~ngx-tethys/styles/index.scss';
 @use '../packages/components/src/styles/index.scss' as proComponents;
 
