@@ -1,4 +1,4 @@
-import { Route } from '../core';
+import { Route } from '@tethys/pro/core';
 
 export interface ThyProLayoutMenu extends Route {
     isCollapsed?: boolean;

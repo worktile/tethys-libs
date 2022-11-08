@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThyAuthService } from '@tethys/auth';
-import { ThyGlobalStore } from '@tethys/pro';
+import { ThyGlobalStore } from '@tethys/pro/core';
 import { ThyFormDirective, ThyFormValidatorConfig } from 'ngx-tethys/form';
 import { ThyStepperComponent } from 'ngx-tethys/stepper';
 import { of } from 'rxjs';
@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
             form.validator.addError('帐号密码输入错误(admin/admin)');
             return;
         }
-        this.globalStore.setUser({ uid: 'admin', name: 'admin' });
         this.authService
             .authenticate(
                 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'

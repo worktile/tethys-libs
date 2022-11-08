@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, QueryList, TemplateRef, ViewChildren } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
-import { Route, ThyGlobalStore } from '../../core';
-import { menusMap } from '../../utils';
+import { Route, ThyGlobalStore } from '@tethys/pro/core';
+import { menusMap } from '../utils';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
 import { ThyPopoverConfig, ThyPopoverDirective } from 'ngx-tethys/popover';
 

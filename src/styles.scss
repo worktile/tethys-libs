@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @use '~ngx-tethys/styles/index.scss';
-@use '../packages/components/src/styles/index.scss' as proComponents;
+@use '../packages/components/styles/index.scss' as proComponents;
 
 html,
 body {

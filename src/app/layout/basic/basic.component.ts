@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThyGlobalStore } from '@tethys/pro';
+import { ThyGlobalStore } from '@tethys/pro/core';
 
 @Component({
     selector: 'app-basic-layout',
