@@ -2,8 +2,8 @@
 
 :host {
     display: block;
-    width: 420px;
-    padding: 30px;
+    width: 520px;
+    padding: 40px;
     background-color: variables.$white;
     border-radius: 10px;
 
@@ -15,12 +15,5 @@
 
     .panel-description {
         margin-bottom: 16px;
-    }
-
-    .panel-copyright {
-        width: 100%;
-        margin-top: 40px;
-        font-size: 0.75rem;
-        text-align: center;
     }
 }

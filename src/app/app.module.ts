@@ -29,6 +29,7 @@ registerLocaleData(localeZH);
         SharedModule,
         UserModule,
         ThyAuthModule.forRoot({
+            loginUrl: '/passport/login',
             tokenStoreKey: 'demo_token'
         })
     ],

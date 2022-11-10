@@ -1,4 +1,4 @@
-<app-passport-panel headerTitle="登录">
+<app-passport-panel heading="登录">
   <ng-template #description>
     <ng-container *ngIf="stepper.selected === step1"
       >通过帐号密码登录团队，或切换为 <a href="javascript:;" (click)="stepper.next()">手机验证码登录</a></ng-container
@@ -70,7 +70,12 @@
         <thy-form-group thyLabelText="验证码" thyLabelRequired>
           <thy-input thySize="lg" type="code" name="code" [(ngModel)]="model.code" required placeholder="请输入验证码">
             <ng-template #append>
-              <!-- <thy-countdown [disabled]="!!form.controls['mobile']?.invalid" [sendAction]="sendAction"></thy-countdown> -->
+              <button [disabled]="!!form.controls.mobile.invalid" thyButton="primary" thySize="sm">获取验证码</button>
+              <!-- <thy-countdown #countdown>
+                <span class="countdown-progress"
+                  >已发送，<span class="text-primary"> {{ countdown.value }} </span> 秒后重新获取</span
+                >
+              </thy-countdown> -->
             </ng-template>
           </thy-input>
         </thy-form-group>
@@ -96,7 +101,7 @@
       </form>
     </thy-step>
   </thy-stepper>
-  <thy-divider [thyTextDirection]="'center'" thyText="第三方帐号登录"></thy-divider>
+  <thy-divider class="mt-10" [thyTextDirection]="'center'" thyText="第三方帐号登录"></thy-divider>
   <div class="sso">
     <div class="wechat"></div>
     <div class="wechat"></div>

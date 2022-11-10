@@ -6,7 +6,7 @@ import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/co
     styleUrls: ['./passport-panel.component.scss']
 })
 export class PassportPanelLayoutComponent implements OnInit {
-    @Input() headerTitle: string = '';
+    @Input() heading: string = '';
 
     @ContentChild('description') descriptionTemplateRef!: TemplateRef<any>;
 
