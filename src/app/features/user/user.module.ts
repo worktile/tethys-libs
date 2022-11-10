@@ -9,7 +9,6 @@ import { UserAddComponent } from './add/add.component';
 @NgModule({
     declarations: [UserListComponent, UserAddComponent],
     imports: [CommonModule, UserRoutingModule, SharedModule],
-    entryComponents: [UserAddComponent],
     providers: [UserListStore]
 })
 export class UserModule {}

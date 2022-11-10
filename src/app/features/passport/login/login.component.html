@@ -73,7 +73,7 @@
           <thy-form-group thyLabelText="验证码" thyLabelRequired>
             <thy-input type="code" name="code" [(ngModel)]="model.code" required placeholder="请输入验证码">
               <ng-template #append>
-                <thy-countdown [disabled]="!!form.controls['mobile']?.invalid" [sendAction]="sendAction"></thy-countdown>
+                <thy-countdown [disabled]="!!form.controls.mobile.invalid" [sendAction]="sendAction"></thy-countdown>
               </ng-template>
             </thy-input>
           </thy-form-group>
