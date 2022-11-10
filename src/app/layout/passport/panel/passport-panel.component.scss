@@ -1,0 +1,19 @@
+@use '~ngx-tethys/styles/variables.scss';
+
+:host {
+    display: block;
+    width: 520px;
+    padding: 40px;
+    background-color: variables.$white;
+    border-radius: 10px;
+
+    .panel-title {
+        font-size: 32px;
+        line-height: 48px;
+        margin-bottom: 16px;
+    }
+
+    .panel-description {
+        margin-bottom: 16px;
+    }
+}

@@ -6,7 +6,7 @@ import { BasicLayoutComponent } from '../layout/basic/basic.component';
 
 export const ROUTES: Routes = [
     {
-        path: 'login',
+        path: 'passport',
         loadChildren: () => import('../features/passport/passport.module').then((m) => m.PassportModule)
     },
     {

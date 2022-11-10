@@ -4,35 +4,33 @@ import { ThyAuthService } from '@tethys/auth';
 import { ThyGlobalStore } from '@tethys/pro/core';
 import { ThyFormDirective, ThyFormValidatorConfig } from 'ngx-tethys/form';
 import { ThyStepperComponent } from 'ngx-tethys/stepper';
-import { of } from 'rxjs';
+import { regex } from '../../../constants';
 
 @Component({
-    selector: 'app-login',
+    selector: 'app-passport-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     host: {
-        class: 'app-login-layout'
+        class: 'app-passport-login'
     }
 })
-export class LoginComponent implements OnInit {
-    saving = false;
-
+export class PassportLoginComponent implements OnInit {
     model: {
-        name?: string;
+        account?: string;
         password?: string;
         mobile?: string;
         code?: string;
-        rememberAccount?: boolean;
-        forgot?: string;
-    } = {
-        rememberAccount: false
-    };
+    } = {};
 
-    mobilePattern = /^1([3-9])\d{9}$/;
+    cacheAccount!: boolean;
+
+    saving = false;
+
+    mobilePattern = regex.mobile;
 
     validateConfig: ThyFormValidatorConfig = {
         validationMessages: {
-            username: {
+            account: {
                 required: '用户名不能为空'
             },
             password: {
@@ -54,13 +52,9 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    sendAction() {
-        return of(true);
-    }
-
-    login(form: ThyFormDirective) {
-        if (this.stepperComponent.selectedIndex === 0 && (this.model.name !== 'admin' || this.model.password !== 'admin')) {
-            form.validator.addError('帐号密码输入错误(admin/admin)');
+    loginByAccount(form: ThyFormDirective) {
+        if (this.model.account !== 'admin' && this.model.password !== '123456') {
+            form.validator.addError('用户名密码输入错误');
             return;
         }
         this.authService
@@ -71,4 +65,6 @@ export class LoginComponent implements OnInit {
                 this.router.navigateByUrl('/dashboard');
             });
     }
+
+    loginByMobile(form: ThyFormDirective) {}
 }

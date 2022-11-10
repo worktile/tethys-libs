@@ -22,6 +22,8 @@ import { ThySpaceModule } from 'ngx-tethys/space';
 import { ThyStepperModule } from 'ngx-tethys/stepper';
 import { ThyTableModule } from 'ngx-tethys/table';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
+import { ThyResultModule } from 'ngx-tethys/result';
+import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 
 const TETHYS_MODULES = [
     ThyLayoutModule,
@@ -41,7 +43,9 @@ const TETHYS_MODULES = [
     ThyActionModule,
     ThyCardModule,
     ThyCheckboxModule,
-    ThyDividerModule
+    ThyDividerModule,
+    ThyResultModule,
+    ThyDropdownModule
 ];
 
 const PRO_MODULES = [ThyProLayoutModule, ThyProCountdownModule];
