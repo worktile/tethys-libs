@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { Router, ActivatedRoute, Route } from '@angular/router';
-import { Routes, ThyGlobalStore } from '../core';
-import { filterEmptyRoutePath } from '../utils';
+import { Router, ActivatedRoute, Route, Routes } from '@angular/router';
+import { ThyGlobalStore } from '@tethys/pro/core';
+import { filterEmptyRoutePath } from './utils';
 
 @Component({
     selector: 'thy-pro-layout',

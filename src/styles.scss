@@ -9,7 +9,7 @@
     $btn-font-size-lg: 16px
 );
 @use '~ngx-tethys/styles/index.scss';
-@use '../packages/components/src/styles/index.scss' as proComponents;
+@use '../packages/components/styles/index.scss' as proComponents;
 
 html,
 body {

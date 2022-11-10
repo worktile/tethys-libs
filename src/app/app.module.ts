@@ -13,7 +13,7 @@ import { LayoutModule } from './layout/layout.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ThyAuthJWTInterceptor, ThyAuthModule } from '@tethys/auth';
 import { UserModule } from './features/user/user.module';
-import { THY_SITE_SETTINGS } from '@tethys/pro';
+import { THY_SITE_SETTINGS } from '@tethys/pro/core';
 import { DEFAULT_GLOBAL_SETTING } from './config/setting';
 
 registerLocaleData(localeZH);

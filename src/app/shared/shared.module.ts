@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TethysComponentsModule } from '@tethys/pro';
+import { ThyProLayoutModule } from '@tethys/pro/layout';
+import { ThyProCountdownModule } from '@tethys/pro/countdown';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyAvatarModule } from 'ngx-tethys/avatar';
 import { ThyButtonModule } from 'ngx-tethys/button';
@@ -42,7 +43,8 @@ const TETHYS_MODULES = [
     ThyCheckboxModule,
     ThyDividerModule
 ];
-const PRO_MODULES = [TethysComponentsModule];
+
+const PRO_MODULES = [ThyProLayoutModule, ThyProCountdownModule];
 
 const SHARED_COMPONENT: never[] = [];
 

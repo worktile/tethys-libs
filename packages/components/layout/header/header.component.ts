@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
 import { takeUntil, Observable } from 'rxjs';
-import { Route, ThyGlobalStore } from '../../core';
+import { Route, ThyGlobalStore } from '@tethys/pro/core';
 
 @Component({
     selector: 'thy-pro-header',

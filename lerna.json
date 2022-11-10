@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1-next.0",
+  "version": "0.0.1-next.1",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
@@ -11,17 +11,11 @@
     },
     "publish": {
       "message": "chore(release): publish",
-      "ignoreChanges": [
-        ".gitignore",
-        "*.log",
-        "*.md"
-      ]
+      "ignoreChanges": [".gitignore", "*.log", "*.md"]
     },
     "bootstrap": {
       "ignore": "npm-*",
-      "npmClientArgs": [
-        "--no-package-lock"
-      ]
+      "npmClientArgs": ["--no-package-lock"]
     }
   }
 }

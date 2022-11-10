@@ -1,6 +1,12 @@
 module.exports = {
-    allowBranch: ['master'],
-    bumpFiles: ['package.json'],
+    allowBranch: ['master', 'release-*'],
+    bumpFiles: [
+        'package.json',
+        {
+            filename: './packages/components/version.ts',
+            type: 'code'
+        }
+    ],
     skip: {
         changelog: true
     },

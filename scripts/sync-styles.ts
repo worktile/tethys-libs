@@ -1,13 +1,9 @@
 import * as shell from 'shelljs';
 
-const packages = ['components'];
-
 async function sync() {
-    for (const pkg of packages) {
-        console.log(`sync @tethys/${pkg} styles ...`);
-        shell.exec(`cd packages/${pkg} && cpx '**/*.scss' '../../dist/@tethys/${pkg}'`);
-        console.log(`sync @tethys/${pkg} styles done.`);
-    }
+    console.log('sync @tethys/pro styles ...');
+    shell.exec("cd packages/components && cpx '**/*.scss' '../../dist/@tethys/pro'");
+    console.log('sync @tethys/pro styles done.');
 }
 
 sync();

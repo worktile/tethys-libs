@@ -13,13 +13,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2020",
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
       "@tethys/auth": ["./packages/auth/index"],
       "@tethys/cache": ["./packages/cache/index"],
-      "@tethys/pro": ["./packages/components/index"]
+      "@tethys/pro/*": ["./packages/components/*"]
     }
   },
   "angularCompilerOptions": {

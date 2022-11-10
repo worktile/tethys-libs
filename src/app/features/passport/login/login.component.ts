@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThyAuthService } from '@tethys/auth';
-import { ThyGlobalStore } from '@tethys/pro';
+import { ThyGlobalStore } from '@tethys/pro/core';
 import { ThyFormDirective, ThyFormValidatorConfig } from 'ngx-tethys/form';
 import { ThyStepperComponent } from 'ngx-tethys/stepper';
 import { regex } from '../../../constants';
