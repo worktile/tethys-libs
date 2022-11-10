@@ -111,11 +111,3 @@ export class ThyTokenService implements OnDestroy {
         this.cleanRefresh();
     }
 }
-
-export const config = {
-    content: {},
-    sidebar: {
-        groupCount: 2,
-        groupPropertyCount: 3
-    }
-};
