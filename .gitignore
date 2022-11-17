@@ -51,3 +51,5 @@ dist
 .nyc_output
 coverage
 tsconfig.tsbuildinfo
+
+.docgeni/site

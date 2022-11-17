@@ -109,8 +109,8 @@
       }
     },
     "tethys": {
-      "sourceRoot": "packages",
-      "root": "packages",
+      "sourceRoot": "packages/components",
+      "root": "packages/components",
       "projectType": "library",
       "prefix": "",
       "architect": {

@@ -78,6 +78,6 @@ export class ThyProSidebarComponent implements OnInit {
 
     getCurrentRootMenuGroup(activeRoute: Route) {
         const activeRouteWidthParent = menusMap.get(activeRoute?.path as string) as Route & { rootMenu: Route };
-        this.currentRootMenuGroup = activeRouteWidthParent.rootMenu;
+        this.currentRootMenuGroup = activeRouteWidthParent?.rootMenu;
     }
 }
