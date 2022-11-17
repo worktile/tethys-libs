@@ -1,10 +1,14 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { interval, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 
 @Component({
     selector: 'thy-countdown',
-    templateUrl: 'countdown.component.html'
+    templateUrl: 'countdown.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'thy-countdown'
+    }
 })
 export class ThyCountdownComponent implements OnInit, OnDestroy {
     @Input() text = '获取短信验证码';
@@ -22,8 +26,6 @@ export class ThyCountdownComponent implements OnInit, OnDestroy {
     }
 
     private time = 60;
-
-    @HostBinding('class.thy-countdown') class = true;
 
     constructor() {}
 
