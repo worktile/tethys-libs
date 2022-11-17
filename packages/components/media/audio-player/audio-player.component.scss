@@ -1,0 +1,19 @@
+@use 'ngx-tethys/styles/basic.scss';
+
+.audio-preview-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: basic.$gray-800;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .audio-content {
+        width: 50%;
+        .error-tip {
+            margin-top: 20px;
+            color: basic.$white;
+            font-size: 16px;
+        }
+    }
+}

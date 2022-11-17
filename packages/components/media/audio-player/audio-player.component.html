@@ -1,0 +1,15 @@
+<div class="audio-content">
+  <audio
+    [src]="fileSrc"
+    muted
+    autoplay
+    controls
+    (loadedmetadata)="onAudioLoadedmetadata($event)"
+    (error)="onAudioError($event)"
+    (canplay)="onAudioCanPlay()"
+    *ngIf="showAudio"
+  ></audio>
+  <div class="error-tip" *ngIf="showErrorTip">
+    {{ errorTipText }}
+  </div>
+</div>
