@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ThyAudioPlayerComponent } from './audio-player/audio-player.component';
-import { ThyVideoPlayerComponent } from './video-player/video-player.component';
+import { ThyAudioPlayerComponent } from './audio-player.component';
+import { ThyMediaPlayerBaseComponent } from './media-base.component';
+import { ThyVideoPlayerComponent } from './video-player.component';
 
 @NgModule({
-    declarations: [ThyVideoPlayerComponent, ThyAudioPlayerComponent],
+    declarations: [ThyMediaPlayerBaseComponent, ThyVideoPlayerComponent, ThyAudioPlayerComponent],
     imports: [CommonModule],
     exports: [ThyVideoPlayerComponent, ThyAudioPlayerComponent],
     providers: []

@@ -1,4 +1,6 @@
 @use './basic';
 @forward '../countdown/countdown.component.scss';
 @forward '../layout/styles';
-@forward '../media/styles';
+@forward '../media/media-base.scss';
+@forward '../media/audio-player.component.scss';
+// @forward '../media/audio-player/audio-player.component.scss';

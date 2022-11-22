@@ -1,12 +1,12 @@
 @use 'ngx-tethys/styles/basic.scss';
 
-.thy-video-preview {
+.thy-media-player {
     display: block;
     width: 100%;
     height: 100%;
     background-color: basic.$gray-800;
     position: relative;
-    .video-content {
+    .media-content {
         width: 100%;
         height: 100%;
     }

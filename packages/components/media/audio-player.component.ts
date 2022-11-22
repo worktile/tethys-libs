@@ -1,10 +1,28 @@
 import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ThyMediaPlayerBaseComponent } from '../media-base.component';
+import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
 @Component({
     selector: 'thy-audio-player',
-    templateUrl: './audio-player.component.html'
+    template: `
+        <div class="audio-content">
+            <audio
+                #audio
+                class="audio"
+                [src]="fileSrc"
+                [muted]="thyMuted"
+                [autoplay]="thyAutoplay"
+                [controls]="thyControls"
+                (loadedmetadata)="onLoadedmetadata($event)"
+                (error)="onError($event)"
+                (canplay)="onCanPlay()"
+                *ngIf="showMedia"
+            ></audio>
+            <div class="error-tip" *ngIf="showErrorTip">
+                {{ errorTipText }}
+            </div>
+        </div>
+    `
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
     @HostBinding('class') class = 'thy-audio-player thy-media-player';
