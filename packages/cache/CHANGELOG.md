@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.0](https://github.com/tethys-org/libs/compare/v0.0.1-next.0...v14.0.0-next.0) (2022-11-23)
+
+### Features
+
+- **component:** add media module and add audio-player and video player component #INFR-5334 #INFR-5333 ([e6f7a2f](https://github.com/tethys-org/libs/commit/e6f7a2f98d4fe9a0bc7be1fd8bf4b82af2d985c2)), closes [#INFR-5334](https://github.com/tethys-org/libs/issues/INFR-5334) [#INFR-5333](https://github.com/tethys-org/libs/issues/INFR-5333)
+
 ## [0.0.1-next.1](https://github.com/tethys-org/libs/compare/v0.0.1-next.0...v0.0.1-next.1) (2022-11-08)
 
 **Note:** Version bump only for package @tethys/cache
