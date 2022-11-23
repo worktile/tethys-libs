@@ -5,7 +5,10 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": []
+    "types": [],
+    "paths": {
+      "@tethys/pro/*": ["./components/*"]
+    }
   },
   "include": ["./**/*.ts"]
 }

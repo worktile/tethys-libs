@@ -1,0 +1,21 @@
+@use 'ngx-tethys/styles/basic.scss';
+@forward '../audio-player.scss';
+
+.thy-media-player {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .media-content {
+        width: 100%;
+        height: 100%;
+    }
+    .error-tip {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: basic.$white;
+        font-size: 16px;
+    }
+}

@@ -1,4 +1,4 @@
-import { isString, isNumber } from '@tethys/cdk/is';
+import { isNumber, isString } from '@tethys/cdk/is';
 
 const NUMBER_PREFIX = '____n____';
 const SupportedStorage = window && window.localStorage;
@@ -35,7 +35,7 @@ const cache = {
      *
      * @param key string
      */
-    get<TValue = string>(key: string): TValue {
+    get<TValue = string>(key: string): TValue | undefined {
         if (SupportedStorage) {
             let value = storageSource.getItem(key);
             if (value) {
