@@ -1,3 +1,4 @@
-<div style="width: 500px; height: 500px">
-  <thy-video-player [thyFileSrc]="src" [thyMuted]="muted" [thyAutoplay]="autoplay" [thyControls]="controls"></thy-video-player>
+<div class="d-flex" style="height: 300px">
+  <thy-video-player [thyFileSrc]="src"></thy-video-player>
+  <thy-video-player class="ml-5" [thyFileSrc]="errorSrc"></thy-video-player>
 </div>

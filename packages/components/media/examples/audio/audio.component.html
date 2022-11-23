@@ -1,3 +1,4 @@
-<div style="width: 500px; height: 500px">
-  <thy-audio-player [thyFileSrc]="src" [thyMuted]="muted" [thyAutoplay]="autoplay" [thyControls]="controls"></thy-audio-player>
+<div class="d-flex">
+  <thy-audio-player [thyFileSrc]="src"></thy-audio-player>
+  <thy-audio-player class="ml-5" [thyFileSrc]="errorSrc"></thy-audio-player>
 </div>

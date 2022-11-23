@@ -5,30 +5,20 @@ import { ThyAudioPlayerComponent, ThyProMediaModule, ThyVideoPlayerComponent } f
 
 @Component({
     selector: 'thy-test-video-basic',
-    template: `
-        <thy-video-player [thyFileSrc]="src" [thyMuted]="muted" [thyAutoplay]="autoplay" [thyControls]="controls"></thy-video-player>
-    `
+    template: ` <thy-video-player [thyFileSrc]="src"></thy-video-player> `
 })
 export class ThyVideoTestBasicComponent {
     @ViewChild(ThyVideoPlayerComponent) videoPlayer: ThyVideoPlayerComponent | undefined;
     src = 'test.mp4';
-    muted = false;
-    autoplay = true;
-    controls = false;
 }
 
 @Component({
     selector: 'thy-test-audio-basic',
-    template: `
-        <thy-audio-player [thyFileSrc]="src" [thyMuted]="muted" [thyAutoplay]="autoplay" [thyControls]="controls"></thy-audio-player>
-    `
+    template: ` <thy-audio-player [thyFileSrc]="src"></thy-audio-player> `
 })
 export class ThyAudioTestBasicComponent {
     @ViewChild(ThyAudioPlayerComponent) audioPlayer: ThyAudioPlayerComponent | undefined;
     src = 'test.aac';
-    muted = false;
-    autoplay = true;
-    controls = false;
 }
 
 describe('mediaViewerComponent', () => {
@@ -98,9 +88,6 @@ describe('mediaViewerComponent', () => {
         mediaName: string
     ) {
         const mediaComponent = debugElement.nativeElement.querySelector(mediaName);
-        expect(mediaComponent.controls).toEqual(component.controls);
-        expect(mediaComponent.muted).toEqual(component.muted);
-        expect(mediaComponent.autoplay).toEqual(component.autoplay);
-        expect(mediaComponent.played).toBeTruthy();
+        expect(mediaComponent.src.includes(component.src)).toBeTruthy();
     }
 });

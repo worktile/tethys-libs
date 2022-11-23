@@ -10,6 +10,8 @@ export class ThyProMediaAudioExampleComponent implements OnInit {
 
     src = audioSrc;
 
+    errorSrc = 'error.aac';
+
     muted = false;
 
     autoplay = true;

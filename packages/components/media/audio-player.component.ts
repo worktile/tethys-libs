@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
@@ -10,9 +10,9 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
                 #audio
                 class="audio"
                 [src]="fileSrc"
-                [muted]="thyMuted"
-                [autoplay]="thyAutoplay"
-                [controls]="thyControls"
+                [muted]="false"
+                [autoplay]="true"
+                [controls]="true"
                 (loadedmetadata)="onLoadedmetadata($event)"
                 (error)="onError($event)"
                 (canplay)="onCanPlay()"
@@ -25,9 +25,16 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
     `
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
-    @HostBinding('class') class = 'thy-audio-player thy-media-player';
+    @HostBinding('class') class = 'thy-audio-player';
 
     @ViewChild('audio') audio: ElementRef | undefined;
+
+    /**
+     * 媒体资源的url
+     */
+    @Input() set thyFileSrc(src: string) {
+        this.fileSrc = this.sanitizer.bypassSecurityTrustResourceUrl(src);
+    }
 
     public errorTips = {
         formatError: '该音频暂不支持预览，请升级浏览器版本或下载查看',

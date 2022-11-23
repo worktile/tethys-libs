@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, ViewChild } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
@@ -9,9 +9,9 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
             #video
             class="media-content"
             [src]="fileSrc"
-            [muted]="thyMuted"
-            [autoplay]="thyAutoplay"
-            [controls]="thyControls"
+            [muted]="false"
+            [autoplay]="true"
+            [controls]="true"
             (loadedmetadata)="onLoadedmetadata($event)"
             (error)="onError($event)"
             (canplay)="onCanPlay()"
@@ -26,6 +26,13 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     @HostBinding('class') class = 'thy-video-player thy-media-player';
 
     @ViewChild('video') video: HTMLVideoElement | undefined;
+
+    /**
+     * 媒体资源的url
+     */
+    @Input() set thyFileSrc(src: string) {
+        this.fileSrc = this.sanitizer.bypassSecurityTrustResourceUrl(src);
+    }
 
     constructor(public sanitizer: DomSanitizer) {
         super(sanitizer);

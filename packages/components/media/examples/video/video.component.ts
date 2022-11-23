@@ -10,6 +10,8 @@ export class ThyProMediaVideoExampleComponent implements OnInit {
 
     src = videoSrc;
 
+    errorSrc = 'error.mp4';
+
     muted = false;
 
     autoplay = true;
