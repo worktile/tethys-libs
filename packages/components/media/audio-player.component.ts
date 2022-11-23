@@ -11,7 +11,7 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
                 class="audio"
                 [src]="fileSrc"
                 [muted]="false"
-                [autoplay]="true"
+                [autoplay]="thyAutoPlay"
                 [controls]="true"
                 (loadedmetadata)="onLoadedmetadata($event)"
                 (error)="onError($event)"
@@ -25,16 +25,21 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
     `
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
-    @HostBinding('class') class = 'thy-audio-player';
+    @HostBinding('class.thy-audio-player') audioPlayerClass = true;
 
     @ViewChild('audio') audio: ElementRef | undefined;
 
     /**
      * 媒体资源的url
      */
-    @Input() set thyFileSrc(src: string) {
+    @Input() set thySrc(src: string) {
         this.fileSrc = this.sanitizer.bypassSecurityTrustResourceUrl(src);
     }
+
+    /**
+     * 当下载到足够播放的媒体文件，是否可以自动播放
+     */
+    @Input() thyAutoPlay: boolean = false;
 
     public errorTips = {
         formatError: '该音频暂不支持预览，请升级浏览器版本或下载查看',

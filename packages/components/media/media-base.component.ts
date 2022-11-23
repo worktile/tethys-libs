@@ -6,10 +6,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
  */
 @Directive({ selector: '[thyMediaPlayerBase]' })
 export class ThyMediaPlayerBaseComponent implements OnInit {
-    protected errorTips = {
-        formatError: '该视频暂不支持预览，请升级浏览器版本或下载查看',
-        networkError: '当前网络异常，请刷新后重试'
-    };
+    errorTips!: { formatError: string; networkError: string };
 
     public fileSrc: SafeUrl = '';
 

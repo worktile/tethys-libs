@@ -12,11 +12,7 @@ export class ThyProMediaAudioExampleComponent implements OnInit {
 
     errorSrc = 'error.aac';
 
-    muted = false;
-
-    autoplay = true;
-
-    controls = true;
+    autoplay = false;
 
     ngOnInit(): void {}
 }

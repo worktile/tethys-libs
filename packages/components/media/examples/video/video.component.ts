@@ -12,11 +12,7 @@ export class ThyProMediaVideoExampleComponent implements OnInit {
 
     errorSrc = 'error.mp4';
 
-    muted = false;
-
     autoplay = true;
-
-    controls = true;
 
     ngOnInit(): void {}
 }
