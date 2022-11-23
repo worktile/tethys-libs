@@ -1,6 +1,6 @@
 {
   "name": "@tethys/cache",
-  "version": "0.0.1-next.1",
+  "version": "14.0.0-next.0",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
