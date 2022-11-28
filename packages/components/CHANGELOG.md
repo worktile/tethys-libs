@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.1](https://github.com/tethys-org/libs/compare/v14.0.0-next.0...v14.0.0-next.1) (2022-11-28)
+
+### Features
+
+- **components:** media src support safe url and rename export style filename ([c099054](https://github.com/tethys-org/libs/commit/c099054f4af83f715208afd29d090450c2556849))
+
 # [14.0.0-next.0](https://github.com/tethys-org/libs/compare/v0.0.1-next.0...v14.0.0-next.0) (2022-11-23)
 
 ### Bug Fixes
