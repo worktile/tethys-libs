@@ -1,5 +1,5 @@
 @use 'ngx-tethys/styles/basic.scss';
-@forward '../audio-player.scss';
+@forward './audio-player.scss';
 
 .thy-media-player {
     display: block;
