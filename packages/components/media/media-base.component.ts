@@ -1,20 +1,33 @@
 import { Directive, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { isString } from '@tethys/cdk';
 
 /**
  * @internal
  */
 @Directive({ selector: '[thyMediaPlayerBase]' })
 export class ThyMediaPlayerBaseComponent implements OnInit {
-    errorTips!: { formatError: string; networkError: string };
-
-    public fileSrc: SafeUrl = '';
+    public errorTips!: { formatError: string; networkError: string };
 
     public showErrorTip = false;
 
     public showMedia = true;
 
     public errorTipText: string = '';
+
+    public set fileSrc(value: string | SafeUrl) {
+        if (isString(value)) {
+            this.internalFileSrc = this.sanitizer.bypassSecurityTrustResourceUrl(value);
+        } else {
+            this.internalFileSrc = value;
+        }
+    }
+
+    public get fileSrc() {
+        return this.internalFileSrc;
+    }
+
+    private internalFileSrc: SafeUrl = '';
 
     constructor(public sanitizer: DomSanitizer) {}
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { audioSrc } from '../mock';
 
 @Component({
@@ -6,13 +7,15 @@ import { audioSrc } from '../mock';
     templateUrl: './audio.component.html'
 })
 export class ThyProMediaAudioExampleComponent implements OnInit {
-    constructor() {}
+    constructor(private sanitizer: DomSanitizer) {}
 
-    src = audioSrc;
+    src: SafeUrl = '';
 
     errorSrc = 'error.aac';
 
     autoplay = false;
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.src = this.sanitizer.bypassSecurityTrustResourceUrl(audioSrc);
+    }
 }
