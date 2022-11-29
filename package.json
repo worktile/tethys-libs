@@ -1,7 +1,7 @@
 {
   "name": "libs",
   "private": true,
-  "version": "14.0.0-next.1",
+  "version": "14.0.0-next.2",
   "scripts": {
     "ng": "ng",
     "build:docs": "docgeni build --prod",
