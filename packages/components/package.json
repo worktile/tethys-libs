@@ -5,6 +5,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    "./styles/index": {
+      "sass": "./styles/index.scss"
+    }
+  },
   "peerDependencies": {
     "@angular/cdk": "*"
   },
