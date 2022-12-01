@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
 @Component({
@@ -30,8 +30,8 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     /**
      * 媒体资源的url
      */
-    @Input() set thySrc(src: string) {
-        this.fileSrc = this.sanitizer.bypassSecurityTrustResourceUrl(src);
+    @Input() set thySrc(src: string | SafeUrl) {
+        this.fileSrc = src;
     }
 
     /**

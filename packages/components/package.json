@@ -1,9 +1,14 @@
 {
   "name": "@tethys/pro",
-  "version": "14.0.0-next.0",
+  "version": "14.0.0-next.2",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    "./styles/index": {
+      "sass": "./styles/index.scss"
+    }
   },
   "peerDependencies": {
     "@angular/cdk": "*"

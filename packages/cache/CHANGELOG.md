@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.2](https://github.com/tethys-org/libs/compare/v14.0.0-next.1...v14.0.0-next.2) (2022-11-29)
+
+**Note:** Version bump only for package @tethys/cache
+
+# [14.0.0-next.1](https://github.com/tethys-org/libs/compare/v14.0.0-next.0...v14.0.0-next.1) (2022-11-28)
+
+**Note:** Version bump only for package @tethys/cache
+
 # [14.0.0-next.0](https://github.com/tethys-org/libs/compare/v0.0.1-next.0...v14.0.0-next.0) (2022-11-23)
 
 ### Features
