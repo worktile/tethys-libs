@@ -54,7 +54,7 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     onLoadedmetadata(event: Event) {
         const duration = this.audio?.nativeElement?.duration;
         if (!(duration && duration > 0)) {
-            this.showMedia = false;
+            this.showErrorTip = true;
         }
     }
 }
