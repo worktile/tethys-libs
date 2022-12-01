@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.3](https://github.com/tethys-org/libs/compare/v14.0.0-next.2...v14.0.0-next.3) (2022-12-01)
+
+### Bug Fixes
+
+- **components:** fix media styles #INFR-5334 ([#26](https://github.com/tethys-org/libs/issues/26)) ([a185396](https://github.com/tethys-org/libs/commit/a1853963a3ae528f6a26014da3e399c3341a0730)), closes [#INFR-5334](https://github.com/tethys-org/libs/issues/INFR-5334)
+
 # [14.0.0-next.2](https://github.com/tethys-org/libs/compare/v14.0.0-next.1...v14.0.0-next.2) (2022-11-29)
 
 **Note:** Version bump only for package @tethys/pro
