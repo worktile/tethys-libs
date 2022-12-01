@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { videoSrc } from '../mock';
+import { videoSrc, videoSrc1 } from '../mock';
 
 @Component({
     selector: 'thy-pro-media-video-example',
@@ -10,7 +10,9 @@ export class ThyProMediaVideoExampleComponent implements OnInit {
 
     src = videoSrc;
 
-    errorSrc = 'error.mp4';
+    errorSrc = 'error.aac';
+
+    errorSrc1 = videoSrc1;
 
     autoplay = true;
 

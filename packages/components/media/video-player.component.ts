@@ -50,11 +50,5 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     ngOnInit(): void {}
 
-    onLoadedmetadata(event: Event) {
-        if (!(event.target as HTMLVideoElement).videoWidth || !(event.target as HTMLVideoElement).videoHeight) {
-            this.showMedia = false;
-            this.showErrorTip = true;
-            this.errorTipText = this.errorTips['formatError'];
-        }
-    }
+    onLoadedmetadata(event: Event) {}
 }

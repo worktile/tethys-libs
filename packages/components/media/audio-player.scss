@@ -14,17 +14,6 @@
         .audio {
             width: 100%;
         }
-        audio::-moz-media-controls-panel {
-            background-color: basic.$gray-100;
-        }
-        audio::-webkit-media-controls-panel {
-            background-color: basic.$gray-100;
-        }
-
-        audio::-webkit-media-controls-play-button:hover {
-            background-color: rgba(basic.$gray-300, 0.7);
-            border-radius: 50%;
-        }
 
         .error-tip {
             margin-top: 20px;
