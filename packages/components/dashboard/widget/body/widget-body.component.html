@@ -1,0 +1,4 @@
+<thy-loading *ngIf="!loadingDone" [thyDone]="loadingDone"></thy-loading>
+<ng-container *ngIf="loadingDone">
+  <ng-content></ng-content>
+</ng-container>

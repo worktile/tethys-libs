@@ -1,0 +1,65 @@
+@use 'ngx-tethys/styles/variables.scss';
+@use 'src/styles/hidden-scrollbar.scss' as hiddenScrollbar;
+
+.thy-pro-widget-item {
+    width: 100%;
+    height: 100%;
+    padding: 24px 28px;
+    box-sizing: border-box;
+    display: block;
+    .drag-icon {
+        visibility: hidden;
+    }
+
+    &:hover {
+        .widget-header-title {
+            .more-icon {
+                display: block;
+                &:hover {
+                    .thy-icon {
+                        color: variables.$link-hover-color;
+                    }
+                }
+            }
+            .drag-icon {
+                visibility: visible;
+            }
+        }
+    }
+
+    .widget-item-layout {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+    }
+
+    .widget-body {
+        display: flex;
+        overflow: auto;
+        height: 100%;
+        justify-content: center;
+
+        &.widget-body-scrollable {
+            justify-content: left;
+        }
+
+        @include hiddenScrollbar.hidden-scrollbar;
+        .thy-table {
+            &-body {
+                @include hiddenScrollbar.hidden-scrollbar;
+            }
+        }
+
+        .scroll-table {
+            min-width: 1000px;
+        }
+    }
+
+    .widget-header-title {
+        .more-icon {
+            padding-top: 2px;
+            text-align: center;
+            line-height: 26px;
+        }
+    }
+}
