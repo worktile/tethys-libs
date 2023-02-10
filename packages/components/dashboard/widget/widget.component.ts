@@ -1,5 +1,5 @@
 import { Directive } from '@angular/core';
-import { ThyWidgetItem } from '@tethys/pro/dashboard';
+import { ThyWidgetItem } from '../dashboard.class';
 
 @Directive()
 export class ThyDashboardWidgetComponent {
