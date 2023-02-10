@@ -1,6 +1,6 @@
-<div class="widget-header-title" [ngClass]="{ 'widget-header-bottom-spacing': !thyDescription }">
+<div class="widget-header-title" [ngClass]="{ 'mb-3': !thyDescription }">
   <span class="title-text text-truncate" *thyStringOrTemplateOutlet="thyTitle"></span>
 </div>
-<div *ngIf="thyDescription" class="widget-header-description text-truncate" [ngClass]="{ 'widget-header-bottom-spacing': thyDescription }">
+<div *ngIf="thyDescription" class="widget-header-description text-truncate" [ngClass]="{ 'mb-3': thyDescription }">
   <ng-container *thyStringOrTemplateOutlet="thyDescription"></ng-container>
 </div>

@@ -11,7 +11,7 @@ import {
     Type
 } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
-import { ThyWidget } from '../../dashboard.class';
+import { ThyWidgetItem } from '../../dashboard.class';
 
 @Component({
     selector: 'thy-dashboard-widget-item',
@@ -22,7 +22,7 @@ import { ThyWidget } from '../../dashboard.class';
 export class ThyDashboardWidgetItemComponent implements OnInit, OnChanges {
     @Input() @InputBoolean() editing = false;
 
-    @Input() widget!: ThyWidget;
+    @Input() widget!: ThyWidgetItem;
 
     @Input() component!: Type<any>;
 

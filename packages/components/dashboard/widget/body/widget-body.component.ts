@@ -1,5 +1,4 @@
-import { OnInit, Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { WidgetInfo } from '../../dashboard.class';
+import { OnInit, Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'thy-dashboard-widget-body',

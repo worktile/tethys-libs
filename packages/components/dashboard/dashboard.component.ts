@@ -1,8 +1,9 @@
-import { OnChanges, SimpleChanges, Type, Output } from '@angular/core';
+import { OnChanges, SimpleChanges, Type } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CompactType, DisplayGrid, GridsterComponentInterface, GridType } from 'angular-gridster2';
 import { helpers } from 'ngx-tethys/util';
-import { ThyDashboardConfig, ThyWidget, WidgetGridsterItem, WidgetInfo } from './dashboard.class';
+import { ThyDashboardConfig, ThyWidgetItem, WidgetGridsterItem } from './dashboard.class';
+import { ThyDashboardWidgetComponent } from './widget/widget.component';
 
 @Component({
     selector: 'thy-dashboard',
@@ -14,14 +15,14 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
     /**
      * 仪表盘部件数据
      */
-    @Input() set thyWidgets(value: ThyWidget[]) {
+    @Input() set thyWidgets(value: ThyWidgetItem[]) {
         this.widgetGridsterItems = this.buildWidgetGridsterItems(value);
     }
 
     /**
      * 仪表盘部件对应组件映射
      */
-    @Input() thyWidgetComponents: Record<string, Type<any>> = {};
+    @Input() thyWidgetComponents: Record<string, Type<ThyDashboardWidgetComponent>> = {};
 
     /**
      * 仪表盘部件是否允许拖拽
@@ -76,7 +77,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         return item.widget?._id || index;
     }
 
-    private buildWidgetGridsterItems(widgets: ThyWidget[]) {
+    private buildWidgetGridsterItems(widgets: ThyWidgetItem[]) {
         const changedWidgetGridsterItemsMap = helpers.keyBy(this.changedWidgetGridsterItems, 'widget._id');
         return (widgets || []).map((widget) => {
             const changedWidgetGridsterItem = changedWidgetGridsterItemsMap[widget._id];
@@ -141,7 +142,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
     // 保存编辑部件，给外部使用
     saveWidget() {
         this.changedWidgetGridsterItems = [];
-        let widgets: WidgetInfo[] = [];
+        let widgets: ThyWidgetItem[] = [];
         if (this.widgetGridsterItems.length) {
             widgets = this.buildTemporaryWidgets();
         }
