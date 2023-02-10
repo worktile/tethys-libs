@@ -1,7 +1,3 @@
-<div class="dashboard-operations">
-  <button thyButton="primary" *ngIf="editing" (click)="save()">保存</button>
-  <button thyButton="primary" *ngIf="!editing" (click)="toggleManageWidget()">编辑</button>
-</div>
 <div class="dashboard-container">
-  <thy-pro-dashboard #thyProDashboard [thyWidgets]="widgets"></thy-pro-dashboard>
+  <thy-dashboard #thyProDashboard [thyWidgets]="widgets" [thyWidgetComponents]="widgetComponents"></thy-dashboard>
 </div>

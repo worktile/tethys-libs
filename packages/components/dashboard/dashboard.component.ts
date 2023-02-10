@@ -1,30 +1,41 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { CompactType, DisplayGrid, GridsterComponentInterface, GridsterConfig, GridType } from 'angular-gridster2';
+import { OnChanges, SimpleChanges, Type, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { CompactType, DisplayGrid, GridsterComponentInterface, GridType } from 'angular-gridster2';
 import { helpers } from 'ngx-tethys/util';
-import { WidgetGridsterItem, WidgetInfo } from './dashboard.entity';
+import { ThyDashboardConfig, ThyWidget, WidgetGridsterItem, WidgetInfo } from './dashboard.class';
 
 @Component({
-    selector: 'thy-pro-dashboard',
+    selector: 'thy-dashboard',
     templateUrl: './dashboard.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'thy-pro-dashboard' }
+    host: { class: 'thy-dashboard' }
 })
-export class ThyProDashboardComponent implements OnInit {
+export class ThyDashboardComponent implements OnInit, OnChanges {
     /**
-     * widgets 仪表盘内部件数据
+     * 仪表盘部件数据
      */
-    @Input() set thyWidgets(value: WidgetInfo[]) {
+    @Input() set thyWidgets(value: ThyWidget[]) {
         this.widgetGridsterItems = this.buildWidgetGridsterItems(value);
     }
 
     /**
-     * gridster config
+     * 仪表盘部件对应组件映射
      */
-    @Input() set thyGristerConfig(value: GridsterConfig) {
+    @Input() thyWidgetComponents: Record<string, Type<any>> = {};
+
+    /**
+     * 仪表盘部件是否允许拖拽
+     */
+    @Input() thyDraggable: boolean = false;
+
+    /**
+     * Config
+     */
+    @Input() set thyConfig(value: ThyDashboardConfig) {
         this.config = Object.assign({}, this.config, value);
     }
 
-    public config: GridsterConfig = {
+    public config: ThyDashboardConfig = {
         gridType: GridType.VerticalFixed,
         margin: 8,
         compactType: CompactType.None,
@@ -42,8 +53,6 @@ export class ThyProDashboardComponent implements OnInit {
         }
     };
 
-    public editing = false;
-
     public widgetGridsterItems: WidgetGridsterItem[] = [];
 
     private changedWidgetGridsterItems: WidgetGridsterItem[] = [];
@@ -53,24 +62,30 @@ export class ThyProDashboardComponent implements OnInit {
 
     constructor(private cdr: ChangeDetectorRef) {}
 
-    ngOnInit(): void {}
-
-    trackBy(index: number, item: WidgetGridsterItem) {
-        return item.widget._id || index;
+    ngOnInit(): void {
+        this.setDraggable(this.thyDraggable);
     }
 
-    private buildWidgetGridsterItems(widgets: WidgetInfo[]) {
+    ngOnChanges(changes: SimpleChanges): void {
+        if (!changes.thyDraggable?.firstChange) {
+            this.setDraggable(this.thyDraggable);
+        }
+    }
+
+    trackBy(index: number, item: WidgetGridsterItem) {
+        return item.widget?._id || index;
+    }
+
+    private buildWidgetGridsterItems(widgets: ThyWidget[]) {
         const changedWidgetGridsterItemsMap = helpers.keyBy(this.changedWidgetGridsterItems, 'widget._id');
         return (widgets || []).map((widget) => {
             const changedWidgetGridsterItem = changedWidgetGridsterItemsMap[widget._id];
             const gridsterItem: WidgetGridsterItem = {
-                x: widget.position.x,
-                y: widget.position.y,
+                x: widget.position?.x,
+                y: widget.position?.y,
                 cols: widget.size.cols,
                 rows: widget.size.rows,
                 widget: widget
-                // minItemCols: minSize.cols,
-                // minItemRows: minSize.rows
             };
             if (changedWidgetGridsterItem) {
                 gridsterItem.x = changedWidgetGridsterItem.x;
@@ -83,21 +98,8 @@ export class ThyProDashboardComponent implements OnInit {
         });
     }
 
-    private buildTemporaryWidgets() {
-        return (this.gridsterComponent.grid || []).map((gridsterItem) => {
-            const widgetGridsterItem = gridsterItem.item as WidgetGridsterItem;
-            return {
-                ...widgetGridsterItem.widget,
-                position: { x: widgetGridsterItem.x, y: widgetGridsterItem.y },
-                size: { cols: widgetGridsterItem.cols, rows: widgetGridsterItem.rows }
-            };
-        });
-    }
-
-    // 编辑切换，给外部使用
-    toggleManageWidget() {
-        this.editing = !this.editing;
-        if (this.editing) {
+    private setDraggable(draggable: boolean) {
+        if (draggable) {
             this.config = {
                 ...this.config,
                 minRows: 12,
@@ -123,6 +125,17 @@ export class ThyProDashboardComponent implements OnInit {
             };
         }
         this.cdr.markForCheck();
+    }
+
+    private buildTemporaryWidgets() {
+        return (this.gridsterComponent.grid || []).map((gridsterItem) => {
+            const widgetGridsterItem = gridsterItem.item as WidgetGridsterItem;
+            return {
+                ...widgetGridsterItem.widget,
+                position: { x: widgetGridsterItem.x, y: widgetGridsterItem.y },
+                size: { cols: widgetGridsterItem.cols, rows: widgetGridsterItem.rows }
+            };
+        });
     }
 
     // 保存编辑部件，给外部使用

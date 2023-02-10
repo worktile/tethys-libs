@@ -1,7 +1,15 @@
 @use 'ngx-tethys/styles/variables.scss';
-@use 'src/styles/hidden-scrollbar.scss' as hiddenScrollbar;
 
-.thy-pro-widget-item {
+// 隐藏滚动条
+@mixin hidden-scrollbar() {
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    &::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+    }
+}
+
+.thy-dashboard-widget-item {
     width: 100%;
     height: 100%;
     padding: 24px 28px;
@@ -43,10 +51,10 @@
             justify-content: left;
         }
 
-        @include hiddenScrollbar.hidden-scrollbar;
+        @include hidden-scrollbar;
         .thy-table {
             &-body {
-                @include hiddenScrollbar.hidden-scrollbar;
+                @include hidden-scrollbar;
             }
         }
 

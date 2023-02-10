@@ -1,8 +1,8 @@
-<gridster #gridster class="dashboard-gridster" [class.dashboard-gridster-editing]="editing" [options]="config">
+<gridster #gridster class="dashboard-gridster" [options]="config">
   <gridster-item class="dashboard-girdster-item" [item]="gridsterItem" *ngFor="let gridsterItem of widgetGridsterItems; trackBy: trackBy">
-    111
-    <!-- <widget-item *ngIf="gridsterItem.widget" [widget]="gridsterItem.widget" [editing]="editing"></widget-item> -->
-    <thy-icon *ngIf="editing" class="dashboard-girdster-item-resize-icon" thyIconName="se-resize"></thy-icon>
+    <thy-dashboard-widget-item
+      *ngIf="gridsterItem.widget"
+      [component]="thyWidgetComponents[gridsterItem.widget.type]"
+    ></thy-dashboard-widget-item>
   </gridster-item>
-  <div class="empty-block" [style.top.px]="gridster?.rows * 128"></div>
 </gridster>

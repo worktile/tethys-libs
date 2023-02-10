@@ -1,17 +1,13 @@
 import { OnInit, Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { WidgetInfo } from '../../dashboard.entity';
+import { WidgetInfo } from '../../dashboard.class';
 
 @Component({
-    selector: 'thy-pro-widget-body',
+    selector: 'thy-dashboard-widget-body',
     templateUrl: './widget-body.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'thy-pro-widget-body' }
+    host: { class: 'thy-dashboard-widget-body' }
 })
-export class ThyProWidgetBodyComponent implements OnInit {
-    @Input() widget!: WidgetInfo;
-
-    @Input() loadingDone = true;
-
+export class ThyDashboardWidgetBodyComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}

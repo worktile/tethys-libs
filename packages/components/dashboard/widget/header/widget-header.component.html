@@ -1,19 +1,6 @@
-<div class="widget-header-title" [ngClass]="{ 'widget-header-bottom-spacing': !descriptionTemplate }">
-  <thy-icon *ngIf="editing" class="drag-icon" thyIconName="drag"></thy-icon>
-  <span class="title-text text-truncate" [ngClass]="{ 'title-spacing': !editing }">{{ widget?.name }}</span>
-  <a
-    href="javascript:;"
-    (click)="openMoreMenu()"
-    class="more-icon"
-    [ngClass]="{ 'editing-more-icon': editing }"
-    thyAction
-    thyIcon="more-vertical"
-  ></a>
+<div class="widget-header-title" [ngClass]="{ 'widget-header-bottom-spacing': !thyDescription }">
+  <span class="title-text text-truncate" *thyStringOrTemplateOutlet="thyTitle"></span>
 </div>
-<div
-  *ngIf="descriptionTemplate"
-  class="widget-header-description text-truncate"
-  [ngClass]="{ 'widget-header-bottom-spacing': descriptionTemplate }"
->
-  <ng-template [ngTemplateOutlet]="descriptionTemplate"> </ng-template>
+<div *ngIf="thyDescription" class="widget-header-description text-truncate" [ngClass]="{ 'widget-header-bottom-spacing': thyDescription }">
+  <ng-container *thyStringOrTemplateOutlet="thyDescription"></ng-container>
 </div>

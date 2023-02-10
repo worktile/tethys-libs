@@ -1,18 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ThyProDashboardComponent } from '@tethys/pro/dashboard';
+import { ThyDashboardComponent } from '@tethys/pro/dashboard';
+import { ThyDashboardBasicNoticeWidgetComponent } from './widgets/notice.component';
 
 @Component({
-    selector: 'thy-pro-dashboard-basic-example',
+    selector: 'thy-dashboard-basic-example',
     templateUrl: './basic.component.html',
     styleUrls: ['./basic.component.scss']
 })
-export class ThyProDashboardBasicExampleComponent implements OnInit {
+export class ThyDashboardBasicExampleComponent implements OnInit {
     widgets = [
         {
             _id: '63c0d6f08e1cc40c3e41ad30',
-            name: '版本列表',
-            dashboard_id: '63c0d66f8e1cc40c3e41ad2d',
-            type: 'agile_version_list',
+            name: '公告',
+            type: 'notice',
             position: {
                 x: 0,
                 y: 0
@@ -24,23 +24,16 @@ export class ThyProDashboardBasicExampleComponent implements OnInit {
         }
     ];
 
+    widgetComponents = {
+        notice: ThyDashboardBasicNoticeWidgetComponent
+    };
+
     editing = false;
 
-    @ViewChild('thyProDashboard')
-    dashboardComponent!: ThyProDashboardComponent;
+    @ViewChild('thyDashboard')
+    dashboardComponent!: ThyDashboardComponent;
 
     constructor() {}
 
     ngOnInit(): void {}
-
-    toggleManageWidget() {
-        this.dashboardComponent.toggleManageWidget();
-        this.editing = this.dashboardComponent.editing;
-    }
-
-    save() {
-        const newWidgets = this.dashboardComponent.saveWidget();
-        this.toggleManageWidget();
-        console.log(newWidgets);
-    }
 }

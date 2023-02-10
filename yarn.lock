@@ -3947,7 +3947,7 @@ algoliasearch@^3.24.5:
     semver "^5.1.0"
     tunnel-agent "^0.6.0"
 
-angular-gridster2@14.1.4:
+angular-gridster2@^14.1.4:
   version "14.1.4"
   resolved "https://registry.npmjs.org/angular-gridster2/-/angular-gridster2-14.1.4.tgz#8891334f16380ced5dc2316eb63528da1049d22a"
   integrity sha512-knPyJzk5sZ5GeRDUh5wNNfHoYz0tCrII0iSPzphrcAlYrDTzncnH3fxBpz+catojHIJkrbQBTsOM8+ccOi5X5g==

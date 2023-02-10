@@ -1,3 +1,4 @@
+import { ThySharedModule } from 'ngx-tethys/shared';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -5,19 +6,23 @@ import { RouterModule } from '@angular/router';
 import { GridsterModule } from 'angular-gridster2';
 import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
-import { ThyProDashboardComponent } from './dashboard.component';
-import { ThyProWidgetHeaderComponent } from './widget/header/widget-header.component';
-import { ThyProWidgetBodyComponent } from './widget/body/widget-body.component';
-import { ThyProWidgetItemComponent } from './widget/item/widget-item.component';
+import { ThyDashboardWidgetHeaderComponent } from './widget/header/widget-header.component';
+import { ThyDashboardWidgetBodyComponent } from './widget/body/widget-body.component';
+import { ThyDashboardWidgetItemComponent } from './widget/item/widget-item.component';
+import { ThyDashboardComponent } from './dashboard.component';
 
-const COMPONENTS = [ThyProDashboardComponent, ThyProWidgetHeaderComponent, ThyProWidgetBodyComponent, ThyProWidgetItemComponent];
-
-const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule];
+const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySharedModule];
 
 @NgModule({
-    declarations: [...COMPONENTS],
+    declarations: [
+        ThyDashboardComponent,
+        ThyDashboardWidgetItemComponent,
+        ThyDashboardWidgetHeaderComponent,
+        ThyDashboardWidgetBodyComponent,
+        ThyDashboardWidgetItemComponent
+    ],
     imports: [...TETHYS_MODULES, RouterModule, CommonModule, GridsterModule],
-    exports: [...COMPONENTS],
+    exports: [ThyDashboardComponent, ThyDashboardWidgetItemComponent, ThyDashboardWidgetHeaderComponent, ThyDashboardWidgetBodyComponent],
     providers: []
 })
 export class ThyProDashboardModule {}
