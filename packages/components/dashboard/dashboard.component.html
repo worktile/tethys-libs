@@ -1,8 +1,5 @@
 <gridster #gridster class="dashboard-gridster" [options]="config">
   <gridster-item class="dashboard-girdster-item" [item]="gridsterItem" *ngFor="let gridsterItem of widgetGridsterItems; trackBy: trackBy">
-    <thy-dashboard-widget-item
-      *ngIf="gridsterItem.widget"
-      [component]="thyWidgetComponents[gridsterItem.widget.type]"
-    ></thy-dashboard-widget-item>
+    <ng-container *thyViewOutlet="thyWidgetViews[gridsterItem.widget.type]; context: { widget: gridsterItem.widget }"> </ng-container>
   </gridster-item>
 </gridster>

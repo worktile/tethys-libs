@@ -5,12 +5,11 @@ export interface WidgetGridsterItem extends GridsterItem {
 }
 
 export interface ThyWidgetItem<TConfig = unknown> {
-    _id: string;
     type: string;
-    name?: string;
     size: { cols: number; rows: number };
     position: { x: number; y: number };
-    dashboard_id?: string;
+    name?: string;
+    _id?: string;
     config?: TConfig;
 }
 

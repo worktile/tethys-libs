@@ -30,7 +30,7 @@ export class ThyDashboardBasicExampleComponent implements OnInit {
         }
     ];
 
-    widgetComponents = {
+    widgetViews = {
         notice: ThyDashboardBasicNoticeWidgetComponent,
         links: ThyDashboardBasicLinksWidgetComponent
     };

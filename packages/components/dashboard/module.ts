@@ -8,21 +8,14 @@ import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { ThyDashboardWidgetHeaderComponent } from './widget/header/widget-header.component';
 import { ThyDashboardWidgetBodyComponent } from './widget/body/widget-body.component';
-import { ThyDashboardWidgetItemComponent } from './widget/item/widget-item.component';
 import { ThyDashboardComponent } from './dashboard.component';
 
 const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySharedModule];
 
 @NgModule({
-    declarations: [
-        ThyDashboardComponent,
-        ThyDashboardWidgetItemComponent,
-        ThyDashboardWidgetHeaderComponent,
-        ThyDashboardWidgetBodyComponent,
-        ThyDashboardWidgetItemComponent
-    ],
+    declarations: [ThyDashboardComponent, ThyDashboardWidgetHeaderComponent, ThyDashboardWidgetBodyComponent],
     imports: [...TETHYS_MODULES, RouterModule, CommonModule, GridsterModule],
-    exports: [ThyDashboardComponent, ThyDashboardWidgetItemComponent, ThyDashboardWidgetHeaderComponent, ThyDashboardWidgetBodyComponent],
+    exports: [ThyDashboardComponent, ThyDashboardWidgetHeaderComponent, ThyDashboardWidgetBodyComponent],
     providers: []
 })
 export class ThyProDashboardModule {}
