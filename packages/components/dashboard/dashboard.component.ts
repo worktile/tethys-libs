@@ -84,7 +84,8 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
     private buildWidgetGridsterItems(widgets: ThyWidgetItem[]) {
         const changedWidgetGridsterItemsMap = helpers.keyBy(this.changedWidgetGridsterItems, 'widget._id');
         return (widgets || []).map((widget) => {
-            const changedWidgetGridsterItem = changedWidgetGridsterItemsMap[widget._id];
+            const id = widget._id || '';
+            const changedWidgetGridsterItem = changedWidgetGridsterItemsMap[id];
             const gridsterItem: WidgetGridsterItem = {
                 x: widget.position?.x,
                 y: widget.position?.y,
