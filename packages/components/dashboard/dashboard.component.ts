@@ -1,6 +1,6 @@
 import { EventEmitter, OnChanges, Output, SimpleChanges, Type, TemplateRef } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CompactType, DisplayGrid, GridsterComponentInterface, GridType } from 'angular-gridster2';
+import { CompactType, DisplayGrid, GridsterComponentInterface, GridsterItem, GridType } from 'angular-gridster2';
 import { ThyDashboardConfig, ThyWidgetItem, WidgetGridsterItem } from './dashboard.class';
 import { ThyDashboardWidgetComponent } from './widget/widget.component';
 
@@ -46,7 +46,13 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         disablePushOnDrag: true,
         useTransformPositioning: false,
         // swapWhileDragging: true,
-        itemChangeCallback: (gridsterItem) => {
+        itemChangeCallback: () => {
+            if (this.thyDraggable) {
+                const widgets = this.buildTemporaryWidgets();
+                this.thyWidgetsChange.emit(widgets);
+            }
+        },
+        itemRemovedCallback: () => {
             const widgets = this.buildTemporaryWidgets();
             this.thyWidgetsChange.emit(widgets);
         }
