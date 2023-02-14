@@ -1,7 +1,7 @@
 import { EventEmitter, OnChanges, Output, SimpleChanges, Type, TemplateRef } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CompactType, DisplayGrid, GridsterComponentInterface, GridsterItem, GridType } from 'angular-gridster2';
-import { ThyDashboardConfig, ThyWidgetItem, WidgetGridsterItem } from './dashboard.class';
+import { CompactType, DisplayGrid, GridsterComponentInterface, GridsterConfig, GridsterItem, GridType } from 'angular-gridster2';
+import { ThyWidgetItem, WidgetGridsterItem } from './dashboard.class';
 import { ThyDashboardWidgetComponent } from './widget/widget.component';
 
 @Component({
@@ -14,7 +14,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
     /**
      * 仪表盘部件对应组件或模版映射
      */
-    @Input() thyWidgetViews: Record<string, Type<ThyDashboardWidgetComponent | TemplateRef<any>>> = {};
+    @Input() thyWidgetViews: Record<string, Type<ThyDashboardWidgetComponent> | TemplateRef<any>> = {};
 
     /**
      * 仪表盘部件是否允许拖拽
@@ -33,7 +33,9 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
      */
     @Output() thyWidgetsChange: EventEmitter<ThyWidgetItem[]> = new EventEmitter();
 
-    public config: ThyDashboardConfig = {
+    public widgetGridsterItems: WidgetGridsterItem[] = [];
+
+    public config: GridsterConfig = {
         gridType: GridType.VerticalFixed,
         margin: 8,
         compactType: CompactType.None,
@@ -47,18 +49,14 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         useTransformPositioning: false,
         // swapWhileDragging: true,
         itemChangeCallback: () => {
-            if (this.thyDraggable) {
-                const widgets = this.buildTemporaryWidgets();
-                this.thyWidgetsChange.emit(widgets);
-            }
+            const widgets = this.buildWidgetItems();
+            this.thyWidgetsChange.emit(widgets);
         },
         itemRemovedCallback: () => {
-            const widgets = this.buildTemporaryWidgets();
+            const widgets = this.buildWidgetItems();
             this.thyWidgetsChange.emit(widgets);
         }
     };
-
-    public widgetGridsterItems: WidgetGridsterItem[] = [];
 
     @ViewChild('gridster')
     gridsterComponent!: GridsterComponentInterface;
@@ -122,7 +120,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         this.cdr.markForCheck();
     }
 
-    private buildTemporaryWidgets() {
+    private buildWidgetItems() {
         return (this.gridsterComponent.grid || []).map((gridsterItem) => {
             const widgetGridsterItem = gridsterItem.item as WidgetGridsterItem;
             return {
