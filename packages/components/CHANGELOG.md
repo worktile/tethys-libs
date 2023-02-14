@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.4](https://github.com/tethys-org/libs/compare/v14.0.0-next.3...v14.0.0-next.4) (2023-02-14)
+
+### Features
+
+- **components:** add dashboard module #INFR-6408 ([#32](https://github.com/tethys-org/libs/issues/32)) ([37512d5](https://github.com/tethys-org/libs/commit/37512d5fb58c977a5e167ee171c7da674ea44f66)), closes [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408)
+
 # [14.0.0-next.3](https://github.com/tethys-org/libs/compare/v14.0.0-next.2...v14.0.0-next.3) (2022-12-01)
 
 ### Bug Fixes
