@@ -3199,10 +3199,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@tethys/cdk@^14.1.7":
-  version "14.1.8"
-  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-14.1.8.tgz#ac7e946d9ea893cc2c2711354a662916ce572263"
-  integrity sha512-AAcT1ehHdy5GJsQfygqVZkL4g7l6PjX8qEeMmZ7VQyXXZkB6zziMo7+tVui+fss3Zn29ADTF7kfbV4Y3HXie4g==
+"@tethys/cdk@^14.2.11":
+  version "14.2.16"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-14.2.16.tgz#66d3edebaebe8367f4a832aae4e1f5e73c150089"
+  integrity sha512-NDbbu4s7+PKckerxFSGI7/Y4umDS/hSUjUg5uEbasD/tjQUhyVGqPMxxtkdrCMaxpEGV3jVCWhqDbGUbP4+fpw==
   dependencies:
     tslib "^2.3.0"
 
@@ -3946,6 +3946,13 @@ algoliasearch@^3.24.5:
     reduce "^1.0.1"
     semver "^5.1.0"
     tunnel-agent "^0.6.0"
+
+angular-gridster2@^14.1.4:
+  version "14.1.4"
+  resolved "https://registry.npmjs.org/angular-gridster2/-/angular-gridster2-14.1.4.tgz#8891334f16380ced5dc2316eb63528da1049d22a"
+  integrity sha512-knPyJzk5sZ5GeRDUh5wNNfHoYz0tCrII0iSPzphrcAlYrDTzncnH3fxBpz+catojHIJkrbQBTsOM8+ccOi5X5g==
+  dependencies:
+    tslib "^2.3.0"
 
 ansi-colors@4.1.1, ansi-colors@^4.1.1:
   version "4.1.1"
@@ -10304,10 +10311,10 @@ ng-packagr@^14.2.2:
   optionalDependencies:
     esbuild "^0.15.0"
 
-ngx-tethys@^14.1.7:
-  version "14.1.8"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-14.1.8.tgz#8f47939837d77f7abaa7c614c2d76270368b06a7"
-  integrity sha512-hMDThruki0Hj8OlkRveg6liMQ17G6TuyJDXQeFVO95sgZKY5B95XmphhJr7J1DnOOjhXOc271UMnD6N3TYWTAg==
+ngx-tethys@^14.2.16:
+  version "14.2.16"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-14.2.16.tgz#d78cdaca0033203cbe31d2df282c4ad3a93938b3"
+  integrity sha512-PdEzDqFm+cGlWHgN93ZcRKuVbuL1lWzb+TUBgEMvGUfHjd+QXoTAPcRs8yK6QJjBt4DcWcXZ9djGWDXbBN0Ulg==
   dependencies:
     cyia-code-util "^1.0.4"
     tslib "^2.3.0"
