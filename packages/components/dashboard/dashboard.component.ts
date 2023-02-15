@@ -121,7 +121,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
     }
 
     private buildWidgetItems() {
-        return (this.gridsterComponent.grid || []).map((gridsterItem) => {
+        return (this.gridsterComponent?.grid || []).map((gridsterItem) => {
             const widgetGridsterItem = gridsterItem.item as WidgetGridsterItem;
             return {
                 ...widgetGridsterItem.widget,
