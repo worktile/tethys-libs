@@ -1,5 +1,6 @@
 @use 'ngx-tethys/styles/basic.scss';
 @forward './audio-player.scss';
+@forward './progress.scss';
 
 .thy-media-player {
     display: block;
@@ -32,5 +33,52 @@
     audio::-webkit-media-controls-play-button:hover {
         background-color: rgba(basic.$gray-300, 0.7);
         border-radius: 50%;
+    }
+}
+
+.thy-video-player {
+    ::-webkit-media-controls {
+        display: none;
+    }
+    .media-controls-container {
+        opacity: 0;
+        background: rgba(basic.$black, 0.2);
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        left: 0;
+        padding: 12px 32px 24px;
+        transition: all 0.3s ease;
+        .controls {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: basic.$white;
+            .volume-bar-wrap {
+                display: flex;
+                align-items: center;
+                .volume-bar {
+                    width: 45px;
+                }
+            }
+        }
+    }
+    &:hover {
+        .media-controls-container {
+            opacity: 1;
+        }
+    }
+}
+
+.thy-video-playing {
+    .media-controls-container {
+        opacity: 0;
+    }
+}
+
+.thy-video-paused {
+    .media-controls-container {
+        opacity: 1;
     }
 }

@@ -1,12 +1,16 @@
-import { Directive, OnInit } from '@angular/core';
+import { Directive, Input, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { isString } from '@tethys/cdk';
+import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
+import { ThySliderType } from 'ngx-tethys/slider';
+
+export const DEFAULT_PLAYBACK_RATES = [0.5, 1, 1.25, 1.5, 2];
 
 /**
  * @internal
  */
 @Directive({ selector: '[thyMediaPlayerBase]' })
-export class ThyMediaPlayerBaseComponent implements OnInit {
+export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
     public errorTips!: { formatError: string; networkError: string };
 
     public showErrorTip = false;
@@ -29,7 +33,31 @@ export class ThyMediaPlayerBaseComponent implements OnInit {
 
     private internalFileSrc: SafeUrl = '';
 
-    constructor(public sanitizer: DomSanitizer) {}
+    mediaOptions = {
+        playbackRate: 1,
+        currentTime: 0,
+        duration: 0,
+        paused: true,
+        volume: 0
+    };
+
+    /**
+     * 缓存值（0-100）
+     */
+    bufferedValue = 0;
+
+    /**
+     * 进度值（0-100）
+     */
+    progressValue = 0;
+
+    @Input() thyProgressType: ThySliderType | undefined;
+
+    @Input() thyProgressColor: undefined;
+
+    constructor(public sanitizer: DomSanitizer) {
+        super();
+    }
 
     ngOnInit(): void {}
 
