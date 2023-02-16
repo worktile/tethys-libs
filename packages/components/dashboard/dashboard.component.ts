@@ -51,10 +51,6 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         itemChangeCallback: () => {
             const widgets = this.buildWidgetItems();
             this.thyWidgetsChange.emit(widgets);
-        },
-        itemRemovedCallback: () => {
-            const widgets = this.buildWidgetItems();
-            this.thyWidgetsChange.emit(widgets);
         }
     };
 
@@ -84,7 +80,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
                 y: widget.position?.y,
                 cols: widget.size.cols,
                 rows: widget.size.rows,
-                widget: widget
+                widget: { ...widget }
             };
 
             return gridsterItem;
