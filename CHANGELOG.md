@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.5](https://github.com/tethys-org/libs/compare/v14.0.0-next.4...v14.0.0-next.5) (2023-02-17)
+
+### Bug Fixes
+
+- **components:** fix dashboard widget component and delete itemRemovedCallback #INFR-6408 ([#35](https://github.com/tethys-org/libs/issues/35)) ([81069f2](https://github.com/tethys-org/libs/commit/81069f26aa8d07b8626a60b799cb826612fefa3e)), closes [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408)
+
 # [14.0.0-next.4](https://github.com/tethys-org/libs/compare/v14.0.0-next.3...v14.0.0-next.4) (2023-02-14)
 
 ### Features
