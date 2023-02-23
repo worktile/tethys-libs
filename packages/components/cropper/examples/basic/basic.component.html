@@ -1,4 +1,6 @@
 <thy-space>
-  <button *thySpaceItem thyButton="primary" (click)="uploadImage()">上传头像</button>
-  <button *thySpaceItem thyButton="primary" (click)="previewImage()">预览头像</button>
+  <thy-file-select *thySpaceItem thyStopPropagation (thyOnFileSelect)="selectImage($event)" thyAcceptType=".jpg,.png,.jpeg">
+    <button thyButton="primary">上传图片</button>
+  </thy-file-select>
+  <button *thySpaceItem thyButton="primary" (click)="previewImage()">预览图片</button>
 </thy-space>

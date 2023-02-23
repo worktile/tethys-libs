@@ -2,6 +2,6 @@
 
 <div class="alert alert-warning" *ngIf="loadError">{{ thyLoadErrorText }}</div>
 
-<div class="cropper-content" *ngIf="!loadError">
+<div class="cropper-content">
   <img #image alt="image" [src]="thySrc" (load)="onLoad($event)" (error)="onError($event)" />
 </div>

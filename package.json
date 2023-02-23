@@ -17,7 +17,7 @@
     "release": "wpm release",
     "pub-only": "ts-node --project ./scripts/tsconfig.json ./scripts/npm-publish.ts",
     "pub": "wpm publish",
-    "start:docs": "docgeni serve --port 4800",
+    "start:docs": "docgeni serve",
     "sync-styles": "ts-node --project ./scripts/tsconfig.json ./scripts/sync-styles.ts",
     "prepare": "husky install",
     "pre-commit": "pretty-quick --staged",

@@ -10317,9 +10317,9 @@ ng-packagr@^14.2.2:
     esbuild "^0.15.0"
 
 ngx-tethys@^14.2.16:
-  version "14.2.16"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-14.2.16.tgz#d78cdaca0033203cbe31d2df282c4ad3a93938b3"
-  integrity sha512-PdEzDqFm+cGlWHgN93ZcRKuVbuL1lWzb+TUBgEMvGUfHjd+QXoTAPcRs8yK6QJjBt4DcWcXZ9djGWDXbBN0Ulg==
+  version "14.2.21"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-14.2.21.tgz#a8c4c36d3798ade8f545d050ac2f983fa9f476d9"
+  integrity sha512-uzJiFh3+D0dvQxHLPwBirOXsk6mf2R00iWNANqw+Bqu7zJb2thhRpO5kIroKsfRUTL1BAk0pAJhn8VtaggBalA==
   dependencies:
     cyia-code-util "^1.0.4"
     tslib "^2.3.0"

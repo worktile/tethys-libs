@@ -315,12 +315,17 @@
     cursor: not-allowed;
 }
 
-.thy-cropper-preview {
-    flex-direction: row;
-    .cropper-container {
-        max-width: 300px;
-        max-height: 300px;
+.thy-pro-cropper-preview {
+    .preview-dialog-body {
+        display: flex;
+    }
+    .preview-cropper {
+        flex: 1;
         margin-right: 30px;
+        .cropper-content {
+            max-width: 300px !important;
+            max-height: 300px !important;
+        }
 
         .cropper {
             border-radius: 4px;
@@ -337,7 +342,8 @@
         }
     }
     .preview-container {
-        .preview-avatar-warp {
+        flex: 1;
+        .preview-image-warp {
             overflow: hidden;
             border-radius: 50%;
             margin: 28px auto 20px;

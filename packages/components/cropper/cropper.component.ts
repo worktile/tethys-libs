@@ -50,9 +50,9 @@ export class ThyCropperComponent implements OnInit {
     @Input() thyCropperOptions: Cropper.Options = {};
 
     /**
-     * 图片裁剪的数据( blob)
+     * 图片裁剪的数据更改( blob)
      */
-    @Output() thyCropperData = new EventEmitter<CropperData>();
+    @Output() thyCropperDataChange = new EventEmitter<CropperData>();
 
     /**
      * 图片加载完毕事件
@@ -118,7 +118,7 @@ export class ThyCropperComponent implements OnInit {
         });
 
         promise.then((res) => {
-            this.thyCropperData.emit(res as CropperData);
+            this.thyCropperDataChange.emit(res as CropperData);
         });
     }
 }
