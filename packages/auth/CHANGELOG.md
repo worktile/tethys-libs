@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.5](https://github.com/tethys-org/libs/compare/v14.0.0-next.4...v14.0.0-next.5) (2023-02-17)
+
+**Note:** Version bump only for package @tethys/auth
+
+# [14.0.0-next.4](https://github.com/tethys-org/libs/compare/v14.0.0-next.3...v14.0.0-next.4) (2023-02-14)
+
+**Note:** Version bump only for package @tethys/auth
+
 # [14.0.0-next.3](https://github.com/tethys-org/libs/compare/v14.0.0-next.2...v14.0.0-next.3) (2022-12-01)
 
 **Note:** Version bump only for package @tethys/auth

@@ -1,0 +1,56 @@
+@use '~ngx-tethys/styles/variables.scss';
+
+.thy-dashboard {
+    .dashboard-gridster {
+        background-color: variables.$gray-80;
+
+        .dashboard-girdster-item {
+            border-radius: 2px;
+            outline: 1px solid variables.$gray-200;
+            padding: 24px 28px;
+            &.gridster-item-moving {
+                z-index: 2 !important;
+            }
+            .dashboard-girdster-item-resize-icon {
+                position: absolute;
+                right: 2px;
+                bottom: 2px;
+                color: variables.$gray-500;
+                visibility: hidden;
+                font-size: 10px;
+            }
+            &:hover {
+                box-shadow: 0 3px 6px 0 rgba(variables.$black, 0.04);
+                .dashboard-girdster-item-resize-icon {
+                    visibility: visible;
+                }
+                .gridster-item-resizable-handler.handle-se {
+                    border-color: transparent;
+                }
+            }
+        }
+        .gridster-column {
+            border-left: 1px dashed rgba(variables.$gray-500, 0.3);
+            border-right: 1px dashed rgba(variables.$gray-500, 0.3);
+        }
+        .gridster-row {
+            border-top: 1px dashed rgba(variables.$gray-500, 0.3);
+            border-bottom: 1px dashed rgba(variables.$gray-500, 0.3);
+        }
+
+        .gridster-preview {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        &-editing {
+        }
+
+        .empty-block {
+            position: absolute;
+            height: 8px;
+            width: 100%;
+            left: 0;
+            right: 0;
+        }
+    }
+}
