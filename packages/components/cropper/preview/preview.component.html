@@ -1,0 +1,33 @@
+<thy-dialog-header [thyTitle]="thyTitle"></thy-dialog-header>
+<thy-dialog-body>
+  <div class="cropper-container">
+    <thy-cropper
+      #cropper
+      [thyCropperOptions]="cropperOptions"
+      [thySrc]="src"
+      (thyCropperData)="thyImageCropperChange($event)"
+    ></thy-cropper>
+    <div class="avatar-text-desc">
+      <div>
+        <thy-file-select thyStopPropagation (thyOnFileSelect)="selectAvatar($event)" thyAcceptType=".jpg,.png,.jpeg">
+          <button class="pl-0" thyButton="link">重新上传</button>
+        </thy-file-select>
+        <span class="text-desc">(最佳尺寸 120X120 像素，可以上传高质量图片进行裁剪)</span>
+      </div>
+    </div>
+  </div>
+  <div class="preview-container">
+    头像预览
+    <div class="text-center">
+      <div #defaultAvatar class="preview-avatar-warp preview-cropper-default"></div>
+      <div>110*110</div>
+      <div #smAvatar class="preview-avatar-warp preview-cropper-sm"></div>
+      <div>38*38</div>
+    </div>
+  </div>
+</thy-dialog-body>
+
+<thy-dialog-footer thyShowBorderTop="true">
+  <button class="cancel" thyButton="link-secondary" (click)="close()">取消</button>
+  <button thyButton="primary" [thyLoading]="saving" thyLoadingText="上传中" (click)="save()">确定</button>
+</thy-dialog-footer>
