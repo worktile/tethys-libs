@@ -48,8 +48,17 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         disablePushOnDrag: true,
         useTransformPositioning: false,
         // swapWhileDragging: true,
-        itemChangeCallback: () => {
+        itemChangeCallback: (item: GridsterItem) => {
             const widgets = this.buildWidgetItems();
+            const isNewWidget = widgets.some((widget) => {
+                return widget._id === item.widget._id;
+            });
+            if (isNewWidget) {
+                const newWidget = item.widget;
+                newWidget.position = { x: item.x, y: item.y };
+                newWidget.size = { cols: item.cols, rows: item.rows };
+                widgets.push(newWidget);
+            }
             this.thyWidgetsChange.emit(widgets);
         }
     };
@@ -80,7 +89,9 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
                 y: widget.position?.y,
                 cols: widget.size.cols,
                 rows: widget.size.rows,
-                widget: { ...widget }
+                minItemCols: widget.minSize.cols,
+                minItemRows: widget.minSize.rows,
+                widget
             };
 
             return gridsterItem;
@@ -119,11 +130,10 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
     private buildWidgetItems() {
         return (this.gridsterComponent?.grid || []).map((gridsterItem) => {
             const widgetGridsterItem = gridsterItem.item as WidgetGridsterItem;
-            return {
-                ...widgetGridsterItem.widget,
-                position: { x: widgetGridsterItem.x, y: widgetGridsterItem.y },
-                size: { cols: widgetGridsterItem.cols, rows: widgetGridsterItem.rows }
-            };
+            const widget = widgetGridsterItem.widget;
+            widget.position = { x: widgetGridsterItem.x, y: widgetGridsterItem.y };
+            widget.size = { cols: widgetGridsterItem.cols, rows: widgetGridsterItem.rows };
+            return widget;
         });
     }
 }
