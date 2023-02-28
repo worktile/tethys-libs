@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0-next.6](https://github.com/tethys-org/libs/compare/v14.0.0-next.5...v14.0.0-next.6) (2023-02-28)
+
+### Bug Fixes
+
+- **components:** fix dashboard add widget error a nd add dashboard test #INFR-6408 ([#38](https://github.com/tethys-org/libs/issues/38)) ([1da842d](https://github.com/tethys-org/libs/commit/1da842d2965075fbabe32082521928ce68311ec7)), closes [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408)
+
 # [14.0.0-next.5](https://github.com/tethys-org/libs/compare/v14.0.0-next.4...v14.0.0-next.5) (2023-02-17)
 
 ### Bug Fixes
