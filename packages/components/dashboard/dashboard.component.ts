@@ -47,19 +47,20 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         pushItems: true,
         disablePushOnDrag: true,
         useTransformPositioning: false,
-        // swapWhileDragging: true,
         itemChangeCallback: (item: GridsterItem) => {
             const widgets = this.buildWidgetItems();
-            const isNewWidget = widgets.some((widget) => {
-                return widget._id === item.widget._id;
-            });
-            if (isNewWidget) {
-                const newWidget = item.widget;
-                newWidget.position = { x: item.x, y: item.y };
-                newWidget.size = { cols: item.cols, rows: item.rows };
-                widgets.push(newWidget);
+            if (widgets.length) {
+                const isNewWidget = !widgets.some((widget) => {
+                    return widget._id === item.widget._id;
+                });
+                if (isNewWidget) {
+                    const newWidget = item.widget;
+                    newWidget.position = { x: item.x, y: item.y };
+                    newWidget.size = { cols: item.cols, rows: item.rows };
+                    widgets.push(newWidget);
+                }
+                this.thyWidgetsChange.emit(widgets);
             }
-            this.thyWidgetsChange.emit(widgets);
         }
     };
 
@@ -89,8 +90,8 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
                 y: widget.position?.y,
                 cols: widget.size.cols,
                 rows: widget.size.rows,
-                minItemCols: widget.minSize.cols,
-                minItemRows: widget.minSize.rows,
+                minItemCols: widget.minSize?.cols,
+                minItemRows: widget.minSize?.rows,
                 widget
             };
 
