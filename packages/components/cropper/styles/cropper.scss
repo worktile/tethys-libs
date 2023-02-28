@@ -315,16 +315,26 @@
     cursor: not-allowed;
 }
 
-.thy-pro-cropper-preview {
-    .preview-dialog-body {
+.thy-cropper-dialog {
+    .cropper-dialog-body {
         display: flex;
     }
-    .preview-cropper {
+    .cropper-content-container {
         flex: 1;
         margin-right: 30px;
         .cropper-content {
+            img {
+                // opacity: 0;
+                visibility: hidden;
+            }
             max-width: 300px !important;
             max-height: 300px !important;
+        }
+        .image-ready {
+            img {
+                // opacity: 1;
+                visibility: visible;
+            }
         }
 
         .cropper {
@@ -343,18 +353,12 @@
     }
     .preview-container {
         flex: 1;
+        display: flex;
+        flex-direction: column;
         .preview-image-warp {
+            flex: 1;
             overflow: hidden;
-            border-radius: 50%;
             margin: 28px auto 20px;
-        }
-        .preview-cropper-default {
-            width: 110px;
-            height: 110px;
-        }
-        .preview-cropper-sm {
-            width: 38px;
-            height: 38px;
         }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThyProCropperPreviewComponent } from '@tethys/pro/cropper';
+import { ThyCropperDialogComponent } from '@tethys/pro/cropper';
 import { ThyDialog, ThyDialogSizes } from 'ngx-tethys/dialog';
 import { of } from 'rxjs';
 
@@ -10,26 +10,30 @@ import { of } from 'rxjs';
 export class ThyProCropperBasicExampleComponent implements OnInit {
     constructor(public dialog: ThyDialog) {}
 
-    src = 'https://cdn.worktile.com/open-sources/ngx-tethys/logos/tethys.png?100';
+    image = 'https://cdn.worktile.com/open-sources/ngx-tethys/logos/tethys.png?100';
 
     ngOnInit(): void {}
 
     selectImage(image: { files: FileList[] }) {
         if (image.files.length > 0) {
-            this.dialog.open(ThyProCropperPreviewComponent, {
+            this.dialog.open(ThyCropperDialogComponent, {
                 size: ThyDialogSizes.lg,
                 initialState: {
-                    imageFile: image.files[0]
+                    image: image.files[0]
                 }
             });
         }
     }
 
     previewImage() {
-        this.dialog.open(ThyProCropperPreviewComponent, {
+        this.dialog.open(ThyCropperDialogComponent, {
             size: ThyDialogSizes.lg,
             initialState: {
-                thySrc: this.src,
+                image: this.image,
+                previewSizes: [
+                    { width: 120, height: '120px' },
+                    { width: 38, height: '38px' }
+                ],
                 thyUploadAction: this.uploadAction
             }
         });

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { Router, ActivatedRoute, Route, Routes } from '@angular/router';
+import { ActivatedRoute, Route, Router, Routes } from '@angular/router';
 import { ThyGlobalStore } from '@tethys/pro/core';
 import { filterEmptyRoutePath } from './utils';
 
@@ -74,7 +74,7 @@ export class ThyProLayoutComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.menus = this.thyMenus && this.thyMenus.length ? this.thyMenus : this.globalStore.snapshot.menus;
+        this.menus = this.menus && this.menus.length ? this.menus : this.globalStore.snapshot.menus;
     }
 
     collapsedChange(isCollapsed: boolean) {

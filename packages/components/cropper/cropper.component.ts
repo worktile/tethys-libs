@@ -1,14 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import Cropper from 'cropperjs';
-
-export interface ImageCropperSetting {
-    width: number;
-    height: number;
-}
-
-export interface CropperData {
-    blob: Blob;
-}
+import { ThyCropperOptions } from './cropper.entity';
 
 export const defaultConfig = {
     aspectRatio: 1,
@@ -32,27 +24,37 @@ export class ThyCropperComponent implements OnInit {
     /**
      * 图片资源的url
      */
-    @Input() thySrc: string | undefined;
-
-    /**
-     * 图片裁剪的盒子
-     */
-    @Input() thyCropBox: Cropper.CropBoxData | undefined;
+    @Input() thyImage: string | undefined;
 
     /**
      * 图片加载的错误提示
      */
-    @Input() thyLoadErrorText: string = '图片加载错误';
+    @Input() thyImageErrorMessage: string = '图片加载错误';
 
     /**
      * 图片裁剪的选项
      */
-    @Input() thyCropperOptions: Cropper.Options = {};
+    @Input('cropperOptions') cropperOptions: ThyCropperOptions = {
+        viewMode: 2,
+        aspectRatio: 1,
+        dragMode: 'move' as Cropper.DragMode,
+        cropBoxResizable: false,
+        zoomable: true,
+        guides: false,
+        autoCrop: false,
+        zoomOnWheel: true,
+        checkCrossOrigin: true,
+        preview: '.preview-image-warp',
+        ready: (event) => {
+            (this.cropper as Cropper).crop();
+            return;
+        }
+    };
 
     /**
      * 图片裁剪的数据更改( blob)
      */
-    @Output() thyCropperDataChange = new EventEmitter<CropperData>();
+    @Output() thyCropped = new EventEmitter();
 
     /**
      * 图片加载完毕事件
@@ -74,7 +76,7 @@ export class ThyCropperComponent implements OnInit {
 
         const image = event.target as HTMLImageElement;
 
-        if (this.thyCropperOptions.checkCrossOrigin) {
+        if (this.cropperOptions.checkCrossOrigin) {
             image.crossOrigin = 'anonymous';
         }
 
@@ -82,27 +84,23 @@ export class ThyCropperComponent implements OnInit {
             this.thyImageReady.emit(true);
 
             this.loadingDone = true;
-
-            if (this.thyCropBox) {
-                (this.cropper as Cropper).setCropBoxData(this.thyCropBox);
-            }
         });
 
-        this.thyCropperOptions = Object.assign(
+        this.cropperOptions = Object.assign(
             {
                 ...defaultConfig,
                 crop: (event: any) => {
                     this.crop();
                 }
             },
-            this.thyCropperOptions
+            this.cropperOptions
         );
 
         if (this.cropper) {
             this.cropper.destroy();
             this.cropper = undefined;
         }
-        this.cropper = new Cropper(image, this.thyCropperOptions);
+        this.cropper = new Cropper(image, this.cropperOptions);
     }
 
     onError(event: any) {
@@ -118,7 +116,7 @@ export class ThyCropperComponent implements OnInit {
         });
 
         promise.then((res) => {
-            this.thyCropperDataChange.emit(res as CropperData);
+            this.thyCropped.emit(res);
         });
     }
 }
