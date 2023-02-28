@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ThyDashboardComponent } from '@tethys/pro/dashboard';
+import { ThyDashboardComponent, ThyWidgetItem } from '@tethys/pro/dashboard';
 import { ThyDashboardBasicLinksWidgetComponent } from './widgets/links/links.component';
 import { ThyDashboardBasicNoticeWidgetComponent } from './widgets/notice/notice.component';
 
@@ -35,7 +35,7 @@ export class ThyDashboardBasicExampleComponent implements OnInit {
         links: ThyDashboardBasicLinksWidgetComponent
     };
 
-    editing = false;
+    draggable = false;
 
     @ViewChild('thyDashboard')
     dashboardComponent!: ThyDashboardComponent;
@@ -43,4 +43,8 @@ export class ThyDashboardBasicExampleComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {}
+
+    widgetsChange(widgets: ThyWidgetItem[]) {
+        // console.log(widgets);
+    }
 }
