@@ -1,11 +1,10 @@
 import { GridsterItem } from 'angular-gridster2';
-import { SafeAny } from 'ngx-tethys/types';
 
 export interface WidgetGridsterItem extends GridsterItem {
     widget: ThyWidgetItem;
 }
 
-export interface ThyWidgetItem<TConfig = SafeAny> {
+export interface ThyWidgetItem<TConfig = unknown> {
     type: string;
     size: { cols: number; rows: number };
     position: { x: number; y: number };
