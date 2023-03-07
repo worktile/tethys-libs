@@ -1,4 +1,4 @@
-import { ThyProCropperModule } from '@tethys/pro/cropper';
+import { ThyProCropperModule } from '@tethys/pro/image-cropper';
 import { ThyButtonModule } from 'ngx-tethys/button';
 import { ThyNotifyModule } from 'ngx-tethys/notify';
 import { ThySpaceModule } from 'ngx-tethys/space';

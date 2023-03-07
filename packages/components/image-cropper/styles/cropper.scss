@@ -1,6 +1,6 @@
 @use 'ngx-tethys/styles/basic.scss';
 
-.thy-cropper {
+.thy-image-cropper {
     display: block;
     position: relative;
     min-height: 80px;
@@ -315,7 +315,7 @@
     cursor: not-allowed;
 }
 
-.thy-cropper-dialog {
+.thy-image-cropper-dialog {
     .cropper-dialog-body {
         display: flex;
     }
@@ -359,6 +359,9 @@
             flex: 1;
             overflow: hidden;
             margin: 28px auto 20px;
+            img {
+                pointer-events: none;
+            }
         }
     }
 }

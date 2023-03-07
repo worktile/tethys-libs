@@ -7,11 +7,11 @@ export interface ThyCropperFile {
     blob: Blob;
 }
 
-type DragMode = 'crop' | 'move' | 'none';
-type ViewMode = 0 | 1 | 2 | 3;
+export type ThyCropperDragMode = 'crop' | 'move' | 'none';
+export type ThyCropperViewMode = 0 | 1 | 2 | 3;
 
 /**
- * viewMode 视图模式，选项为 0（移动没有限制）、 1（图片只能再图片内移动而不是整个容器） 、2（图片不全部铺满容器） 、3（图片填充整个容器），default：0，
+ * viewMode 视图模式，选项为 0（移动没有限制）、 1（图片只能在图片内移动而不是整个容器） 、2（图片不全部铺满容器） 、3（图片填充整个容器），default：0，
  * aspectRatio 裁剪框宽高比
  * dragMode 拖拽模式，选项为 'crop'（产生一个新的裁剪框） 'move'（移动） 'none'(不处理)
  * cropBoxResizable 是否通过拖动来调整剪裁框的大小
@@ -30,14 +30,14 @@ export interface ThyCropperOptions {
     checkCrossOrigin?: boolean;
     crop?(event: CustomEvent): void;
     cropBoxResizable?: boolean;
-    dragMode?: DragMode;
+    dragMode?: ThyCropperDragMode;
     guides?: boolean;
     movable?: boolean;
     preview?: Element | Element[] | NodeList | string;
     ready?(event: CustomEvent): void;
     rotatable?: boolean;
     scalable?: boolean;
-    viewMode?: ViewMode;
+    viewMode?: ThyCropperViewMode;
     wheelZoomRatio?: number;
     zoom?(event: CustomEvent): void;
     zoomOnTouch?: boolean;

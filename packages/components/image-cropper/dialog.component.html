@@ -1,7 +1,7 @@
 <thy-dialog-header [thyTitle]="'上传' + thyTitle"></thy-dialog-header>
 <thy-dialog-body class="cropper-dialog-body">
   <div class="cropper-content-container">
-    <thy-cropper #cropper [thyImage]="imageSrc"></thy-cropper>
+    <thy-image-cropper #cropper [thyImage]="image"></thy-image-cropper>
     <div class="avatar-text-desc">
       <thy-file-select thyStopPropagation (thyOnFileSelect)="selectImage($event)" thyAcceptType=".jpg,.png,.jpeg">
         <button class="pl-0" thyButton="link">重新上传</button>

@@ -5,14 +5,14 @@ import { ThyDialogModule } from 'ngx-tethys/dialog';
 import { ThyLoadingModule } from 'ngx-tethys/loading';
 import { ThyNotifyModule } from 'ngx-tethys/notify';
 import { ThyUploadModule } from 'ngx-tethys/upload';
-import { ThyCropperComponent } from './cropper.component';
+import { ThyImageCropperComponent } from './cropper.component';
 import { ThyCropperSizeStylePipe, ThyCropperSizeTextPipe } from './cropper.pipe';
-import { ThyCropperDialogComponent } from './dialog/dialog.component';
+import { ThyImageCropperDialogComponent } from './dialog.component';
 
 @NgModule({
-    declarations: [ThyCropperComponent, ThyCropperDialogComponent, ThyCropperSizeTextPipe, ThyCropperSizeStylePipe],
+    declarations: [ThyImageCropperComponent, ThyImageCropperDialogComponent, ThyCropperSizeTextPipe, ThyCropperSizeStylePipe],
     imports: [CommonModule, ThyLoadingModule, ThyUploadModule, ThyButtonModule, ThyDialogModule, ThyNotifyModule],
-    exports: [ThyCropperComponent, ThyCropperDialogComponent],
+    exports: [ThyImageCropperComponent, ThyImageCropperDialogComponent],
     providers: []
 })
 export class ThyProCropperModule {}

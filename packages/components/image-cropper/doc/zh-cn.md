@@ -9,7 +9,7 @@ order: 20
 ## 模块导入
 
 ```ts
-import { ThyProCropperModule } from '@tethys/pro/cropper';
+import { ThyProCropperModule } from '@tethys/pro/image-cropper';
 ```
 
 <examples />
