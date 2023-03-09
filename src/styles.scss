@@ -8,7 +8,7 @@
     $btn-padding-y-lg: 0.565rem,
     $btn-font-size-lg: 16px
 );
-@use '~ngx-tethys/styles/index.scss';
+@use 'ngx-tethys/styles/index.scss';
 @use '../packages/components/styles/index.scss' as proComponents;
 
 html,
