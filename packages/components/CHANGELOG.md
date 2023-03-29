@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.2](https://github.com/tethys-org/libs/compare/v15.0.0-next.1...v15.0.0-next.2) (2023-03-29)
+
+### Bug Fixes
+
+- **components:** fix dashboard item change callback #INFR-7089 ([c154b78](https://github.com/tethys-org/libs/commit/c154b7810940149e14c3bca2c8480fa180a57542)), closes [#INFR-7089](https://github.com/tethys-org/libs/issues/INFR-7089)
+
 # [15.0.0-next.1](https://github.com/tethys-org/libs/compare/v15.0.0-next.0...v15.0.0-next.1) (2023-03-29)
 
 ### Bug Fixes
