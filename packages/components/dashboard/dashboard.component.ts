@@ -33,6 +33,8 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
      */
     @Output() thyWidgetsChange: EventEmitter<ThyWidgetItem[]> = new EventEmitter();
 
+    private gridsterComponent!: GridsterComponentInterface;
+
     public widgetGridsterItems: WidgetGridsterItem[] = [];
 
     public config: GridsterConfig = {
@@ -47,6 +49,9 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         pushItems: true,
         disablePushOnDrag: true,
         useTransformPositioning: false,
+        initCallback: (grister) => {
+            this.gridsterComponent = grister;
+        },
         itemChangeCallback: (item: GridsterItem) => {
             const widgets = this.buildWidgetItems();
             if (widgets.length) {
@@ -63,9 +68,6 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
             }
         }
     };
-
-    @ViewChild('gridster')
-    gridsterComponent!: GridsterComponentInterface;
 
     constructor(private cdr: ChangeDetectorRef) {}
 
