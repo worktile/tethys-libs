@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.1](https://github.com/tethys-org/libs/compare/v15.0.0-next.0...v15.0.0-next.1) (2023-03-29)
+
+### Bug Fixes
+
+- **components:** add set gridsterComponent when initCallback #INFR-7089 ([c910abe](https://github.com/tethys-org/libs/commit/c910abe14560d9d37d693bd123016421429f658a)), closes [#INFR-7089](https://github.com/tethys-org/libs/issues/INFR-7089)
+
 # [15.0.0-next.0](https://github.com/tethys-org/libs/compare/v14.0.0-next.6...v15.0.0-next.0) (2023-03-09)
 
 **Note:** Version bump only for package @tethys/pro
