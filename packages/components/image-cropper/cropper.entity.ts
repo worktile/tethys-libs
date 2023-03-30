@@ -3,7 +3,7 @@ export interface ThyCropperImageSize {
     height: number | string;
 }
 
-export interface ThyCropperFile {
+export interface thyCropDataChangeEvent {
     blob: Blob;
 }
 

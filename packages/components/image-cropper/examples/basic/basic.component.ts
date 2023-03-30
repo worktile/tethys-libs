@@ -1,45 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ThyImageCropperDialogComponent } from '@tethys/pro/image-cropper';
-import { ThyDialog, ThyDialogSizes } from 'ngx-tethys/dialog';
-import { of } from 'rxjs';
+import { ThyDialog } from 'ngx-tethys/dialog';
 
 @Component({
-    selector: 'thy-pro-cropper-basic-example',
+    selector: 'thy-image-cropper-basic-example',
     templateUrl: './basic.component.html'
 })
-export class ThyProCropperBasicExampleComponent implements OnInit {
+export class ThyImageCropperBasicExampleComponent implements OnInit {
     constructor(public dialog: ThyDialog) {}
 
     image = 'https://cdn.worktile.com/open-sources/ngx-tethys/logos/tethys.png?100';
 
     ngOnInit(): void {}
-
-    selectImage(image: { files: FileList[] }) {
-        if (image.files.length > 0) {
-            this.dialog.open(ThyImageCropperDialogComponent, {
-                size: ThyDialogSizes.lg,
-                initialState: {
-                    image: image.files[0]
-                }
-            });
-        }
-    }
-
-    previewImage() {
-        this.dialog.open(ThyImageCropperDialogComponent, {
-            size: ThyDialogSizes.lg,
-            initialState: {
-                image: this.image,
-                previewSizes: [
-                    { width: 120, height: '120px' },
-                    { width: 38, height: '38px' }
-                ],
-                thyUploadAction: this.uploadAction
-            }
-        });
-    }
-
-    uploadAction = (file: File) => {
-        return of(true);
-    };
 }

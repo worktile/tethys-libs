@@ -15,4 +15,4 @@ import { ThyImageCropperDialogComponent } from './dialog.component';
     exports: [ThyImageCropperComponent, ThyImageCropperDialogComponent],
     providers: []
 })
-export class ThyProCropperModule {}
+export class ThyImageCropperModule {}

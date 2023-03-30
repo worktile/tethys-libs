@@ -1,5 +1,5 @@
 ---
-title: Cropper
+title: ImageCropper
 subtitle: 图片剪裁
 order: 20
 ---
@@ -9,7 +9,7 @@ order: 20
 ## 模块导入
 
 ```ts
-import { ThyProCropperModule } from '@tethys/pro/image-cropper';
+import { ThyImageCropperModule } from '@tethys/pro/image-cropper';
 ```
 
 <examples />

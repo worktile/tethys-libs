@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { isString } from '@tethys/cdk';
 import Cropper from 'cropperjs';
-import { ThyCropperOptions, ThyCropperViewMode } from './cropper.entity';
+import { thyCropDataChangeEvent, ThyCropperOptions, ThyCropperViewMode } from './cropper.entity';
 
 @Component({
     selector: 'thy-image-cropper',
@@ -43,9 +43,9 @@ export class ThyImageCropperComponent implements OnInit {
 
     /**
      * 图片裁剪的数据更改(blob)
-     * @default EventEmitter<{ blob: Blob }>
+     * @default EventEmitter<thyCropDataChangeEvent>
      */
-    @Output() thyCropDataChanged: EventEmitter<{ blob: Blob }> = new EventEmitter<{ blob: Blob }>();
+    @Output() thyCropDataChanged: EventEmitter<thyCropDataChangeEvent> = new EventEmitter<thyCropDataChangeEvent>();
 
     /**
      * 图片加载完毕事件
@@ -79,6 +79,7 @@ export class ThyImageCropperComponent implements OnInit {
         checkCrossOrigin: true,
         preview: '.preview-image-warp',
         ready: (event) => {
+            this.loadingDone = true;
             (this.cropper as Cropper).crop();
             return;
         }
@@ -95,20 +96,14 @@ export class ThyImageCropperComponent implements OnInit {
 
         const image = event.target as HTMLImageElement;
 
-        if (this.cropperOptions.checkCrossOrigin) {
-            image.crossOrigin = 'anonymous';
-        }
-
         image.addEventListener('ready', () => {
             this.thyImageReady.emit(true);
-
-            this.loadingDone = true;
         });
 
         const { viewMode, aspectRatio } = this.defaultCropperOptions;
 
         const customCropperOptions = {
-            viewMode: this.thyCropperViewMode ? this.thyCropperViewMode : viewMode,
+            viewMode: this.thyCropperViewMode || this.thyCropperViewMode === 0 ? this.thyCropperViewMode : viewMode,
             aspectRatio: this.thyCropperAspectRatio ? this.thyCropperAspectRatio : aspectRatio
         };
 
@@ -122,6 +117,10 @@ export class ThyImageCropperComponent implements OnInit {
             customCropperOptions
         );
 
+        if (this.cropperOptions?.checkCrossOrigin) {
+            image.crossOrigin = 'anonymous';
+        }
+
         if (this.cropper) {
             this.cropper.destroy();
             this.cropper = undefined;
@@ -129,12 +128,12 @@ export class ThyImageCropperComponent implements OnInit {
         this.cropper = new Cropper(image, this.cropperOptions);
     }
 
-    onError(event: any) {
+    onError(event: Event) {
         this.loadError = true;
         this.loadingDone = true;
     }
 
-    crop() {
+    crop = () => {
         const cropper = this.cropper as Cropper;
         const canvas = cropper.getCroppedCanvas();
         const promise = new Promise((resolve) => {
@@ -142,9 +141,9 @@ export class ThyImageCropperComponent implements OnInit {
         });
 
         promise.then((res) => {
-            return this.thyCropDataChanged.emit(res as { blob: Blob });
+            return this.thyCropDataChanged.emit(res as thyCropDataChangeEvent);
         });
-    }
+    };
 
     setImageSrc() {
         const reader = new FileReader();
