@@ -1,6 +1,6 @@
 import { EventEmitter, OnChanges, Output, SimpleChanges, Type, TemplateRef } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CompactType, DisplayGrid, GridsterComponentInterface, GridsterConfig, GridsterItem, GridType } from 'angular-gridster2';
+import { CompactType, DisplayGrid, GridsterConfig, GridsterItem, GridType } from 'angular-gridster2';
 import { ThyWidgetItem, WidgetGridsterItem } from './dashboard.class';
 import { ThyDashboardWidgetComponent } from './widget/widget.component';
 
@@ -25,6 +25,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
      * 仪表盘部件数据
      */
     @Input() set thyWidgets(value: ThyWidgetItem[]) {
+        this.widgets = value || [];
         this.widgetGridsterItems = this.buildWidgetGridsterItems(value);
     }
 
@@ -34,6 +35,8 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
     @Output() thyWidgetsChange: EventEmitter<ThyWidgetItem[]> = new EventEmitter();
 
     public widgetGridsterItems: WidgetGridsterItem[] = [];
+
+    private widgets!: ThyWidgetItem[];
 
     public config: GridsterConfig = {
         gridType: GridType.VerticalFixed,
@@ -47,15 +50,18 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
         pushItems: true,
         disablePushOnDrag: true,
         useTransformPositioning: false,
-        // swapWhileDragging: true,
-        itemChangeCallback: () => {
-            const widgets = this.buildWidgetItems();
-            this.thyWidgetsChange.emit(widgets);
+        itemChangeCallback: (item: GridsterItem) => {
+            const changedWidget = this.widgets.find((widget) => {
+                return widget._id === item.widget._id;
+            });
+
+            if (changedWidget) {
+                changedWidget.position = { x: item.x, y: item.y };
+                changedWidget.size = { cols: item.cols, rows: item.rows };
+                this.thyWidgetsChange.emit(this.widgets);
+            }
         }
     };
-
-    @ViewChild('gridster')
-    gridsterComponent!: GridsterComponentInterface;
 
     constructor(private cdr: ChangeDetectorRef) {}
 
@@ -80,7 +86,9 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
                 y: widget.position?.y,
                 cols: widget.size.cols,
                 rows: widget.size.rows,
-                widget: { ...widget }
+                minItemCols: widget.minSize?.cols,
+                minItemRows: widget.minSize?.rows,
+                widget
             };
 
             return gridsterItem;
@@ -114,16 +122,5 @@ export class ThyDashboardComponent implements OnInit, OnChanges {
             };
         }
         this.cdr.markForCheck();
-    }
-
-    private buildWidgetItems() {
-        return (this.gridsterComponent?.grid || []).map((gridsterItem) => {
-            const widgetGridsterItem = gridsterItem.item as WidgetGridsterItem;
-            return {
-                ...widgetGridsterItem.widget,
-                position: { x: widgetGridsterItem.x, y: widgetGridsterItem.y },
-                size: { cols: widgetGridsterItem.cols, rows: widgetGridsterItem.rows }
-            };
-        });
     }
 }

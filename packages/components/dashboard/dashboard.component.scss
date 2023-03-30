@@ -1,4 +1,4 @@
-@use '~ngx-tethys/styles/variables.scss';
+@use 'ngx-tethys/styles/variables.scss';
 
 .thy-dashboard {
     .dashboard-gridster {
@@ -40,9 +40,6 @@
 
         .gridster-preview {
             background: rgba(0, 0, 0, 0.1);
-        }
-
-        &-editing {
         }
 
         .empty-block {

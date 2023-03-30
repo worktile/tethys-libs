@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.2](https://github.com/tethys-org/libs/compare/v15.0.0-next.1...v15.0.0-next.2) (2023-03-29)
+
+### Bug Fixes
+
+- **components:** fix dashboard item change callback #INFR-7089 ([c154b78](https://github.com/tethys-org/libs/commit/c154b7810940149e14c3bca2c8480fa180a57542)), closes [#INFR-7089](https://github.com/tethys-org/libs/issues/INFR-7089)
+
+# [15.0.0-next.1](https://github.com/tethys-org/libs/compare/v15.0.0-next.0...v15.0.0-next.1) (2023-03-29)
+
+### Bug Fixes
+
+- **components:** add set gridsterComponent when initCallback #INFR-7089 ([c910abe](https://github.com/tethys-org/libs/commit/c910abe14560d9d37d693bd123016421429f658a)), closes [#INFR-7089](https://github.com/tethys-org/libs/issues/INFR-7089)
+
+# [15.0.0-next.0](https://github.com/tethys-org/libs/compare/v14.0.0-next.6...v15.0.0-next.0) (2023-03-09)
+
+**Note:** Version bump only for package @tethys/pro
+
+# [14.0.0-next.6](https://github.com/tethys-org/libs/compare/v14.0.0-next.5...v14.0.0-next.6) (2023-02-28)
+
+### Bug Fixes
+
+- **components:** fix dashboard add widget error a nd add dashboard test #INFR-6408 ([#38](https://github.com/tethys-org/libs/issues/38)) ([1da842d](https://github.com/tethys-org/libs/commit/1da842d2965075fbabe32082521928ce68311ec7)), closes [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408)
+
 # [14.0.0-next.5](https://github.com/tethys-org/libs/compare/v14.0.0-next.4...v14.0.0-next.5) (2023-02-17)
 
 ### Bug Fixes

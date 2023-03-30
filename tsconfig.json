@@ -13,14 +13,15 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2015",
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "paths": {
       "@tethys/auth": ["./packages/auth/index"],
       "@tethys/cache": ["./packages/cache/index"],
       "@tethys/pro/*": ["./packages/components/*"]
-    }
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
