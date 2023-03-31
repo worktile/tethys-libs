@@ -5252,6 +5252,11 @@ critters@0.0.16:
     postcss "^8.3.7"
     pretty-bytes "^5.3.0"
 
+cropperjs@1.5.4:
+  version "1.5.4"
+  resolved "https://registry.npmjs.org/cropperjs/-/cropperjs-1.5.4.tgz#183590efb14cbef779d1532f898273f32d49cc0f"
+  integrity sha512-2DczDxhqruvDz+oOUjRTXvsIyUnlSDvWG7r7qaUQioPoZAgfA07kaTtdNXAD/8ezA4CHRk1MT7PFMFQVpcD/1Q==
+
 cross-spawn@^6.0.5:
   version "6.0.5"
   resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
