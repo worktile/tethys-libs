@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.3](https://github.com/tethys-org/libs/compare/v15.0.0-next.2...v15.0.0-next.3) (2023-04-07)
+
+### Features
+
+- **components:** add cropper component and preview component ([#37](https://github.com/tethys-org/libs/issues/37)) ([b8f7a39](https://github.com/tethys-org/libs/commit/b8f7a393d1bfb0a6dbdf41e4b78ac42caca5dfd1))
+
 # [15.0.0-next.2](https://github.com/tethys-org/libs/compare/v15.0.0-next.1...v15.0.0-next.2) (2023-03-29)
 
 ### Bug Fixes
