@@ -4,15 +4,17 @@ import { ThyNotifyService } from 'ngx-tethys/notify';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { ThyImageCropperComponent } from './cropper.component';
-import { ThyCropperImageSize, ThyCropperViewMode } from './cropper.entity';
+import { ThyCropperImageSize, ThyCropperShape, ThyCropperViewMode } from './cropper.entity';
 
 @Component({
     selector: 'thy-image-cropper-dialog',
-    templateUrl: './dialog.component.html'
+    templateUrl: './dialog.component.html',
+    host: {
+        class: 'thy-dialog-content thy-image-cropper-dialog',
+        '[class.thy-image-cropper-dialog-round]': 'cropperShape === "round"'
+    }
 })
 export class ThyImageCropperDialogComponent implements OnInit {
-    @HostBinding('class') className = 'thy-dialog-content thy-image-cropper-dialog';
-
     /**
      * 标题
      * @default 图片
@@ -49,6 +51,11 @@ export class ThyImageCropperDialogComponent implements OnInit {
      * 图片裁剪宽高比
      */
     @Input('thyCropperAspectRatio') cropperAspectRatio!: number;
+
+    /**
+     * 设置裁剪形状
+     */
+    @Input('thyCropperShape') cropperShape: ThyCropperShape = 'rect';
 
     /**
      * 确定按钮回调方法

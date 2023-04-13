@@ -8,7 +8,10 @@ export interface thyCropDataChangeEvent {
 }
 
 export type ThyCropperDragMode = 'crop' | 'move' | 'none';
+
 export type ThyCropperViewMode = 0 | 1 | 2 | 3;
+
+export type ThyCropperShape = 'rect' | 'round';
 
 /**
  * viewMode 视图模式，选项为 0（移动没有限制）、 1（图片只能在图片内移动而不是整个容器） 、2（图片不全部铺满容器） 、3（图片填充整个容器），default：0，

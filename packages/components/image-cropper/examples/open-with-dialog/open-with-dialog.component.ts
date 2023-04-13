@@ -19,7 +19,8 @@ export class ThyOpenWithDialogExampleComponent implements OnInit {
             this.dialog.open(ThyImageCropperDialogComponent, {
                 size: ThyDialogSizes.lg,
                 initialState: {
-                    image: image.files[0]
+                    image: image.files[0],
+                    cropperShape: 'round'
                 }
             });
         }
