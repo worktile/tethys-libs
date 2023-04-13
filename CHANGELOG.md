@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.4](https://github.com/tethys-org/libs/compare/v15.0.0-next.3...v15.0.0-next.4) (2023-04-13)
+
+### Features
+
+- **components:** thy-image-cropper supported cropper shape #INFR-7395 ([#49](https://github.com/tethys-org/libs/issues/49)) ([d409631](https://github.com/tethys-org/libs/commit/d40963191d73bd4172b5929ad143202ae8e52f7d)), closes [#INFR-7395](https://github.com/tethys-org/libs/issues/INFR-7395)
+
 # [15.0.0-next.3](https://github.com/tethys-org/libs/compare/v15.0.0-next.2...v15.0.0-next.3) (2023-04-07)
 
 ### Features
