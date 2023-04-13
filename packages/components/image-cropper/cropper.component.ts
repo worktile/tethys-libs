@@ -1,12 +1,15 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { isString } from '@tethys/cdk';
 import Cropper from 'cropperjs';
-import { thyCropDataChangeEvent, ThyCropperOptions, ThyCropperViewMode } from './cropper.entity';
+import { thyCropDataChangeEvent, ThyCropperOptions, ThyCropperShape, ThyCropperViewMode } from './cropper.entity';
 
 @Component({
     selector: 'thy-image-cropper',
     templateUrl: './cropper.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        '[class.thy-image-cropper-round]': 'thyCropperShape === "round"'
+    }
 })
 export class ThyImageCropperComponent implements OnInit {
     @HostBinding('class.thy-image-cropper') cropperClass = true;
@@ -40,6 +43,11 @@ export class ThyImageCropperComponent implements OnInit {
      * 图片裁剪宽高比
      */
     @Input() thyCropperAspectRatio!: number;
+
+    /**
+     * 设置裁剪形状
+     */
+    @Input() thyCropperShape: ThyCropperShape = 'rect';
 
     /**
      * 图片裁剪的数据更改(blob)
