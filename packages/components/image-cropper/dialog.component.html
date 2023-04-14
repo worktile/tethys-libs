@@ -9,7 +9,12 @@
       [thyCropperShape]="cropperShape"
     ></thy-image-cropper>
     <div class="avatar-text-desc">
-      <thy-file-select thyStopPropagation (thyOnFileSelect)="selectImage($event)" thyAcceptType=".jpg,.png,.jpeg">
+      <thy-file-select
+        thyStopPropagation
+        [thySizeThreshold]="uploadSizeThreshold"
+        [thyAcceptType]="uploadAcceptType"
+        (thyOnFileSelect)="selectImage($event)"
+      >
         <button class="pl-0" thyButton="link">重新上传</button>
       </thy-file-select>
       <span class="text-desc">{{ uploadTips }}</span>

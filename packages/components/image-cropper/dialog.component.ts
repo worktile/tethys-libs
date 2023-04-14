@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostBinding, inject, Input, NgZone, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { InputNumber } from 'ngx-tethys/core';
 import { ThyDialog, ThyDialogContainerComponent } from 'ngx-tethys/dialog';
 import { ThyNotifyService } from 'ngx-tethys/notify';
 import { Observable } from 'rxjs';
@@ -38,9 +39,23 @@ export class ThyImageCropperDialogComponent implements OnInit {
     @Input('thyImage') image!: File | string;
 
     /**
-     * 图片资源
+     * 上传提示文案
      */
     @Input('thyUploadTips') uploadTips: string = '(最佳尺寸 120X120 像素，可以上传高质量图片进行裁剪)';
+
+    /**
+     * 上传指定文件后缀类型
+     */
+    @Input('thyUploadAcceptType')
+    @InputNumber()
+    uploadAcceptType = '.jpg,.png,.jpeg';
+
+    /**
+     * 上传,单位`kb`，`0`表示没有任何限制
+     */
+    @Input('thyUploadSizeThreshold')
+    @InputNumber()
+    uploadSizeThreshold!: number;
 
     /**
      * 图片裁剪模式
