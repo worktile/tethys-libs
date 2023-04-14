@@ -20,7 +20,8 @@ export class ThyOpenWithDialogExampleComponent implements OnInit {
                 size: ThyDialogSizes.lg,
                 initialState: {
                     image: image.files[0],
-                    cropperShape: 'round'
+                    cropperShape: 'round',
+                    uploadSizeThreshold: 1024 * 2
                 }
             });
         }
