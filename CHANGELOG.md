@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.5](https://github.com/tethys-org/libs/compare/v15.0.0-next.4...v15.0.0-next.5) (2023-04-17)
+
+### Features
+
+- **components:** ImageCropper supported uploadSizeThreshold #INFR-7397 ([51d14c8](https://github.com/tethys-org/libs/commit/51d14c8c58c2856803ca5c0c89b61a342e8de6b5)), closes [#INFR-7397](https://github.com/tethys-org/libs/issues/INFR-7397)
+
 # [15.0.0-next.4](https://github.com/tethys-org/libs/compare/v15.0.0-next.3...v15.0.0-next.4) (2023-04-13)
 
 ### Features
