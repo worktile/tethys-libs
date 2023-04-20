@@ -4,10 +4,24 @@
     <thy-image-cropper
       #cropper
       [thyImage]="image"
-      [thyCropperAspectRatio]="cropperAspectRatio"
-      [thyCropperViewMode]="cropperViewMode"
-      [thyCropperShape]="cropperShape"
+      [thyAspectRatio]="aspectRatio"
+      [thyViewMode]="viewMode"
+      [thyShape]="shape"
+      [thyScale]="scale"
+      [thyRotate]="rotate"
     ></thy-image-cropper>
+    <div class="zoom-container d-flex align-items-center mt-4 mb-4">
+      <thy-slider
+        class="zoom-slider"
+        [thyType]="sliderType"
+        [thyMax]="scaleConfig.maxScale"
+        [thyMin]="scaleConfig.minScale"
+        [thyStep]="scaleConfig.step"
+        [(ngModel)]="scale"
+        thySize="sm"
+      ></thy-slider>
+      <div><button thyButtonIcon="rotate-right" class="pl-3" (click)="setRotate()"></button></div>
+    </div>
     <div class="avatar-text-desc">
       <thy-file-select
         thyStopPropagation
@@ -15,7 +29,7 @@
         [thyAcceptType]="uploadAcceptType"
         (thyOnFileSelect)="selectImage($event)"
       >
-        <button class="pl-0" thyButton="link">重新上传</button>
+        <a href="javascript:;" class="link-has-icon pl-0"><thy-icon thyIconName="upload" class="mr-1"></thy-icon>重新上传</a>
       </thy-file-select>
       <span class="text-desc">{{ uploadTips }}</span>
     </div>
@@ -23,20 +37,14 @@
   <div class="preview-container">
     预览
     <div class="text-center">
-      <ng-container *ngIf="previewSizes && previewSizes?.length; else defaultPreview">
-        <ng-container *ngFor="let currentSize of previewSizes">
-          <ng-template [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ $implicit: currentSize }"></ng-template>
+      <ng-container *ngIf="previewSizes && previewSizes?.length">
+        <ng-container *ngFor="let size of previewSizes">
+          <div class="preview-image-warp" [ngStyle]="size | thyCropperSizeStyle"></div>
+          <div class="preview-image-size">{{ size | thyCropperSizeText }}</div>
         </ng-container>
       </ng-container>
-      <ng-template #defaultPreview>
-        <ng-template [ngTemplateOutlet]="preview" [ngTemplateOutletContext]="{ $implicit: size }"></ng-template>
-      </ng-template>
     </div>
   </div>
-  <ng-template #preview let-size>
-    <div class="preview-image-warp" [ngStyle]="size | thyCropperSizeStyle"></div>
-    <div class="preview-image-size">{{ size | thyCropperSizeText }}</div>
-  </ng-template>
 </thy-dialog-body>
 
 <thy-dialog-footer thyShowBorderTop="true" [thyAlign]="'right'">

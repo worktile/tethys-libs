@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyImageCropperComponent, ThyImageCropperModule } from '@tethys/pro/image-cropper';
 import Cropper from 'cropperjs';
-import { ThyCropperViewMode } from '../cropper.entity';
+import { thyViewMode } from '../cropper.entity';
 
 @Component({
     selector: 'thy-test-cropper-basic',
@@ -11,8 +11,8 @@ import { ThyCropperViewMode } from '../cropper.entity';
         #cropper
         [thyImage]="image"
         [thyImageErrorMessage]="errorMessage"
-        [thyCropperViewMode]="viewMode"
-        [thyCropperAspectRatio]="aspectRatio"
+        [thyViewMode]="viewMode"
+        [thyAspectRatio]="aspectRatio"
         (thyCropDataChanged)="cropDataChange()"
         style="width: 500px; height: 300px"
     ></thy-image-cropper>`
@@ -24,7 +24,7 @@ export class ThyImageCropperTestBasicComponent {
 
     errorMessage = '图片加载错误';
 
-    viewMode: ThyCropperViewMode = 0;
+    viewMode: thyViewMode = 0;
 
     aspectRatio = 4;
 
@@ -82,7 +82,7 @@ describe('imageCropperComponent', () => {
             expect(errMessageElement.textContent).toEqual('自定义错误文案');
         });
 
-        it('should get correct viewMode aspectRatio when set thyCropperViewMode or thyCropperAspectRatio', () => {
+        it('should get correct viewMode aspectRatio when set thyViewMode or thyAspectRatio', () => {
             component.imageCropper.onLoad({ target: component.imageCropper.image.nativeElement } as Event);
             fixture.detectChanges();
             expect(component.imageCropper.cropperOptions.aspectRatio).toEqual(component.aspectRatio);

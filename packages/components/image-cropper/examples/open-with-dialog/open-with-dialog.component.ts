@@ -17,11 +17,15 @@ export class ThyOpenWithDialogExampleComponent implements OnInit {
     selectImage(image: { files: FileList[] }) {
         if (image.files.length > 0) {
             this.dialog.open(ThyImageCropperDialogComponent, {
-                size: ThyDialogSizes.lg,
+                size: ThyDialogSizes.md,
                 initialState: {
                     image: image.files[0],
-                    cropperShape: 'round',
-                    uploadSizeThreshold: 1024 * 2
+                    shape: 'round',
+                    uploadSizeThreshold: 1024 * 2,
+                    previewSizes: [
+                        { width: 120, height: '120px' },
+                        { width: 36, height: '36px' }
+                    ]
                 }
             });
         }
@@ -29,16 +33,17 @@ export class ThyOpenWithDialogExampleComponent implements OnInit {
 
     previewImage() {
         this.dialog.open(ThyImageCropperDialogComponent, {
-            size: ThyDialogSizes.lg,
+            size: ThyDialogSizes.md,
             initialState: {
                 image: this.image,
+                uploadTips: '最佳尺寸 320 X 120 像素',
                 previewSizes: [
-                    { width: 120, height: '120px' },
-                    { width: 38, height: '38px' }
+                    { width: 160, height: '60px' },
+                    { width: 80, height: '30px' }
                 ],
                 confirmAction: this.confirmAction,
-                cropperViewMode: 1,
-                cropperAspectRatio: 2
+                viewMode: 1,
+                aspectRatio: 320 / 120
             }
         });
     }
