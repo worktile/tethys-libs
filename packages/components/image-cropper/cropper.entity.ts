@@ -36,7 +36,7 @@ export interface ThyCropperOptions {
     dragMode?: ThyCropperDragMode;
     guides?: boolean;
     movable?: boolean;
-    preview?: Element | Element[] | NodeList | string;
+    preview?: HTMLElement | HTMLElement[] | NodeListOf<HTMLElement> | string;
     ready?(event: CustomEvent): void;
     rotatable?: boolean;
     scalable?: boolean;
@@ -46,4 +46,5 @@ export interface ThyCropperOptions {
     zoomOnTouch?: boolean;
     zoomOnWheel?: boolean;
     zoomable?: boolean;
+    center?: boolean;
 }

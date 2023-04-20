@@ -2,15 +2,15 @@ import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyImageCropperDialogComponent, ThyImageCropperModule } from '@tethys/pro/image-cropper';
-import { ThyCropperViewMode } from '../cropper.entity';
+import { thyViewMode } from '../cropper.entity';
 
 @Component({
     selector: 'thy-test-cropper-dialog-basic',
     template: `<thy-image-cropper-dialog
         [thyImage]="image"
         [thyPreviewSizes]="previewSizes"
-        [thyCropperViewMode]="viewMode"
-        [thyCropperAspectRatio]="aspectRatio"
+        [thyViewMode]="viewMode"
+        [thyAspectRatio]="aspectRatio"
         [thyUploadTips]="uploadTips"
         [thyConfirmAction]="confirmAction()"
     ></thy-image-cropper-dialog>`
@@ -22,7 +22,7 @@ export class ThyImageCropperDialogTestBasicComponent {
 
     uploadTips = '(最佳尺寸 120X120 像素，可以上传高质量图片进行裁剪)';
 
-    viewMode: ThyCropperViewMode = 1;
+    viewMode: thyViewMode = 1;
 
     aspectRatio = 1;
 

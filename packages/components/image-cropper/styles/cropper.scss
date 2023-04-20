@@ -15,6 +15,14 @@
             max-height: 100%;
             visibility: hidden;
         }
+        .cropper-modal {
+            border-radius: 4px;
+            background-color: basic.$gray-800;
+            opacity: 0.6;
+        }
+        .cropper-view-box {
+            outline: 0;
+        }
     }
     .image-ready {
         img {
@@ -26,12 +34,6 @@
         .cropper-view-box,
         .cropper-face {
             border-radius: 50%;
-        }
-
-        /* The css styles for `outline` do not follow `border-radius` on iOS/Safari (#979). */
-        .cropper-view-box {
-            outline: 0;
-            box-shadow: 0 0 0 1px #39f;
         }
     }
 }
@@ -346,12 +348,10 @@
     }
     .cropper-content-container {
         flex: 1;
-        margin-right: 30px;
+        margin-right: 32px;
         .cropper-content {
             width: 300px !important;
             height: 300px !important;
-        }
-        .image-ready {
         }
 
         .cropper {
@@ -364,8 +364,16 @@
             }
         }
 
+        .zoom-container {
+            .zoom-slider {
+                padding-left: 0;
+            }
+        }
+
         .avatar-text-desc {
-            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
     }
     .preview-container {
@@ -373,18 +381,28 @@
         display: flex;
         flex-direction: column;
         .preview-image-warp {
+            border-radius: 4px;
             flex: 1;
             overflow: hidden;
-            margin: 28px auto 20px;
+            margin: 56px auto 12px;
             img {
                 pointer-events: none;
+            }
+            &:first-of-type {
+                margin-top: 40px;
             }
         }
     }
 
     &-round {
-        .preview-image-warp {
-            border-radius: 50%;
+        .preview-container {
+            .preview-image-warp {
+                border-radius: 50%;
+                margin-top: 40px;
+                &:first-of-type {
+                    margin-top: 16px;
+                }
+            }
         }
     }
 }

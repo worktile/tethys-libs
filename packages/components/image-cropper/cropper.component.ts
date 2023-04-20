@@ -1,14 +1,15 @@
 import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { isString } from '@tethys/cdk';
 import Cropper from 'cropperjs';
-import { thyCropDataChangeEvent, ThyCropperOptions, ThyCropperShape, ThyCropperViewMode } from './cropper.entity';
+import { InputNumber } from 'ngx-tethys/core';
+import { ThyCropperOptions, ThyCropperShape, ThyCropperViewMode, thyCropDataChangeEvent } from './cropper.entity';
 
 @Component({
     selector: 'thy-image-cropper',
     templateUrl: './cropper.component.html',
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[class.thy-image-cropper-round]': 'thyCropperShape === "round"'
+        '[class.thy-image-cropper-round]': 'thyShape === "round"'
     }
 })
 export class ThyImageCropperComponent implements OnInit {
@@ -37,17 +38,32 @@ export class ThyImageCropperComponent implements OnInit {
     /**
      * 图片裁剪模式
      */
-    @Input() thyCropperViewMode!: ThyCropperViewMode;
+    @Input() thyViewMode!: ThyCropperViewMode;
 
     /**
      * 图片裁剪宽高比
      */
-    @Input() thyCropperAspectRatio!: number;
+    @Input() thyAspectRatio!: number;
 
     /**
      * 设置裁剪形状
      */
-    @Input() thyCropperShape: ThyCropperShape = 'rect';
+    @Input() thyShape: ThyCropperShape = 'rect';
+
+    /**
+     * 设置放大缩小
+     */
+    @Input() @InputNumber() set thyScale(value: number) {
+        this.scale = value;
+        (this.cropper as Cropper)?.scale(value);
+    }
+
+    /**
+     * 设置旋转角度
+     */
+    @Input() @InputNumber() set thyRotate(value: number) {
+        (this.cropper as Cropper)?.rotateTo(value);
+    }
 
     /**
      * 图片裁剪的数据更改(blob)
@@ -74,10 +90,10 @@ export class ThyImageCropperComponent implements OnInit {
     public imageSrc!: string;
 
     defaultCropperOptions: ThyCropperOptions = {
-        viewMode: 2,
+        viewMode: 1,
         aspectRatio: 1,
         movable: false,
-        scalable: false,
+        scalable: true,
         dragMode: 'move' as Cropper.DragMode,
         cropBoxResizable: false,
         zoomable: true,
@@ -95,6 +111,8 @@ export class ThyImageCropperComponent implements OnInit {
 
     cropperOptions!: ThyCropperOptions;
 
+    scale: number = 1;
+
     constructor() {}
 
     ngOnInit() {}
@@ -111,8 +129,8 @@ export class ThyImageCropperComponent implements OnInit {
         const { viewMode, aspectRatio } = this.defaultCropperOptions;
 
         const customCropperOptions = {
-            viewMode: this.thyCropperViewMode || this.thyCropperViewMode === 0 ? this.thyCropperViewMode : viewMode,
-            aspectRatio: this.thyCropperAspectRatio ? this.thyCropperAspectRatio : aspectRatio
+            viewMode: this.thyViewMode || this.thyViewMode === 0 ? this.thyViewMode : viewMode,
+            aspectRatio: this.thyAspectRatio ? this.thyAspectRatio : aspectRatio
         };
 
         this.cropperOptions = Object.assign(
