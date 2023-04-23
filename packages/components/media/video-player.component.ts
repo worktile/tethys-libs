@@ -51,6 +51,6 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     ngOnInit(): void {}
 
     onLoadedmetadata(event: Event) {
-        this.thyOnloadedMetadata.emit(this.video?.nativeElement);
+        this.thyLoadedMetadata.emit(this.video?.nativeElement);
     }
 }

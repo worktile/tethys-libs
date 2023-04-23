@@ -32,7 +32,7 @@ export class ThyMediaPlayerBaseComponent implements OnInit {
     /**
      * 媒体元数据被加载完成后触发 能拿到媒体尺寸、时长等
      */
-    @Output() thyOnloadedMetadata: EventEmitter<HTMLVideoElement | HTMLAudioElement> = new EventEmitter();
+    @Output() thyLoadedMetadata: EventEmitter<HTMLVideoElement | HTMLAudioElement> = new EventEmitter();
 
     constructor(public sanitizer: DomSanitizer) {}
 
