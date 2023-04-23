@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { isString } from '@tethys/cdk';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
 @Component({
@@ -28,7 +27,7 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
     @HostBinding('class.thy-audio-player') audioPlayerClass = true;
 
-    @ViewChild('audio') audio: ElementRef | undefined;
+    @ViewChild('audio') audio: ElementRef<HTMLAudioElement> | undefined;
 
     /**
      * 媒体资源的url
@@ -56,5 +55,6 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
         if (!(duration && duration > 0)) {
             this.showErrorTip = true;
         }
+        this.thyOnloadedMetadata.emit(this.audio?.nativeElement);
     }
 }

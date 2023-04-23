@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
@@ -25,7 +25,7 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
 export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
     @HostBinding('class') class = 'thy-video-player thy-media-player';
 
-    @ViewChild('video') video: HTMLVideoElement | undefined;
+    @ViewChild('video') video: ElementRef<HTMLVideoElement> | undefined;
 
     /**
      * 媒体资源的url
@@ -50,5 +50,7 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     ngOnInit(): void {}
 
-    onLoadedmetadata(event: Event) {}
+    onLoadedmetadata(event: Event) {
+        this.thyOnloadedMetadata.emit(this.video?.nativeElement);
+    }
 }

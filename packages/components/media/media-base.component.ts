@@ -1,4 +1,4 @@
-import { Directive, OnInit } from '@angular/core';
+import { Directive, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { isString } from '@tethys/cdk';
 
@@ -28,6 +28,11 @@ export class ThyMediaPlayerBaseComponent implements OnInit {
     }
 
     private internalFileSrc: SafeUrl = '';
+
+    /**
+     * 媒体元数据被加载完成后触发 能拿到媒体尺寸、时长等
+     */
+    @Output() thyOnloadedMetadata: EventEmitter<HTMLVideoElement | HTMLAudioElement> = new EventEmitter();
 
     constructor(public sanitizer: DomSanitizer) {}
 
