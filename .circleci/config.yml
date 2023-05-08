@@ -1,18 +1,19 @@
+repo_token: COVERALLS_REPO_TOKEN=j31pdiG4EJKj4umFDYtfWd6PZFqju5Zso
 version: 2
 jobs:
   build:
-    working_directory: ~/tethys-pro
+    working_directory: ~/tethys-libs
     docker:
       - image: circleci/node:16-browsers
     steps:
       - checkout
       - restore_cache:
-          key: tethys-pro-{{ .Branch }}-{{ checksum "package-lock.json" }}
-      - run: npm ci
+          key: tethys-libs-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: yarn install
       - save_cache:
-          key: tethys-pro-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: tethys-libs-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
-            - 'node_modules'
+            - ~/.cache/yarn
       # - run: npm run lint
-      - run: npm run tethys -- --no-watch --no-progress --browsers=ChromeHeadlessCI --source-map=false
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --source-map=false
       - run: npm run report-coverage
