@@ -7,12 +7,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: tethys-libs-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: tethys-libs-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: npm ci
       - save_cache:
-          key: tethys-libs-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: tethys-libs-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
-            - 'node_modules'
+            - ~/.cache/yarn
       # - run: npm run lint
       - run: npm run tethys -- --no-watch --no-progress --browsers=ChromeHeadlessCI --source-map=false
       - run: npm run report-coverage
