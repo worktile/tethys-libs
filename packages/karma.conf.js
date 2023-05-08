@@ -25,7 +25,7 @@ module.exports = function (config) {
             suppressAll: true // removes the duplicated traces
         },
         coverageReporter: {
-            dir: '../coverage/@tethys',
+            dir: '../coverage/tethys',
             subdir: '.',
             reporters: [{ type: 'html' }, { type: 'text-summary' }]
         },
