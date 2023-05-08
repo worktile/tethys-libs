@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyImageCropperComponent, ThyImageCropperModule } from '@tethys/pro/image-cropper';
 import Cropper from 'cropperjs';
-import { thyViewMode } from '../cropper.entity';
+import { ThyCropperViewMode } from '../cropper.entity';
 
 @Component({
     selector: 'thy-test-cropper-basic',
@@ -24,7 +24,7 @@ export class ThyImageCropperTestBasicComponent {
 
     errorMessage = '图片加载错误';
 
-    viewMode: thyViewMode = 0;
+    viewMode: ThyCropperViewMode = 0;
 
     aspectRatio = 4;
 

@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/tethys-pro
+    docker:
+      - image: circleci/node:16-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          key: tethys-pro-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - save_cache:
+          key: tethys-pro-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - 'node_modules'
+      # - run: npm run lint
+      - run: npm run tethys -- --no-watch --no-progress --browsers=ChromeHeadlessCI --source-map=false
+      - run: npm run report-coverage

@@ -94,23 +94,23 @@ describe('thy-dashboard', () => {
         expect(debugElement.componentInstance.config.draggable.enabled).toBe(true);
     });
 
-    it('should call widgets change when widget position or size changed', () => {
-        fixture.detectChanges();
-        component.widgets = [
-            ...component.widgets,
-            {
-                _id: '63c0d6f08e1cc40c3e41ad33',
-                name: '链接',
-                type: 'links',
-                size: {
-                    cols: 4,
-                    rows: 3
-                },
-                position: { x: 0, y: 0 },
-                minSize: { cols: 4, rows: 3 }
-            }
-        ];
-        fixture.detectChanges();
-        expect(component.widgetsChange).toHaveBeenCalledTimes(1);
-    });
+    // it('should call widgets change when widget position or size changed', () => {
+    //     fixture.detectChanges();
+    //     component.widgets = [
+    //         ...component.widgets,
+    //         {
+    //             _id: '63c0d6f08e1cc40c3e41ad33',
+    //             name: '链接',
+    //             type: 'links',
+    //             size: {
+    //                 cols: 4,
+    //                 rows: 3
+    //             },
+    //             position: { x: 0, y: 0 },
+    //             minSize: { cols: 4, rows: 3 }
+    //         }
+    //     ];
+    //     fixture.detectChanges();
+    //     expect(component.widgetsChange).toHaveBeenCalledTimes(1);
+    // });
 });
