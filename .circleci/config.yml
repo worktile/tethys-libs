@@ -1,16 +1,16 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/tethys-pro
+    working_directory: ~/tethys-libs
     docker:
       - image: circleci/node:16-browsers
     steps:
       - checkout
       - restore_cache:
-          key: tethys-pro-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: tethys-libs-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run: npm ci
       - save_cache:
-          key: tethys-pro-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: tethys-libs-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - 'node_modules'
       # - run: npm run lint
