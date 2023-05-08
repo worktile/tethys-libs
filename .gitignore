@@ -34,7 +34,7 @@ chrome-profiler-events*.json
 /.angular/cache
 /.sass-cache
 /connect.lock
-/coverage
+# /coverage
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
@@ -49,7 +49,7 @@ Thumbs.db
 dist
 *.log
 .nyc_output
-coverage
+# coverage
 tsconfig.tsbuildinfo
 
 .docgeni/site

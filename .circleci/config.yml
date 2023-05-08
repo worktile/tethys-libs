@@ -1,3 +1,4 @@
+repo_token: COVERALLS_REPO_TOKEN=j31pdiG4EJKj4umFDYtfWd6PZFqju5Zso
 version: 2
 jobs:
   build:
