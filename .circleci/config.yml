@@ -14,5 +14,5 @@ jobs:
           paths:
             - ~/.cache/yarn
       # - run: npm run lint
-      - run: npm run tethys -- --no-watch --no-progress --browsers=ChromeHeadlessCI --source-map=false
+      - run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --source-map=false
       - run: npm run report-coverage
