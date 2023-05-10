@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.6](https://github.com/tethys-org/libs/compare/v15.0.0-next.5...v15.0.0-next.6) (2023-05-10)
+
+### Features
+
+- **components:** media support thyLoadedMetadata event #INFR-7500 ([#54](https://github.com/tethys-org/libs/issues/54)) ([3415452](https://github.com/tethys-org/libs/commit/341545289a9d25690084e4b0b17f0635717534e4)), closes [#INFR-7500](https://github.com/tethys-org/libs/issues/INFR-7500)
+- **components:** optimization image-cropper #INFR-7171 ([4bc69c1](https://github.com/tethys-org/libs/commit/4bc69c18dddb9e56e1a743e897623201c0d4c27e)), closes [#INFR-7171](https://github.com/tethys-org/libs/issues/INFR-7171)
+
 # [15.0.0-next.5](https://github.com/tethys-org/libs/compare/v15.0.0-next.4...v15.0.0-next.5) (2023-04-17)
 
 ### Features
