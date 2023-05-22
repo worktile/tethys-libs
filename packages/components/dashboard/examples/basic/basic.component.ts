@@ -32,7 +32,14 @@ export class ThyDashboardBasicExampleComponent implements OnInit {
 
     widgetViews = {
         notice: ThyDashboardBasicNoticeWidgetComponent,
-        links: ThyDashboardBasicLinksWidgetComponent
+        links: {
+            outlet: ThyDashboardBasicLinksWidgetComponent,
+            context: {
+                config: {
+                    size: 'lg'
+                }
+            }
+        }
     };
 
     draggable = false;
