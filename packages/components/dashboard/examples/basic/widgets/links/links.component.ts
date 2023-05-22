@@ -6,6 +6,8 @@ import { ThyDashboardWidgetComponent, ThyWidgetItem } from '@tethys/pro/dashboar
     templateUrl: './links.component.html'
 })
 export class ThyDashboardBasicLinksWidgetComponent extends ThyDashboardWidgetComponent implements OnInit {
+    config = null;
+
     constructor() {
         super();
     }

@@ -45,7 +45,14 @@ export class ThyDashboardBasicTestComponent {
 
     widgetViews = {
         notice: ThyDashboardBasicNoticeWidgetComponent,
-        links: ThyDashboardBasicLinksWidgetComponent
+        links: {
+            outlet: ThyDashboardBasicLinksWidgetComponent,
+            context: {
+                config: {
+                    size: 'lg'
+                }
+            }
+        }
     };
 
     draggable = false;
@@ -81,6 +88,13 @@ describe('thy-dashboard', () => {
         fixture.detectChanges();
         const widgets = fixture.debugElement.queryAll(By.css('.dashboard-girdster-item'));
         expect(widgets.length).toEqual(2);
+        expect(fixture.debugElement.query(By.directive(ThyDashboardBasicNoticeWidgetComponent))).not.toBeNull();
+        expect(fixture.debugElement.query(By.directive(ThyDashboardBasicLinksWidgetComponent))).not.toBeNull();
+    });
+
+    it('should inject context to link widget', () => {
+        fixture.detectChanges();
+        expect(fixture.debugElement.query(By.directive(ThyDashboardBasicLinksWidgetComponent)).componentInstance.config.size).toEqual('lg');
     });
 
     it('should grister draggable enabled to be false', () => {
