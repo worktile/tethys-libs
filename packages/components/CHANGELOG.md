@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.7](https://github.com/tethys-org/libs/compare/v15.0.0-next.6...v15.0.0-next.7) (2023-05-22)
+
+### Features
+
+- **components:** feat dashboard auto resize when container resize #INFR-7972 ([b9c29dd](https://github.com/tethys-org/libs/commit/b9c29dd7f8bc3e3df5cbfb5f83d330141dadf465)), closes [#INFR-7972](https://github.com/tethys-org/libs/issues/INFR-7972)
+- **components:** support config widget initialize context #INFR-7992 ([c7d0cb2](https://github.com/tethys-org/libs/commit/c7d0cb234cf532632cc846dae06b046aa752c44f)), closes [#INFR-7992](https://github.com/tethys-org/libs/issues/INFR-7992)
+
 # [15.0.0-next.6](https://github.com/tethys-org/libs/compare/v15.0.0-next.5...v15.0.0-next.6) (2023-05-10)
 
 ### Features
