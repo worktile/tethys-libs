@@ -91,11 +91,12 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (!changes.thyWidgets.firstChange) {
+        if (!changes.thyWidgets?.firstChange) {
             this.widgetGridsterItems = this.buildWidgetGridsterItems(this.widgets);
         }
         if (!changes.thyDraggable?.firstChange) {
             this.setDraggable(this.thyDraggable);
+            undefined;
         }
     }
 
