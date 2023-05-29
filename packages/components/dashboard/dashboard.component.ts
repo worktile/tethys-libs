@@ -34,6 +34,11 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
      */
     @Output() thyWidgetsChange: EventEmitter<ThyWidgetItem[]> = new EventEmitter();
 
+    /**
+     * 仪表盘整体大小发生变化
+     */
+    @Output() thyResizeChange: EventEmitter<void> = new EventEmitter();
+
     @ViewChild('gridster', { static: true, read: ElementRef }) gridster!: ElementRef<HTMLElement>;
 
     public widgetGridsterItems: WidgetGridsterItem[] = [];
@@ -86,6 +91,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
                     if (this.config.api && this.config.api.resize) {
                         this.config.api.resize();
                     }
+                    this.thyResizeChange.emit();
                 });
         });
     }
