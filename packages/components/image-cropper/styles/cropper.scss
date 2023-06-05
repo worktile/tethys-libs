@@ -7,6 +7,9 @@
     .thy-loading {
         position: absolute;
     }
+    .cropper-container {
+        border-radius: 4px;
+    }
     .cropper-content {
         width: 100%;
         height: 100%;
@@ -352,6 +355,11 @@
         .cropper-content {
             width: 300px !important;
             height: 300px !important;
+        }
+
+        .zoom-container,
+        .avatar-text-desc {
+            width: 300px;
         }
 
         .cropper {

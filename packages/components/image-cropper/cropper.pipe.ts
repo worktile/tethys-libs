@@ -11,7 +11,7 @@ export class ThyCropperSizeTextPipe implements PipeTransform {
             const currentSize = previewSizes ? previewSizes[0] : size;
             const width = parseFloat(currentSize.width as string);
             const height = parseFloat(currentSize.height as string);
-            return width + 'X' + height;
+            return width + ' x ' + height;
         } else {
             return '';
         }
