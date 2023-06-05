@@ -1,4 +1,5 @@
 @use 'ngx-tethys/styles/basic.scss';
+@use 'ngx-tethys/styles/variables.scss';
 
 .thy-image-cropper {
     display: block;
@@ -400,6 +401,10 @@
                 margin-top: 40px;
             }
         }
+    }
+
+    .preview-image-size {
+        color: basic.$gray-600;
     }
 
     &-round {
