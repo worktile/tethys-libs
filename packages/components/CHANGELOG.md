@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.9](https://github.com/tethys-org/libs/compare/v15.0.0-next.8...v15.0.0-next.9) (2023-06-05)
+
+### Features
+
+- **components:** dashboard support output thySizeChange when container resize #INFR-8084 ([f334f7d](https://github.com/tethys-org/libs/commit/f334f7d92feb005759fed48311f082d356206357)), closes [#INFR-8084](https://github.com/tethys-org/libs/issues/INFR-8084)
+- **components:** image-cropper modify styles and description #INFR-8200 ([#65](https://github.com/tethys-org/libs/issues/65)) ([184d181](https://github.com/tethys-org/libs/commit/184d1810c5c8a1703783dd1e98ae02e95991ca02)), closes [#INFR-8200](https://github.com/tethys-org/libs/issues/INFR-8200)
+
 # [15.0.0-next.8](https://github.com/tethys-org/libs/compare/v15.0.0-next.6...v15.0.0-next.8) (2023-05-23)
 
 ### Bug Fixes
