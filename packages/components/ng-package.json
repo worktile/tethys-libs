@@ -5,5 +5,6 @@
   "lib": {
     "flatModuleFile": "pro",
     "entryFile": "index.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["cropperjs"]
 }
