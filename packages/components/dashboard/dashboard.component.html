@@ -1,0 +1,6 @@
+<gridster #gridster class="dashboard-gridster" [options]="config">
+  <gridster-item class="dashboard-girdster-item" [item]="gridsterItem" *ngFor="let gridsterItem of widgetGridsterItems; trackBy: trackBy">
+    <ng-container *thyViewOutlet="gridsterItem.outlet; context: gridsterItem.outletContext"> </ng-container>
+  </gridster-item>
+  <div class="empty-block" [style.top.px]="gridster.rows * 128"></div>
+</gridster>

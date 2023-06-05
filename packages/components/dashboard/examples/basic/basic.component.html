@@ -1,0 +1,10 @@
+<div class="dashboard-container">
+  <thy-dashboard
+    #thyProDashboard
+    [thyDraggable]="draggable"
+    [(thyWidgets)]="widgets"
+    [thyWidgetViews]="widgetViews"
+    (thyWidgetsChange)="widgetsChange($event)"
+  >
+  </thy-dashboard>
+</div>

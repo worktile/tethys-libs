@@ -17,66 +17,84 @@
           "strict": true
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "site",
+      "sourceRoot": "site/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/site",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "index": "site/src/index.html",
+            "main": "site/src/main.ts",
+            "polyfills": "site/src/polyfills.ts",
+            "tsConfig": "site/tsconfig.app.json",
+            "stylePreprocessorOptions": {
+              "includePaths": ["./site/src/styles"]
+            },
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
+              "site/src/favicon.ico",
+              "site/src/assets",
               {
                 "glob": "**/*",
                 "input": "./node_modules/@tethys/icons",
                 "output": "/assets/icons/"
               }
             ],
-            "styles": ["src/styles.scss"],
-            "scripts": []
+            "styles": ["site/src/styles.scss"],
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "site/src/environments/environment.ts",
+                  "with": "site/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
+              ]
             },
             "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "site:build",
+            "port": 4800,
+            "disableHostCheck": true
+          },
           "configurations": {
             "production": {
               "browserTarget": "site:build:production"
@@ -96,13 +114,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "main": "site/src/test.ts",
+            "polyfills": "site/src/polyfills.ts",
+            "tsConfig": "site/tsconfig.spec.json",
+            "karmaConfig": "site/karma.conf.js",
+            "assets": ["site/src/favicon.ico", "site/src/assets"],
+            "styles": ["site/src/styles.scss"],
             "scripts": []
           }
         }
@@ -128,7 +145,7 @@
             "karmaConfig": "packages/karma.conf.js",
             "polyfills": "packages/polyfills.ts",
             "tsConfig": "packages/tsconfig.spec.json",
-            "codeCoverageExclude": []
+            "codeCoverage": true
           }
         }
       }

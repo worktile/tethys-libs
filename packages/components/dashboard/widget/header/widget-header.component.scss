@@ -1,0 +1,53 @@
+@use 'ngx-tethys/styles/variables.scss';
+
+.thy-dashboard-widget-header {
+    display: block;
+    .widget-header-title {
+        position: relative;
+        display: flex;
+        font-size: 15px;
+        color: variables.$gray-800;
+        line-height: 22px;
+        height: 22px;
+        .thy-icon {
+            line-height: 20px;
+            color: variables.$gray-500;
+            &.drag-icon {
+                position: absolute;
+                left: -20px;
+                top: 0;
+            }
+        }
+        .more-icon {
+            display: none;
+            position: absolute;
+            right: -12px;
+            top: -4px;
+            &.editing-more-icon {
+                display: block;
+            }
+            &.active {
+                display: block;
+                .thy-icon {
+                    color: variables.$link-hover-color;
+                }
+            }
+        }
+        .title-text {
+            flex: 1;
+        }
+    }
+    .widget-header-description {
+        color: variables.$gray-500;
+        font-size: 14px;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        .black {
+            color: variables.$gray-800;
+        }
+    }
+    &-bottom-spacing {
+        margin-bottom: 18px;
+    }
+}

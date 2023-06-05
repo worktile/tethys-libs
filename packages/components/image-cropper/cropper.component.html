@@ -1,0 +1,7 @@
+<thy-loading [thyDone]="loadingDone"></thy-loading>
+
+<div class="alert alert-warning" *ngIf="loadError">{{ thyImageErrorMessage }}</div>
+
+<div class="cropper-content" [class.image-ready]="loadingDone">
+  <img #image alt="image" [src]="imageSrc" (load)="onLoad($event)" (error)="onError($event)" />
+</div>

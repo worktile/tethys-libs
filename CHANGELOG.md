@@ -3,6 +3,94 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.9](https://github.com/tethys-org/libs/compare/v15.0.0-next.8...v15.0.0-next.9) (2023-06-05)
+
+### Features
+
+- **components:** dashboard support output thySizeChange when container resize #INFR-8084 ([f334f7d](https://github.com/tethys-org/libs/commit/f334f7d92feb005759fed48311f082d356206357)), closes [#INFR-8084](https://github.com/tethys-org/libs/issues/INFR-8084)
+- **components:** image-cropper modify styles and description #INFR-8200 ([#65](https://github.com/tethys-org/libs/issues/65)) ([184d181](https://github.com/tethys-org/libs/commit/184d1810c5c8a1703783dd1e98ae02e95991ca02)), closes [#INFR-8200](https://github.com/tethys-org/libs/issues/INFR-8200)
+
+# [15.0.0-next.8](https://github.com/tethys-org/libs/compare/v15.0.0-next.6...v15.0.0-next.8) (2023-05-23)
+
+### Bug Fixes
+
+- **components:** handle changes thyWidgets is undefined ([3b6580c](https://github.com/tethys-org/libs/commit/3b6580c2cc885aa27ac1c7d50ff75d45250822a7))
+
+### Features
+
+- **components:** feat dashboard auto resize when container resize #INFR-7972 ([b9c29dd](https://github.com/tethys-org/libs/commit/b9c29dd7f8bc3e3df5cbfb5f83d330141dadf465)), closes [#INFR-7972](https://github.com/tethys-org/libs/issues/INFR-7972)
+- **components:** support config widget initialize context #INFR-7992 ([c7d0cb2](https://github.com/tethys-org/libs/commit/c7d0cb234cf532632cc846dae06b046aa752c44f)), closes [#INFR-7992](https://github.com/tethys-org/libs/issues/INFR-7992)
+
+# [15.0.0-next.7](https://github.com/tethys-org/libs/compare/v15.0.0-next.6...v15.0.0-next.7) (2023-05-22)
+
+### Features
+
+- **components:** feat dashboard auto resize when container resize #INFR-7972 ([b9c29dd](https://github.com/tethys-org/libs/commit/b9c29dd7f8bc3e3df5cbfb5f83d330141dadf465)), closes [#INFR-7972](https://github.com/tethys-org/libs/issues/INFR-7972)
+- **components:** support config widget initialize context #INFR-7992 ([c7d0cb2](https://github.com/tethys-org/libs/commit/c7d0cb234cf532632cc846dae06b046aa752c44f)), closes [#INFR-7992](https://github.com/tethys-org/libs/issues/INFR-7992)
+
+# [15.0.0-next.6](https://github.com/tethys-org/libs/compare/v15.0.0-next.5...v15.0.0-next.6) (2023-05-10)
+
+### Features
+
+- **components:** media support thyLoadedMetadata event #INFR-7500 ([#54](https://github.com/tethys-org/libs/issues/54)) ([3415452](https://github.com/tethys-org/libs/commit/341545289a9d25690084e4b0b17f0635717534e4)), closes [#INFR-7500](https://github.com/tethys-org/libs/issues/INFR-7500)
+- **components:** optimization image-cropper #INFR-7171 ([4bc69c1](https://github.com/tethys-org/libs/commit/4bc69c18dddb9e56e1a743e897623201c0d4c27e)), closes [#INFR-7171](https://github.com/tethys-org/libs/issues/INFR-7171)
+
+# [15.0.0-next.5](https://github.com/tethys-org/libs/compare/v15.0.0-next.4...v15.0.0-next.5) (2023-04-17)
+
+### Features
+
+- **components:** ImageCropper supported uploadSizeThreshold #INFR-7397 ([51d14c8](https://github.com/tethys-org/libs/commit/51d14c8c58c2856803ca5c0c89b61a342e8de6b5)), closes [#INFR-7397](https://github.com/tethys-org/libs/issues/INFR-7397)
+
+# [15.0.0-next.4](https://github.com/tethys-org/libs/compare/v15.0.0-next.3...v15.0.0-next.4) (2023-04-13)
+
+### Features
+
+- **components:** thy-image-cropper supported cropper shape #INFR-7395 ([#49](https://github.com/tethys-org/libs/issues/49)) ([d409631](https://github.com/tethys-org/libs/commit/d40963191d73bd4172b5929ad143202ae8e52f7d)), closes [#INFR-7395](https://github.com/tethys-org/libs/issues/INFR-7395)
+
+# [15.0.0-next.3](https://github.com/tethys-org/libs/compare/v15.0.0-next.2...v15.0.0-next.3) (2023-04-07)
+
+### Features
+
+- **components:** add cropper component and preview component ([#37](https://github.com/tethys-org/libs/issues/37)) ([b8f7a39](https://github.com/tethys-org/libs/commit/b8f7a393d1bfb0a6dbdf41e4b78ac42caca5dfd1))
+
+# [15.0.0-next.2](https://github.com/tethys-org/libs/compare/v15.0.0-next.1...v15.0.0-next.2) (2023-03-29)
+
+### Bug Fixes
+
+- **components:** fix dashboard item change callback #INFR-7089 ([c154b78](https://github.com/tethys-org/libs/commit/c154b7810940149e14c3bca2c8480fa180a57542)), closes [#INFR-7089](https://github.com/tethys-org/libs/issues/INFR-7089)
+
+# [15.0.0-next.1](https://github.com/tethys-org/libs/compare/v15.0.0-next.0...v15.0.0-next.1) (2023-03-29)
+
+### Bug Fixes
+
+- **components:** add set gridsterComponent when initCallback #INFR-7089 ([c910abe](https://github.com/tethys-org/libs/commit/c910abe14560d9d37d693bd123016421429f658a)), closes [#INFR-7089](https://github.com/tethys-org/libs/issues/INFR-7089)
+
+### Reverts
+
+- Revert "chore(release): 15.0.0" ([d234fe6](https://github.com/tethys-org/libs/commit/d234fe6bc476eaaa6a937fa23401b83659aa9905))
+
+# [15.0.0-next.0](https://github.com/tethys-org/libs/compare/v14.0.0-next.6...v15.0.0-next.0) (2023-03-09)
+
+**Note:** Version bump only for package libs
+
+# [14.0.0-next.6](https://github.com/tethys-org/libs/compare/v14.0.0-next.5...v14.0.0-next.6) (2023-02-28)
+
+### Bug Fixes
+
+- **components:** fix dashboard add widget error a nd add dashboard test #INFR-6408 ([#38](https://github.com/tethys-org/libs/issues/38)) ([1da842d](https://github.com/tethys-org/libs/commit/1da842d2965075fbabe32082521928ce68311ec7)), closes [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408)
+
+# [14.0.0-next.5](https://github.com/tethys-org/libs/compare/v14.0.0-next.4...v14.0.0-next.5) (2023-02-17)
+
+### Bug Fixes
+
+- **components:** fix dashboard widget component and delete itemRemovedCallback #INFR-6408 ([#35](https://github.com/tethys-org/libs/issues/35)) ([81069f2](https://github.com/tethys-org/libs/commit/81069f26aa8d07b8626a60b799cb826612fefa3e)), closes [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408)
+
+# [14.0.0-next.4](https://github.com/tethys-org/libs/compare/v14.0.0-next.3...v14.0.0-next.4) (2023-02-14)
+
+### Features
+
+- **components:** add dashboard module #INFR-6408 ([#32](https://github.com/tethys-org/libs/issues/32)) ([37512d5](https://github.com/tethys-org/libs/commit/37512d5fb58c977a5e167ee171c7da674ea44f66)), closes [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408) [#INFR-6408](https://github.com/tethys-org/libs/issues/INFR-6408)
+
 # [14.0.0-next.3](https://github.com/tethys-org/libs/compare/v14.0.0-next.2...v14.0.0-next.3) (2022-12-01)
 
 ### Bug Fixes

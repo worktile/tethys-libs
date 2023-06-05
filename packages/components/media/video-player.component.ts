@@ -148,8 +148,6 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
         }
     }
 
-    onLoadedmetadata(event: Event) {}
-
     /**
      * 进度条点击事件
      * 根据当前播放时间
@@ -227,6 +225,10 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     onPlay() {
         this.videoElement.play && this.videoElement.play();
         this.mediaOptions.paused = this.videoElement.paused;
+    }
+
+    onLoadedmetadata(event: Event) {
+        this.thyLoadedMetadata.emit(this.video?.nativeElement);
     }
 
     ngOnDestroy() {

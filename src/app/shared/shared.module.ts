@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ThyProCountdownModule } from '@tethys/pro/countdown';
 import { ThyProLayoutModule } from '@tethys/pro/layout';
 import { ThyProMediaModule } from '@tethys/pro/media';
+import { ThyProDashboardModule } from '@tethys/pro/dashboard';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyAvatarModule } from 'ngx-tethys/avatar';
 import { ThyButtonModule } from 'ngx-tethys/button';
@@ -49,7 +50,7 @@ const TETHYS_MODULES = [
     ThyDropdownModule
 ];
 
-const PRO_MODULES = [ThyProLayoutModule, ThyProCountdownModule, ThyProMediaModule];
+const PRO_MODULES = [ThyProLayoutModule, ThyProCountdownModule, ThyProMediaModule, ThyProDashboardModule];
 
 const SHARED_COMPONENT: never[] = [];
 
