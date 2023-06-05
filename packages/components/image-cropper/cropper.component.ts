@@ -172,6 +172,7 @@ export class ThyImageCropperComponent implements OnInit {
     };
 
     setImageSrc() {
+        this.loadingDone = false;
         const reader = new FileReader();
         reader.onloadend = () => {
             const cropperRef = this.cropper;
