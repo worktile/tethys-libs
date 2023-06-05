@@ -1,4 +1,5 @@
 @use 'ngx-tethys/styles/basic.scss';
+@use 'ngx-tethys/styles/variables.scss';
 
 .thy-image-cropper {
     display: block;
@@ -6,6 +7,9 @@
     min-height: 100px;
     .thy-loading {
         position: absolute;
+    }
+    .cropper-container {
+        border-radius: 4px;
     }
     .cropper-content {
         width: 100%;
@@ -354,6 +358,11 @@
             height: 300px !important;
         }
 
+        .zoom-container,
+        .avatar-text-desc {
+            width: 300px;
+        }
+
         .cropper {
             border-radius: 4px;
             overflow: hidden;
@@ -392,6 +401,10 @@
                 margin-top: 40px;
             }
         }
+    }
+
+    .preview-image-size {
+        color: basic.$gray-600;
     }
 
     &-round {

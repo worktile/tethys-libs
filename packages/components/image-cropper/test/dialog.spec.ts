@@ -20,7 +20,7 @@ export class ThyImageCropperDialogTestBasicComponent {
 
     image: string | File = 'image.png';
 
-    uploadTips = '(最佳尺寸 120X120 像素，可以上传高质量图片进行裁剪)';
+    uploadTips = '最佳尺寸 120 X 120 像素';
 
     viewMode: ThyCropperViewMode = 1;
 
@@ -71,7 +71,7 @@ describe('imageCropperComponent', () => {
             let previewImageElements = debugElement.nativeElement.querySelectorAll('.preview-image-size');
 
             expect(previewImageElements.length).toEqual(component.previewSizes.length);
-            expect(previewImageElements[0].textContent).toEqual('120X120');
+            expect(previewImageElements[0].textContent).toEqual('120 x 120');
 
             component.previewSizes = [
                 { width: 120, height: '120px' },
@@ -82,17 +82,8 @@ describe('imageCropperComponent', () => {
 
             previewImageElements = debugElement.nativeElement.querySelectorAll('.preview-image-size');
             expect(previewImageElements.length).toEqual(3);
-            expect(previewImageElements[1].textContent).toEqual('60X60');
+            expect(previewImageElements[1].textContent).toEqual('60 x 60');
         });
-
-        // it('should get default size when thyPreviewSizes is empty', () => {
-        //     component.previewSizes = [];
-        //     fixture.detectChanges();
-
-        //     const previewImageElements = debugElement.nativeElement.querySelectorAll('.preview-image-size');
-        //     expect(previewImageElements.length).toEqual(1);
-        //     expect(previewImageElements[0].textContent).toEqual('120X120');
-        // });
 
         it('should call confirmAction when click save button', () => {
             const confirmSpy = spyOn(component, 'confirmAction');

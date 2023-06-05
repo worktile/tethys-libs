@@ -36,7 +36,7 @@ export class ThyImageCropperDialogComponent implements OnInit {
     /**
      * 上传提示文案
      */
-    @Input('thyUploadTips') uploadTips: string = '最佳尺寸 120X120 像素';
+    @Input('thyUploadTips') uploadTips: string = '最佳尺寸 120 x 120 像素';
 
     /**
      * 上传指定文件后缀类型

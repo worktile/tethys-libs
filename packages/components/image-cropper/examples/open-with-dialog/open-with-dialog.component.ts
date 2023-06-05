@@ -36,7 +36,7 @@ export class ThyOpenWithDialogExampleComponent implements OnInit {
             size: ThyDialogSizes.md,
             initialState: {
                 image: this.image,
-                uploadTips: '最佳尺寸 320 X 120 像素',
+                uploadTips: '最佳尺寸 320 x 120 像素',
                 previewSizes: [
                     { width: 160, height: '60px' },
                     { width: 80, height: '30px' }
