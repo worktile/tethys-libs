@@ -7,7 +7,7 @@ import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyAudioPlayerComponent } from './audio-player.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 import { ThyMediaProgressComponent } from './progress.component';
-import { ThyTimeFormatPipe } from './time.pipe';
+import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './time.pipe';
 import { ThyVideoPlayerComponent } from './video-player.component';
 @NgModule({
     declarations: [
@@ -15,10 +15,11 @@ import { ThyVideoPlayerComponent } from './video-player.component';
         ThyVideoPlayerComponent,
         ThyAudioPlayerComponent,
         ThyMediaProgressComponent,
-        ThyTimeFormatPipe
+        ThyTimeFormatPipe,
+        ThyVolumeFormatPipe
     ],
     imports: [CommonModule, FormsModule, ThyIconModule, ThyDropdownModule, ThyActionModule],
-    exports: [ThyVideoPlayerComponent, ThyAudioPlayerComponent, ThyTimeFormatPipe],
+    exports: [ThyVideoPlayerComponent, ThyAudioPlayerComponent, ThyTimeFormatPipe, ThyVolumeFormatPipe],
     providers: []
 })
 export class ThyProMediaModule {}

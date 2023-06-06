@@ -9,3 +9,12 @@ export class ThyTimeFormatPipe implements PipeTransform {
         return formatTime(time, displayHours, inverted);
     }
 }
+
+@Pipe({ name: 'thyVolumeFormat' })
+export class ThyVolumeFormatPipe implements PipeTransform {
+    constructor() {}
+
+    transform(volume: number): number {
+        return Number(((volume || 0) * 100).toFixed(2));
+    }
+}

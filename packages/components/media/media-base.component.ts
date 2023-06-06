@@ -38,6 +38,7 @@ export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) imp
         currentTime: 0,
         duration: 0,
         paused: true,
+        muted: true,
         volume: 0
     };
 

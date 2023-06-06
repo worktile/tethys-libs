@@ -10,7 +10,7 @@ import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-bas
             #video
             class="media-content"
             [src]="fileSrc"
-            [muted]="false"
+            [muted]="true"
             [autoplay]="thyAutoPlay"
             [controls]="true"
             (loadedmetadata)="onLoadedmetadata($event)"
@@ -33,28 +33,31 @@ import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-bas
             ></thy-media-progress>
             <div class="controls">
                 <div class="d-flex">
-                    <a href="javascript:;" class="play" (click)="playOrPause()">
-                        {{ mediaOptions.paused ? '开始' : '暂停' }}
-                        <!-- <thy-icon [thyIconName]="mediaOptions.paused ? : 'play-circle' : 'pause-circle'"></thy-icon> -->
+                    <a href="javascript:;" class="play mr-2" (click)="playOrPause()">
+                        <thy-icon [thyIconName]="videoElement?.paused ? 'play-circle' : 'pause-circle'"></thy-icon>
                     </a>
-                    <div class="time">{{ mediaOptions.currentTime | thyTimeFormat }} / {{ mediaOptions.duration | thyTimeFormat }}</div>
+                    <div class="time">{{ videoElement?.currentTime | thyTimeFormat }} / {{ videoElement?.duration | thyTimeFormat }}</div>
                 </div>
                 <div class="d-flex">
                     <div class="volume-bar-wrap">
-                        <thy-icon [thyIconName]="'play-circle'"></thy-icon>
+                        <thy-icon
+                            class="mr-2"
+                            (click)="muted()"
+                            [thyIconName]="videoElement?.muted ? 'app-bulletin' : 'app-bulletin'"
+                        ></thy-icon>
                         <thy-media-progress
-                            class="volume-bar"
-                            [thyProgressValue]="mediaOptions.volume"
+                            class="volume-bar mr-2"
+                            [thyProgressValue]="videoElement?.volume | thyVolumeFormat"
                             [thyProgressType]="thyProgressType"
                             (thyAfterChange)="afterVolumeChange($event)"
                         ></thy-media-progress>
                     </div>
 
-                    <a thyAction [thyDropdown]="menu" class="volume" thyIcon="app-bulletin" href="javascript:;">倍速</a>
+                    <a thyAction [thyDropdown]="menu" class="volume" href="javascript:;">倍速</a>
 
                     <thy-dropdown-menu #menu>
                         <a
-                            [class.active]="mediaOptions.playbackRate === item"
+                            [class.active]="videoElement?.playbackRate === item"
                             *ngFor="let item of playBackRates"
                             thyDropdownMenuItem
                             href="javascript:;"
@@ -111,8 +114,8 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     onCanPlay() {
         this.showErrorTip = false;
 
-        const { playbackRate, currentTime, duration, paused, volume } = this.videoElement;
-        this.mediaOptions = { playbackRate, currentTime, duration, paused, volume: volume * 100 };
+        const { playbackRate, currentTime, duration, paused, volume, muted } = this.videoElement;
+        // this.videoElement = { playbackRate, currentTime, duration, paused, volume: volume * 100, muted };
         this.videoElement.ontimeupdate = this.onTimeUpdate;
         this.videoElement.onwaiting = this.onWaiting;
     }
@@ -122,8 +125,8 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
      * 非禁用或当前时间为总时长重新设置进度
      */
     onTimeUpdate = () => {
-        const { playbackRate, currentTime, duration, paused } = this.videoElement;
-        this.mediaOptions = { ...this.mediaOptions, playbackRate, currentTime, duration };
+        const { playbackRate, currentTime, duration, paused, muted } = this.videoElement;
+        // this.videoElement = { ...this.videoElement, playbackRate, currentTime, duration, muted };
         if (currentTime === duration || !paused) {
             this.setProgressValue();
         }
@@ -138,14 +141,21 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     playOrPause() {
         if (this.videoElement.paused) {
-            this.onPlay();
-            this.hostRenderer.addClass('thy-video-playing');
-            this.hostRenderer.removeClass('thy-video-paused');
+            if (this.videoElement?.duration) {
+                this.onPlay();
+                this.hostRenderer.addClass('thy-video-playing');
+                this.hostRenderer.removeClass('thy-video-paused');
+            }
         } else {
             this.onPause();
             this.hostRenderer.addClass('thy-video-paused');
             this.hostRenderer.removeClass('thy-video-playing');
         }
+    }
+
+    muted() {
+        this.videoElement.muted = !this.videoElement.muted;
+        this.videoElement.muted = !this.videoElement.muted;
     }
 
     /**
@@ -169,7 +179,6 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     }
 
     afterVolumeChange(value: number) {
-        this.mediaOptions.volume = value;
         this.videoElement.volume = value / 100;
     }
 
@@ -211,7 +220,6 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
             playPromise
                 .then(() => {
                     this.videoElement.pause();
-                    this.mediaOptions.paused = this.videoElement.paused;
                 })
                 .catch(() => {});
         }
@@ -219,12 +227,10 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     playBackRateChange(rate: number) {
         this.videoElement.playbackRate = rate;
-        this.mediaOptions.playbackRate = rate;
     }
 
     onPlay() {
         this.videoElement.play && this.videoElement.play();
-        this.mediaOptions.paused = this.videoElement.paused;
     }
 
     onLoadedmetadata(event: Event) {

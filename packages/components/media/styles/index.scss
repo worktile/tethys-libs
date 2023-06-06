@@ -37,6 +37,7 @@
 }
 
 .thy-video-player {
+    background-color: basic.$black;
     ::-webkit-media-controls {
         display: none;
     }
