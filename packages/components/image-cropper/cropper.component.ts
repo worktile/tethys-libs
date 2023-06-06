@@ -29,7 +29,7 @@ export class ThyImageCropperComponent implements OnInit {
                 this.imageSrc = value;
             }
         } else {
-            this.loadingDone = true;
+            this.onError();
         }
     }
 
@@ -158,7 +158,7 @@ export class ThyImageCropperComponent implements OnInit {
         this.cropper = new Cropper(image, this.cropperOptions);
     }
 
-    onError(event: Event) {
+    onError(event?: Event) {
         this.loadError = true;
         this.loadingDone = true;
     }
