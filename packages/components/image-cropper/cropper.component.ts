@@ -21,11 +21,15 @@ export class ThyImageCropperComponent implements OnInit {
      * 图片资源
      */
     @Input('thyImage') set imageSource(value: File | string) {
-        if (!isString(value)) {
-            this.imageFile = value;
-            this.setImageSrc();
+        if (value) {
+            if (!isString(value)) {
+                this.imageFile = value;
+                this.setImageSrc();
+            } else {
+                this.imageSrc = value;
+            }
         } else {
-            this.imageSrc = value;
+            this.loadingDone = true;
         }
     }
 
