@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0-next.10](https://github.com/tethys-org/libs/compare/v15.0.0-next.9...v15.0.0-next.10) (2023-06-07)
+
+### Bug Fixes
+
+- **components:** fix cropper upload lagre image error #INFR-5872 ([#68](https://github.com/tethys-org/libs/issues/68)) ([b5720bb](https://github.com/tethys-org/libs/commit/b5720bbc2f4ceeddc45b2a3e5500c1ea851aeb4a)), closes [#INFR-5872](https://github.com/tethys-org/libs/issues/INFR-5872)
+
 # [15.0.0-next.9](https://github.com/tethys-org/libs/compare/v15.0.0-next.8...v15.0.0-next.9) (2023-06-05)
 
 ### Features
