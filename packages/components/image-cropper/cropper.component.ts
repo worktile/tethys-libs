@@ -21,11 +21,15 @@ export class ThyImageCropperComponent implements OnInit {
      * 图片资源
      */
     @Input('thyImage') set imageSource(value: File | string) {
-        if (!isString(value)) {
-            this.imageFile = value;
-            this.setImageSrc();
+        if (value) {
+            if (!isString(value)) {
+                this.imageFile = value;
+                this.setImageSrc();
+            } else {
+                this.imageSrc = value;
+            }
         } else {
-            this.imageSrc = value;
+            this.onError();
         }
     }
 
@@ -154,7 +158,7 @@ export class ThyImageCropperComponent implements OnInit {
         this.cropper = new Cropper(image, this.cropperOptions);
     }
 
-    onError(event: Event) {
+    onError(event?: Event) {
         this.loadError = true;
         this.loadingDone = true;
     }

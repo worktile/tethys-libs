@@ -83,7 +83,8 @@ describe('imageCropperComponent', () => {
         });
 
         it('should get correct viewMode aspectRatio when set thyViewMode or thyAspectRatio', () => {
-            component.imageCropper.onLoad({ target: component.imageCropper.image.nativeElement } as Event);
+            const image = document.createElement('img');
+            component.imageCropper.onLoad({ target: image as any } as Event);
             fixture.detectChanges();
             expect(component.imageCropper.cropperOptions.aspectRatio).toEqual(component.aspectRatio);
             expect(component.imageCropper.cropperOptions.viewMode).toEqual(component.viewMode);
@@ -92,7 +93,7 @@ describe('imageCropperComponent', () => {
             component.aspectRatio = 5;
             fixture.detectChanges();
 
-            component.imageCropper.onLoad({ target: component.imageCropper.image.nativeElement } as Event);
+            component.imageCropper.onLoad({ target: image as any } as Event);
             fixture.detectChanges();
             expect(component.imageCropper.cropperOptions.aspectRatio).toEqual(component.aspectRatio);
             expect(component.imageCropper.cropperOptions.viewMode).toEqual(component.viewMode);
