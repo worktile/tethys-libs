@@ -7,7 +7,7 @@ export const getSeconds = (value: number) => Math.trunc(value % 60);
 
 // Format time to UI friendly string
 export function formatTime(time = 0, displayHours = false, inverted = false): string {
-    if (!isNumber(time)) {
+    if (!isNumber(time) || isNaN(time)) {
         return formatTime(undefined, displayHours, inverted);
     }
 

@@ -5,9 +5,10 @@ import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyAudioPlayerComponent } from './audio-player.component';
+import { ThyMediaControlsComponent } from './controls.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
+import { ThyMediaMutedPathPipe, ThyMediaStatePathPipe, ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
-import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './time.pipe';
 import { ThyVideoPlayerComponent } from './video-player.component';
 @NgModule({
     declarations: [
@@ -15,11 +16,22 @@ import { ThyVideoPlayerComponent } from './video-player.component';
         ThyVideoPlayerComponent,
         ThyAudioPlayerComponent,
         ThyMediaProgressComponent,
+        ThyMediaControlsComponent,
         ThyTimeFormatPipe,
-        ThyVolumeFormatPipe
+        ThyVolumeFormatPipe,
+        ThyMediaStatePathPipe,
+        ThyMediaMutedPathPipe
     ],
     imports: [CommonModule, FormsModule, ThyIconModule, ThyDropdownModule, ThyActionModule],
-    exports: [ThyVideoPlayerComponent, ThyAudioPlayerComponent, ThyTimeFormatPipe, ThyVolumeFormatPipe],
+    exports: [
+        ThyVideoPlayerComponent,
+        ThyAudioPlayerComponent,
+        ThyMediaPlayerBaseComponent,
+        ThyTimeFormatPipe,
+        ThyVolumeFormatPipe,
+        ThyMediaStatePathPipe,
+        ThyMediaMutedPathPipe
+    ],
     providers: []
 })
 export class ThyProMediaModule {}

@@ -1,33 +1,46 @@
-import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ThyMediaControlsComponent } from './controls.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
 @Component({
     selector: 'thy-audio-player',
     template: `
-        <div class="audio-content">
+        <div class="media-content audio-content">
             <audio
                 #audio
                 class="audio"
                 [src]="fileSrc"
                 [muted]="false"
                 [autoplay]="thyAutoPlay"
-                [controls]="true"
                 (loadedmetadata)="onLoadedmetadata($event)"
                 (error)="onError($event)"
                 (canplay)="onCanPlay()"
                 *ngIf="showMedia"
             ></audio>
-            <div class="error-tip" *ngIf="showErrorTip">
-                {{ errorTipText }}
-            </div>
+            <thy-media-controls
+                #controls
+                [thyMediaType]="'audio'"
+                [thyMedia]="audio"
+                [thyTitleTemplate]="showErrorTip ? errorTemplate : titleTemplate"
+                [thyProgressColor]="thyProgressColor"
+                [thyProgressType]="thyProgressType"
+            >
+            </thy-media-controls>
+            <ng-template #errorTemplate>
+                <div class="error-tip">
+                    {{ errorTipText }}
+                </div>
+            </ng-template>
         </div>
     `
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
-    @HostBinding('class.thy-audio-player') audioPlayerClass = true;
+    @HostBinding('class') class = 'thy-audio-player thy-media-player';
 
-    @ViewChild('audio') audio: ElementRef<HTMLAudioElement> | undefined;
+    @ViewChild('audio') audio!: ElementRef<HTMLAudioElement>;
+
+    @ViewChild('controls') controls!: ThyMediaControlsComponent;
 
     /**
      * 媒体资源的url
@@ -40,6 +53,11 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
      * 当下载到足够播放的媒体文件，是否可以自动播放
      */
     @Input() thyAutoPlay: boolean = false;
+
+    /**
+     * 标题模版
+     */
+    @Input('thyTitleTemplate') titleTemplate!: TemplateRef<any>;
 
     public errorTips = {
         formatError: '该音频暂不支持预览，请升级浏览器版本或下载查看',
@@ -56,5 +74,10 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
             this.showErrorTip = true;
         }
         this.thyLoadedMetadata.emit(this.audio?.nativeElement);
+    }
+
+    onCanPlay() {
+        this.showErrorTip = false;
+        this.controls.onCanPlay && this.controls.onCanPlay();
     }
 }

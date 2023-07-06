@@ -5,7 +5,6 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    HostBinding,
     Input,
     NgZone,
     OnInit,
@@ -16,23 +15,26 @@ import { useHostRenderer } from '@tethys/cdk/dom';
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
 import { ThySliderType } from 'ngx-tethys/slider';
 import { clamp } from 'ngx-tethys/util';
-import { distinctUntilChanged, fromEvent, map, Observable, pluck, Subscription, takeUntil, tap } from 'rxjs';
+import { Observable, Subscription, distinctUntilChanged, fromEvent, map, pluck, takeUntil, tap } from 'rxjs';
 
 @Component({
     selector: 'thy-media-progress',
+    host: {
+        class: 'thy-media-progress',
+        '[class.thy-media-progress-vertical]': 'thyDirection === "vertical"',
+        '[class.thy-media-progress-horizontal]': 'thyDirection === "horizontal"'
+    },
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="thy-media-progress-rail" #progressRail>
             <div class="thy-media-progress-track" #progressTrack [ngStyle]="{ 'background-color': thyProgressColor }">
-                <div class="thy-media-progress-pointer" #progressPointer [ngStyle]="{ 'background-color': thyProgressColor }"></div>
+                <div class="thy-media-progress-pointer" #progressPointer [ngStyle]="{ 'background-color': thyProgressPointerColor }"></div>
             </div>
             <div class="thy-media-progress-buffer" #progressBuffer [ngStyle]="{ 'background-color': thyBufferedColor }"></div>
         </div>
     `
 })
 export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) implements OnInit, AfterViewInit {
-    @HostBinding('class') class = 'thy-media-progress';
-
     @ViewChild('progressRail', { static: true }) progressRail: ElementRef | undefined;
 
     @ViewChild('progressTrack', { static: true }) progressTrack: ElementRef | undefined;
@@ -51,7 +53,7 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
      */
     @Input() set thyBufferedValue(value: number) {
         if (this.progressBuffer && value) {
-            (this.progressBuffer as ElementRef).nativeElement.style.width = `${value}%`;
+            (this.progressBuffer as ElementRef).nativeElement.style[this.dimension] = `${value}%`;
         }
     }
 
@@ -59,6 +61,16 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
      * 进度条颜色
      */
     @Input() thyProgressColor: any;
+
+    /**
+     * 进度条点的颜色
+     */
+    @Input() thyProgressPointerColor: any;
+
+    /**
+     * 进度条方向
+     */
+    @Input() thyDirection: 'horizontal' | 'vertical' = 'horizontal';
 
     /**
      * 进度主题类型 primary | success | info | warning | danger
@@ -92,6 +104,10 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
      * 移动结束
      */
     @Output() thyMoveEnd = new EventEmitter<void>();
+
+    get dimension() {
+        return this.thyDirection === 'horizontal' ? 'width' : 'height';
+    }
 
     private dragStartListener: Observable<number> | undefined;
 
@@ -132,7 +148,7 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     private updateTrackAndPointer() {
-        (this.progressTrack as ElementRef).nativeElement.style.width = `${this.progressValue}%`;
+        (this.progressTrack as ElementRef).nativeElement.style[this.dimension] = `${this.progressValue}%`;
         this.cdr.markForCheck();
     }
 
@@ -190,13 +206,14 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     private registerMouseEventsListeners() {
+        const dimension = this.thyDirection === 'vertical' ? 'pageY' : 'pageX';
         this.dragStartListener = this.ngZone.runOutsideAngular(() => {
             return (fromEvent(this.ref.nativeElement, 'mousedown') as Observable<MouseEvent>).pipe(
                 tap((e: MouseEvent) => {
                     e.stopPropagation();
                     e.preventDefault();
                 }),
-                pluck('pageX'),
+                pluck(dimension),
                 map((position: number, index) => this.mousePositionToAdaptiveValue(position)),
                 tap(() => {
                     this.thyMoveStart.emit();
@@ -213,13 +230,14 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
         });
 
         this.dragMoveListener = this.ngZone.runOutsideAngular(() => {
+            const dimension = this.thyDirection === 'vertical' ? 'pageY' : 'pageX';
             return (fromEvent(document, 'mousemove') as Observable<MouseEvent>).pipe(
                 tap((e: MouseEvent) => {
                     e.stopPropagation();
                     e.preventDefault();
                     this.thyMoveStart.emit();
                 }),
-                pluck('pageX'),
+                pluck(dimension),
                 map((position: number) => this.mousePositionToAdaptiveValue(position)),
                 distinctUntilChanged(),
                 tap(() => {
@@ -231,8 +249,9 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     private mousePositionToAdaptiveValue(position: number): number {
+        const dimension = this.thyDirection === 'vertical' ? 'clientHeight' : 'clientWidth';
         const progressStartPosition = this.getProgressPagePosition();
-        const progressLength = (this.progressRail as ElementRef).nativeElement.clientWidth;
+        const progressLength = (this.progressRail as ElementRef).nativeElement[dimension];
         const ratio = this.convertPointerPositionToRatio(position, progressStartPosition, progressLength);
         return parseFloat((ratio * 100).toFixed(2));
     }
@@ -240,12 +259,13 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     private getProgressPagePosition(): number {
         const rect = this.ref.nativeElement.getBoundingClientRect();
         const window = this.ref.nativeElement.ownerDocument.defaultView;
-        const orientFields: string[] = ['left', 'pageXOffset'];
+        const orientFields: string[] = this.thyDirection === 'vertical' ? ['bottom', 'pageYOffset'] : ['left', 'pageXOffset'];
+        // const orientFields: string[] = ['left', 'pageXOffset'];
         return rect[orientFields[0]] + window[orientFields[1]];
     }
 
     private convertPointerPositionToRatio(pointerPosition: number, startPosition: number, totalLength: number) {
-        return clamp((pointerPosition - startPosition) / totalLength, 0, 1);
+        return clamp(Math.abs(pointerPosition - startPosition) / totalLength, 0, 1);
     }
 
     ngOnDestroy(): void {

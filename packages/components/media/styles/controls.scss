@@ -1,0 +1,118 @@
+@use 'ngx-tethys/styles/basic.scss';
+.thy-media-controls {
+    width: 100%;
+    padding: 12px 20px 8px;
+    transition: all 0.3s ease;
+    background-image: linear-gradient(180deg, rgba(51, 51, 51, 0.3) 0%, rgba(51, 51, 51, 0.8) 100%);
+    .controls-main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: basic.$white;
+        .controls-play {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 12px;
+            justify-content: center;
+            img.paused-image {
+                margin-left: 3px;
+            }
+            &.disabled {
+                img {
+                    opacity: 0.2;
+                }
+            }
+        }
+
+        img {
+            width: 14px;
+            height: 14px;
+        }
+        .controls-playback-rate {
+            font-size: 12px;
+        }
+    }
+    &-video {
+        .controls-main {
+            margin-top: 4px;
+        }
+        .thy-action {
+            color: basic.$white;
+            span {
+                color: basic.$white;
+            }
+            &:hover {
+                color: basic.$white;
+                background: rgba($color: basic.$white, $alpha: 0.2);
+            }
+        }
+        .duration-time {
+            color: basic.$gray-400;
+        }
+    }
+    &-audio {
+        height: 72px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        background: basic.$white;
+        border: 1px solid basic.$gray-200;
+        border-radius: 4px;
+        .controls-main {
+            display: flex;
+            color: basic.$gray-600;
+            width: 100%;
+            .controls-play {
+                width: 40px;
+                height: 40px;
+                margin-right: 20px;
+                border: 1px solid basic.$gray-200;
+                img {
+                    width: 12px;
+                    height: 12px;
+                }
+                &:hover {
+                    background-color: basic.$gray-100;
+                }
+            }
+            .controls-playback-rate {
+                margin-right: -8px;
+            }
+            .controls-right {
+                flex: 1;
+                .controls-description {
+                    display: flex;
+                    flex-direction: row-reverse;
+                }
+                .controls-content {
+                    display: flex;
+                    align-items: center;
+                    font-size: 12px;
+                    .current-time,
+                    .duration-time {
+                        width: 32px;
+                    }
+                }
+            }
+            .controls-progress {
+                flex: 1;
+                margin-right: 16px;
+            }
+        }
+    }
+}
+
+.volume-dropdown-panel-class {
+    padding: 8px 0 12px;
+}
+.volume-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    .volume-progress {
+        height: 100px;
+        transform: rotate(-180deg);
+    }
+}

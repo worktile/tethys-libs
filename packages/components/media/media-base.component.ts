@@ -33,15 +33,6 @@ export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) imp
 
     private internalFileSrc: SafeUrl = '';
 
-    mediaOptions = {
-        playbackRate: 1,
-        currentTime: 0,
-        duration: 0,
-        paused: true,
-        muted: true,
-        volume: 0
-    };
-
     /**
      * 缓存值（0-100）
      */
@@ -55,13 +46,17 @@ export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) imp
     /**
      * 进度类型
      */
-    @Input() thyProgressType: ThySliderType | undefined;
+    @Input() thyProgressType: ThySliderType = 'primary';
 
     /**
      * 进度颜色
      */
     @Input() thyProgressColor: undefined;
 
+    /**
+     * 进度条点的颜色
+     */
+    @Input() thyProgressPointerColor: undefined;
     /**
      * 媒体元数据被加载完成后触发 能拿到媒体尺寸、时长等
      */
