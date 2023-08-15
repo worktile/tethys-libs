@@ -49,15 +49,6 @@ export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) imp
     @Input() thyProgressType: ThySliderType = 'primary';
 
     /**
-     * 进度颜色
-     */
-    @Input() thyProgressColor: undefined;
-
-    /**
-     * 进度条点的颜色
-     */
-    @Input() thyProgressPointerColor: undefined;
-    /**
      * 媒体元数据被加载完成后触发 能拿到媒体尺寸、时长等
      */
     @Output() thyLoadedMetadata: EventEmitter<HTMLVideoElement | HTMLAudioElement> = new EventEmitter();

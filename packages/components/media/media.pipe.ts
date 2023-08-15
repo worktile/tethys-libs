@@ -18,27 +18,3 @@ export class ThyVolumeFormatPipe implements PipeTransform {
         return Number(((volume || 0) * 100).toFixed(0));
     }
 }
-
-@Pipe({ name: 'thyMediaStatePath' })
-export class ThyMediaStatePathPipe implements PipeTransform {
-    constructor() {}
-
-    transform(isPlaying: boolean, isAudio: boolean): string {
-        return isPlaying
-            ? isAudio
-                ? '/assets/images/media/paused.svg'
-                : '/assets/images/media/paused-white.svg'
-            : isAudio
-            ? '/assets/images/media/play.svg'
-            : '/assets/images/media/play-white.svg';
-    }
-}
-
-@Pipe({ name: 'thyMediaMutedPath' })
-export class ThyMediaMutedPathPipe implements PipeTransform {
-    constructor() {}
-
-    transform(isMuted: boolean): string {
-        return isMuted ? '/assets/images/media/muted.svg' : '/assets/images/media/volume.svg';
-    }
-}

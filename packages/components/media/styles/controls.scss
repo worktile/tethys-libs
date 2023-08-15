@@ -1,4 +1,6 @@
 @use 'ngx-tethys/styles/basic.scss';
+@use './progress.scss' as progress;
+
 .thy-media-controls {
     width: 100%;
     padding: 12px 20px 8px;
@@ -9,48 +11,51 @@
         align-items: center;
         justify-content: space-between;
         color: basic.$white;
+        margin-top: 4px;
+        .thy-action {
+            color: basic.$white;
+            span {
+                color: basic.$white;
+            }
+            &:hover,
+            &.active {
+                color: basic.$white;
+                background: rgba($color: basic.$white, $alpha: 0.2);
+            }
+        }
         .controls-play {
             width: 32px;
             height: 32px;
             border-radius: 50%;
             margin-right: 12px;
             justify-content: center;
-            img.paused-image {
+            .thy-pro-icon.paused-image {
                 margin-left: 3px;
             }
             &.disabled {
-                img {
+                .thy-pro-icon {
                     opacity: 0.2;
                 }
             }
         }
 
-        img {
+        .thy-pro-icon {
             width: 14px;
             height: 14px;
         }
         .controls-playback-rate {
             font-size: 12px;
         }
-    }
-    &-video {
-        .controls-main {
-            margin-top: 4px;
-        }
-        .thy-action {
-            color: basic.$white;
-            span {
-                color: basic.$white;
-            }
-            &:hover {
-                color: basic.$white;
-                background: rgba($color: basic.$white, $alpha: 0.2);
-            }
-        }
+
         .duration-time {
             color: basic.$gray-400;
         }
     }
+
+    .thy-media-progress .thy-media-progress-rail .thy-media-progress-pointer {
+        background-color: basic.$white;
+    }
+
     &-audio {
         height: 72px;
         padding: 0 20px;
@@ -63,12 +68,27 @@
             display: flex;
             color: basic.$gray-600;
             width: 100%;
+            margin-top: 0;
+            .thy-action {
+                color: basic.$gray-600;
+                span {
+                    color: basic.$gray-600;
+                }
+                &:hover,
+                &.active {
+                    span {
+                        color: basic.$primary;
+                    }
+                    color: basic.$primary;
+                    background: rgba($color: basic.$primary, $alpha: 0.1);
+                }
+            }
             .controls-play {
                 width: 40px;
                 height: 40px;
                 margin-right: 20px;
                 border: 1px solid basic.$gray-200;
-                img {
+                .thy-pro-icon {
                     width: 12px;
                     height: 12px;
                 }
@@ -76,28 +96,40 @@
                     background-color: basic.$gray-100;
                 }
             }
-            .controls-playback-rate {
-                margin-right: -8px;
-            }
-            .controls-right {
-                flex: 1;
-                .controls-description {
-                    display: flex;
-                    flex-direction: row-reverse;
-                }
-                .controls-content {
-                    display: flex;
-                    align-items: center;
-                    font-size: 12px;
-                    .current-time,
-                    .duration-time {
-                        width: 32px;
-                    }
-                }
-            }
-            .controls-progress {
+            .controls-content {
                 flex: 1;
                 margin-right: 16px;
+                font-size: 0.75rem;
+                color: basic.$gray-600;
+                .file-description,
+                .error-tip {
+                    height: 28px;
+                    line-height: 28px;
+                }
+                .file-description {
+                    .file-name {
+                        font-size: 0.875rem;
+                        color: basic.$black;
+                    }
+                    .file-size {
+                        margin-left: 8px;
+                    }
+                }
+
+                .controls-progress {
+                    flex: 1;
+                }
+
+                @include progress.progress-type-styles();
+            }
+            .controls-right {
+                .controls-playback-rate {
+                    margin-right: -8px;
+                }
+                .duration-time {
+                    font-size: 0.75rem;
+                    color: basic.$gray-600;
+                }
             }
         }
     }

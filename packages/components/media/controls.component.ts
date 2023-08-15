@@ -5,109 +5,93 @@ import { ThySliderType } from 'ngx-tethys/slider';
 import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
 
 @Component({
-    selector: 'thy-media-controls',
+    selector: 'thy-video-controls',
     host: {
-        class: 'thy-media-controls',
-        '[class.thy-media-controls-video]': 'thyMediaType === "video"',
-        '[class.thy-media-controls-audio]': 'thyMediaType === "audio"'
+        class: 'thy-media-controls'
     },
     template: `
-        <ng-container *ngIf="thyMediaType === 'audio'">
-            <div class="controls-main">
-                <ng-template [ngTemplateOutlet]="play"></ng-template>
-                <div class="controls-right">
-                    <div class="controls-description">
-                        <ng-template [ngTemplateOutlet]="playbackRate"></ng-template>
-                        <ng-template *ngIf="titleTemplate" [ngTemplateOutlet]="titleTemplate"></ng-template>
-                    </div>
-                    <div class="controls-content">
-                        <span class="current-time mr-4">
-                            {{ mediaHtmlElement?.currentTime | thyTimeFormat }}
-                        </span>
-                        <ng-template [ngTemplateOutlet]="progress" *ngIf="thyMediaType === 'audio'"></ng-template>
-                        <span class="duration-time">
-                            {{ mediaHtmlElement?.duration | thyTimeFormat }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-        <ng-container *ngIf="thyMediaType === 'video'">
-            <ng-template [ngTemplateOutlet]="progress"></ng-template>
-            <div class="controls-main">
-                <div class="d-flex align-items-center controls-left">
-                    <ng-template [ngTemplateOutlet]="play"></ng-template>
-
-                    <div class="controls-time">
-                        {{ mediaHtmlElement?.currentTime | thyTimeFormat }} /
-                        <span class="duration-time">{{ mediaHtmlElement?.duration | thyTimeFormat }}</span>
-                    </div>
-                </div>
-                <div class="d-flex controls-right">
-                    <a
-                        class="mr-2 controls-muted"
-                        thyAction
-                        href="javascript:;"
-                        (click)="muted()"
-                        [thyDropdown]="volume"
-                        [thyPanelClass]="'volume-dropdown-panel-class'"
-                        [thyPopoverOptions]="popoverOptions"
-                    >
-                        <img [src]="mediaHtmlElement?.muted | thyMediaMutedPath" />
-                    </a>
-
-                    <thy-dropdown-menu #volume>
-                        <div class="volume-progress-container">
-                            <span class="mb-2">{{ mediaHtmlElement?.volume | thyVolumeFormat }}%</span>
-
-                            <thy-media-progress
-                                class="volume-progress"
-                                [thyDirection]="'vertical'"
-                                [thyProgressType]="progressType"
-                                [thyProgressValue]="mediaHtmlElement?.volume | thyVolumeFormat"
-                                (thyAfterChange)="afterVolumeChange($event)"
-                            ></thy-media-progress>
-                        </div>
-                    </thy-dropdown-menu>
-
-                    <ng-template [ngTemplateOutlet]="playbackRate"></ng-template>
-                </div>
-            </div>
-        </ng-container>
-        <ng-template #play>
-            <a class="controls-play thy-action" [class.disabled]="!mediaHtmlElement?.duration" href="javascript:;" (click)="playOrPause()">
-                <img [class.paused-image]="!isPlaying" [src]="isPlaying | thyMediaStatePath : thyMediaType === 'audio'" />
-            </a>
-        </ng-template>
-        <ng-template #progress>
-            <thy-media-progress
-                class="controls-progress"
-                [thyProgressValue]="progressValue"
-                [thyBufferedValue]="bufferedValue"
-                [thyProgressColor]="progressColor"
-                [thyProgressPointerColor]="progressPointerColor ? progressPointerColor : thyMediaType === 'video' ? '#fff' : null"
-                [thyProgressType]="progressType"
-                (thyMoveStart)="onMouseStart()"
-                (thyMoveEnd)="onMouseEnd()"
-                (thyAfterChange)="afterProgressChange($event)"
-            ></thy-media-progress>
-        </ng-template>
-
-        <ng-template #playbackRate>
-            <a thyAction [thyDropdown]="menu" class="controls-playback-rate" href="javascript:;">倍速</a>
-
-            <thy-dropdown-menu #menu>
+        <thy-media-progress
+            class="controls-progress"
+            [thyProgressValue]="progressValue"
+            [thyBufferedValue]="bufferedValue"
+            [thyProgressType]="progressType"
+            (thyMoveStart)="onMouseStart()"
+            (thyMoveEnd)="onMouseEnd()"
+            (thyAfterChange)="afterProgressChange($event)"
+        ></thy-media-progress>
+        <div class="controls-main">
+            <div class="d-flex align-items-center controls-left">
                 <a
-                    [class.active]="mediaHtmlElement?.playbackRate === item"
-                    *ngFor="let item of playBackRates"
-                    thyDropdownMenuItem
+                    class="controls-play thy-action"
+                    [class.disabled]="!mediaHtmlElement?.duration"
                     href="javascript:;"
-                    (click)="playBackRateChange(item)"
+                    (click)="playOrPause()"
                 >
-                    <span>{{ item }}X</span>
+                    <thy-pro-icon
+                        [class.paused-image]="!isPlaying"
+                        [thyIconName]="isPlaying ? 'paused-white' : 'play-white'"
+                    ></thy-pro-icon>
                 </a>
-            </thy-dropdown-menu>
-        </ng-template>
+
+                <div class="controls-time">
+                    {{ mediaHtmlElement?.currentTime | thyTimeFormat }} /
+                    <span class="duration-time">{{ mediaHtmlElement?.duration | thyTimeFormat }}</span>
+                </div>
+            </div>
+            <div class="d-flex controls-right">
+                <a
+                    class="mr-2 controls-muted"
+                    thyAction
+                    href="javascript:;"
+                    (click)="muted()"
+                    thyDropdownActive="active"
+                    [thyDropdown]="volume"
+                    [thyPopoverOptions]="popoverOptions"
+                    (thyActiveChange)="actionActiveChange($event)"
+                >
+                    <thy-pro-icon
+                        [class.paused-image]="!isPlaying"
+                        [thyIconName]="mediaHtmlElement?.muted ? 'muted' : 'volume'"
+                    ></thy-pro-icon>
+                </a>
+
+                <a
+                    thyAction
+                    [thyDropdown]="menu"
+                    thyDropdownActive="active"
+                    (thyActiveChange)="actionActiveChange($event)"
+                    class="controls-playback-rate"
+                    href="javascript:;"
+                    >倍速</a
+                >
+            </div>
+        </div>
+
+        <thy-dropdown-menu #volume>
+            <div class="volume-progress-container">
+                <span class="mb-2">{{ mediaHtmlElement?.volume | thyVolumeFormat }}%</span>
+
+                <thy-media-progress
+                    class="volume-progress"
+                    [thyDirection]="'vertical'"
+                    [thyProgressType]="progressType"
+                    [thyProgressValue]="mediaHtmlElement?.volume | thyVolumeFormat"
+                    (thyAfterChange)="afterVolumeChange($event)"
+                ></thy-media-progress>
+            </div>
+        </thy-dropdown-menu>
+
+        <thy-dropdown-menu #menu>
+            <a
+                [class.active]="mediaHtmlElement?.playbackRate === item"
+                *ngFor="let item of playBackRates"
+                thyDropdownMenuItem
+                href="javascript:;"
+                (click)="playBackRateChange(item)"
+            >
+                <span>{{ item }}X</span>
+            </a>
+        </thy-dropdown-menu>
     `
 })
 export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) implements OnInit, AfterViewInit {
@@ -115,21 +99,6 @@ export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) imple
      * 进度主题类型 primary | success | info | warning | danger
      */
     @Input('thyProgressType') progressType!: ThySliderType;
-
-    /**
-     * 进度条颜色
-     */
-    @Input('thyProgressColor') progressColor: any;
-
-    /**
-     * 进度条点的颜色
-     */
-    @Input('thyProgressPointerColor') progressPointerColor: any;
-
-    /**
-     * 进度条类型 'video' | 'audio'
-     */
-    @Input() thyMediaType: 'video' | 'audio' = 'video';
 
     /**
      * 媒体组件
@@ -176,6 +145,18 @@ export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     ngAfterViewInit() {}
+
+    actionActiveChange(active: boolean) {
+        if (active) {
+            this.hostRenderer.addClass('thy-media-controls-paused');
+            this.hostRenderer.removeClass('thy-media-controls-playing');
+        } else {
+            if (!this.mediaHtmlElement?.paused) {
+                this.hostRenderer.addClass('thy-media-controls-playing');
+                this.hostRenderer.removeClass('thy-media-controls-paused');
+            }
+        }
+    }
 
     onCanPlay() {
         this.mediaHtmlElement.ontimeupdate = this.onTimeUpdate;
@@ -246,10 +227,12 @@ export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     onPlay() {
-        this.mediaHtmlElement.play && this.mediaHtmlElement.play();
-        this.hostRenderer.removeClass('thy-media-controls-paused');
-        this.tempVolume = this.mediaHtmlElement.volume;
-        this.cdr.markForCheck();
+        if (this.mediaHtmlElement?.duration) {
+            this.mediaHtmlElement.play && this.mediaHtmlElement.play();
+            this.hostRenderer.removeClass('thy-media-controls-paused');
+            this.tempVolume = this.mediaHtmlElement.volume;
+            this.cdr.markForCheck();
+        }
     }
 
     /**

@@ -1,4 +1,7 @@
 @use 'ngx-tethys/styles/basic.scss';
+
+$progress-pointer-color: basic.$primary !default;
+
 @mixin progress-type($color) {
     .thy-media-progress-rail {
         background-color: basic.$gray-200;
@@ -11,6 +14,24 @@
         .thy-media-progress-buffer {
             background-color: rgba($color: $color, $alpha: 0.4);
         }
+    }
+}
+
+@mixin progress-type-styles() {
+    .thy-media-progress-primary {
+        @include progress-type(basic.$primary);
+    }
+    .thy-media-progress-success {
+        @include progress-type(basic.$success);
+    }
+    .thy-media-progress-info {
+        @include progress-type(basic.$info);
+    }
+    .thy-media-progress-warning {
+        @include progress-type(basic.$warning);
+    }
+    .thy-media-progress-danger {
+        @include progress-type(basic.$danger);
     }
 }
 
@@ -49,28 +70,13 @@
         border-radius: 50%;
         background-color: basic.$white;
         transition: all 0.3s ease-in-out;
+        background-color: $progress-pointer-color;
     }
 
     &:hover {
         .thy-media-progress-pointer {
             transform: scale(1);
         }
-    }
-
-    &.thy-media-progress-primary {
-        @include progress-type(basic.$primary);
-    }
-    &.thy-media-progress-success {
-        @include progress-type(basic.$success);
-    }
-    &.thy-media-progress-info {
-        @include progress-type(basic.$info);
-    }
-    &.thy-media-progress-warning {
-        @include progress-type(basic.$warning);
-    }
-    &.thy-media-progress-danger {
-        @include progress-type(basic.$danger);
     }
 }
 .thy-media-progress-vertical {
@@ -91,3 +97,4 @@
         top: unset;
     }
 }
+@include progress-type-styles();

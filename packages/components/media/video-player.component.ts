@@ -8,7 +8,7 @@ import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-bas
     selector: 'thy-video-player',
     template: `
         <video
-            #video
+            #videoElement
             class="media-content"
             [src]="fileSrc"
             [muted]="true"
@@ -21,18 +21,13 @@ import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-bas
         <div class="error-tip" *ngIf="showErrorTip">
             {{ errorTipText }}
         </div>
-        <thy-media-controls
-            #controls
-            [thyMedia]="video"
-            [thyProgressColor]="thyProgressColor"
-            [thyProgressType]="thyProgressType"
-        ></thy-media-controls>
+        <thy-video-controls #controls [thyMedia]="video" [thyProgressType]="thyProgressType"></thy-video-controls>
     `
 })
 export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     @HostBinding('class') class = 'thy-video-player thy-media-player';
 
-    @ViewChild('video') video!: ElementRef;
+    @ViewChild('videoElement') videoElement!: ElementRef;
 
     @ViewChild('controls') controls!: ThyMediaControlsComponent;
 
@@ -57,13 +52,19 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     private hostRenderer = useHostRenderer();
 
-    constructor(public sanitizer: DomSanitizer, private ref: ElementRef) {
+    public video!: ElementRef;
+
+    constructor(public sanitizer: DomSanitizer) {
         super(sanitizer);
     }
 
     ngOnInit(): void {}
 
-    ngAfterViewInit() {}
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.video = this.videoElement;
+        }, 0);
+    }
 
     onCanPlay() {
         this.showErrorTip = false;

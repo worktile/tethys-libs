@@ -27,10 +27,10 @@ import { Observable, Subscription, distinctUntilChanged, fromEvent, map, pluck, 
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <div class="thy-media-progress-rail" #progressRail>
-            <div class="thy-media-progress-track" #progressTrack [ngStyle]="{ 'background-color': thyProgressColor }">
-                <div class="thy-media-progress-pointer" #progressPointer [ngStyle]="{ 'background-color': thyProgressPointerColor }"></div>
+            <div class="thy-media-progress-track" #progressTrack>
+                <div class="thy-media-progress-pointer" #progressPointer></div>
             </div>
-            <div class="thy-media-progress-buffer" #progressBuffer [ngStyle]="{ 'background-color': thyBufferedColor }"></div>
+            <div class="thy-media-progress-buffer" #progressBuffer></div>
         </div>
     `
 })
@@ -58,16 +58,6 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     /**
-     * 进度条颜色
-     */
-    @Input() thyProgressColor: any;
-
-    /**
-     * 进度条点的颜色
-     */
-    @Input() thyProgressPointerColor: any;
-
-    /**
      * 进度条方向
      */
     @Input() thyDirection: 'horizontal' | 'vertical' = 'horizontal';
@@ -84,11 +74,6 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
             this.typeClassName = `thy-media-progress-${type}`;
         }
     }
-
-    /**
-     * 通过变量设置进度颜色
-     */
-    @Input() thyBufferedColor: any;
 
     /**
      * 移动结束后回调
