@@ -15,7 +15,9 @@ import { ThyCropperViewMode } from '../cropper.entity';
         [thyAspectRatio]="aspectRatio"
         (thyCropDataChanged)="cropDataChange()"
         style="width: 500px; height: 300px"
-    ></thy-image-cropper>`
+    ></thy-image-cropper>`,
+    standalone: true,
+    imports: [ThyImageCropperModule]
 })
 export class ThyImageCropperTestBasicComponent {
     @ViewChild(ThyImageCropperComponent, { static: true }) public imageCropper!: ThyImageCropperComponent;
@@ -38,8 +40,7 @@ describe('imageCropperComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ThyImageCropperTestBasicComponent],
-            imports: [ThyImageCropperModule]
+            imports: [ThyImageCropperModule, ThyImageCropperTestBasicComponent]
         }).compileComponents();
     }));
 

@@ -5,8 +5,7 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
 import { ThyVideoPlayerComponent } from './video-player.component';
 
 @NgModule({
-    declarations: [ThyMediaPlayerBaseComponent, ThyVideoPlayerComponent, ThyAudioPlayerComponent],
-    imports: [CommonModule],
+    imports: [CommonModule, ThyMediaPlayerBaseComponent, ThyVideoPlayerComponent, ThyAudioPlayerComponent],
     exports: [ThyVideoPlayerComponent, ThyAudioPlayerComponent],
     providers: []
 })

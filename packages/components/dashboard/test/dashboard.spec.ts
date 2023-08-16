@@ -15,7 +15,9 @@ import { ThyDashboardBasicLinksWidgetComponent } from '../examples/basic/widgets
             (thyWidgetsChange)="widgetsChange($event)"
         >
         </thy-dashboard>
-    `
+    `,
+    standalone: true,
+    imports: [ThyProDashboardModule]
 })
 export class ThyDashboardBasicTestComponent {
     widgets: ThyWidgetItem[] = [
@@ -67,8 +69,7 @@ describe('thy-dashboard', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [ThyDashboardBasicTestComponent],
-            imports: [ThyProDashboardModule],
+            imports: [ThyProDashboardModule, ThyDashboardBasicTestComponent],
             providers: []
         }).compileComponents();
     });

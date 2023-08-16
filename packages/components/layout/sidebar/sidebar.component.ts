@@ -3,7 +3,11 @@ import { InputBoolean } from 'ngx-tethys/core';
 import { Route, ThyGlobalStore } from '@tethys/pro/core';
 import { menusMap } from '../utils';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
-import { ThyPopoverConfig, ThyPopoverDirective } from 'ngx-tethys/popover';
+import { ThyPopoverConfig, ThyPopoverDirective, ThyPopoverModule } from 'ngx-tethys/popover';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { ThyMenuModule } from 'ngx-tethys/menu';
+import { NgClass, NgIf, NgTemplateOutlet, NgFor } from '@angular/common';
+import { ThyLayoutModule } from 'ngx-tethys/layout';
 
 @Component({
     selector: 'thy-pro-sidebar',
@@ -11,7 +15,9 @@ import { ThyPopoverConfig, ThyPopoverDirective } from 'ngx-tethys/popover';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'thy-layout thy-pro-sidebar'
-    }
+    },
+    standalone: true,
+    imports: [ThyLayoutModule, NgClass, NgIf, NgTemplateOutlet, ThyMenuModule, NgFor, ThyPopoverModule, RouterLinkActive, RouterLink]
 })
 export class ThyProSidebarComponent implements OnInit {
     @Input() menus!: ThyProLayoutMenus;

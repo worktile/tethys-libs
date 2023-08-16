@@ -13,7 +13,9 @@ import { ThyCropperViewMode } from '../cropper.entity';
         [thyAspectRatio]="aspectRatio"
         [thyUploadTips]="uploadTips"
         [thyConfirmAction]="confirmAction()"
-    ></thy-image-cropper-dialog>`
+    ></thy-image-cropper-dialog>`,
+    standalone: true,
+    imports: [ThyImageCropperModule]
 })
 export class ThyImageCropperDialogTestBasicComponent {
     @ViewChild(ThyImageCropperDialogComponent, { static: true }) public dialog!: ThyImageCropperDialogComponent;
@@ -41,8 +43,7 @@ describe('imageCropperComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ThyImageCropperDialogTestBasicComponent],
-            imports: [ThyImageCropperModule]
+            imports: [ThyImageCropperModule, ThyImageCropperDialogTestBasicComponent]
         }).compileComponents();
     }));
 

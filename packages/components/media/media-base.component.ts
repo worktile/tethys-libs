@@ -5,7 +5,10 @@ import { isString } from '@tethys/cdk';
 /**
  * @internal
  */
-@Directive({ selector: '[thyMediaPlayerBase]' })
+@Directive({
+    selector: '[thyMediaPlayerBase]',
+    standalone: true
+})
 export class ThyMediaPlayerBaseComponent implements OnInit {
     public errorTips!: { formatError: string; networkError: string };
 

@@ -13,8 +13,15 @@ import { ThyDashboardComponent } from './dashboard.component';
 const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySharedModule];
 
 @NgModule({
-    declarations: [ThyDashboardComponent, ThyDashboardWidgetHeaderComponent, ThyDashboardWidgetBodyComponent],
-    imports: [...TETHYS_MODULES, RouterModule, CommonModule, GridsterModule],
+    imports: [
+        ...TETHYS_MODULES,
+        RouterModule,
+        CommonModule,
+        GridsterModule,
+        ThyDashboardComponent,
+        ThyDashboardWidgetHeaderComponent,
+        ThyDashboardWidgetBodyComponent
+    ],
     exports: [ThyDashboardComponent, ThyDashboardWidgetHeaderComponent, ThyDashboardWidgetBodyComponent],
     providers: []
 })

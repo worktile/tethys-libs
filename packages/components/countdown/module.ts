@@ -5,8 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ThyCountdownComponent } from './countdown.component';
 
 @NgModule({
-    declarations: [ThyCountdownComponent],
-    imports: [ThyButtonModule, RouterModule, CommonModule],
+    imports: [ThyButtonModule, RouterModule, CommonModule, ThyCountdownComponent],
     exports: [ThyCountdownComponent],
     providers: []
 })

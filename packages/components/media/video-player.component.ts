@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'thy-video-player',
@@ -20,7 +21,9 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
         <div class="error-tip" *ngIf="showErrorTip">
             {{ errorTipText }}
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf]
 })
 export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
     @HostBinding('class') class = 'thy-video-player thy-media-player';

@@ -1,6 +1,8 @@
 import { Component, HostBinding, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { interval, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { ThyButtonModule } from 'ngx-tethys/button';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'thy-countdown',
@@ -8,7 +10,9 @@ import { catchError, map, take } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'thy-countdown'
-    }
+    },
+    standalone: true,
+    imports: [NgIf, ThyButtonModule]
 })
 export class ThyCountdownComponent implements OnInit, OnDestroy {
     @Input() text = '获取短信验证码';
