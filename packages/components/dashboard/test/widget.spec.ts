@@ -5,7 +5,9 @@ import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'thy-widget-header-basic-test',
-    template: ` <thy-dashboard-widget-header [thyTitle]="title" [thyDescription]="description"> </thy-dashboard-widget-header> `
+    template: ` <thy-dashboard-widget-header [thyTitle]="title" [thyDescription]="description"> </thy-dashboard-widget-header> `,
+    standalone: true,
+    imports: [ThyProDashboardModule]
 })
 export class ThyWidgetHeaderBasicTestComponent {
     title = '链接';
@@ -19,8 +21,7 @@ describe('thy-widget-header', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [ThyWidgetHeaderBasicTestComponent],
-            imports: [ThyProDashboardModule],
+            imports: [ThyProDashboardModule, ThyWidgetHeaderBasicTestComponent],
             providers: []
         }).compileComponents();
     });

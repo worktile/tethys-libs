@@ -1,12 +1,18 @@
 import { Component, EventEmitter, inject, Input, NgZone, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { InputNumber } from 'ngx-tethys/core';
-import { ThyDialog, ThyDialogContainerComponent } from 'ngx-tethys/dialog';
+import { ThyDialog, ThyDialogContainerComponent, ThyDialogModule } from 'ngx-tethys/dialog';
 import { ThyNotifyService } from 'ngx-tethys/notify';
-import { ThySliderType } from 'ngx-tethys/slider';
+import { ThySliderType, ThySliderModule } from 'ngx-tethys/slider';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { ThyImageCropperComponent } from './cropper.component';
 import { ThyCropperImageSize, ThyCropperShape, ThyCropperViewMode } from './cropper.entity';
+import { ThyCropperSizeTextPipe, ThyCropperSizeStylePipe } from './cropper.pipe';
+import { NgIf, NgFor, NgStyle } from '@angular/common';
+import { ThyIconComponent } from 'ngx-tethys/icon';
+import { ThyUploadModule } from 'ngx-tethys/upload';
+import { ThyButtonModule } from 'ngx-tethys/button';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'thy-image-cropper-dialog',
@@ -14,7 +20,22 @@ import { ThyCropperImageSize, ThyCropperShape, ThyCropperViewMode } from './crop
     host: {
         class: 'thy-dialog-content thy-image-cropper-dialog',
         '[class.thy-image-cropper-dialog-round]': 'shape === "round"'
-    }
+    },
+    standalone: true,
+    imports: [
+        ThyDialogModule,
+        ThyImageCropperComponent,
+        ThySliderModule,
+        FormsModule,
+        ThyButtonModule,
+        ThyUploadModule,
+        ThyIconComponent,
+        NgIf,
+        NgFor,
+        NgStyle,
+        ThyCropperSizeTextPipe,
+        ThyCropperSizeStylePipe
+    ]
 })
 export class ThyImageCropperDialogComponent implements OnInit {
     /**

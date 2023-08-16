@@ -5,7 +5,9 @@ import { ThyAudioPlayerComponent, ThyProMediaModule, ThyVideoPlayerComponent } f
 
 @Component({
     selector: 'thy-test-video-basic',
-    template: ` <thy-video-player [thySrc]="src"></thy-video-player> `
+    template: ` <thy-video-player [thySrc]="src"></thy-video-player> `,
+    standalone: true,
+    imports: [ThyProMediaModule]
 })
 export class ThyVideoTestBasicComponent {
     @ViewChild(ThyVideoPlayerComponent) videoPlayer: ThyVideoPlayerComponent | undefined;
@@ -14,7 +16,9 @@ export class ThyVideoTestBasicComponent {
 
 @Component({
     selector: 'thy-test-audio-basic',
-    template: ` <thy-audio-player [thySrc]="src"></thy-audio-player> `
+    template: ` <thy-audio-player [thySrc]="src"></thy-audio-player> `,
+    standalone: true,
+    imports: [ThyProMediaModule]
 })
 export class ThyAudioTestBasicComponent {
     @ViewChild(ThyAudioPlayerComponent) audioPlayer: ThyAudioPlayerComponent | undefined;
@@ -31,8 +35,7 @@ describe('mediaViewerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ThyVideoTestBasicComponent, ThyAudioTestBasicComponent],
-            imports: [ThyProMediaModule]
+            imports: [ThyProMediaModule, ThyVideoTestBasicComponent, ThyAudioTestBasicComponent]
         }).compileComponents();
     }));
 

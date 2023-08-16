@@ -3,7 +3,8 @@ import { isString } from '@tethys/cdk/is';
 import { ThyCropperImageSize } from './cropper.entity';
 
 @Pipe({
-    name: 'thyCropperSizeText'
+    name: 'thyCropperSizeText',
+    standalone: true
 })
 export class ThyCropperSizeTextPipe implements PipeTransform {
     transform(size: ThyCropperImageSize, previewSizes?: ThyCropperImageSize[]): string {
@@ -19,7 +20,8 @@ export class ThyCropperSizeTextPipe implements PipeTransform {
 }
 
 @Pipe({
-    name: 'thyCropperSizeStyle'
+    name: 'thyCropperSizeStyle',
+    standalone: true
 })
 export class ThyCropperSizeStylePipe implements PipeTransform {
     transform(size: ThyCropperImageSize) {

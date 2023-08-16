@@ -1,15 +1,27 @@
 import { EventEmitter, OnChanges, Output, SimpleChanges, NgZone, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { CompactType, DisplayGrid, GridsterConfig, GridsterItem, GridType } from 'angular-gridster2';
+import {
+    CompactType,
+    DisplayGrid,
+    GridsterConfig,
+    GridsterItem,
+    GridType,
+    GridsterComponent,
+    GridsterItemComponent
+} from 'angular-gridster2';
 import { ThyWidgetItem, WidgetGridsterItem, ThyWidgetVieOutletWithContext, ThyWidgetViewOutlet } from './dashboard.class';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
+import { ThyViewOutletDirective } from 'ngx-tethys/shared';
+import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'thy-dashboard',
     templateUrl: './dashboard.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'thy-dashboard' }
+    host: { class: 'thy-dashboard' },
+    standalone: true,
+    imports: [GridsterComponent, NgFor, GridsterItemComponent, ThyViewOutletDirective]
 })
 export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     /**

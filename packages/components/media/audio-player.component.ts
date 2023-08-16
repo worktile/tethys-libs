@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'thy-audio-player',
@@ -22,7 +23,9 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
                 {{ errorTipText }}
             </div>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf]
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
     @HostBinding('class.thy-audio-player') audioPlayerClass = true;
