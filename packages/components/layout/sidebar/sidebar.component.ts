@@ -8,6 +8,7 @@ import { RouterLinkActive, RouterLink } from '@angular/router';
 import { ThyMenuModule } from 'ngx-tethys/menu';
 import { NgClass, NgIf, NgTemplateOutlet, NgFor } from '@angular/common';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
+import { SafeAny } from 'ngx-tethys/types';
 
 @Component({
     selector: 'thy-pro-sidebar',
@@ -33,11 +34,11 @@ export class ThyProSidebarComponent implements OnInit {
         }
     }
 
-    @Input() public headerTemplate!: TemplateRef<HTMLElement>;
+    @Input() public headerTemplate!: TemplateRef<SafeAny>;
 
-    @Input() public menuTemplate!: TemplateRef<HTMLElement>;
+    @Input() public menuTemplate!: TemplateRef<SafeAny>;
 
-    @Input() public footerTemplate!: TemplateRef<HTMLElement>;
+    @Input() public footerTemplate!: TemplateRef<SafeAny>;
 
     public currentRootMenuGroup!: ThyProLayoutMenu;
 
