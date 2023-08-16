@@ -25,7 +25,6 @@ const TETHYS_MODULES = [
 ];
 @NgModule({
     declarations: [],
-    entryComponents: [],
     providers: [...DOCGENI_SITE_PROVIDERS],
     imports: [
         ThyProLayoutModule,
