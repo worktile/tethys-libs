@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0-next.0](https://github.com/tethys-org/libs/compare/v15.0.0-next.10...v16.0.0-next.0) (2023-08-16)
+
+**Note:** Version bump only for package @tethys/cache
+
 # [15.0.0-next.10](https://github.com/tethys-org/libs/compare/v15.0.0-next.9...v15.0.0-next.10) (2023-06-07)
 
 **Note:** Version bump only for package @tethys/cache

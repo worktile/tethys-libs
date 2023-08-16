@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0-next.0](https://github.com/tethys-org/libs/compare/v15.0.0-next.10...v16.0.0-next.0) (2023-08-16)
+
+### Features
+
+- upgrade angular 16 #INFR-9212 ([#70](https://github.com/tethys-org/libs/issues/70)) ([e075bf7](https://github.com/tethys-org/libs/commit/e075bf72cfc41caedc4736b39f99147fc6da89a9)), closes [#INFR-9212](https://github.com/tethys-org/libs/issues/INFR-9212)
+
 # [15.0.0-next.10](https://github.com/tethys-org/libs/compare/v15.0.0-next.9...v15.0.0-next.10) (2023-06-07)
 
 ### Bug Fixes
