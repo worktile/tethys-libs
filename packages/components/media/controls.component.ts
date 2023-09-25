@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
 import { ThySliderType } from 'ngx-tethys/slider';
@@ -46,7 +46,6 @@ import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
                     (click)="muted()"
                     thyDropdownActive="active"
                     [thyDropdown]="volume"
-                    [thyPopoverOptions]="popoverOptions"
                     (thyActiveChange)="actionActiveChange($event)"
                 >
                     <thy-pro-icon
@@ -57,7 +56,7 @@ import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
 
                 <a
                     thyAction
-                    [thyDropdown]="menu"
+                    [thyDropdown]="playbackRate"
                     thyDropdownActive="active"
                     (thyActiveChange)="actionActiveChange($event)"
                     class="controls-playback-rate"
@@ -81,7 +80,7 @@ import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
             </div>
         </thy-dropdown-menu>
 
-        <thy-dropdown-menu #menu>
+        <thy-dropdown-menu #playbackRate>
             <a
                 [class.active]="mediaHtmlElement?.playbackRate === item"
                 *ngFor="let item of playBackRates"
@@ -94,7 +93,7 @@ import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
         </thy-dropdown-menu>
     `
 })
-export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) implements OnInit, AfterViewInit {
+export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
     /**
      * 进度主题类型 primary | success | info | warning | danger
      */
@@ -104,11 +103,6 @@ export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) imple
      * 媒体组件
      */
     @Input('thyMedia') media!: ElementRef;
-
-    /**
-     * 标题模版
-     */
-    @Input('thyTitleTemplate') titleTemplate!: TemplateRef<any>;
 
     public get isPlaying(): boolean {
         return !!this.mediaHtmlElement?.duration && !this.mediaHtmlElement?.paused;
@@ -143,8 +137,6 @@ export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) imple
     ngOnInit(): void {
         this.hostRenderer.addClass('thy-media-controls-paused');
     }
-
-    ngAfterViewInit() {}
 
     actionActiveChange(active: boolean) {
         if (active) {
@@ -213,11 +205,9 @@ export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) imple
     playOrPause() {
         if (this.mediaHtmlElement?.duration) {
             if (this.mediaHtmlElement.paused) {
-                if (this.mediaHtmlElement?.duration) {
-                    this.onPlay();
-                    this.hostRenderer.addClass('thy-media-controls-playing');
-                    this.hostRenderer.removeClass('thy-media-controls-paused');
-                }
+                this.onPlay();
+                this.hostRenderer.addClass('thy-media-controls-playing');
+                this.hostRenderer.removeClass('thy-media-controls-paused');
             } else {
                 this.onPause();
                 this.hostRenderer.addClass('thy-media-controls-paused');
@@ -274,6 +264,7 @@ export class ThyMediaControlsComponent extends mixinUnsubscribe(MixinBase) imple
     afterProgressChange(value: number) {
         const { duration, buffered } = this.mediaHtmlElement;
 
+        console.log(duration, buffered);
         const currentTime = (value / 100) * duration;
         // 防止 duration 值为NaN
         if (isFinite(currentTime)) {

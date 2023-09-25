@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start:docs": "docgeni serve",
+    "start:docs": "docgeni serve --port 4800",
     "watch": "ng build --watch --configuration development",
     "install": "lerna bootstrap",
     "change": "lerna changed",

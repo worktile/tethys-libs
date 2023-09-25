@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { useHostRenderer } from '@tethys/cdk/dom';
-import { ThyMediaControlsComponent } from './controls.component';
+import { ThyVideoControlsComponent } from './controls.component';
 import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-base.component';
 
 @Component({
@@ -29,7 +29,7 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     @ViewChild('videoElement') videoElement!: ElementRef;
 
-    @ViewChild('controls') controls!: ThyMediaControlsComponent;
+    @ViewChild('controls') controls!: ThyVideoControlsComponent;
 
     /**
      * 媒体资源的url
@@ -54,16 +54,15 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     public video!: ElementRef;
 
-    constructor(public sanitizer: DomSanitizer) {
+    constructor(public sanitizer: DomSanitizer, public cdr: ChangeDetectorRef) {
         super(sanitizer);
     }
 
     ngOnInit(): void {}
 
     ngAfterViewInit() {
-        setTimeout(() => {
-            this.video = this.videoElement;
-        }, 0);
+        this.video = this.videoElement;
+        this.cdr.detectChanges();
     }
 
     onCanPlay() {

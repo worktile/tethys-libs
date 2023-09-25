@@ -53,7 +53,8 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
      */
     @Input() set thyBufferedValue(value: number) {
         if (this.progressBuffer && value) {
-            (this.progressBuffer as ElementRef).nativeElement.style[this.dimension] = `${value}%`;
+            const validValue = value <= 0 ? 0 : value >= 100 ? 100 : value;
+            (this.progressBuffer as ElementRef).nativeElement.style[this.dimension] = `${validValue}%`;
         }
     }
 
@@ -127,7 +128,7 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
 
     private setValue(value: number) {
         if (this.progressValue !== value) {
-            this.progressValue = value;
+            this.progressValue = value <= 0 ? 0 : value >= 100 ? 100 : value;
             this.updateTrackAndPointer();
         }
     }

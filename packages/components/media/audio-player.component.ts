@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ThyMediaControlsComponent } from './controls.component';
+import { ThyVideoControlsComponent } from './controls.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 
 @Component({
@@ -35,7 +35,7 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     @ViewChild('audioElement') audioElement!: ElementRef<HTMLAudioElement>;
 
-    @ViewChild('controls') controls!: ThyMediaControlsComponent;
+    @ViewChild('controls') controls!: ThyVideoControlsComponent;
 
     /**
      * 媒体资源的url
@@ -63,14 +63,13 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     public audio!: ElementRef;
 
-    constructor(public sanitizer: DomSanitizer) {
+    constructor(public sanitizer: DomSanitizer, public cdr: ChangeDetectorRef) {
         super(sanitizer);
     }
 
     ngAfterViewInit() {
-        setTimeout(() => {
-            this.audio = this.audioElement;
-        }, 0);
+        this.audio = this.audioElement;
+        this.cdr.detectChanges();
     }
 
     onLoadedmetadata(event: Event) {

@@ -7,7 +7,7 @@ import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyProIconModule } from '../icon/module';
 import { ThyAudioControlsComponent } from './audio-controls.component';
 import { ThyAudioPlayerComponent } from './audio-player.component';
-import { ThyMediaControlsComponent } from './controls.component';
+import { ThyVideoControlsComponent } from './controls.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
@@ -18,7 +18,7 @@ import { ThyVideoPlayerComponent } from './video-player.component';
         ThyVideoPlayerComponent,
         ThyAudioPlayerComponent,
         ThyMediaProgressComponent,
-        ThyMediaControlsComponent,
+        ThyVideoControlsComponent,
         ThyAudioControlsComponent,
         ThyTimeFormatPipe,
         ThyVolumeFormatPipe

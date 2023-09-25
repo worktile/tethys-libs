@@ -9,7 +9,7 @@ import { ThyAudioPlayerComponent, ThyProMediaModule, ThyVideoPlayerComponent } f
 })
 export class ThyVideoTestBasicComponent {
     @ViewChild(ThyVideoPlayerComponent) videoPlayer: ThyVideoPlayerComponent | undefined;
-    src = 'test.mp4';
+    src = 'assets/media/video.mp4';
 }
 
 @Component({
@@ -18,7 +18,7 @@ export class ThyVideoTestBasicComponent {
 })
 export class ThyAudioTestBasicComponent {
     @ViewChild(ThyAudioPlayerComponent) audioPlayer: ThyAudioPlayerComponent | undefined;
-    src = 'test.aac';
+    src = 'assets/media/mp3.mp3';
 }
 
 describe('mediaComponent', () => {

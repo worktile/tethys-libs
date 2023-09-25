@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { ThyMediaControlsComponent } from './controls.component';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ThyVideoControlsComponent } from './controls.component';
 
 @Component({
     selector: 'thy-audio-controls',
@@ -66,7 +66,7 @@ import { ThyMediaControlsComponent } from './controls.component';
         </thy-dropdown-menu>
     `
 })
-export class ThyAudioControlsComponent extends ThyMediaControlsComponent implements OnInit, AfterViewInit {
+export class ThyAudioControlsComponent extends ThyVideoControlsComponent implements OnInit {
     @Input('thyFileName') fileName!: string;
 
     @Input('thyFileSize') fileSize!: number;
