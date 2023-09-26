@@ -26,8 +26,7 @@ const TETHYS_MODULES = [
 ];
 
 @NgModule({
-    declarations: [...COMPONENTS],
-    imports: [...TETHYS_MODULES, RouterModule, CommonModule],
+    imports: [...TETHYS_MODULES, RouterModule, CommonModule, ...COMPONENTS],
     exports: [...COMPONENTS],
     providers: [THY_SITE_SETTINGS_PROVIDER, ThyMenuComponent]
 })

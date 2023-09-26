@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { formatTime } from './time.util';
 
-@Pipe({ name: 'thyTimeFormat' })
+@Pipe({ name: 'thyTimeFormat', standalone: true })
 export class ThyTimeFormatPipe implements PipeTransform {
     constructor() {}
 
@@ -10,7 +10,7 @@ export class ThyTimeFormatPipe implements PipeTransform {
     }
 }
 
-@Pipe({ name: 'thyVolumeFormat' })
+@Pipe({ name: 'thyVolumeFormat', standalone: true })
 export class ThyVolumeFormatPipe implements PipeTransform {
     constructor() {}
 

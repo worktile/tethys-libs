@@ -9,7 +9,10 @@ export const DEFAULT_PLAYBACK_RATES = [0.5, 1, 1.25, 1.5, 2];
 /**
  * @internal
  */
-@Directive({ selector: '[thyMediaPlayerBase]' })
+@Directive({
+    selector: '[thyMediaPlayerBase]',
+    standalone: true
+})
 export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
     public errorTips!: { formatError: string; networkError: string };
 

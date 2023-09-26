@@ -1,8 +1,15 @@
+import { CommonModule, NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { useHostRenderer } from '@tethys/cdk/dom';
+import { ThyActionModule } from 'ngx-tethys/action';
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
+import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThySliderType } from 'ngx-tethys/slider';
+import { ThyProIconModule } from '../icon/module';
 import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
+import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
+import { ThyMediaProgressComponent } from './progress.component';
 
 @Component({
     selector: 'thy-video-controls',
@@ -91,7 +98,19 @@ import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
                 <span>{{ item }}X</span>
             </a>
         </thy-dropdown-menu>
-    `
+    `,
+    standalone: true,
+    imports: [
+        NgIf,
+        CommonModule,
+        FormsModule,
+        ThyProIconModule,
+        ThyDropdownModule,
+        ThyActionModule,
+        ThyMediaProgressComponent,
+        ThyTimeFormatPipe,
+        ThyVolumeFormatPipe
+    ]
 })
 export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
     /**

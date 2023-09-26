@@ -3,6 +3,8 @@ import { isString } from '@tethys/cdk';
 import Cropper from 'cropperjs';
 import { InputNumber } from 'ngx-tethys/core';
 import { ThyCropperOptions, ThyCropperShape, ThyCropperViewMode, thyCropDataChangeEvent } from './cropper.entity';
+import { NgIf } from '@angular/common';
+import { ThyLoadingModule } from 'ngx-tethys/loading';
 
 @Component({
     selector: 'thy-image-cropper',
@@ -10,7 +12,9 @@ import { ThyCropperOptions, ThyCropperShape, ThyCropperViewMode, thyCropDataChan
     encapsulation: ViewEncapsulation.None,
     host: {
         '[class.thy-image-cropper-round]': 'thyShape === "round"'
-    }
+    },
+    standalone: true,
+    imports: [ThyLoadingModule, NgIf]
 })
 export class ThyImageCropperComponent implements OnInit {
     @HostBinding('class.thy-image-cropper') cropperClass = true;
@@ -21,11 +25,15 @@ export class ThyImageCropperComponent implements OnInit {
      * 图片资源
      */
     @Input('thyImage') set imageSource(value: File | string) {
-        if (!isString(value)) {
-            this.imageFile = value;
-            this.setImageSrc();
+        if (value) {
+            if (!isString(value)) {
+                this.imageFile = value;
+                this.setImageSrc();
+            } else {
+                this.imageSrc = value;
+            }
         } else {
-            this.imageSrc = value;
+            this.onError();
         }
     }
 
@@ -154,7 +162,7 @@ export class ThyImageCropperComponent implements OnInit {
         this.cropper = new Cropper(image, this.cropperOptions);
     }
 
-    onError(event: Event) {
+    onError(event?: Event) {
         this.loadError = true;
         this.loadingDone = true;
     }

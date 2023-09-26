@@ -17,7 +17,9 @@ import { ThyMediaProgressComponent } from '../progress.component';
             (thyMoveEnd)="onMouseEnd()"
             (thyAfterChange)="afterProgressChange($event)"
         ></thy-media-progress>
-    `
+    `,
+    standalone: true,
+    imports: [ThyMediaProgressComponent]
 })
 class ThyTestProgressComponent {
     direction = 'horizontal';
@@ -55,8 +57,7 @@ describe('ThyMediaProgressComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, ThyProMediaModule],
-            declarations: [ThyMediaProgressComponent, ThyTestProgressComponent]
+            imports: [FormsModule, ThyProMediaModule, ThyTestProgressComponent]
         });
         TestBed.compileComponents();
     });
@@ -98,7 +99,7 @@ describe('ThyMediaProgressComponent', () => {
     it('should update progress on mouse down and move', () => {
         const pointerElement = debugElement.query(By.css('.thy-media-progress-pointer')).nativeElement;
         const progress = debugElement.injector.get(ThyMediaProgressComponent);
-        const position = (progress.progressRail as ElementRef).nativeElement.clientWidth;
+        const position = (progress.progressRail as ElementRef).nativeElement.clientWidth + 100;
         expect(component.afterChangeSpy).not.toHaveBeenCalled();
 
         dispatchMouseEvent(pointerElement, 'mousedown', position);

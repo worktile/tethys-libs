@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { useHostRenderer } from '@tethys/cdk/dom';
@@ -22,7 +23,9 @@ import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-bas
             {{ errorTipText }}
         </div>
         <thy-video-controls #controls [thyMedia]="video" [thyProgressType]="thyProgressType"></thy-video-controls>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf, ThyVideoControlsComponent]
 })
 export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     @HostBinding('class') class = 'thy-video-player thy-media-player';

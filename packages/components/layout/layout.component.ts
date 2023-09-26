@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { ActivatedRoute, Route, Router, Routes } from '@angular/router';
+import { ActivatedRoute, Route, Router, Routes, RouterOutlet } from '@angular/router';
 import { ThyGlobalStore } from '@tethys/pro/core';
 import { filterEmptyRoutePath } from './utils';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { ThyProHeaderComponent } from './header/header.component';
+import { ThyProSidebarComponent } from './sidebar/sidebar.component';
+import { ThyLayoutModule } from 'ngx-tethys/layout';
 
 @Component({
     selector: 'thy-pro-layout',
@@ -9,7 +13,9 @@ import { filterEmptyRoutePath } from './utils';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'thy-layout thy-layout--has-sidebar thy-pro-layout'
-    }
+    },
+    standalone: true,
+    imports: [ThyLayoutModule, ThyProSidebarComponent, ThyProHeaderComponent, RouterOutlet, NgIf, NgTemplateOutlet]
 })
 export class ThyProLayoutComponent implements OnInit {
     /**

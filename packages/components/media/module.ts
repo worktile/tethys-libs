@@ -8,13 +8,17 @@ import { ThyProIconModule } from '../icon/module';
 import { ThyAudioControlsComponent } from './audio-controls.component';
 import { ThyAudioPlayerComponent } from './audio-player.component';
 import { ThyVideoControlsComponent } from './controls.component';
-import { ThyMediaPlayerBaseComponent } from './media-base.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
 import { ThyVideoPlayerComponent } from './video-player.component';
 @NgModule({
-    declarations: [
-        ThyMediaPlayerBaseComponent,
+    imports: [
+        CommonModule,
+        FormsModule,
+        ThyIconModule,
+        ThyDropdownModule,
+        ThyActionModule,
+        ThyProIconModule,
         ThyVideoPlayerComponent,
         ThyAudioPlayerComponent,
         ThyMediaProgressComponent,
@@ -23,7 +27,6 @@ import { ThyVideoPlayerComponent } from './video-player.component';
         ThyTimeFormatPipe,
         ThyVolumeFormatPipe
     ],
-    imports: [CommonModule, FormsModule, ThyIconModule, ThyDropdownModule, ThyActionModule, ThyProIconModule],
     exports: [ThyVideoPlayerComponent, ThyAudioPlayerComponent],
     providers: []
 })

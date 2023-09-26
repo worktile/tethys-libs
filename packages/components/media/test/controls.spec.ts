@@ -8,14 +8,15 @@ import { ThyPopoverModule } from 'ngx-tethys/popover';
 import { dispatchMouseEvent } from 'ngx-tethys/testing';
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyVideoControlsComponent } from '../controls.component';
-import { ThyMediaProgressComponent } from '../progress.component';
 
 @Component({
     selector: 'thy-test-controls-basic',
     template: `
         <video #videoElement [src]="src" [muted]="muted"></video>
         <thy-video-controls [thyMedia]="video" [thyProgressType]="progressType"> </thy-video-controls>
-    `
+    `,
+    standalone: true,
+    imports: [ThyVideoControlsComponent]
 })
 export class ThyVideoControlsTestBasicComponent implements AfterViewInit {
     @ViewChild(ThyVideoControlsComponent) controls!: ThyVideoControlsComponent;
@@ -45,8 +46,7 @@ describe('mediaComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ThyVideoControlsComponent, ThyMediaProgressComponent, ThyVideoControlsTestBasicComponent],
-            imports: [ThyProMediaModule, NoopAnimationsModule, ThyPopoverModule]
+            imports: [ThyVideoControlsTestBasicComponent, ThyProMediaModule, NoopAnimationsModule, ThyPopoverModule]
         }).compileComponents();
     }));
 

@@ -1,12 +1,18 @@
-repo_token: COVERALLS_REPO_TOKEN=j31pdiG4EJKj4umFDYtfWd6PZFqju5Zso
-version: 2
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.4.3
 jobs:
   build:
     working_directory: ~/tethys-libs
     docker:
-      - image: circleci/node:16-browsers
+      - image: cimg/node:18.16-browsers
     steps:
+      - browser-tools/install-chrome
       - checkout
+      - run: |
+          node --version
+          google-chrome --version
+          which google-chrome
       - restore_cache:
           key: tethys-libs-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: yarn install

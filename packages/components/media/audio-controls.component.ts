@@ -1,5 +1,11 @@
+import { CommonModule, NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ThyActionModule } from 'ngx-tethys/action';
+import { ThyDropdownModule } from 'ngx-tethys/dropdown';
+import { ThyProIconModule } from '../icon/module';
 import { ThyVideoControlsComponent } from './controls.component';
+import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
+import { ThyMediaProgressComponent } from './progress.component';
 
 @Component({
     selector: 'thy-audio-controls',
@@ -64,7 +70,18 @@ import { ThyVideoControlsComponent } from './controls.component';
                 <span>{{ item }}X</span>
             </a>
         </thy-dropdown-menu>
-    `
+    `,
+    standalone: true,
+    imports: [
+        NgIf,
+        CommonModule,
+        ThyProIconModule,
+        ThyDropdownModule,
+        ThyActionModule,
+        ThyMediaProgressComponent,
+        ThyTimeFormatPipe,
+        ThyVolumeFormatPipe
+    ]
 })
 export class ThyAudioControlsComponent extends ThyVideoControlsComponent implements OnInit {
     @Input('thyFileName') fileName!: string;

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0-next.0](https://github.com/tethys-org/libs/compare/v15.0.0-next.10...v16.0.0-next.0) (2023-08-16)
+
+### Features
+
+- upgrade angular 16 #INFR-9212 ([#70](https://github.com/tethys-org/libs/issues/70)) ([e075bf7](https://github.com/tethys-org/libs/commit/e075bf72cfc41caedc4736b39f99147fc6da89a9)), closes [#INFR-9212](https://github.com/tethys-org/libs/issues/INFR-9212)
+
+# [15.0.0-next.10](https://github.com/tethys-org/libs/compare/v15.0.0-next.9...v15.0.0-next.10) (2023-06-07)
+
+### Bug Fixes
+
+- **components:** fix cropper upload lagre image error #INFR-5872 ([#68](https://github.com/tethys-org/libs/issues/68)) ([b5720bb](https://github.com/tethys-org/libs/commit/b5720bbc2f4ceeddc45b2a3e5500c1ea851aeb4a)), closes [#INFR-5872](https://github.com/tethys-org/libs/issues/INFR-5872)
+
 # [15.0.0-next.9](https://github.com/tethys-org/libs/compare/v15.0.0-next.8...v15.0.0-next.9) (2023-06-05)
 
 ### Features

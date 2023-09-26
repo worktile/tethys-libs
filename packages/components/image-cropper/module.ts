@@ -14,7 +14,6 @@ import { ThyCropperSizeStylePipe, ThyCropperSizeTextPipe } from './cropper.pipe'
 import { ThyImageCropperDialogComponent } from './dialog.component';
 
 @NgModule({
-    declarations: [ThyImageCropperComponent, ThyImageCropperDialogComponent, ThyCropperSizeTextPipe, ThyCropperSizeStylePipe],
     imports: [
         CommonModule,
         FormsModule,
@@ -25,7 +24,11 @@ import { ThyImageCropperDialogComponent } from './dialog.component';
         ThyNotifyModule,
         ThySliderModule,
         ThyIconModule,
-        ThyTooltipModule
+        ThyTooltipModule,
+        ThyImageCropperComponent,
+        ThyImageCropperDialogComponent,
+        ThyCropperSizeTextPipe,
+        ThyCropperSizeStylePipe
     ],
     exports: [ThyImageCropperComponent, ThyImageCropperDialogComponent],
     providers: []

@@ -1,7 +1,10 @@
+import { NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ThyAudioControlsComponent } from './audio-controls.component';
 import { ThyVideoControlsComponent } from './controls.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
+import { ThyMediaProgressComponent } from './progress.component';
 
 @Component({
     selector: 'thy-audio-player',
@@ -28,7 +31,9 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
             >
             </thy-audio-controls>
         </div>
-    `
+    `,
+    standalone: true,
+    imports: [NgIf, ThyMediaProgressComponent, ThyAudioControlsComponent]
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit {
     @HostBinding('class') class = 'thy-audio-player thy-media-player';

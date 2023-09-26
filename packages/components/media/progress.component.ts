@@ -32,7 +32,8 @@ import { Observable, Subscription, distinctUntilChanged, fromEvent, map, pluck, 
             </div>
             <div class="thy-media-progress-buffer" #progressBuffer></div>
         </div>
-    `
+    `,
+    standalone: true
 })
 export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) implements OnInit, AfterViewInit {
     @ViewChild('progressRail', { static: true }) progressRail: ElementRef | undefined;
