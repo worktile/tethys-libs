@@ -6,7 +6,6 @@ module.exports = {
     title: 'TETHYS PRO',
     description: '',
     docsDir: 'docs',
-    siteProjectName: 'site',
     repoUrl: 'git+https://github.com/worktile/tethys-libs.git',
     logoUrl: 'https://cdn.worktile.com/open-sources/ngx-tethys/logos/tethys.png?100',
     navs: [
@@ -22,7 +21,7 @@ module.exports = {
     libs: [
         {
             name: 'tethys',
-            rootDir: './packages/components',
+            rootDir: 'packages/components',
             include: [],
             apiMode: 'automatic',
             categories: []

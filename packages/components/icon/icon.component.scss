@@ -1,0 +1,12 @@
+.thy-pro-icon {
+    display: inline-flex;
+    line-height: 0;
+
+    svg {
+        width: 1em;
+        height: 1em;
+        fill: currentColor;
+        vertical-align: -0.125em;
+        background-repeat: no-repeat;
+    }
+}

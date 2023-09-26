@@ -1,5 +1,5 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyAudioPlayerComponent, ThyProMediaModule, ThyVideoPlayerComponent } from '@tethys/pro/media';
 
@@ -11,7 +11,7 @@ import { ThyAudioPlayerComponent, ThyProMediaModule, ThyVideoPlayerComponent } f
 })
 export class ThyVideoTestBasicComponent {
     @ViewChild(ThyVideoPlayerComponent) videoPlayer: ThyVideoPlayerComponent | undefined;
-    src = 'test.mp4';
+    src = 'assets/media/video.mp4';
 }
 
 @Component({
@@ -22,10 +22,10 @@ export class ThyVideoTestBasicComponent {
 })
 export class ThyAudioTestBasicComponent {
     @ViewChild(ThyAudioPlayerComponent) audioPlayer: ThyAudioPlayerComponent | undefined;
-    src = 'test.aac';
+    src = 'assets/media/mp3.mp3';
 }
 
-describe('mediaViewerComponent', () => {
+describe('mediaComponent', () => {
     let videoComponent: ThyVideoTestBasicComponent;
     let audioComponent: ThyAudioTestBasicComponent;
     let videoFixture: ComponentFixture<ThyVideoTestBasicComponent>;
@@ -39,7 +39,7 @@ describe('mediaViewerComponent', () => {
         }).compileComponents();
     }));
 
-    describe('videoViewerComponent', () => {
+    describe('videoPlayerComponent', () => {
         beforeEach(() => {
             videoFixture = TestBed.createComponent(ThyVideoTestBasicComponent);
             videoComponent = videoFixture.componentInstance;
@@ -62,7 +62,7 @@ describe('mediaViewerComponent', () => {
         }));
     });
 
-    describe('audioViewerComponent', () => {
+    describe('audioPlayerComponent', () => {
         beforeEach(() => {
             audioFixture = TestBed.createComponent(ThyAudioTestBasicComponent);
             audioComponent = audioFixture.componentInstance;

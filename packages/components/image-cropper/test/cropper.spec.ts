@@ -119,7 +119,9 @@ describe('imageCropperComponent', () => {
             component.imageCropper.crop();
 
             let promise = new Promise((resolve, reject) => {
-                canvas.toBlob((blob) => resolve({ blob }));
+                setTimeout(() => {
+                    canvas.toBlob((blob) => resolve({ blob }));
+                }, 100);
             });
             promise.then((value) => {
                 expect(cropDataChangeSpy).toHaveBeenCalled();

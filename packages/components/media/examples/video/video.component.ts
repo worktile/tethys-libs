@@ -14,7 +14,7 @@ export class ThyProMediaVideoExampleComponent implements OnInit {
 
     errorSrc1 = videoSrc1;
 
-    autoplay = true;
+    autoplay = false;
 
     ngOnInit(): void {}
 }
