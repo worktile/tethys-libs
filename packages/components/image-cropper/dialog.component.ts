@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, NgZone, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { InputNumber } from 'ngx-tethys/core';
-import { ThyDialog, ThyDialogContainerComponent, ThyDialogModule } from 'ngx-tethys/dialog';
+import { ThyDialog, ThyDialogContainer, ThyDialogModule } from 'ngx-tethys/dialog';
 import { ThyNotifyService } from 'ngx-tethys/notify';
 import { ThySliderType, ThySliderModule } from 'ngx-tethys/slider';
 import { Observable } from 'rxjs';
@@ -9,7 +9,7 @@ import { ThyImageCropperComponent } from './cropper.component';
 import { ThyCropperImageSize, ThyCropperShape, ThyCropperViewMode } from './cropper.entity';
 import { ThyCropperSizeTextPipe, ThyCropperSizeStylePipe } from './cropper.pipe';
 import { NgIf, NgFor, NgStyle } from '@angular/common';
-import { ThyIconComponent } from 'ngx-tethys/icon';
+import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyUploadModule } from 'ngx-tethys/upload';
 import { ThyButtonModule } from 'ngx-tethys/button';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
         FormsModule,
         ThyButtonModule,
         ThyUploadModule,
-        ThyIconComponent,
+        ThyIcon,
         NgIf,
         NgFor,
         NgStyle,
@@ -115,7 +115,7 @@ export class ThyImageCropperDialogComponent implements OnInit {
 
     sliderType: ThySliderType = 'primary';
 
-    constructor(public dialog: ThyDialog, @Optional() public dialogContainer: ThyDialogContainerComponent, private ngZone: NgZone) {}
+    constructor(public dialog: ThyDialog, @Optional() public dialogContainer: ThyDialogContainer, private ngZone: NgZone) {}
 
     ngOnInit(): void {}
 

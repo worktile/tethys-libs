@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
-import { ThyMenuComponent, ThyMenuModule } from 'ngx-tethys/menu';
+import { ThyMenu, ThyMenuModule } from 'ngx-tethys/menu';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyAvatarModule } from 'ngx-tethys/avatar';
 import { ThyProHeaderComponent } from './header/header.component';
@@ -28,6 +28,6 @@ const TETHYS_MODULES = [
 @NgModule({
     imports: [...TETHYS_MODULES, RouterModule, CommonModule, ...COMPONENTS],
     exports: [...COMPONENTS],
-    providers: [THY_SITE_SETTINGS_PROVIDER, ThyMenuComponent]
+    providers: [THY_SITE_SETTINGS_PROVIDER, ThyMenu]
 })
 export class ThyProLayoutModule {}
