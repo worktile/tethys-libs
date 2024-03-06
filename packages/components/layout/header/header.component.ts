@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
 import { takeUntil, Observable } from 'rxjs';
 import { Route, ThyGlobalStore } from '@tethys/pro/core';
-import { ThyIconComponent } from 'ngx-tethys/icon';
+import { ThyIcon } from 'ngx-tethys/icon';
 import { NgIf, NgTemplateOutlet, AsyncPipe } from '@angular/common';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { ThyActionModule } from 'ngx-tethys/action';
@@ -16,7 +16,7 @@ import { ThyLayoutModule } from 'ngx-tethys/layout';
         class: 'thy-pro-header'
     },
     standalone: true,
-    imports: [ThyLayoutModule, ThyActionModule, ThyTooltipModule, NgIf, NgTemplateOutlet, ThyIconComponent, AsyncPipe]
+    imports: [ThyLayoutModule, ThyActionModule, ThyTooltipModule, NgIf, NgTemplateOutlet, ThyIcon, AsyncPipe]
 })
 export class ThyProHeaderComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
     @Input() public headerRightContentTemplate!: TemplateRef<HTMLElement>;
