@@ -250,13 +250,6 @@
     tslib "^2.3.0"
     yargs "^17.2.1"
 
-"@angular/compiler@15.1.4":
-  version "15.1.4"
-  resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-15.1.4.tgz#35ba0156eae24b407e6e21bfd4af98cba7887a97"
-  integrity sha512-b2jH336pl647IKgMYzsmJ/2Qpw6JqlP/OeCsOnAJ55LIQa37w+bnuTpdPh4pk8qV9h735rV9NXNO5t3pQFOo3Q==
-  dependencies:
-    tslib "^2.3.0"
-
 "@angular/compiler@^17.2.3":
   version "17.2.3"
   resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-17.2.3.tgz#9cf35dd1bb49edcdf4f854cb459c630efc126698"
@@ -3536,10 +3529,10 @@
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
-"@tethys/cdk@16.0.0-next.0", "@tethys/cdk@^16.0.0@next":
-  version "16.0.0-next.0"
-  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-16.0.0-next.0.tgz#a01f3fe93d8fe29a6abb70f0797d618b5c1a13c2"
-  integrity sha512-uKvNBic8vQsToQ7CAbRDu2yw7D08CsbpEOXYZUz6CiUPV7lDdtyKT+9BrtiUY7crQYwIRxVJxuEiGT0sQm+K/A==
+"@tethys/cdk@17.0.0-next.4", "@tethys/cdk@^17.0.0-next.3":
+  version "17.0.0-next.4"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-17.0.0-next.4.tgz#cb384313b40d0a999a6c8a2f19dfd2ab9c35e590"
+  integrity sha512-p3xgsrukAdx6vR7CInawXTOAafF51NU0mCIh/zKyn8fXPBY7hrCrL8eh7Mq0eYgvhZxz3GiAopWMCO850wObzQ==
   dependencies:
     tslib "^2.3.0"
 
@@ -3548,12 +3541,12 @@
   resolved "https://registry.npmjs.org/@tethys/icons/-/icons-1.4.24.tgz#a0730f975226cb09250b8a49014260485aab55df"
   integrity sha512-P/WHWdu5DTFVz/SbmtYkAP7vZkuPU2sQt5gEQRRdApYECbemCCPsyRiB5gK1QUfaRE7r9eCKzl2Vpy4LF+iYJQ==
 
-"@tethys/store@16.0.0-next.0":
-  version "16.0.0-next.0"
-  resolved "https://registry.npmjs.org/@tethys/store/-/store-16.0.0-next.0.tgz#6c5c5509ceb2e30f4f2bacf2ef07193c789d3a02"
-  integrity sha512-HkqvBXYwVR/XmSo0kebst389L243VYupjuosppEZH1loNdiPr1cvsuSfHlBaT0JnRKmNvoP4Ac9CmyXp6XSxTw==
+"@tethys/store@17.0.0-next.0":
+  version "17.0.0-next.0"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-17.0.0-next.0.tgz#6df248e7a67fa1bc6ebc61a92068d4b50d22749a"
+  integrity sha512-3n1T4c/IlLxBiIHWy9iq4HzP3iioWbBAyOfpGk0WOP386HNJKOBkHfWYP7zbEJl+JG5XaLwI4S6el3II4QatgQ==
   dependencies:
-    "@tethys/cdk" "^16.0.0@next"
+    "@tethys/cdk" "^17.0.0-next.3"
     tslib "^2.0.0"
 
 "@tootallnate/once@1":
@@ -4356,10 +4349,10 @@ algoliasearch@^3.24.5:
     semver "^5.1.0"
     tunnel-agent "^0.6.0"
 
-angular-gridster2@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.npmjs.org/angular-gridster2/-/angular-gridster2-16.0.0.tgz#414101ce8d5e15ff7bb8898bc081026968d75ed3"
-  integrity sha512-Us6nwxS+84W49nRXk/Dcm7KxgVmJNzkMwLDN2/FfoRlV1nhcv8j7kM2llhSpelwGPDyw/T64BePFw2Dx03QaTQ==
+angular-gridster2@^17.0.0:
+  version "17.0.0"
+  resolved "https://registry.npmjs.org/angular-gridster2/-/angular-gridster2-17.0.0.tgz#9c9cee9db54eaf69fa9f322913149c4795ccbff3"
+  integrity sha512-HYUQSAuhDlbsVWxIUqgSPfWKqzxkT96qsSrLWB0WjzcEdJ2yVjX4R0AY/VJyzmKFzdFU7adGEPJkJ8volRSsWQ==
   dependencies:
     tslib "^2.4.0"
 
@@ -6175,7 +6168,7 @@ css-select@^5.1.0:
     domutils "^3.0.1"
     nth-check "^2.0.1"
 
-css-what@6.1.0, css-what@^6.1.0:
+css-what@^6.1.0:
   version "6.1.0"
   resolved "https://registry.npmjs.org/css-what/-/css-what-6.1.0.tgz#fb5effcf76f1ddea2c81bdfaa4de44e79bac70f4"
   integrity sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==
@@ -6194,16 +6187,6 @@ cycle@1.0.x:
   version "1.0.3"
   resolved "https://registry.npmjs.org/cycle/-/cycle-1.0.3.tgz#21e80b2be8580f98b468f379430662b046c34ad2"
   integrity sha512-TVF6svNzeQCOpjCqsy0/CSy8VgObG3wXusJ73xW2GbG5rGx7lC8zxDSURicsXI2UsGdi2L0QNRCi745/wUDvsA==
-
-cyia-code-util@^1.0.4:
-  version "1.6.3"
-  resolved "https://registry.npmjs.org/cyia-code-util/-/cyia-code-util-1.6.3.tgz#e8552e89af2a6af65277c62657895512d1c1a53e"
-  integrity sha512-Iurgw9XCMVR1qIuCHfEBzWFwmmHp2VYFxdYlTtnqIrMDkZcOIF10hCFamy2AD9v0F/k2w8EZQ4OnW9u+xJQ0Ig==
-  dependencies:
-    "@angular/compiler" "15.1.4"
-    css-what "6.1.0"
-    inquirer "^7.3.3"
-    jsonc-parser "^3.0.0"
 
 cz-customizable@^4.0.0:
   version "4.0.0"
@@ -9479,7 +9462,7 @@ json5@^2.1.2, json5@^2.2.2, json5@^2.2.3:
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
-jsonc-parser@3.2.0, jsonc-parser@^3.0.0, jsonc-parser@^3.2.0:
+jsonc-parser@3.2.0, jsonc-parser@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.2.0.tgz#31ff3f4c2b9793f89c67212627c51c6394f88e76"
   integrity sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==
@@ -10662,12 +10645,11 @@ ng-packagr@^17.2.1:
     esbuild "^0.20.0"
     rollup "^4.5.0"
 
-ngx-tethys@16.0.0-next.0:
-  version "16.0.0-next.0"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-16.0.0-next.0.tgz#4a001d3940e090e77642e5b1ccdd706977dd5968"
-  integrity sha512-H1h/u/p9KIX+RHhMNphY4ipPWTATyCJAvaHUsyq6UXpyAJfVq3fYdd9PHUgAM0I05tKaqujD32MZu3qNPnqoNA==
+ngx-tethys@17.0.0-next.4:
+  version "17.0.0-next.4"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-17.0.0-next.4.tgz#0c9fe3998b7001b17968781ea28384fdcac0d140"
+  integrity sha512-fFqv1UQ7FVMcixs732aOvo/zplnnKQJX+59rlPOrC4IpLsP+mjarqYlOBqzXqohc9nVegfgouq+ktU6NHEBxcQ==
   dependencies:
-    cyia-code-util "^1.0.4"
     tslib "^2.3.0"
 
 nice-napi@^1.0.2:
