@@ -55,7 +55,7 @@
     "angular-gridster2": "^17.0.0",
     "date-fns": "^2.6.0",
     "extend": "^3.0.2",
-    "ngx-tethys": "17.0.0-next.4",
+    "ngx-tethys": "17.0.0-next.8",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.4",
