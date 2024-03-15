@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.0.0](https://github.com/tethys-org/libs/compare/v17.0.0-next.1...v17.0.0) (2024-03-15)
+
+**Note:** Version bump only for package libs
+
 # [17.0.0-next.1](https://github.com/tethys-org/libs/compare/v17.0.0-next.0...v17.0.0-next.1) (2024-03-13)
 
 **Note:** Version bump only for package libs
