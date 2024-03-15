@@ -2,6 +2,8 @@ module.exports = {
     allowBranch: ['master', 'release-*'],
     bumpFiles: [
         'package.json',
+        './packages/auth/package.json',
+        './packages/auth/cache.json',
         {
             filename: './packages/components/version.ts',
             type: 'code'
