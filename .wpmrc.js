@@ -3,7 +3,7 @@ module.exports = {
     bumpFiles: [
         'package.json',
         './packages/auth/package.json',
-        './packages/auth/cache.json',
+        './packages/cache/package.json',
         {
             filename: './packages/components/version.ts',
             type: 'code'
