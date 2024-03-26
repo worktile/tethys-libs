@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ThyAuthService } from '@tethys/auth';
 import { ThyGlobalStore } from '@tethys/pro/core';
 import { ThyFormDirective, ThyFormValidatorConfig } from 'ngx-tethys/form';
-import { ThyStepperComponent } from 'ngx-tethys/stepper';
+import { ThyStepper } from 'ngx-tethys/stepper';
 import { regex } from '../../../constants';
 
 @Component({
@@ -46,7 +46,7 @@ export class PassportLoginComponent implements OnInit {
         }
     };
 
-    @ViewChild('stepper', { static: true }) stepperComponent: ThyStepperComponent = new ThyStepperComponent();
+    @ViewChild('stepper', { static: true }) stepperComponent: ThyStepper = new ThyStepper();
 
     constructor(public router: Router, protected authService: ThyAuthService, public globalStore: ThyGlobalStore) {}
 
