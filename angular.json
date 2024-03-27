@@ -17,31 +17,31 @@
           "strict": true
         }
       },
-      "root": "site",
-      "sourceRoot": "site/src",
+      "root": "",
+      "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/site",
-            "index": "site/src/index.html",
-            "main": "site/src/main.ts",
-            "polyfills": "site/src/polyfills.ts",
-            "tsConfig": "site/tsconfig.app.json",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "src/tsconfig.app.json",
             "stylePreprocessorOptions": {
-              "includePaths": ["./site/src/styles"]
+              "includePaths": ["./src/styles"]
             },
             "assets": [
-              "site/src/favicon.ico",
-              "site/src/assets",
+              "src/favicon.ico",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "./node_modules/@tethys/icons",
                 "output": "/assets/icons/"
               }
             ],
-            "styles": ["site/src/styles.scss"],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -54,8 +54,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "site/src/environments/environment.ts",
-                  "with": "site/src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -91,7 +91,6 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "port": 4800,
             "disableHostCheck": true,
             "buildTarget": "site:build"
           },
@@ -109,18 +108,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "buildTarget": "site:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "site/src/test.ts",
-            "polyfills": "site/src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "site/karma.conf.js",
-            "assets": ["site/src/favicon.ico", "site/src/assets"],
-            "styles": ["site/src/styles.scss"],
-            "scripts": []
           }
         }
       }
