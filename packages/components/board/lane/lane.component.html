@@ -9,15 +9,15 @@
 
     @if(laneTemplateRef) {
 
-    <ng-template [ngTemplateOutlet]="laneTemplateRef" [ngTemplateOutletContext]="{ lane: lane(), $implicit: lane() }"></ng-template>
+    <ng-template [ngTemplateOutlet]="laneTemplateRef" [ngTemplateOutletContext]="{ lane: lane, $implicit: lane }"></ng-template>
     } @else{
     <div class="d-flex justify-content-between text-secondary flex-grow-1 type-container">
-      <span thyFlexibleText [thyTooltipContent]="lane().name">
-        <span>{{ lane().name }}</span>
+      <span thyFlexibleText [thyTooltipContent]="lane!.name">
+        <span>{{ lane?.name }}</span>
       </span>
       <ng-container *ngIf="isExpanded">
         <span class="text-muted flex-shrink-0"
-          ><span class="text-secondary mr-1">{{ lane().cards?.length || 0 }}</span
+          ><span class="text-secondary mr-1">{{ lane?.cards?.length || 0 }}</span
           >个</span
         >
       </ng-container>
@@ -27,10 +27,10 @@
 </div>
 
 <div class="board-lane-body" cdkDropListGroup [class.board-no-lane-body]="!hasLane">
-  @if(hasLane) { @for (entry of lane().entries; track entry._id) {
+  @if(hasLane) { @for (entry of lane?.entries; track entry._id) {
   <div
     class="board-lane-body-entry"
-    [class.board-lane-body-entry-is-empty]="isExpanded && lane().cards?.length === 0"
+    [class.board-lane-body-entry-is-empty]="isExpanded && lane?.cards?.length === 0"
     [class.board-lane-body-entry-is-collapsed]="!isExpanded"
   >
     <thy-board-entry
@@ -38,7 +38,7 @@
       [hasLane]="hasLane"
       [entry]="entry"
       [cardTemplateRef]="cardTemplateRef"
-      [lane]="lane()"
+      [lane]="lane"
     ></thy-board-entry>
     <div class="text-muted mx-5 text-truncate" *ngIf="!isExpanded && entry.cards!.length > 0">
       <span class="text-secondary mr-1">{{ entry.cards!.length }}</span
@@ -47,11 +47,11 @@
   </div>
   } } @else{ @for (entry of entries(); track entry._id) {
   <div class="board-lane-body-entry">
-    <thy-board-entry [hasLane]="hasLane" [entry]="entry" [cardTemplateRef]="cardTemplateRef" [lane]="lane()"> </thy-board-entry>
+    <thy-board-entry [hasLane]="hasLane" [entry]="entry" [cardTemplateRef]="cardTemplateRef"> </thy-board-entry>
   </div>
   } }
 </div>
 
 <ng-template #unGroupHeader>
-  <span>{{ lane().name }}</span>
+  <span>{{ lane?.name }}</span>
 </ng-template>

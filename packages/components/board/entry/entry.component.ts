@@ -19,7 +19,7 @@ import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from '../entities';
 export class ThyBoardEntryComponent implements OnInit {
     @Input({ required: true }) entry!: ThyBoardEntry;
 
-    @Input() lane: ThyBoardLane | null = null;
+    @Input() lane: ThyBoardLane | undefined;
 
     @Input() hasLane = false;
 
