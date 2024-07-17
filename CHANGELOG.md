@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0-next.0](https://github.com/tethys-org/libs/compare/v17.0.0...v17.1.0-next.0) (2024-07-17)
+
+### Bug Fixes
+
+- fix polyfills not found error when start:docs #INFR-12047 ([fb3723b](https://github.com/tethys-org/libs/commit/fb3723bcf2c56e231a174fd6062afb5177d15e1a)), closes [#INFR-12047](https://github.com/tethys-org/libs/issues/INFR-12047)
+
+### Features
+
+- **components:** add board component #INFR-12953 ([c4b0138](https://github.com/tethys-org/libs/commit/c4b0138ae501bd4aa4719b86a47df4ff53474200)), closes [#INFR-12953](https://github.com/tethys-org/libs/issues/INFR-12953)
+
 # [17.0.0](https://github.com/tethys-org/libs/compare/v17.0.0-next.1...v17.0.0) (2024-03-15)
 
 **Note:** Version bump only for package libs
