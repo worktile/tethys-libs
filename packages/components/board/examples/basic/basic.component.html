@@ -1,0 +1,11 @@
+<div class="thy-pro-board-basic-example-container">
+  <thy-board [thyEntries]="entries" [thyCards]="items" [thyLanes]="lanes" [thyShowLane]="lanes.length > 1">
+    <ng-template #lane let-lane="">
+      <span>{{ lane.name }} **</span>
+    </ng-template>
+
+    <ng-template #card let-item="">
+      <thy-board-basic-card [card]="item"></thy-board-basic-card>
+    </ng-template>
+  </thy-board>
+</div>

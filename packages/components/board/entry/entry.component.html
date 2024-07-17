@@ -1,0 +1,25 @@
+<div class="entry-body">
+  <div class="entry-cards">
+    <ng-container *ngIf="!hasLane">
+      <cdk-virtual-scroll-viewport autosize [minBufferPx]="500" [maxBufferPx]="1000" thyFlexItem="auto">
+        <div *cdkVirtualFor="let card of entry.cards; trackBy: trackByFn" id="current-cards" class="entry-card">
+          <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </ng-container>
+
+    <ng-container *ngIf="hasLane">
+      @for (card of entry.cards; track card._id) {
+      <div id="current-card" class="entry-card">
+        <!-- <div> -->
+        <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+        <!-- </div> -->
+      </div>
+      }
+    </ng-container>
+
+    @if (entryBodyFooter) {
+    <ng-template [ngTemplateOutlet]="entryBodyFooter" [ngTemplateOutletContext]="{ entry: entry }"></ng-template>
+    }
+  </div>
+</div>

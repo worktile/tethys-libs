@@ -1,0 +1,29 @@
+<div class="states">
+  @if (hasLane) {
+  <div class="state d-flex align-items-center">
+    <a href="javascript:;" class="link-muted pr-2" (click)="expandAllLane()" [thyTooltip]="isExpandAll ? '全部收起' : '全部展开'">
+      <thy-icon [thyIconName]="isExpandAll ? 'stow' : 'open'"></thy-icon>
+    </a>
+
+    <span>泳道</span>
+  </div>
+  } @for (entry of entries(); track entry._id) {
+  <div class="state d-flex align-items-center">
+    <div class="text-truncate">
+      <span thyFlexibleText [thyTooltipContent]="entry.name"> {{ entry.name }}</span>
+    </div>
+    <div class="flex-fill">
+      <span class="mx-1">·</span>
+      <span>{{ entry.cards?.length || 0 }}</span>
+    </div>
+  </div>
+  }
+</div>
+
+<div class="board-setting">
+  @if (isFullscreen) {
+  <button (click)="existFullscreen()" thyTooltip="退出全屏" thyButtonIcon="compress-arrows"></button>
+  } @else {
+  <button (click)="enterFullscreen()" thyTooltip="全屏模式" thyButtonIcon="expand-arrows"></button>
+  }
+</div>
