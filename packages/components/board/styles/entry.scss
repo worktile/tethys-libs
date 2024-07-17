@@ -1,0 +1,105 @@
+@use 'ngx-tethys/styles/variables.scss' as variables;
+
+.thy-entry-container {
+    display: block;
+    height: 100%;
+    padding: 8px;
+    position: relative;
+    .entry-body {
+        position: relative;
+        height: 100%;
+        position: sticky;
+        top: 0;
+        &.entry-body-multi-lanes {
+            position: sticky;
+            top: 0;
+        }
+
+        .entry-work-items {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            .cdk-virtual-scrollable {
+                overflow-x: hidden;
+            }
+            .entry-work-item {
+                // min-height: 100px;
+                padding-top: 8px;
+                .cdk-drag-placeholder {
+                    background: transparent !important;
+                    border-color: transparent;
+                }
+            }
+        }
+        .entry-state {
+            height: 100%;
+        }
+        &.droppable {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            height: 100%;
+            background: variables.$gray-80;
+            .entry-work-items {
+                height: 0;
+            }
+        }
+
+        .entry-viewport {
+            // height: 500px;
+            // max-height: 500px;
+            overflow: hidden;
+        }
+    }
+
+    .entry-states {
+        width: calc(100% + 2px);
+        height: 100%;
+        left: -1px;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        bottom: 0;
+
+        &.entry-states-position {
+            position: absolute;
+            top: 0;
+        }
+        .entry-state {
+            flex: 1;
+            height: 100%;
+
+            padding-top: 10px;
+            padding-left: 20px;
+            border: dashed 1px variables.$gray-400;
+            background: variables.$gray-80;
+            z-index: 2;
+            margin-top: -1px;
+            &.cdk-drop-list-dragging {
+                background: rgba(variables.$primary, 0.1);
+                border-color: variables.$primary;
+                z-index: 3;
+                .dragging-text-color {
+                    color: variables.$primary !important;
+                }
+            }
+            .cdk-drag-placeholder {
+                display: none;
+            }
+        }
+    }
+    .empty-state {
+        display: flex;
+        height: calc(100%);
+        background: variables.$gray-100;
+        .empty-state-tip {
+            margin: auto;
+            color: variables.$gray-600;
+        }
+    }
+
+    .other-height {
+        flex: 0;
+    }
+}
