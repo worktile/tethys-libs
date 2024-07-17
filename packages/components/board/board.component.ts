@@ -124,7 +124,7 @@ export class ThyBoardComponent implements OnInit {
     public entriesWithCards: Signal<ThyBoardEntry[]> = computed(() => {
         const lanesWithEntriesAndCards = this.lanesWithEntriesAndCards();
         const entries = this.thyEntries();
-        return this.buildEntriesWithCardsByLane(lanesWithEntriesAndCards, entries);
+        return this.buildEntriesWithCardsByLanes(lanesWithEntriesAndCards, entries);
     });
 
     constructor() {}
@@ -140,8 +140,12 @@ export class ThyBoardComponent implements OnInit {
         return cardsMapByEntryId;
     }
 
-    private buildEntriesWithCardsByLane(lanes: ThyBoardLane[], entries: ThyBoardEntry[]) {
-        const entriesMapById = helpers.keyBy(entries, '_id');
+    private buildEntriesWithCardsByLanes(lanes: ThyBoardLane[], entries: ThyBoardEntry[]) {
+        const entriesMapById: Record<string, ThyBoardEntry> = {};
+        (entries || []).forEach((entry) => {
+            entriesMapById[entry._id] = entry;
+            entriesMapById[entry._id].cards = [];
+        });
         (lanes || []).forEach((lane) => {
             lane.entries!.forEach((entry) => {
                 entriesMapById[entry._id].cards = (entriesMapById[entry._id].cards || []).concat(entry.cards || []);

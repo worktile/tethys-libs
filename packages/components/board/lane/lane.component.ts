@@ -20,7 +20,7 @@ export class ThyBoardLaneComponent implements OnInit {
 
     public swimlaneLength = 0;
 
-    lane = input<ThyBoardLane>();
+    @Input() lane: ThyBoardLane | undefined;
 
     entries = input.required<ThyBoardEntry[]>();
 
