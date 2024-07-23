@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, booleanAttribute, input } from '@angular/core';
 import { ThyBoardEntryComponent } from '../entry/entry.component';
-import { NgClass, NgFor, NgForOf, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import { ThyBoardEntry, ThyBoardLane } from '../entities';
@@ -10,7 +10,7 @@ import { ThyBoardEntry, ThyBoardLane } from '../entities';
     templateUrl: 'lane.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgClass, NgIf, NgFor, NgForOf, NgTemplateOutlet, ThyIcon, ThyFlexibleText, ThyBoardEntryComponent],
+    imports: [NgClass, NgTemplateOutlet, ThyIcon, ThyFlexibleText, ThyBoardEntryComponent],
     host: {
         class: 'thy-board-lane-container'
     }
@@ -27,6 +27,8 @@ export class ThyBoardLaneComponent implements OnInit {
     @Input({ transform: booleanAttribute }) isExpanded = true;
 
     @Input({ transform: booleanAttribute }) hasLane = false;
+
+    @Input({ transform: booleanAttribute }) virtualScroll = false;
 
     @Input() laneTemplateRef: TemplateRef<any> | null = null;
 

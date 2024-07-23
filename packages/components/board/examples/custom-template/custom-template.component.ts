@@ -7,16 +7,16 @@ interface CardInfo extends ThyBoardCard {
 }
 
 @Component({
-    selector: 'thy-pro-board-single-example',
-    templateUrl: './single.component.html',
-    styleUrls: ['./single.component.scss']
+    selector: 'thy-pro-board-custom-template-example',
+    templateUrl: './custom-template.component.html',
+    styleUrls: ['./custom-template.component.scss']
 })
-export class ThyProBoardSingleExampleComponent implements OnInit {
+export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
     entries: ThyBoardEntry[] = [...entries];
 
-    items: CardInfo[] = items as CardInfo[];
+    items: CardInfo[] = [...(items as CardInfo[])];
 
-    lanes: ThyBoardLane[] = [lanes[0]];
+    lanes: ThyBoardLane[] = [...lanes];
 
     constructor() {}
 

@@ -5,10 +5,17 @@
       <thy-icon [thyIconName]="isExpandAll ? 'stow' : 'open'"></thy-icon>
     </a>
 
+    @if (headerTemplateRef) {
+    <ng-template [ngTemplateOutlet]="headerTemplateRef"></ng-template>
+    } @else {
     <span>泳道</span>
+    }
   </div>
   } @for (entry of entries(); track entry._id) {
   <div class="state d-flex align-items-center">
+    @if (headerTemplateRef) {
+    <ng-template [ngTemplateOutlet]="headerTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: entry }"></ng-template>
+    } @else {
     <div class="text-truncate">
       <span thyFlexibleText [thyTooltipContent]="entry.name"> {{ entry.name }}</span>
     </div>
@@ -16,14 +23,7 @@
       <span class="mx-1">·</span>
       <span>{{ entry.cards?.length || 0 }}</span>
     </div>
+    }
   </div>
-  }
-</div>
-
-<div class="board-setting">
-  @if (isFullscreen) {
-  <button (click)="existFullscreen()" thyTooltip="退出全屏" thyButtonIcon="compress-arrows"></button>
-  } @else {
-  <button (click)="enterFullscreen()" thyTooltip="全屏模式" thyButtonIcon="expand-arrows"></button>
   }
 </div>

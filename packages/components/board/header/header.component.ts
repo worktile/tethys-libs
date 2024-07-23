@@ -1,16 +1,26 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, booleanAttribute, input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    TemplateRef,
+    booleanAttribute,
+    input
+} from '@angular/core';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import { ThyIcon } from 'ngx-tethys/icon';
-import { ThyTooltip, ThyTooltipDirective } from 'ngx-tethys/tooltip';
+import { ThyTooltipDirective } from 'ngx-tethys/tooltip';
 import { ThyBoardEntry } from '../entities';
-import { ThyButton } from 'ngx-tethys/button';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
     selector: 'thy-board-header',
     templateUrl: 'header.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ThyFlexibleText, ThyIcon, ThyTooltipDirective, ThyButton],
+    imports: [ThyFlexibleText, ThyIcon, ThyTooltipDirective, NgTemplateOutlet],
     host: {
         class: 'thy-board-groups-header'
     }
@@ -21,6 +31,8 @@ export class ThyBoardHeaderComponent implements OnInit {
     @Input({ transform: booleanAttribute }) hasLane = false;
 
     @Input() isExpandAll = true;
+
+    @Input() headerTemplateRef: TemplateRef<any> | null = null;
 
     @Output() expandAll = new EventEmitter<boolean>();
 
