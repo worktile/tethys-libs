@@ -1,0 +1,27 @@
+<div class="thy-pro-board-basic-example-container">
+  <thy-board [thyEntries]="entries" [thyCards]="items" [thyLanes]="lanes" [thyShowLane]="lanes.length > 1">
+    <ng-template #lane let-lane="" let-isExpanded="isExpanded">
+      @if (isExpanded) {
+      <span>展开自定义泳道【{{ lane.name }} 】</span>
+      } @else {
+      <span>折叠自定义泳道【{{ lane.name }} 】</span>
+      }
+    </ng-template>
+
+    <ng-template #header let-entry="">
+      @if (entry) {
+      <span>自定义栏 header【{{ entry.name }} 】</span>
+      } @else {
+      <span>需求</span>
+      }
+    </ng-template>
+
+    <ng-template #card let-item="">
+      <div class="card-container">
+        <div class="card-content-row-title">
+          <span>{{ item.title }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </thy-board>
+</div>

@@ -17,8 +17,6 @@ import { ThyBoardVirtualScrolledIndexChangeEvent, ThyBoardCard, ThyBoardEntry, T
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
-import { NgFor, NgForOf } from '@angular/common';
-import { helpers } from 'ngx-tethys/util';
 import { EMPTY_OBJECT_ID_STR } from './constants';
 
 @Component({
@@ -26,7 +24,7 @@ import { EMPTY_OBJECT_ID_STR } from './constants';
     templateUrl: 'board.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgFor, NgForOf, ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent],
+    imports: [ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent],
     host: {
         class: 'thy-board-container'
     }
@@ -36,6 +34,7 @@ export class ThyBoardComponent implements OnInit {
      * 卡片展示模板
      * @type TemplateRef
      */
+
     cardTemplateRef = contentChild.required<TemplateRef<any>>('card');
 
     /**
@@ -44,6 +43,13 @@ export class ThyBoardComponent implements OnInit {
      */
     @ContentChild('lane')
     public laneTemplateRef: TemplateRef<any> | null = null;
+
+    /**
+     * header 展示模板
+     * @type TemplateRef
+     */
+    @ContentChild('header')
+    public headerTemplateRef: TemplateRef<any> | null = null;
 
     /**
      * 泳道列表

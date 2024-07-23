@@ -1,20 +1,27 @@
-<thy-board-header [hasLane]="thyShowLane()" [entries]="entriesWithCards()" [isExpandAll]="isExpandAll" (expandAll)="expandAll($event)">
+<thy-board-header
+  [hasLane]="thyShowLane()"
+  [entries]="entriesWithCards()"
+  [headerTemplateRef]="headerTemplateRef"
+  [isExpandAll]="isExpandAll"
+  (expandAll)="expandAll($event)"
+>
 </thy-board-header>
 <div class="board-body" cdkDropListGroup #boardScrollElement [class.board-single-swimlane]="!thyShowLane()">
-  @if(thyShowLane()) {
+  @if(thyShowLane()) { @for(lane of lanesWithEntriesAndCards(); track lane._id){
   <thy-board-lane
-    *ngFor="let lane of lanesWithEntriesAndCards()"
     [lane]="lane"
     [entries]="entriesWithCards()"
     [hasLane]="thyShowLane()"
+    [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
     [isExpanded]="isExpandAll"
   ></thy-board-lane>
-  } @else{
+  } } @else{
   <thy-board-lane
     [entries]="entriesWithCards()"
     [hasLane]="thyShowLane()"
+    [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
     [isExpanded]="isExpandAll"

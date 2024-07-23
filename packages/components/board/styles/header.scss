@@ -17,6 +17,9 @@
             overflow: hidden;
             border-right: solid 1px variables.$gray-200;
             color: variables.$gray-800;
+            &:last-child {
+                border-right: none;
+            }
         }
     }
 

@@ -1,24 +1,65 @@
 <div class="entry-body">
   <div class="entry-cards">
-    <ng-container *ngIf="!hasLane">
-      <cdk-virtual-scroll-viewport autosize [minBufferPx]="500" [maxBufferPx]="1000" thyFlexItem="auto">
-        <div *cdkVirtualFor="let card of entry.cards; trackBy: trackByFn" id="current-cards" class="entry-card">
-          <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
-        </div>
-      </cdk-virtual-scroll-viewport>
-    </ng-container>
-
-    <ng-container *ngIf="hasLane">
-      @for (card of entry.cards; track card._id) {
-      <div id="current-card" class="entry-card">
-        <!-- <div> -->
+    @if(virtualScroll) {
+    <!-- 开启虚拟滚动 -->
+    @if(!hasLane){
+    <!-- 单泳道 -->
+    <cdk-virtual-scroll-viewport autosize [minBufferPx]="500" [maxBufferPx]="1000" thyFlexItem="auto">
+      <div *cdkVirtualFor="let card of entry.cards; trackBy: trackByFn" class="entry-card">
         <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
-        <!-- </div> -->
       </div>
-      }
-    </ng-container>
+    </cdk-virtual-scroll-viewport>
+    }@else { @for (card of entry.cards; track card._id) {
+    <div id="current-card" class="entry-card">
+      <!-- <div> -->
+      <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+      <!-- </div> -->
+    </div>
+    }
+    <!-- 多泳道 -->
+    <!-- <cdk-virtual-scroll-viewport
+      entry
+      [minBufferPx]="500"
+      [maxBufferPx]="1000"
+      [defaultCardSize]="112"
+      (scrolledIndexChange)="scrolledIndexChange($event)"
+      thyFlexItem="auto"
+      class="entry-viewport flex-shrink-0"
+    >
+      <div
+        *cdkVirtualFor="let card of entry.cards; trackBy: trackByFn; last as isLast"
+        cdkDropList
+        [cdkDropListAutoScrollStep]="5"
+        thyDragDrop
+        [cdkDropListData]="entry.cards"
+        id="current-work-items"
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListEnterPredicate]="cdkDropListEnterPredicate"
+        class="entry-work-item"
+      >
+        <agile-work-item-card
+          class="agile"
+          *ngIf="workItem.type !== 'skeleton'"
+          cdkDrag
+          [cdkDragData]="workItem"
+          (cdkDragStarted)="cdkDragStarted($event)"
+          [cdkDragDisabled]="!(workItem.permissions | hasChangeWorkItemStatePermission : workItem.refs?.type?.group)"
+          [workItem]="workItem"
+          [showPropertyConfig]="showPropertyConfig"
+        ></agile-work-item-card>
+        <pjm-work-item-card-skeleton *ngIf="workItem.type === 'skeleton'"></pjm-work-item-card-skeleton>
+      </div>
+    </cdk-virtual-scroll-viewport> -->
 
-    @if (entryBodyFooter) {
+    } } @else {
+    <!-- 不开启虚拟滚动 -->
+    @for (card of entry.cards; track card._id) {
+    <div class="entry-card">
+      <!-- <div> -->
+      <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+      <!-- </div> -->
+    </div>
+    } } @if (entryBodyFooter) {
     <ng-template [ngTemplateOutlet]="entryBodyFooter" [ngTemplateOutletContext]="{ entry: entry }"></ng-template>
     }
   </div>
