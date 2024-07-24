@@ -5,14 +5,13 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, boolean
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyFlexItem } from 'ngx-tethys/grid';
 import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from '../entities';
-import { ThyBoardEntryVirtualScroll } from './entry-virtual-scroll';
 
 @Component({
     selector: 'thy-board-entry',
     templateUrl: 'entry.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgTemplateOutlet, ScrollingModule, ExperimentalScrollingModule, ThyFlexItem, ThyBoardEntryVirtualScroll],
+    imports: [NgTemplateOutlet, ScrollingModule, ExperimentalScrollingModule, ThyFlexItem],
     host: {
         class: 'thy-entry-container'
     }
