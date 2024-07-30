@@ -98,6 +98,13 @@ export class ThyBoardComponent implements OnInit {
      */
     @Input({ transform: booleanAttribute }) thyMovable = false;
 
+    /**
+     * 是否展开所有泳道
+     * @default true
+     * @type boolean
+     */
+    @Input({ transform: booleanAttribute }) thyExpandAll = true;
+
     // @Input() dragStartFn: (card: ThyBoardCard) => Observable<[]>;
 
     // @Input() dragDropFn: (data: { card: ThyBoardCard }) => Observable<any>;
@@ -116,8 +123,6 @@ export class ThyBoardComponent implements OnInit {
      * 拖拽后触发事件
      */
     @Output() droppableChange = new EventEmitter<boolean>();
-
-    public isExpandAll = true;
 
     public lanesWithEntriesAndCards: Signal<ThyBoardLane[]> = computed(() => {
         const entries = this.thyEntries();
@@ -208,6 +213,6 @@ export class ThyBoardComponent implements OnInit {
     }
 
     expandAll(event: boolean) {
-        this.isExpandAll = event;
+        this.thyExpandAll = event;
     }
 }
