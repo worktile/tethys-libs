@@ -2,7 +2,7 @@
   [hasLane]="thyShowLane()"
   [entries]="entriesWithCards()"
   [headerTemplateRef]="headerTemplateRef"
-  [isExpandAll]="isExpandAll"
+  [isExpandAll]="thyExpandAll"
   (expandAll)="expandAll($event)"
 >
 </thy-board-header>
@@ -15,7 +15,7 @@
     [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
-    [isExpanded]="isExpandAll"
+    [isExpanded]="thyExpandAll"
   ></thy-board-lane>
   } } @else{
   <thy-board-lane
@@ -24,7 +24,7 @@
     [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
-    [isExpanded]="isExpandAll"
+    [isExpanded]="thyExpandAll"
   ></thy-board-lane>
   }
 </div>
