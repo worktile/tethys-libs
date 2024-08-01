@@ -3,7 +3,6 @@
 .thy-entry-container {
     display: block;
     height: 100%;
-    padding: 8px;
     position: relative;
     .entry-body {
         position: relative;
@@ -15,16 +14,18 @@
             top: 0;
         }
 
-        .entry-work-items {
+        .entry-cards {
             display: flex;
             flex-direction: column;
             height: 100%;
             .cdk-virtual-scrollable {
                 overflow-x: hidden;
             }
-            .entry-work-item {
-                // min-height: 100px;
-                padding-top: 8px;
+            .entry-card {
+                padding: 8px 8px 0 8px;
+                &:last-child {
+                    padding-bottom: 8px;
+                }
                 .cdk-drag-placeholder {
                     background: transparent !important;
                     border-color: transparent;
@@ -40,14 +41,12 @@
             padding: 0;
             height: 100%;
             background: variables.$gray-80;
-            .entry-work-items {
+            .entry-cards {
                 height: 0;
             }
         }
 
         .entry-viewport {
-            // height: 500px;
-            // max-height: 500px;
             overflow: hidden;
         }
     }

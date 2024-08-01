@@ -31,7 +31,12 @@
 </div>
 }
 
-<div class="board-lane-body" cdkDropListGroup [class.board-no-lane-body]="!hasLane">
+<div
+  class="board-lane-body"
+  cdkDropListGroup
+  [class.board-no-lane-body]="!hasLane"
+  [ngStyle]="{ height: isExpanded && hasLane && laneHeight ? laneHeight + 'px' : 'unset' }"
+>
   @if(hasLane) { @for (entry of lane?.entries; track entry._id) {
   <div
     class="board-lane-body-entry"
@@ -45,6 +50,8 @@
       [entry]="entry"
       [cardTemplateRef]="cardTemplateRef"
       [lane]="lane"
+      [container]="container()"
+      [defaultCardSize]="defaultCardSize"
     ></thy-board-entry>
     }@else {
     <div class="text-muted mx-5 text-truncate">
@@ -56,7 +63,14 @@
   </div>
   } } @else{ @for (entry of entries(); track entry._id) {
   <div class="board-lane-body-entry">
-    <thy-board-entry [hasLane]="hasLane" [virtualScroll]="virtualScroll" [entry]="entry" [cardTemplateRef]="cardTemplateRef">
+    <thy-board-entry
+      [hasLane]="hasLane"
+      [virtualScroll]="virtualScroll"
+      [entry]="entry"
+      [cardTemplateRef]="cardTemplateRef"
+      [container]="container()"
+      [defaultCardSize]="defaultCardSize"
+    >
     </thy-board-entry>
   </div>
   } }

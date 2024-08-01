@@ -22,7 +22,7 @@ export const entries: ThyBoardEntry[] = [
 export const items: ThyBoardCard[] = [
     {
         _id: '1',
-        title: '项目1-1',
+        title: '项目1',
         laneId: '1',
         entryId: '1'
     },
@@ -127,6 +127,12 @@ export const items: ThyBoardCard[] = [
         title: '项目18',
         laneId: '',
         entryId: '1'
+    },
+    {
+        _id: '19',
+        title: '项目19',
+        laneId: '1',
+        entryId: '2'
     }
 ];
 

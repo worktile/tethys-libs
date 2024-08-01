@@ -8,11 +8,22 @@ import { ThyBoardComponent } from './board.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
 import { ThyBoardHeaderComponent } from './header/header.component';
+import { ThyBoardEntryVirtualScroll } from './scroll/entry-virtual-scroll';
+import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 
 const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySharedModule];
 
 @NgModule({
-    imports: [...TETHYS_MODULES, CommonModule, ThyBoardComponent, ThyBoardLaneComponent, ThyBoardEntryComponent, ThyBoardHeaderComponent],
+    imports: [
+        ...TETHYS_MODULES,
+        CommonModule,
+        ThyBoardComponent,
+        ThyBoardBodyScrollableDirective,
+        ThyBoardLaneComponent,
+        ThyBoardEntryComponent,
+        ThyBoardHeaderComponent,
+        ThyBoardEntryVirtualScroll
+    ],
     exports: [ThyBoardComponent],
     providers: []
 })

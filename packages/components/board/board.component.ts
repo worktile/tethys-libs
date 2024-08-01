@@ -11,20 +11,22 @@ import {
     booleanAttribute,
     computed,
     contentChild,
-    input
+    input,
+    numberAttribute
 } from '@angular/core';
 import { ThyBoardVirtualScrolledIndexChangeEvent, ThyBoardCard, ThyBoardEntry, ThyBoardLane } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
 import { EMPTY_OBJECT_ID_STR } from './constants';
+import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 
 @Component({
     selector: 'thy-board',
     templateUrl: 'board.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent],
+    imports: [ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent, ThyBoardBodyScrollableDirective],
     host: {
         class: 'thy-board-container'
     }
@@ -83,6 +85,13 @@ export class ThyBoardComponent implements OnInit {
      * @type boolean
      */
     @Input({ transform: booleanAttribute }) thyVirtualScroll = false;
+
+    /**
+     * 卡片默认高度
+     * @default false
+     * @type boolean
+     */
+    @Input({ transform: numberAttribute }) thyDefaultCardSize = 112;
 
     /**
      * 是否支持排序,开启后支持同栏排序
