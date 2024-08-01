@@ -9,13 +9,16 @@ import {
     ViewChildren,
     booleanAttribute,
     effect,
-    input
+    input,
+    numberAttribute
 } from '@angular/core';
 import { ThyBoardEntryComponent } from '../entry/entry.component';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import { ThyBoardEntry, ThyBoardLane } from '../entities';
+
+const emptyLaneHeight = 200;
 
 @Component({
     selector: 'thy-board-lane',
@@ -50,7 +53,9 @@ export class ThyBoardLaneComponent implements OnInit {
 
     @Input() cardTemplateRef: TemplateRef<any> | null = null;
 
-    container = input.required<ElementRef>();
+    container = input.required<HTMLDivElement>();
+
+    @Input({ transform: numberAttribute }) defaultCardSize = 112;
 
     constructor() {
         effect(() => {
@@ -68,7 +73,7 @@ export class ThyBoardLaneComponent implements OnInit {
                 entrySpacer = entrySpacer < entry.entryBodyHeight ? entry.entryBodyHeight : entrySpacer;
                 laneHeight = Math.max(laneHeight, entrySpacer);
             });
-            laneHeight = this.isExpanded && this.lane?.cards?.length === 0 ? 200 : laneHeight;
+            laneHeight = this.isExpanded && this.lane?.cards?.length === 0 ? emptyLaneHeight : laneHeight;
             this.laneHeight = laneHeight;
         }
     }

@@ -21,7 +21,7 @@ import { ThyBoardCard } from '../entities';
 export class EntryItemSizeAverager extends ItemSizeAverager {
     private averageItemSize: number;
 
-    private defaultItemSize: number;
+    public defaultItemSize: number;
 
     constructor(defaultItemSize = 112) {
         super(defaultItemSize);
@@ -52,7 +52,7 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
 
     private cardsHeightMap: Record<string, { index: number; height: number }> = {};
 
-    constructor(minBufferPx: number, maxBufferPx: number, averager = new EntryItemSizeAverager()) {
+    constructor(minBufferPx: number, maxBufferPx: number, public averager = new EntryItemSizeAverager()) {
         super(minBufferPx, maxBufferPx, averager);
     }
 
@@ -98,9 +98,9 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
         let totalSize = 0;
         const keys = Object.keys(this.cardsHeightMap);
         keys.forEach((item) => {
-            totalSize = totalSize + (this.cardsHeightMap[item].height || 112);
+            totalSize = totalSize + (this.cardsHeightMap[item].height || this.averager.defaultItemSize);
         });
-        const averageSize = keys.length > 0 && totalSize > 0 ? totalSize / keys.length : 112;
+        const averageSize = keys.length > 0 && totalSize > 0 ? totalSize / keys.length : this.averager.defaultItemSize;
         totalSize = totalSize + (viewport.getDataLength() - (keys.length || 0)) * averageSize;
         return totalSize;
     }
@@ -120,7 +120,7 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
             if (this.cardsHeightMap[card._id]) {
                 cardsHeightMap[card._id] = { ...this.cardsHeightMap[card._id], index: index };
             } else {
-                cardsHeightMap[card._id] = { height: 112, index: index };
+                cardsHeightMap[card._id] = { height: this.averager.defaultItemSize, index: index };
             }
         });
         this.cardsHeightMap = { ...cardsHeightMap };
@@ -193,7 +193,7 @@ export class ThyBoardEntryVirtualScroll extends CdkAutoSizeVirtualScroll impleme
         return this._maxBufferPx;
     }
 
-    @Input({ transform: numberAttribute, required: true }) defaultCardSize = 112;
+    @Input({ transform: numberAttribute }) defaultCardSize = 112;
 
     cards = input.required<ThyBoardCard[]>();
 
@@ -202,7 +202,7 @@ export class ThyBoardEntryVirtualScroll extends CdkAutoSizeVirtualScroll impleme
     public readonly scrollStrategy = new ThyBoardEntryVirtualScrollStrategy(
         this.minBufferPx,
         this.maxBufferPx,
-        new EntryItemSizeAverager(112)
+        new EntryItemSizeAverager(this.defaultCardSize)
     );
 
     constructor() {

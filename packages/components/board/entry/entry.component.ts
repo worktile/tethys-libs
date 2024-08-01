@@ -11,7 +11,8 @@ import {
     ViewChild,
     booleanAttribute,
     effect,
-    input
+    input,
+    numberAttribute
 } from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyFlexItem } from 'ngx-tethys/grid';
@@ -56,7 +57,9 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() entryBodyFooter: TemplateRef<SafeAny> | null = null;
 
-    container = input.required<ElementRef>();
+    container = input.required<HTMLElement>();
+
+    @Input({ transform: numberAttribute }) defaultCardSize = 112;
 
     public entryBodyHeight = 0;
 
@@ -71,9 +74,9 @@ export class ThyBoardEntryComponent implements OnInit {
     setBodyHeight() {
         if (this.hasLane && this.virtualScroll) {
             const entrySpacer = this.entryVirtualScroll?.scrollStrategy?.entrySpacer();
-            const containerHeight = this.container()?.nativeElement?.clientHeight;
+            const containerHeight = this.container()?.clientHeight;
             if (this.entryVirtualScroll) {
-                this.entryBodyHeight = Math.min(containerHeight - 50, entrySpacer);
+                this.entryBodyHeight = Math.min(containerHeight, entrySpacer);
             } else {
                 this.entryBodyHeight = containerHeight;
             }

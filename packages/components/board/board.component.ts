@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    ElementRef,
     EventEmitter,
     Input,
     OnInit,
@@ -12,7 +11,8 @@ import {
     booleanAttribute,
     computed,
     contentChild,
-    input
+    input,
+    numberAttribute
 } from '@angular/core';
 import { ThyBoardVirtualScrolledIndexChangeEvent, ThyBoardCard, ThyBoardEntry, ThyBoardLane } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
@@ -87,6 +87,13 @@ export class ThyBoardComponent implements OnInit {
     @Input({ transform: booleanAttribute }) thyVirtualScroll = false;
 
     /**
+     * 卡片默认高度
+     * @default false
+     * @type boolean
+     */
+    @Input({ transform: numberAttribute }) thyDefaultCardSize = 112;
+
+    /**
      * 是否支持排序,开启后支持同栏排序
      * @default false
      * @type boolean
@@ -140,7 +147,7 @@ export class ThyBoardComponent implements OnInit {
         return this.buildEntriesWithCardsByLanes(lanesWithEntriesAndCards, entries);
     });
 
-    constructor(public elementRef: ElementRef) {}
+    constructor() {}
 
     ngOnInit() {}
 
