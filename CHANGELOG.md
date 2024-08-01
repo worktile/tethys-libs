@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0-next.2](https://github.com/tethys-org/libs/compare/v17.1.0-next.1...v17.1.0-next.2) (2024-07-31)
+
+### Features
+
+- **components:** board support expand all lanes ([a363d99](https://github.com/tethys-org/libs/commit/a363d99059fbda8680115a05067615b0b384a097))
+
 # [17.1.0-next.1](https://github.com/tethys-org/libs/compare/v17.0.0...v17.1.0-next.1) (2024-07-24)
 
 ### Bug Fixes

@@ -63,10 +63,6 @@
             width: 320px;
             border-right: 1px solid variables.$gray-200;
 
-            &:last-child {
-                border-right: none;
-            }
-
             &:first-child {
                 margin-left: 0px;
             }
