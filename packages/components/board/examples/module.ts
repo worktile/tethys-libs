@@ -4,6 +4,7 @@ import { ThyBoardBasicCardComponent } from './basic/card/card.component';
 import { CommonModule } from '@angular/common';
 import { ThyProBoardSingleExampleComponent } from './single/single.component';
 import { ThyProBoardCustomTemplateExampleComponent } from './custom-template/custom-template.component';
+import { ThyProBoardVirtualScrollExampleComponent } from './virtual-scroll/virtual-scroll.component';
 
 export default {
     imports: [ThyProBoardModule, CommonModule],
@@ -11,6 +12,7 @@ export default {
         ThyProBoardBasicExampleComponent,
         ThyBoardBasicCardComponent,
         ThyProBoardSingleExampleComponent,
-        ThyProBoardCustomTemplateExampleComponent
+        ThyProBoardCustomTemplateExampleComponent,
+        ThyProBoardVirtualScrollExampleComponent
     ]
 };

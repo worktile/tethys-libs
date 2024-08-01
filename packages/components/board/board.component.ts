@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
+    ElementRef,
     EventEmitter,
     Input,
     OnInit,
@@ -18,13 +19,14 @@ import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
 import { EMPTY_OBJECT_ID_STR } from './constants';
+import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 
 @Component({
     selector: 'thy-board',
     templateUrl: 'board.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent],
+    imports: [ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent, ThyBoardBodyScrollableDirective],
     host: {
         class: 'thy-board-container'
     }
@@ -133,7 +135,7 @@ export class ThyBoardComponent implements OnInit {
         return this.buildEntriesWithCardsByLanes(lanesWithEntriesAndCards, entries);
     });
 
-    constructor() {}
+    constructor(public elementRef: ElementRef) {}
 
     ngOnInit() {}
 

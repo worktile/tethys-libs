@@ -5,3 +5,5 @@ export * from './entry/entry.component';
 export * from './header/header.component';
 export * from './entities';
 export * from './constants';
+export * from './scroll/board-body-scroll';
+export * from './scroll/entry-virtual-scroll';

@@ -6,7 +6,13 @@
   (expandAll)="expandAll($event)"
 >
 </thy-board-header>
-<div class="board-body" cdkDropListGroup #boardScrollElement [class.board-single-swimlane]="!thyShowLane()">
+<div
+  class="board-body"
+  cdkDropListGroup
+  [thyBoardBodyScrollable]="!thyShowLane() || !thyVirtualScroll"
+  #boardScrollElement
+  [class.board-single-swimlane]="!thyShowLane()"
+>
   @if(thyShowLane()) { @for(lane of lanesWithEntriesAndCards(); track lane._id){
   <thy-board-lane
     [lane]="lane"
@@ -16,6 +22,7 @@
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
     [isExpanded]="isExpandAll"
+    [container]="elementRef"
   ></thy-board-lane>
   } } @else{
   <thy-board-lane
@@ -25,6 +32,7 @@
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
     [isExpanded]="isExpandAll"
+    [container]="elementRef"
   ></thy-board-lane>
   }
 </div>

@@ -1,22 +1,49 @@
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
-import { NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, booleanAttribute } from '@angular/core';
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnInit,
+    TemplateRef,
+    ViewChild,
+    booleanAttribute,
+    effect,
+    input
+} from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyFlexItem } from 'ngx-tethys/grid';
 import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from '../entities';
+import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
+import { CdkDragDrop, CdkDragStart, DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
     selector: 'thy-board-entry',
     templateUrl: 'entry.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgTemplateOutlet, ScrollingModule, ExperimentalScrollingModule, ThyFlexItem],
+    imports: [
+        NgStyle,
+        NgTemplateOutlet,
+        ScrollingModule,
+        DragDropModule,
+        ExperimentalScrollingModule,
+        ThyFlexItem,
+        ThyBoardEntryVirtualScroll
+    ],
     host: {
         class: 'thy-entry-container'
     }
 })
 export class ThyBoardEntryComponent implements OnInit {
+    @ViewChild(ThyBoardEntryVirtualScroll) entryVirtualScroll!: ThyBoardEntryVirtualScroll;
+
+    @ViewChild(CdkVirtualScrollViewport) currentViewport!: CdkVirtualScrollViewport;
+
+    @ViewChild('entryBody') entryBody!: ElementRef;
+
     @Input({ required: true }) entry!: ThyBoardEntry;
 
     @Input() lane: ThyBoardLane | undefined;
@@ -29,15 +56,65 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() entryBodyFooter: TemplateRef<SafeAny> | null = null;
 
-    constructor() {}
+    container = input.required<ElementRef>();
+
+    public entryBodyHeight = 0;
+
+    constructor() {
+        effect(() => {
+            this.setBodyHeight();
+        });
+    }
 
     ngOnInit() {}
 
-    scrolledIndexChange() {}
+    setBodyHeight() {
+        if (this.hasLane && this.virtualScroll) {
+            const entrySpacer = this.entryVirtualScroll?.scrollStrategy?.entrySpacer();
+            const containerHeight = this.container()?.nativeElement?.clientHeight;
+            if (this.entryVirtualScroll) {
+                this.entryBodyHeight = Math.min(containerHeight - 50, entrySpacer);
+            } else {
+                this.entryBodyHeight = containerHeight;
+            }
+        }
+    }
 
-    cdkDropListEnterPredicate = () => {};
+    scrolledIndexChange(event: number) {}
 
-    // drop(event) {}
+    cdkDragStarted(event: CdkDragStart) {}
+
+    cdkDropListEnterPredicate = () => {
+        return false;
+    };
+
+    drop(event: CdkDragDrop<ThyBoardCard>) {}
+
+    scrollToOffset(payload: { position: 'top' | 'middle' | 'bottom'; scrollTop: number; laneHight: number }) {
+        const realHeight = this.entryVirtualScroll.scrollStrategy.entrySpacer();
+
+        if (payload.position) {
+            if (payload.position === 'bottom') {
+                this.currentViewport.scrollTo({ bottom: 0 });
+            } else {
+                if (payload.scrollTop > this.entryVirtualScroll.scrollStrategy.entrySpacer() - this.entryBodyHeight) {
+                    this.currentViewport.scrollTo({ bottom: 0 });
+
+                    if (payload.laneHight - payload.scrollTop > this.entryBodyHeight) {
+                        const offset = -(payload.scrollTop + this.entryBodyHeight - realHeight);
+                        const renderedContentTransform = `translateY(${Number(offset)}px)`;
+                        this.entryBody.nativeElement.style.transform = renderedContentTransform;
+                    }
+                } else {
+                    if (!!this.entryBody.nativeElement.style.transform) {
+                        this.entryBody.nativeElement.style.transform = '';
+                    }
+
+                    this.currentViewport.scrollToOffset(Math.max(0, payload.scrollTop));
+                }
+            }
+        }
+    }
 
     trackByFn(index: number, item: ThyBoardCard) {
         return item._id || index;
