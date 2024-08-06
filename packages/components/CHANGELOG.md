@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0-next.2](https://github.com/tethys-org/libs/compare/v17.1.0-next.1...v17.1.0-next.2) (2024-07-31)
+
+### Features
+
+- **components:** board support expand all lanes ([a363d99](https://github.com/tethys-org/libs/commit/a363d99059fbda8680115a05067615b0b384a097))
+
+# [17.1.0-next.1](https://github.com/tethys-org/libs/compare/v17.0.0...v17.1.0-next.1) (2024-07-24)
+
+### Features
+
+- **components:** add board component #INFR-12953 ([c4b0138](https://github.com/tethys-org/libs/commit/c4b0138ae501bd4aa4719b86a47df4ff53474200)), closes [#INFR-12953](https://github.com/tethys-org/libs/issues/INFR-12953)
+- **components:** board support custom lane and header #INFR-12982 ([81b772b](https://github.com/tethys-org/libs/commit/81b772b96186af5feb2cb61cca5c9f04afc5af40)), closes [#INFR-12982](https://github.com/tethys-org/libs/issues/INFR-12982)
+
+# [17.1.0-next.0](https://github.com/tethys-org/libs/compare/v17.0.0...v17.1.0-next.0) (2024-07-17)
+
+### Features
+
+- **components:** add board component #INFR-12953 ([c4b0138](https://github.com/tethys-org/libs/commit/c4b0138ae501bd4aa4719b86a47df4ff53474200)), closes [#INFR-12953](https://github.com/tethys-org/libs/issues/INFR-12953)
+
+# [17.0.0](https://github.com/tethys-org/libs/compare/v17.0.0-next.1...v17.0.0) (2024-03-15)
+
+**Note:** Version bump only for package @tethys/pro
+
+# [17.0.0-next.1](https://github.com/tethys-org/libs/compare/v17.0.0-next.0...v17.0.0-next.1) (2024-03-13)
+
+**Note:** Version bump only for package @tethys/pro
+
+# [17.0.0-next.0](https://github.com/tethys-org/libs/compare/v16.0.0...v17.0.0-next.0) (2024-03-06)
+
+**Note:** Version bump only for package @tethys/pro
+
 # [16.0.0-next.0](https://github.com/tethys-org/libs/compare/v15.0.0-next.10...v16.0.0-next.0) (2023-08-16)
 
 ### Features

@@ -1,0 +1,79 @@
+@use 'ngx-tethys/styles/variables.scss' as variables;
+
+.thy-board-lane-container {
+    display: flex;
+    border-bottom: solid 1px variables.$gray-200;
+
+    .board-lane-header-container {
+        padding: 20px;
+        width: 320px;
+        flex-shrink: 0;
+        &.board-lane-header-expanded {
+            border-right: solid 1px variables.$gray-200;
+        }
+
+        .board-lane-header {
+            display: flex;
+            align-items: flex-start;
+            height: fit-content;
+            width: 100%;
+            position: sticky;
+            top: 20px;
+            z-index: 10;
+        }
+
+        .lane-expand-icon {
+            line-height: initial;
+            color: variables.$gray-500;
+            cursor: pointer;
+            &.lane-expand-icon-collapsed {
+                transform: rotate(-90deg);
+            }
+        }
+        .board-lane-header-title {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            cursor: pointer;
+
+            .board-lane-header-title-content {
+                &.board-lane-header-title-content-multiple-line {
+                    height: 66px;
+                    display: -webkit-box;
+                    white-space: normal;
+                    word-break: break-all;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+        .board-lane-header-state {
+            max-width: 400px;
+            margin-left: 15px;
+        }
+        .type-container {
+            max-width: 255px;
+        }
+    }
+    .board-lane-body {
+        display: flex;
+        .board-lane-body-entry {
+            width: 320px;
+            border-right: 1px solid variables.$gray-200;
+
+            &:first-child {
+                margin-left: 0px;
+            }
+            &.board-lane-body-entry-is-empty {
+                min-height: 200px;
+            }
+            &.board-lane-body-entry-is-collapsed {
+                height: 64px;
+                line-height: 64px;
+                border-right: none;
+            }
+        }
+    }
+}

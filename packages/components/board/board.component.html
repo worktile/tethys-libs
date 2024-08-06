@@ -1,0 +1,40 @@
+<thy-board-header
+  [hasLane]="thyShowLane()"
+  [entries]="entriesWithCards()"
+  [headerTemplateRef]="headerTemplateRef"
+  [isExpandAll]="thyExpandAll"
+  (expandAll)="expandAll($event)"
+>
+</thy-board-header>
+<div
+  class="board-body"
+  cdkDropListGroup
+  [thyBoardBodyScrollable]="!thyShowLane() || !thyVirtualScroll"
+  #boardScrollElement
+  [class.board-single-swimlane]="!thyShowLane()"
+>
+  @if(thyShowLane()) { @for(lane of lanesWithEntriesAndCards(); track lane._id){
+  <thy-board-lane
+    [lane]="lane"
+    [entries]="entriesWithCards()"
+    [hasLane]="thyShowLane()"
+    [virtualScroll]="thyVirtualScroll"
+    [laneTemplateRef]="laneTemplateRef"
+    [cardTemplateRef]="cardTemplateRef()"
+    [isExpanded]="thyExpandAll"
+    [container]="boardScrollElement"
+    [defaultCardSize]="thyDefaultCardSize"
+  ></thy-board-lane>
+  } } @else{
+  <thy-board-lane
+    [entries]="entriesWithCards()"
+    [hasLane]="thyShowLane()"
+    [virtualScroll]="thyVirtualScroll"
+    [laneTemplateRef]="laneTemplateRef"
+    [cardTemplateRef]="cardTemplateRef()"
+    [isExpanded]="thyExpandAll"
+    [container]="boardScrollElement"
+    [defaultCardSize]="thyDefaultCardSize"
+  ></thy-board-lane>
+  }
+</div>

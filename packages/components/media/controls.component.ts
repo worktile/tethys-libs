@@ -5,6 +5,7 @@ import { useHostRenderer } from '@tethys/cdk/dom';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
+import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThySliderType } from 'ngx-tethys/slider';
 import { ThyProIconModule } from '../icon/module';
 import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
@@ -53,6 +54,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                     (click)="muted()"
                     thyDropdownActive="active"
                     [thyDropdown]="volume"
+                    thyPanelClass="volume-dropdown-panel"
                     (thyActiveChange)="actionActiveChange($event)"
                 >
                     <thy-pro-icon
@@ -104,6 +106,7 @@ import { ThyMediaProgressComponent } from './progress.component';
         NgIf,
         CommonModule,
         FormsModule,
+        ThyIconModule,
         ThyProIconModule,
         ThyDropdownModule,
         ThyActionModule,

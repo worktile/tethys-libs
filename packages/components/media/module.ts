@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThyIconModule } from 'ngx-tethys/icon';
-import { ThyProIconModule } from '../icon/module';
 import { ThyAudioControlsComponent } from './audio-controls.component';
 import { ThyAudioPlayerComponent } from './audio-player.component';
 import { ThyVideoControlsComponent } from './controls.component';
@@ -18,7 +17,6 @@ import { ThyVideoPlayerComponent } from './video-player.component';
         ThyIconModule,
         ThyDropdownModule,
         ThyActionModule,
-        ThyProIconModule,
         ThyVideoPlayerComponent,
         ThyAudioPlayerComponent,
         ThyMediaProgressComponent,

@@ -1,0 +1,35 @@
+@use 'ngx-tethys/styles/mixins/shadow';
+@use 'ngx-tethys/styles/variables.scss' as variables;
+
+.thy-board-groups-header {
+    display: block;
+    width: 100%;
+    line-height: 48px;
+    border-bottom: solid 1px variables.$gray-200;
+
+    .states {
+        position: relative;
+        display: flex;
+        .state {
+            width: 320px;
+            min-width: 320px;
+            padding: 0 20px;
+            overflow: hidden;
+            border-right: solid 1px variables.$gray-200;
+            color: variables.$gray-800;
+        }
+    }
+
+    .board-setting {
+        position: absolute;
+        right: 0;
+        top: 48px;
+        width: 50px;
+        color: variables.$gray-500;
+        text-align: center;
+        border-left: solid 1px variables.$gray-200;
+        line-height: 48px;
+        cursor: pointer;
+        background: variables.$gray-80;
+    }
+}

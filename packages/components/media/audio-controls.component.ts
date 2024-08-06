@@ -2,6 +2,8 @@ import { CommonModule, NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
+import { ThyFlexibleTextModule } from 'ngx-tethys/flexible-text';
+import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyProIconModule } from '../icon/module';
 import { ThyVideoControlsComponent } from './controls.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
@@ -25,13 +27,13 @@ import { ThyMediaProgressComponent } from './progress.component';
                 </a>
                 <div class="controls-content">
                     <div class="file-description" *ngIf="fileName">
-                        <span class="file-name">{{ fileName }}</span>
+                        <thy-flexible-text class="file-name" [thyTooltipContent]="fileName"> {{ fileName }}</thy-flexible-text>
                         <span class="file-size" *ngIf="fileSize">{{ fileSize + 'MB' }}</span>
                     </div>
 
-                    <div class="error-tip" *ngIf="errorTips">
+                    <thy-flexible-text [thyTooltipContent]="errorTips" class="error-tip" *ngIf="errorTips">
                         {{ errorTips }}
-                    </div>
+                    </thy-flexible-text>
 
                     <div class="d-flex align-items-center">
                         <div class="current-time mr-4">
@@ -75,7 +77,9 @@ import { ThyMediaProgressComponent } from './progress.component';
     imports: [
         NgIf,
         CommonModule,
+        ThyIconModule,
         ThyProIconModule,
+        ThyFlexibleTextModule,
         ThyDropdownModule,
         ThyActionModule,
         ThyMediaProgressComponent,

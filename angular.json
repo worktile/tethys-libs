@@ -27,9 +27,11 @@
             "outputPath": "dist/site",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "polyfills": ["zone.js"],
+            "tsConfig": "src/tsconfig.app.json",
+            "stylePreprocessorOptions": {
+              "includePaths": ["./src/styles"]
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -40,10 +42,29 @@
               }
             ],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -77,12 +98,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "disableHostCheck": true,
+            "buildTarget": "site:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "site:build:production"
+              "buildTarget": "site:build:production"
             },
             "development": {
-              "browserTarget": "site:build:development"
+              "buildTarget": "site:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,7 +115,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "site:build"
+            "buildTarget": "site:build"
           }
         },
         "test": {

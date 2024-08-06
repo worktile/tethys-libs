@@ -3,6 +3,7 @@
 
 .thy-media-controls {
     width: 100%;
+    overflow: hidden;
     padding: 12px 20px 8px;
     transition: all 0.3s ease;
     background-image: linear-gradient(180deg, rgba(51, 51, 51, 0.3) 0%, rgba(51, 51, 51, 0.8) 100%);
@@ -98,6 +99,7 @@
             }
             .controls-content {
                 flex: 1;
+                overflow: hidden;
                 margin-right: 16px;
                 font-size: 0.75rem;
                 color: basic.$gray-600;
@@ -107,6 +109,8 @@
                     line-height: 28px;
                 }
                 .file-description {
+                    display: flex;
+                    overflow: hidden;
                     .file-name {
                         font-size: 0.875rem;
                         color: basic.$black;
@@ -135,8 +139,11 @@
     }
 }
 
-.volume-dropdown-panel-class {
-    padding: 8px 0 12px;
+.volume-dropdown-panel {
+    .thy-dropdown-menu {
+        width: 48px !important;
+        padding: 8px 0 12px;
+    }
 }
 .volume-progress-container {
     display: flex;
