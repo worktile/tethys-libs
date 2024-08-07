@@ -7,7 +7,6 @@ import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThySliderType } from 'ngx-tethys/slider';
-import { ThyProIconModule } from '../icon/module';
 import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
@@ -35,10 +34,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                     href="javascript:;"
                     (click)="playOrPause()"
                 >
-                    <thy-pro-icon
-                        [class.paused-image]="!isPlaying"
-                        [thyIconName]="isPlaying ? 'paused-white' : 'play-white'"
-                    ></thy-pro-icon>
+                    <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'play-fill' : 'pause'"></thy-icon>
                 </a>
 
                 <div class="controls-time">
@@ -55,12 +51,10 @@ import { ThyMediaProgressComponent } from './progress.component';
                     thyDropdownActive="active"
                     [thyDropdown]="volume"
                     thyPanelClass="volume-dropdown-panel"
+                    [thyPlacement]="placement"
                     (thyActiveChange)="actionActiveChange($event)"
                 >
-                    <thy-pro-icon
-                        [class.paused-image]="!isPlaying"
-                        [thyIconName]="mediaHtmlElement?.muted ? 'muted' : 'volume'"
-                    ></thy-pro-icon>
+                    <thy-icon [thyIconName]="mediaHtmlElement?.muted ? 'muted' : 'volume'"></thy-icon>
                 </a>
 
                 <a
@@ -107,7 +101,6 @@ import { ThyMediaProgressComponent } from './progress.component';
         CommonModule,
         FormsModule,
         ThyIconModule,
-        ThyProIconModule,
         ThyDropdownModule,
         ThyActionModule,
         ThyMediaProgressComponent,
@@ -151,6 +144,8 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     private hostRenderer = useHostRenderer();
 
     playBackRates = DEFAULT_PLAYBACK_RATES;
+
+    placement = 'topCenter' as any;
 
     constructor(private cdr: ChangeDetectorRef) {
         super();

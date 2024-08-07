@@ -1,5 +1,6 @@
 @use 'ngx-tethys/styles/basic.scss';
 @forward './audio-player.scss';
+@forward './video-player.scss';
 @forward './progress.scss';
 @forward './controls.scss';
 
@@ -25,34 +26,5 @@
     audio::-webkit-media-controls-play-button:hover {
         background-color: rgba(basic.$gray-300, 0.7);
         border-radius: 50%;
-    }
-}
-
-.thy-video-player {
-    background-color: basic.$black;
-
-    .thy-media-controls {
-        position: absolute;
-        left: 0;
-        bottom: 0px;
-        opacity: 0;
-    }
-    .thy-media-controls-paused {
-        opacity: 1;
-    }
-    &:hover {
-        .thy-media-controls {
-            opacity: 1;
-        }
-    }
-
-    .error-tip {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        transform: translateX(-50%);
-        color: basic.$white;
-        font-size: 14px;
-        text-align: center;
     }
 }

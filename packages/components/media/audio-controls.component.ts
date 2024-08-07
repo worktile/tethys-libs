@@ -4,7 +4,6 @@ import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThyFlexibleTextModule } from 'ngx-tethys/flexible-text';
 import { ThyIconModule } from 'ngx-tethys/icon';
-import { ThyProIconModule } from '../icon/module';
 import { ThyVideoControlsComponent } from './controls.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
@@ -23,7 +22,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                     href="javascript:;"
                     (click)="playOrPause()"
                 >
-                    <thy-pro-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'paused' : 'play'"></thy-pro-icon>
+                    <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'play-fill' : 'pause'"></thy-icon>
                 </a>
                 <div class="controls-content">
                     <div class="file-description" *ngIf="fileName">
@@ -52,7 +51,15 @@ import { ThyMediaProgressComponent } from './progress.component';
                     </div>
                 </div>
                 <div class="controls-right">
-                    <a thyAction thyDropdownActive="active" [thyDropdown]="menu" class="controls-playback-rate" href="javascript:;">倍速</a>
+                    <a
+                        [class.hidden]="errorTips"
+                        thyAction
+                        thyDropdownActive="active"
+                        [thyDropdown]="menu"
+                        class="controls-playback-rate"
+                        href="javascript:;"
+                        >倍速</a
+                    >
 
                     <div class="duration-time">
                         {{ mediaHtmlElement?.duration | thyTimeFormat }}
@@ -78,7 +85,6 @@ import { ThyMediaProgressComponent } from './progress.component';
         NgIf,
         CommonModule,
         ThyIconModule,
-        ThyProIconModule,
         ThyFlexibleTextModule,
         ThyDropdownModule,
         ThyActionModule,

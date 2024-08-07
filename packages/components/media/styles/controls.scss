@@ -30,11 +30,11 @@
             border-radius: 50%;
             margin-right: 12px;
             justify-content: center;
-            .thy-pro-icon.paused-image {
+            .paused-image {
                 margin-left: 3px;
             }
             &.disabled {
-                .thy-pro-icon {
+                .thy-icon {
                     opacity: 0.2;
                 }
             }
@@ -129,6 +129,9 @@
             .controls-right {
                 .controls-playback-rate {
                     margin-right: -8px;
+                    &.hidden {
+                        visibility: hidden;
+                    }
                 }
                 .duration-time {
                     font-size: 0.75rem;
