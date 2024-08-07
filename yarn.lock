@@ -3552,10 +3552,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@tethys/icons@1.4.24":
-  version "1.4.24"
-  resolved "https://registry.npmjs.org/@tethys/icons/-/icons-1.4.24.tgz#a0730f975226cb09250b8a49014260485aab55df"
-  integrity sha512-P/WHWdu5DTFVz/SbmtYkAP7vZkuPU2sQt5gEQRRdApYECbemCCPsyRiB5gK1QUfaRE7r9eCKzl2Vpy4LF+iYJQ==
+"@tethys/icons@1.4.69":
+  version "1.4.69"
+  resolved "https://registry.npmmirror.com/@tethys/icons/-/icons-1.4.69.tgz#fba983b1237fe3c230bd6bf0e2ff471437a070aa"
+  integrity sha512-suauYSb6QIE9YCRMbeIVzceAfxdZxCe0WwPyUkbCTJxyIAwMY1YFDiJzVNwKQ8227UHy7Z2tUdxgUWXmpiRVgA==
 
 "@tethys/store@17.0.0":
   version "17.0.0"
