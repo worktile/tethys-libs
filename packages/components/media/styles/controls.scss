@@ -112,6 +112,8 @@
                     display: flex;
                     overflow: hidden;
                     .file-name {
+                        max-width: 100%;
+                        width: unset;
                         font-size: 0.875rem;
                         color: basic.$black;
                     }
@@ -143,6 +145,7 @@
 }
 
 .volume-dropdown-panel {
+    padding-bottom: 4px;
     .thy-dropdown-menu {
         width: 48px !important;
         padding: 8px 0 12px;

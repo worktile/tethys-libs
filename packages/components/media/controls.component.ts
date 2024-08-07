@@ -34,7 +34,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                     href="javascript:;"
                     (click)="playOrPause()"
                 >
-                    <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'play-fill' : 'pause'"></thy-icon>
+                    <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'pause' : 'play-fill'"></thy-icon>
                 </a>
 
                 <div class="controls-time">
@@ -60,6 +60,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                 <a
                     thyAction
                     [thyDropdown]="playbackRate"
+                    [thyPlacement]="'topRight'"
                     thyDropdownActive="active"
                     (thyActiveChange)="actionActiveChange($event)"
                     class="controls-playback-rate"

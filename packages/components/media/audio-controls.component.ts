@@ -22,7 +22,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                     href="javascript:;"
                     (click)="playOrPause()"
                 >
-                    <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'play-fill' : 'pause'"></thy-icon>
+                    <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'pause' : 'play-fill'"></thy-icon>
                 </a>
                 <div class="controls-content">
                     <div class="file-description" *ngIf="fileName">

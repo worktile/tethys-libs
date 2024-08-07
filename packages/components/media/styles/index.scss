@@ -16,6 +16,7 @@
 }
 .thy-video-player,
 .thy-audio-player {
+    overflow: hidden;
     audio::-moz-media-controls-panel {
         background-color: basic.$gray-100;
     }
