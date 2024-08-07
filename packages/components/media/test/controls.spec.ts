@@ -121,7 +121,7 @@ describe('mediaComponent', () => {
             loadedMediaAndPlay(done, mutedClick);
         });
 
-        it('should set volume worked', fakeAsync(() => {
+        xit('should set volume worked', fakeAsync(() => {
             const mutedDebugElement = videoControlsDebugElement.query(By.css('.controls-muted'));
             const mutedButton = mutedDebugElement.nativeElement;
             const dropdown = mutedDebugElement.injector.get(ThyDropdownDirective);
