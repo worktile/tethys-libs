@@ -131,7 +131,7 @@ export class ThyBoardComponent implements OnInit {
     /**
      * 展开收起所有泳道事件
      */
-    @Output() thyExpandAllLane = new EventEmitter<{ expanded: boolean }>();
+    @Output() thyExpandAllLanes = new EventEmitter<{ expanded: boolean }>();
 
     /**
      * 拖拽后触发事件
@@ -228,6 +228,6 @@ export class ThyBoardComponent implements OnInit {
 
     expandAll(event: boolean) {
         this.thyExpandAll = event;
-        this.thyExpandAllLane.emit({ expanded: this.thyExpandAll });
+        this.thyExpandAllLanes.emit({ expanded: this.thyExpandAll });
     }
 }

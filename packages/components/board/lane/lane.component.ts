@@ -83,7 +83,6 @@ export class ThyBoardLaneComponent implements OnInit {
 
         effect(
             () => {
-                console.log(`effect lane`);
                 const lane = this.lane();
                 if (!helpers.isUndefinedOrNull(lane?.expanded)) {
                     this.laneIsExpanded.set(!!lane?.expanded);

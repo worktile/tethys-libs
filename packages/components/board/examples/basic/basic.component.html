@@ -5,7 +5,7 @@
     [thyLanes]="lanes"
     [thyShowLane]="lanes.length > 1"
     (thyExpandLane)="expandLane($event)"
-    (thyExpandAllLane)="expandAllLanes($event)"
+    (thyExpandAllLanes)="expandAllLanes($event)"
   >
     <ng-template #card let-item="">
       <thy-board-basic-card [card]="item"></thy-board-basic-card>
