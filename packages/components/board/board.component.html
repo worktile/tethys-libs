@@ -21,9 +21,10 @@
     [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
-    [isExpanded]="thyExpandAll"
+    [allLanesIsExpanded]="thyExpandAll"
     [container]="boardScrollElement"
     [defaultCardSize]="thyDefaultCardSize"
+    (expandLane)="thyExpandLane.emit($event)"
   ></thy-board-lane>
   } } @else{
   <thy-board-lane
@@ -32,7 +33,6 @@
     [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
-    [isExpanded]="thyExpandAll"
     [container]="boardScrollElement"
     [defaultCardSize]="thyDefaultCardSize"
   ></thy-board-lane>

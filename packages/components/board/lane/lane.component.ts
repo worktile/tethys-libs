@@ -1,22 +1,26 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
+    EventEmitter,
     Input,
     OnInit,
+    Output,
     QueryList,
     TemplateRef,
     ViewChildren,
+    WritableSignal,
     booleanAttribute,
     effect,
     input,
-    numberAttribute
+    numberAttribute,
+    signal
 } from '@angular/core';
 import { ThyBoardEntryComponent } from '../entry/entry.component';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import { ThyBoardEntry, ThyBoardLane } from '../entities';
+import { helpers } from 'ngx-tethys/util';
 
 const emptyLaneHeight = 200;
 
@@ -39,11 +43,11 @@ export class ThyBoardLaneComponent implements OnInit {
 
     public laneHeight = 0;
 
-    @Input() lane: ThyBoardLane | undefined;
+    lane = input<ThyBoardLane>();
 
     entries = input.required<ThyBoardEntry[]>();
 
-    @Input({ transform: booleanAttribute }) isExpanded = true;
+    allLanesIsExpanded = input<boolean>(true);
 
     @Input({ transform: booleanAttribute }) hasLane = false;
 
@@ -57,10 +61,36 @@ export class ThyBoardLaneComponent implements OnInit {
 
     @Input({ transform: numberAttribute }) defaultCardSize = 112;
 
+    /**
+     * 展开收起泳道事件
+     */
+    @Output() expandLane = new EventEmitter<{ lane: ThyBoardLane; expanded: boolean }>();
+
+    laneIsExpanded: WritableSignal<boolean> = signal(true);
+
     constructor() {
         effect(() => {
             this.setLaneHeight();
         });
+
+        effect(
+            () => {
+                const allLanesIsExpanded = this.allLanesIsExpanded();
+                this.laneIsExpanded.set(allLanesIsExpanded);
+            },
+            { allowSignalWrites: true }
+        );
+
+        effect(
+            () => {
+                console.log(`effect lane`);
+                const lane = this.lane();
+                if (!helpers.isUndefinedOrNull(lane?.expanded)) {
+                    this.laneIsExpanded.set(!!lane?.expanded);
+                }
+            },
+            { allowSignalWrites: true }
+        );
     }
 
     ngOnInit() {}
@@ -73,12 +103,15 @@ export class ThyBoardLaneComponent implements OnInit {
                 entrySpacer = entrySpacer < entry.entryBodyHeight ? entry.entryBodyHeight : entrySpacer;
                 laneHeight = Math.max(laneHeight, entrySpacer);
             });
-            laneHeight = this.isExpanded && this.lane?.cards?.length === 0 ? emptyLaneHeight : laneHeight;
+            laneHeight = this.laneIsExpanded() && this.lane()?.cards?.length === 0 ? emptyLaneHeight : laneHeight;
             this.laneHeight = laneHeight;
         }
     }
 
     public expand() {
-        this.isExpanded = !this.isExpanded;
+        const isExpanded = this.laneIsExpanded();
+        this.lane()!.expanded = !isExpanded;
+        this.laneIsExpanded.set(!isExpanded);
+        this.expandLane.emit({ lane: this.lane()!, expanded: !isExpanded });
     }
 }
