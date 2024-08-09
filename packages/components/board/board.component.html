@@ -2,7 +2,7 @@
   [hasLane]="thyShowLane()"
   [entries]="entriesWithCards()"
   [headerTemplateRef]="headerTemplateRef"
-  [isExpandAll]="thyExpandAll"
+  [isExpandAll]="thyAllLanesExpanded"
   (expandAll)="expandAll($event)"
 >
 </thy-board-header>
@@ -21,9 +21,10 @@
     [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
-    [isExpanded]="thyExpandAll"
+    [allLanesExpanded]="thyAllLanesExpanded"
     [container]="boardScrollElement"
     [defaultCardSize]="thyDefaultCardSize"
+    (expandLane)="thyExpandLane.emit($event)"
   ></thy-board-lane>
   } } @else{
   <thy-board-lane
@@ -32,7 +33,6 @@
     [virtualScroll]="thyVirtualScroll"
     [laneTemplateRef]="laneTemplateRef"
     [cardTemplateRef]="cardTemplateRef()"
-    [isExpanded]="thyExpandAll"
     [container]="boardScrollElement"
     [defaultCardSize]="thyDefaultCardSize"
   ></thy-board-lane>

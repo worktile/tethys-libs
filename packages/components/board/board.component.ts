@@ -112,7 +112,7 @@ export class ThyBoardComponent implements OnInit {
      * @default true
      * @type boolean
      */
-    @Input({ transform: booleanAttribute }) thyExpandAll = true;
+    @Input({ transform: booleanAttribute }) thyAllLanesExpanded = true;
 
     // @Input() dragStartFn: (card: ThyBoardCard) => Observable<[]>;
 
@@ -121,17 +121,22 @@ export class ThyBoardComponent implements OnInit {
     /**
      * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
      */
-    @Output() virtualScrolledIndexChange = new EventEmitter<ThyBoardVirtualScrolledIndexChangeEvent>();
+    @Output() thyVirtualScrolledIndexChange = new EventEmitter<ThyBoardVirtualScrolledIndexChangeEvent>();
 
     /**
      * 展开收起泳道事件
      */
-    @Output() expandLane = new EventEmitter<{ lane: ThyBoardLane; expanded: boolean }>();
+    @Output() thyExpandLane = new EventEmitter<{ lane: ThyBoardLane; expanded: boolean }>();
+
+    /**
+     * 展开收起所有泳道事件
+     */
+    @Output() thyExpandAllLanes = new EventEmitter<{ expanded: boolean }>();
 
     /**
      * 拖拽后触发事件
      */
-    @Output() droppableChange = new EventEmitter<boolean>();
+    @Output() thyDroppableChange = new EventEmitter<boolean>();
 
     public lanesWithEntriesAndCards: Signal<ThyBoardLane[]> = computed(() => {
         const entries = this.thyEntries();
@@ -222,6 +227,7 @@ export class ThyBoardComponent implements OnInit {
     }
 
     expandAll(event: boolean) {
-        this.thyExpandAll = event;
+        this.thyAllLanesExpanded = event;
+        this.thyExpandAllLanes.emit({ expanded: this.thyAllLanesExpanded });
     }
 }

@@ -75,7 +75,7 @@ export class ThyBoardBodyScrollableDirective extends CdkScrollable implements Af
     private laneScrollToOffset() {
         let preLanesTotalSize = 0;
         this.lanes.forEach((lane, index) => {
-            const laneSpacerSize = lane.isExpanded ? lane.laneHeight : 65;
+            const laneSpacerSize = lane.laneIsExpanded() ? lane.laneHeight : 65;
 
             /**
              *  触发 lane 滚动: 滚动当前视窗范围内的 lane

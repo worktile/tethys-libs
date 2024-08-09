@@ -1,5 +1,5 @@
 <div class="thy-pro-board-basic-example-container">
-  <thy-board [thyEntries]="entries" [thyCards]="items" [thyLanes]="lanes" [thyShowLane]="lanes.length > 1" [thyExpandAll]="false">
+  <thy-board [thyEntries]="entries" [thyCards]="items" [thyLanes]="lanes" [thyShowLane]="lanes.length > 1" [thyAllLanesExpanded]="false">
     <ng-template #lane let-lane="" let-isExpanded="isExpanded">
       @if (isExpanded) {
       <span>展开自定义泳道【{{ lane.name }} 】</span>

@@ -8,6 +8,9 @@ export interface ThyBoardLane {
     cards?: ThyBoardCard[];
 
     entries?: ThyBoardEntry[];
+
+    // 设置泳道展开收起状态，true 为展开
+    expanded?: boolean;
 }
 
 export interface ThyBoardEntry {
