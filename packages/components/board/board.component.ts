@@ -112,7 +112,7 @@ export class ThyBoardComponent implements OnInit {
      * @default true
      * @type boolean
      */
-    @Input({ transform: booleanAttribute }) thyExpandAll = true;
+    @Input({ transform: booleanAttribute }) thyAllLanesExpanded = true;
 
     // @Input() dragStartFn: (card: ThyBoardCard) => Observable<[]>;
 
@@ -227,7 +227,7 @@ export class ThyBoardComponent implements OnInit {
     }
 
     expandAll(event: boolean) {
-        this.thyExpandAll = event;
-        this.thyExpandAllLanes.emit({ expanded: this.thyExpandAll });
+        this.thyAllLanesExpanded = event;
+        this.thyExpandAllLanes.emit({ expanded: this.thyAllLanesExpanded });
     }
 }

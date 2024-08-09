@@ -47,7 +47,7 @@ export class ThyBoardLaneComponent implements OnInit {
 
     entries = input.required<ThyBoardEntry[]>();
 
-    allLanesIsExpanded = input<boolean>(true);
+    allLanesExpanded = input<boolean>(true);
 
     @Input({ transform: booleanAttribute }) hasLane = false;
 
@@ -75,8 +75,8 @@ export class ThyBoardLaneComponent implements OnInit {
 
         effect(
             () => {
-                const allLanesIsExpanded = this.allLanesIsExpanded();
-                this.laneIsExpanded.set(allLanesIsExpanded);
+                const allLanesExpanded = this.allLanesExpanded();
+                this.laneIsExpanded.set(allLanesExpanded);
             },
             { allowSignalWrites: true }
         );
