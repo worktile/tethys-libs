@@ -1,6 +1,10 @@
-import { Directive, EventEmitter, OnInit, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { isString } from '@tethys/cdk';
+import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
+import { ThySliderType } from 'ngx-tethys/slider';
+
+export const DEFAULT_PLAYBACK_RATES = [0.5, 1, 1.25, 1.5, 2];
 
 /**
  * @internal
@@ -9,7 +13,7 @@ import { isString } from '@tethys/cdk';
     selector: '[thyMediaPlayerBase]',
     standalone: true
 })
-export class ThyMediaPlayerBaseComponent implements OnInit {
+export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
     public errorTips!: { formatError: string; networkError: string };
 
     public showErrorTip = false;
@@ -33,11 +37,28 @@ export class ThyMediaPlayerBaseComponent implements OnInit {
     private internalFileSrc: SafeUrl = '';
 
     /**
+     * 缓存值（0-100）
+     */
+    bufferedValue = 0;
+
+    /**
+     * 进度值（0-100）
+     */
+    progressValue = 0;
+
+    /**
+     * 进度类型
+     */
+    @Input() thyProgressType: ThySliderType = 'primary';
+
+    /**
      * 媒体元数据被加载完成后触发 能拿到媒体尺寸、时长等
      */
     @Output() thyLoadedMetadata: EventEmitter<HTMLVideoElement | HTMLAudioElement> = new EventEmitter();
 
-    constructor(public sanitizer: DomSanitizer) {}
+    constructor(public sanitizer: DomSanitizer) {
+        super();
+    }
 
     ngOnInit(): void {}
 

@@ -1,0 +1,163 @@
+@use 'ngx-tethys/styles/basic.scss';
+@use './progress.scss' as progress;
+
+.thy-media-controls {
+    width: 100%;
+    overflow: hidden;
+    padding: 12px 20px 8px;
+    transition: all 0.3s ease;
+    background-image: linear-gradient(180deg, rgba(51, 51, 51, 0.3) 0%, rgba(51, 51, 51, 0.8) 100%);
+    .controls-main {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: basic.$white;
+        margin-top: 4px;
+        .thy-action {
+            color: basic.$white;
+            span {
+                color: basic.$white;
+            }
+            &:hover,
+            &.active {
+                color: basic.$white;
+                background: rgba($color: basic.$white, $alpha: 0.2);
+            }
+        }
+        .controls-play {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 12px;
+            justify-content: center;
+            .paused-image {
+                margin-left: 3px;
+            }
+            &.disabled {
+                .thy-icon {
+                    opacity: 0.2;
+                }
+            }
+        }
+
+        .thy-pro-icon {
+            width: 14px;
+            height: 14px;
+        }
+        .controls-playback-rate {
+            font-size: 12px;
+        }
+
+        .duration-time {
+            color: basic.$gray-400;
+        }
+    }
+
+    .thy-media-progress .thy-media-progress-rail .thy-media-progress-pointer {
+        background-color: basic.$white;
+    }
+
+    &-audio {
+        height: 72px;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        background: basic.$white;
+        border: 1px solid basic.$gray-200;
+        border-radius: 4px;
+        .controls-main {
+            display: flex;
+            color: basic.$gray-600;
+            width: 100%;
+            margin-top: 0;
+            .thy-action {
+                color: basic.$gray-600;
+                span {
+                    color: basic.$gray-600;
+                }
+                &:hover,
+                &.active {
+                    span {
+                        color: basic.$primary;
+                    }
+                    color: basic.$primary;
+                    background: rgba($color: basic.$primary, $alpha: 0.1);
+                }
+            }
+            .controls-play {
+                width: 40px;
+                height: 40px;
+                margin-right: 20px;
+                border: 1px solid basic.$gray-200;
+                .thy-pro-icon {
+                    width: 12px;
+                    height: 12px;
+                }
+                &:hover {
+                    background-color: basic.$gray-100;
+                }
+            }
+            .controls-content {
+                flex: 1;
+                overflow: hidden;
+                margin-right: 16px;
+                font-size: 0.75rem;
+                color: basic.$gray-600;
+                .file-description,
+                .error-tip {
+                    height: 28px;
+                    line-height: 28px;
+                }
+                .file-description {
+                    display: flex;
+                    overflow: hidden;
+                    .file-name {
+                        max-width: 100%;
+                        width: unset;
+                        font-size: 0.875rem;
+                        color: basic.$black;
+                    }
+                    .file-size {
+                        margin-left: 8px;
+                    }
+                }
+
+                .controls-progress {
+                    flex: 1;
+                }
+
+                @include progress.progress-type-styles();
+            }
+            .controls-right {
+                .controls-playback-rate {
+                    margin-right: -8px;
+                    &.hidden {
+                        visibility: hidden;
+                    }
+                }
+                .duration-time {
+                    font-size: 0.75rem;
+                    color: basic.$gray-600;
+                }
+            }
+        }
+    }
+}
+
+.volume-dropdown-panel {
+    padding-bottom: 4px;
+    .thy-dropdown-menu {
+        width: 48px !important;
+        padding: 8px 0 12px;
+    }
+}
+.volume-progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    .volume-progress {
+        height: 100px;
+        transform: rotate(-180deg);
+    }
+}

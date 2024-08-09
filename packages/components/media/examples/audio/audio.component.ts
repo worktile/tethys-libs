@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { audioSrc } from '../mock';
 
 @Component({
-    selector: 'thy-pro-media-audip-example',
+    selector: 'thy-pro-media-audio-example',
     templateUrl: './audio.component.html'
 })
 export class ThyProMediaAudioExampleComponent implements OnInit {
     constructor(private sanitizer: DomSanitizer) {}
 
-    src: SafeUrl = '';
+    src: SafeUrl = 'assets/media/audio.mp3';
 
     errorSrc = 'error.aac';
 
     autoplay = false;
 
-    ngOnInit(): void {
-        this.src = this.sanitizer.bypassSecurityTrustResourceUrl(audioSrc);
-    }
+    ngOnInit(): void {}
 }

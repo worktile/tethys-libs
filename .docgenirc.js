@@ -21,7 +21,7 @@ module.exports = {
     libs: [
         {
             name: 'tethys',
-            rootDir: './packages/components',
+            rootDir: 'packages/components',
             include: [],
             apiMode: 'automatic',
             categories: []

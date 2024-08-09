@@ -1,36 +1,46 @@
-import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ThyMediaPlayerBaseComponent } from './media-base.component';
 import { NgIf } from '@angular/common';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ThyAudioControlsComponent } from './audio-controls.component';
+import { ThyVideoControlsComponent } from './controls.component';
+import { ThyMediaPlayerBaseComponent } from './media-base.component';
+import { ThyMediaProgressComponent } from './progress.component';
 
 @Component({
     selector: 'thy-audio-player',
     template: `
-        <div class="audio-content">
+        <div class="media-content audio-content">
             <audio
-                #audio
+                #audioElement
                 class="audio"
                 [src]="fileSrc"
                 [muted]="false"
                 [autoplay]="thyAutoPlay"
-                [controls]="true"
                 (loadedmetadata)="onLoadedmetadata($event)"
                 (error)="onError($event)"
                 (canplay)="onCanPlay()"
                 *ngIf="showMedia"
             ></audio>
-            <div class="error-tip" *ngIf="showErrorTip">
-                {{ errorTipText }}
-            </div>
+            <thy-audio-controls
+                #controls
+                [thyMedia]="audio"
+                [thyErrorTips]="errorTipText"
+                [thyProgressType]="thyProgressType"
+                [thyFileName]="fileName"
+                [thyFileSize]="thyFileSize"
+            >
+            </thy-audio-controls>
         </div>
     `,
     standalone: true,
-    imports: [NgIf]
+    imports: [NgIf, ThyMediaProgressComponent, ThyAudioControlsComponent]
 })
-export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit {
-    @HostBinding('class.thy-audio-player') audioPlayerClass = true;
+export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit {
+    @HostBinding('class') class = 'thy-audio-player thy-media-player';
 
-    @ViewChild('audio') audio: ElementRef<HTMLAudioElement> | undefined;
+    @ViewChild('audioElement') audioElement!: ElementRef<HTMLAudioElement>;
+
+    @ViewChild('controls') controls!: ThyVideoControlsComponent;
 
     /**
      * 媒体资源的url
@@ -44,20 +54,38 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
      */
     @Input() thyAutoPlay: boolean = false;
 
+    /**
+     * 文件大小
+     */
+    @Input() thyFileSize!: number;
+
     public errorTips = {
         formatError: '该音频暂不支持预览，请升级浏览器版本或下载查看',
         networkError: '当前网络异常，请刷新后重试'
     };
 
-    constructor(public sanitizer: DomSanitizer) {
+    public fileName!: string;
+
+    public audio!: ElementRef;
+
+    constructor(public sanitizer: DomSanitizer, public cdr: ChangeDetectorRef) {
         super(sanitizer);
     }
 
+    ngAfterViewInit() {
+        this.audio = this.audioElement;
+        this.cdr.detectChanges();
+    }
+
     onLoadedmetadata(event: Event) {
-        const duration = this.audio?.nativeElement?.duration;
-        if (!(duration && duration > 0)) {
-            this.showErrorTip = true;
-        }
         this.thyLoadedMetadata.emit(this.audio?.nativeElement);
+    }
+
+    onCanPlay() {
+        const { src } = this.audio?.nativeElement;
+
+        this.fileName = src.split('/').pop();
+
+        this.controls.onCanPlay && this.controls.onCanPlay();
     }
 }

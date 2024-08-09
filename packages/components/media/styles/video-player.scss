@@ -1,0 +1,37 @@
+@use 'ngx-tethys/styles/basic.scss';
+
+.thy-video-player {
+    background-color: basic.$black;
+
+    .thy-media-controls {
+        position: absolute;
+        left: 0;
+        bottom: 0px;
+        opacity: 0;
+        .controls-play {
+            .thy-icon {
+                path {
+                    fill: basic.$white;
+                }
+            }
+        }
+    }
+    .thy-media-controls-paused {
+        opacity: 1;
+    }
+    &:hover {
+        .thy-media-controls {
+            opacity: 1;
+        }
+    }
+
+    .error-tip {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+        color: basic.$white;
+        font-size: 14px;
+        text-align: center;
+    }
+}
