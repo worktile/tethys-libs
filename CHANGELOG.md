@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0-next.3](https://github.com/tethys-org/libs/compare/v17.1.0-next.2...v17.1.0-next.3) (2024-08-09)
+
+### Features
+
+- **components:** board support expand lane #INFR-13091 ([#93](https://github.com/tethys-org/libs/issues/93)) ([3720c91](https://github.com/tethys-org/libs/commit/3720c919c46602f817f27fca5d1d1dbbdefc098a)), closes [#INFR-13091](https://github.com/tethys-org/libs/issues/INFR-13091)
+- **components:** board support virtual scroll #INFR-12954 ([#91](https://github.com/tethys-org/libs/issues/91)) ([16aa7bc](https://github.com/tethys-org/libs/commit/16aa7bc97aa3a681a35c390fdd4b7af028d06b4e)), closes [#INFR-12954](https://github.com/tethys-org/libs/issues/INFR-12954)
+
 # [17.1.0-next.2](https://github.com/tethys-org/libs/compare/v17.1.0-next.1...v17.1.0-next.2) (2024-07-31)
 
 ### Features
