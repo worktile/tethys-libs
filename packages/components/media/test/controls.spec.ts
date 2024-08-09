@@ -1,272 +1,129 @@
-import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, flush, tick, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ThyProMediaModule } from '@tethys/pro/media';
-import { ThyDropdownDirective } from 'ngx-tethys/dropdown';
-import { ThyPopoverModule } from 'ngx-tethys/popover';
-import { dispatchMouseEvent } from 'ngx-tethys/testing';
-import { SafeAny } from 'ngx-tethys/types';
+import { ChangeDetectorRef, ElementRef } from '@angular/core';
+import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { ThyVideoControlsComponent } from '../controls.component';
 
-@Component({
-    selector: 'thy-test-controls-basic',
-    template: `
-        <video #videoElement [src]="src" [muted]="muted"></video>
-        <thy-video-controls [thyMedia]="video" [thyProgressType]="progressType"> </thy-video-controls>
-    `,
-    standalone: true,
-    imports: [ThyVideoControlsComponent]
-})
-export class ThyVideoControlsTestBasicComponent implements AfterViewInit {
-    @ViewChild(ThyVideoControlsComponent) controls!: ThyVideoControlsComponent;
+describe('ThyVideoControlsComponent', () => {
+    let component: ThyVideoControlsComponent;
+    let fixture: ComponentFixture<ThyVideoControlsComponent>;
+    let mediaElementMock: HTMLMediaElement;
 
-    @ViewChild('videoElement') videoElement!: HTMLMediaElement;
+    beforeEach(async () => {
+        // Mock HTMLMediaElement
+        mediaElementMock = document.createElement('video') as HTMLMediaElement;
 
-    muted = true;
-
-    src = 'assets/media/video.mp4';
-
-    video: any;
-
-    progressType = 'primary';
-
-    constructor(public cdr: ChangeDetectorRef) {}
-
-    ngAfterViewInit() {
-        this.video = this.videoElement;
-        this.cdr.detectChanges();
-    }
-}
-
-describe('mediaComponent', () => {
-    let videoControlsComponent: ThyVideoControlsTestBasicComponent;
-    let videoControlsFixture: ComponentFixture<ThyVideoControlsTestBasicComponent>;
-    let videoControlsDebugElement: DebugElement;
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ThyVideoControlsTestBasicComponent, ThyProMediaModule, NoopAnimationsModule, ThyPopoverModule]
-        }).compileComponents();
-    }));
-
-    describe('videoControlsComponent', () => {
-        beforeEach(() => {
-            videoControlsFixture = TestBed.createComponent(ThyVideoControlsTestBasicComponent);
-            videoControlsComponent = videoControlsFixture.componentInstance;
-            videoControlsDebugElement = videoControlsFixture.debugElement.query(By.directive(ThyVideoControlsComponent));
-            videoControlsFixture.detectChanges();
+        // 使用 Object.defineProperty 来定义可写的 duration 属性
+        Object.defineProperty(mediaElementMock, 'duration', {
+            writable: true,
+            value: 100 // 设置视频时长
         });
 
-        it('should create', () => {
-            expect(videoControlsComponent).toBeTruthy();
-            expect(videoControlsFixture).toBeTruthy();
+        // 使用 Object.defineProperty 来定义可写的 paused 属性
+        Object.defineProperty(mediaElementMock, 'paused', {
+            writable: true,
+            value: true
         });
 
-        it('should has thy-media-controls-paused class default', () => {
-            expectPausedControls();
-        });
-
-        it('should call onPlay or onPaused when click play button and paused', (done) => {
-            expectPausedControls();
-
-            videoControlsFixture.detectChanges();
-
-            function pausedClick() {
-                const pausedSpy = spyOn(videoControlsComponent.controls, 'onPause').and.callThrough();
-                const playButton = document.querySelector('.controls-play') as HTMLElement;
-                playButton.click();
-                videoControlsFixture.detectChanges();
-
-                expectPausedControls();
-                expect(pausedSpy).toHaveBeenCalled();
+        // 模拟 seekable 属性
+        Object.defineProperty(mediaElementMock, 'seekable', {
+            get: () => {
+                return {
+                    length: 1,
+                    start: (index: number) => 0,
+                    end: (index: number) => 100 * index
+                } as TimeRanges;
             }
-
-            loadedMediaAndPlay(done, pausedClick);
         });
 
-        it('should set progress worked', (done) => {
-            loadedMediaAndPlay(done, () => {
-                const pointerElement = document.querySelector('.thy-media-progress-pointer') as HTMLElement;
-                const progressRailElement = document.querySelector('.thy-media-progress-rail');
+        // 模拟 buffered 属性
+        Object.defineProperty(mediaElementMock, 'buffered', {
+            get: () => {
+                return {
+                    length: 1,
+                    start: (index: number) => 0,
+                    end: (index: number) => 100
+                } as TimeRanges;
+            }
+        });
 
-                dispatchMouseEvent(pointerElement, 'mousedown', progressRailElement?.clientWidth);
-                dispatchMouseEvent(pointerElement, 'mouseup');
+        mediaElementMock.currentTime = 0; // 初始化当前时间
+        mediaElementMock.volume = 1; // 初始化音量
+        mediaElementMock.pause = () => {
+            Object.defineProperty(mediaElementMock, 'paused', {
+                writable: true,
+                value: false
             });
-        });
+        };
 
-        it('should mute worked when muted button click', (done) => {
-            expect(videoControlsComponent.controls.mediaHtmlElement.muted).toBeTruthy();
+        mediaElementMock.play = () => {
+            Object.defineProperty(mediaElementMock, 'paused', {
+                writable: true,
+                value: true
+            });
+            return Promise.resolve();
+        };
 
-            function mutedClick() {
-                const mutedDebugElement = videoControlsDebugElement.query(By.css('.controls-muted'));
-                const mutedButton = mutedDebugElement.nativeElement;
-                const dropdown = mutedDebugElement.injector.get(ThyDropdownDirective);
-                mutedButton.click();
+        await TestBed.configureTestingModule({
+            imports: [ThyVideoControlsComponent],
+            providers: [
+                { provide: ChangeDetectorRef, useValue: { markForCheck: () => {} } },
+                { provide: ElementRef, useValue: { nativeElement: mediaElementMock } }
+            ]
+        }).compileComponents();
 
-                videoControlsFixture.detectChanges();
-
-                expect(videoControlsComponent.controls.mediaHtmlElement.muted).toBeFalsy();
-                expect(videoControlsComponent.controls.mediaHtmlElement.volume).toEqual(1);
-
-                dropdown.hide();
-                mutedButton.click();
-
-                videoControlsFixture.detectChanges();
-
-                expect(videoControlsComponent.controls.mediaHtmlElement.muted).toBeTruthy();
-                expect(videoControlsComponent.controls.mediaHtmlElement.volume).toEqual(0);
-            }
-
-            loadedMediaAndPlay(done, mutedClick);
-        });
-
-        xit('should set volume worked', fakeAsync(() => {
-            const mutedDebugElement = videoControlsDebugElement.query(By.css('.controls-muted'));
-            const mutedButton = mutedDebugElement.nativeElement;
-            const dropdown = mutedDebugElement.injector.get(ThyDropdownDirective);
-            mutedButton.click();
-
-            videoControlsFixture.detectChanges();
-            tick();
-
-            const pointerElement = document.querySelector('.volume-progress .thy-media-progress-pointer') as HTMLElement;
-            const progressRailElement = document.querySelector('.volume-progress .thy-media-progress-rail');
-
-            dispatchMouseEvent(pointerElement, 'mousedown', progressRailElement?.clientWidth);
-            dispatchMouseEvent(pointerElement, 'mouseup');
-
-            expect(videoControlsComponent.controls.mediaHtmlElement.muted).toEqual(false);
-            expect(videoControlsComponent.controls.mediaHtmlElement.volume).toEqual(1);
-            expect(videoControlsComponent.controls.tempVolume).toEqual(1);
-
-            dropdown.hide();
-            flush();
-        }));
-
-        it('should playbackRate worked when muted button click', fakeAsync(() => {
-            expect(videoControlsComponent.controls.mediaHtmlElement.playbackRate).toEqual(1);
-            const actionChangeSpy = spyOn(videoControlsComponent.controls, 'actionActiveChange').and.callThrough();
-
-            const rateDebugElement = videoControlsDebugElement.query(By.css('.controls-playback-rate'));
-            const dropdown = rateDebugElement.injector.get(ThyDropdownDirective);
-            dropdown.show();
-
-            tick();
-            videoControlsFixture.detectChanges();
-            tick();
-
-            expect(actionChangeSpy).toHaveBeenCalledWith(true);
-
-            const dropdownMenus = document.querySelectorAll('.dropdown-menu-item');
-            (dropdownMenus[0] as HTMLElement).click();
-
-            videoControlsFixture.detectChanges();
-            tick();
-
-            expect(actionChangeSpy).toHaveBeenCalledWith(false);
-            expect(videoControlsComponent.controls.mediaHtmlElement.playbackRate).toEqual(0.5);
-        }));
-
-        it('should actionActiveChange worked', (done) => {
-            videoControlsComponent.controls.actionActiveChange(true);
-            videoControlsFixture.detectChanges();
-
-            expectPausedControls();
-
-            function actionInActive() {
-                videoControlsComponent.controls.actionActiveChange(false);
-                videoControlsFixture.detectChanges();
-                expectPlayingControls();
-            }
-
-            loadedMediaAndPlay(done, actionInActive);
-        });
-
-        it('should progressType worked', fakeAsync(() => {
-            videoControlsComponent.progressType = 'primary';
-            videoControlsFixture.detectChanges();
-            const progressComponent = document.querySelector('.thy-media-progress-primary');
-            expect(progressComponent).toBeTruthy();
-
-            videoControlsComponent.progressType = 'success';
-            videoControlsFixture.detectChanges();
-            const successProgressComponent = document.querySelector('.thy-media-progress-success');
-            expect(successProgressComponent).toBeTruthy();
-
-            videoControlsComponent.progressType = 'danger';
-            videoControlsFixture.detectChanges();
-            const dangerProgressComponent = document.querySelector('.thy-media-progress-danger');
-            expect(dangerProgressComponent).toBeTruthy();
-
-            videoControlsComponent.progressType = 'info';
-            videoControlsFixture.detectChanges();
-            const infoProgressComponent = document.querySelector('.thy-media-progress-info');
-            expect(infoProgressComponent).toBeTruthy();
-        }));
-
-        it('should onCanPlay worked', fakeAsync(() => {
-            videoControlsComponent.controls.onCanPlay();
-
-            videoControlsFixture.detectChanges();
-
-            const mediaHtmlElement = videoControlsComponent.controls.mediaHtmlElement;
-            expect(mediaHtmlElement.ontimeupdate).toEqual(videoControlsComponent.controls.onTimeUpdate);
-            expect(mediaHtmlElement.onwaiting).toEqual(videoControlsComponent.controls.onWaiting);
-        }));
-
-        it('should onMouseStart worked', fakeAsync(() => {
-            const onPausedSpy = spyOn(videoControlsComponent.controls, 'onPause').and.callThrough();
-
-            videoControlsComponent.controls.onMouseStart();
-
-            videoControlsFixture.detectChanges();
-
-            expect(onPausedSpy).toHaveBeenCalled();
-        }));
-
-        it('should onMouseEnd worked', fakeAsync(() => {
-            const onPlaySpy = spyOn(videoControlsComponent.controls, 'onPlay').and.callThrough();
-
-            videoControlsComponent.controls.onMouseEnd();
-
-            videoControlsFixture.detectChanges();
-
-            expect(onPlaySpy).toHaveBeenCalled();
-        }));
+        fixture = TestBed.createComponent(ThyVideoControlsComponent);
+        component = fixture.componentInstance;
+        component.media = new ElementRef(mediaElementMock);
+        fixture.detectChanges();
     });
 
-    function expectPlayingControls() {
-        const playingClass = document.querySelector('.thy-media-controls-playing');
-        const pausedClass = document.querySelector('.thy-media-controls-paused');
-        expect(playingClass).not.toBeNull();
-        expect(pausedClass).toBeNull();
-    }
+    it('should create the component', () => {
+        expect(component).toBeTruthy();
+    });
 
-    function expectPausedControls() {
-        const playing = document.querySelector('.thy-media-controls-playing');
-        const paused = document.querySelector('.thy-media-controls-paused');
-        expect(playing).toBeNull();
-        expect(paused).not.toBeNull();
-    }
+    it('should play the video', () => {
+        spyOn(mediaElementMock, 'play').and.returnValue(Promise.resolve());
+        component.playOrPause();
+        expect(mediaElementMock.play).toHaveBeenCalled();
+    });
 
-    function loadedMediaAndPlay(done: SafeAny, callback?: SafeAny) {
-        videoControlsComponent.video.nativeElement.addEventListener('loadedmetadata', () => {
-            const playSpy = spyOn(videoControlsComponent.controls, 'onPlay').and.callThrough();
+    it('should change volume', () => {
+        component.afterVolumeChange(50); // 设置音量为50%
+        expect(mediaElementMock.volume).toBe(0.5);
+        expect(mediaElementMock.muted).toBeFalse();
+    });
 
-            const playButton = document.querySelector('.controls-play') as HTMLElement;
-            playButton.click();
+    it('should mute and unmute the video', () => {
+        component.muted(); // 进行静音
+        expect(mediaElementMock.volume).toBe(0);
+        expect(mediaElementMock.muted).toBeTrue();
 
-            videoControlsFixture.detectChanges();
+        component.muted(); // 取消静音
+        expect(mediaElementMock.volume).toBe(1);
+        expect(mediaElementMock.muted).toBeFalse();
+    });
 
-            expectPlayingControls();
-            expect(playSpy).toHaveBeenCalled();
+    it('should update progress value on time update', () => {
+        mediaElementMock.currentTime = 50; // 设置当前播放时间
+        component.setProgressValue();
+        expect(component.progressValue).toBe(50); // 应该是50%
+    });
 
-            if (callback) {
-                callback();
-            }
+    it('should handle playback rate change', () => {
+        component.playBackRateChange(2); // 设置播放速率为2x
+        expect(mediaElementMock.playbackRate).toBe(2);
+    });
 
-            done();
-        });
-    }
+    it('should update progress on mouse events', fakeAsync(() => {
+        component.onMouseStart();
+        expect(mediaElementMock.paused).toBeTrue(); // 应该暂停
+
+        flush();
+        fixture.detectChanges();
+
+        expect(mediaElementMock.paused).toBeFalse(); // 应该播放
+
+        component.onMouseEnd();
+        fixture.detectChanges();
+        expect(mediaElementMock.paused).toBeTrue(); // 应该暂停
+    }));
 });

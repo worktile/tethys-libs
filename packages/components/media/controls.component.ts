@@ -24,6 +24,7 @@ import { ThyMediaProgressComponent } from './progress.component';
             [thyProgressType]="progressType"
             (thyMoveStart)="onMouseStart()"
             (thyMoveEnd)="onMouseEnd()"
+            (thyMoveMove)="onMouseMove()"
             (thyAfterChange)="afterProgressChange($event)"
         ></thy-media-progress>
         <div class="controls-main">
@@ -216,6 +217,10 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
         this.onPause();
     }
 
+    onMouseMove() {
+        this.mediaHtmlElement.pause();
+    }
+
     onMouseEnd() {
         this.onPlay();
     }
@@ -282,7 +287,6 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     afterProgressChange(value: number) {
         const { duration, buffered } = this.mediaHtmlElement;
 
-        console.log(duration, buffered);
         const currentTime = (value / 100) * duration;
         // 防止 duration 值为NaN
         if (isFinite(currentTime)) {

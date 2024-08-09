@@ -153,7 +153,6 @@
             "karmaConfig": "packages/karma.conf.js",
             "polyfills": "packages/polyfills.ts",
             "tsConfig": "packages/tsconfig.spec.json",
-            "assets": ["packages/components/assets"],
             "codeCoverage": true,
             "codeCoverageExclude": []
           }

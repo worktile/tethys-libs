@@ -88,6 +88,11 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     @Output() thyMoveStart = new EventEmitter<void>();
 
     /**
+     * 移动中
+     */
+    @Output() thyMove = new EventEmitter<void>();
+
+    /**
      * 移动结束
      */
     @Output() thyMoveEnd = new EventEmitter<void>();
@@ -222,13 +227,13 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
                 tap((e: MouseEvent) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    this.thyMoveStart.emit();
+                    this.thyMove.emit();
                 }),
                 pluck(dimension),
                 map((position: number) => this.mousePositionToAdaptiveValue(position)),
                 distinctUntilChanged(),
                 tap(() => {
-                    this.thyMoveStart.emit();
+                    this.thyMove.emit();
                 }),
                 takeUntil(this.dragEndListener as Observable<Event>)
             );
