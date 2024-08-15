@@ -111,6 +111,9 @@
                 .file-description {
                     display: flex;
                     overflow: hidden;
+                    &.hidden {
+                        visibility: hidden;
+                    }
                     .file-name {
                         max-width: 100%;
                         width: unset;
@@ -118,6 +121,7 @@
                         color: basic.$black;
                     }
                     .file-size {
+                        white-space: nowrap;
                         margin-left: 8px;
                     }
                 }
@@ -129,6 +133,7 @@
                 @include progress.progress-type-styles();
             }
             .controls-right {
+                width: 34px;
                 .controls-playback-rate {
                     margin-right: -8px;
                     &.hidden {
@@ -140,6 +145,14 @@
                     color: basic.$gray-600;
                 }
             }
+        }
+    }
+}
+.playback-rate-dropdown-panel {
+    .thy-dropdown-menu {
+        width: 160px !important;
+        .dropdown-menu-item.active {
+            color: basic.$primary !important;
         }
     }
 }

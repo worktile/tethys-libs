@@ -10661,10 +10661,10 @@ ng-packagr@^17.2.1:
     esbuild "^0.20.0"
     rollup "^4.5.0"
 
-ngx-tethys@17.0.0-next.8:
-  version "17.0.0-next.8"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-17.0.0-next.8.tgz#419fba2a6b2f8bac111379cf67d74b6ff4a18b56"
-  integrity sha512-dJdkujkdgdJIoQ0o4mVSmhTmxmwjpLliahccAQ1V6oMg73mQz9SAhNuXDy3++3qWhyCHCx+NjOCcVT0T9ZprYw==
+ngx-tethys@17.0.19:
+  version "17.0.19"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-17.0.19.tgz#c58e16e8c041cd5a4540f8e1a94bca484fc26e91"
+  integrity sha512-NJEIsNTmfgVsswkvkjX8UjaDz53xCh/SF3pFJgZrO6naeefa9mtMr0sOcWOdUe9CRfGvVTiOuYZ8Bi7ToHWSBw==
   dependencies:
     tslib "^2.3.0"
 

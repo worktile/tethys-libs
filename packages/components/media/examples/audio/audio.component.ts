@@ -14,5 +14,9 @@ export class ThyProMediaAudioExampleComponent implements OnInit {
 
     autoplay = false;
 
+    fileName = 'audio.mp3';
+
+    size = '1.7 MB';
+
     ngOnInit(): void {}
 }
