@@ -16,13 +16,15 @@ export class ThyVideoTestBasicComponent {
 
 @Component({
     selector: 'thy-test-audio-basic',
-    template: ` <thy-audio-player [thySrc]="src"></thy-audio-player> `,
+    template: ` <thy-audio-player [thySrc]="src" [thyFileName]="fileName"></thy-audio-player> `,
     standalone: true,
     imports: [ThyProMediaModule]
 })
 export class ThyAudioTestBasicComponent {
     @ViewChild(ThyAudioPlayerComponent) audioPlayer: ThyAudioPlayerComponent | undefined;
     src = 'assets/media/mp3.mp3';
+
+    fileName = '';
 }
 
 describe('mediaComponent', () => {
@@ -82,6 +84,20 @@ describe('mediaComponent', () => {
         it('should not show error-tip when resource is correct', fakeAsync(() => {
             const errorTip = audioDebugElement.nativeElement.querySelector('.error-tip');
             expect(errorTip).toBeFalsy();
+        }));
+
+        it('should show correct fileName', fakeAsync(() => {
+            expect(audioComponent.audioPlayer?.fileName).toEqual('');
+
+            audioComponent.audioPlayer?.onCanPlay();
+            audioFixture.detectChanges();
+            expect(audioComponent.audioPlayer?.fileName).toEqual('mp3.mp3');
+
+            audioComponent.fileName = 'test.mp3';
+            audioComponent.audioPlayer?.onCanPlay();
+            audioFixture.detectChanges();
+
+            expect(audioComponent.audioPlayer?.fileName).toEqual('test.mp3');
         }));
     });
 

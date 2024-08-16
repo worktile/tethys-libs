@@ -25,14 +25,16 @@ import { ThyMediaProgressComponent } from './progress.component';
                     <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'pause' : 'play-fill'"></thy-icon>
                 </a>
                 <div class="controls-content">
-                    <div class="file-description" *ngIf="fileName">
+                    @if(!errorTips){
+                    <div class="file-description" [class.hidden]="!fileName">
                         <thy-flexible-text class="file-name" [thyTooltipContent]="fileName"> {{ fileName }}</thy-flexible-text>
-                        <span class="file-size" *ngIf="fileSize">{{ fileSize + 'MB' }}</span>
+                        <span class="file-size" *ngIf="fileSize">{{ fileSize }}</span>
                     </div>
-
-                    <thy-flexible-text [thyTooltipContent]="errorTips" class="error-tip" *ngIf="errorTips">
+                    } @else {
+                    <thy-flexible-text [thyTooltipContent]="errorTips" class="error-tip">
                         {{ errorTips }}
                     </thy-flexible-text>
+                    }
 
                     <div class="d-flex align-items-center">
                         <div class="current-time mr-4">
@@ -57,6 +59,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                         thyDropdownActive="active"
                         [thyDropdown]="menu"
                         class="controls-playback-rate"
+                        thyPanelClass="playback-rate-dropdown-panel"
                         href="javascript:;"
                         >倍速</a
                     >

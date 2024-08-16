@@ -8,11 +8,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         .audio {
             width: 100%;
         }
         .controls-play {
             .thy-icon {
+                color: basic.$gray-700;
                 font-size: 0.75rem;
             }
         }

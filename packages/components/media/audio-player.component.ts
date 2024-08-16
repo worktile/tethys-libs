@@ -59,6 +59,13 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
      */
     @Input() thyFileSize!: number;
 
+    /**
+     * 文件名称
+     */
+    @Input() set thyFileName(name: string) {
+        this.fileName = name;
+    }
+
     public errorTips = {
         formatError: '该音频暂不支持预览，请升级浏览器版本或下载查看',
         networkError: '当前网络异常，请刷新后重试'
@@ -84,7 +91,9 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     onCanPlay() {
         const { src } = this.audio?.nativeElement;
 
-        this.fileName = src.split('/').pop();
+        const match = src.match(/([^\/]+\.mp3|[^\/]+\.(wav|ogg|flac|aac|m4a))$/i);
+
+        this.fileName = this.fileName || (match && match[0]) || '';
 
         this.controls.onCanPlay && this.controls.onCanPlay();
     }
