@@ -77,11 +77,11 @@
                 }
                 &:hover,
                 &.active {
+                    color: basic.$primary;
+                    background: rgba($color: basic.$primary, $alpha: 0.1);
                     span {
                         color: basic.$primary;
                     }
-                    color: basic.$primary;
-                    background: rgba($color: basic.$primary, $alpha: 0.1);
                 }
             }
             .controls-play {

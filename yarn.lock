@@ -227,10 +227,10 @@
     vite "5.4.0"
     watchpack "2.4.1"
 
-"@angular/cdk-experimental@^17.3.0":
-  version "17.3.10"
-  resolved "https://registry.npmjs.org/@angular/cdk-experimental/-/cdk-experimental-17.3.10.tgz#9af36d0cd517b1c02e7b900b443ae2fd90c345ad"
-  integrity sha512-5SzNov+EwM8ZGj9KGa1c0TVw9iuUb/Uk0cw87KQOiU/vTkrcn+sVsVvAi36MbJcc0kZhyyfFdFM7tMMfR3/tBA==
+"@angular/cdk-experimental@^18.2.0":
+  version "18.2.0"
+  resolved "https://registry.npmmirror.com/@angular/cdk-experimental/-/cdk-experimental-18.2.0.tgz#e2fbe386fb08b020416309205e4de46e7582f65b"
+  integrity sha512-uS129+peEYQyJgK1E3VrJkj27IfRXnnt8h0Pu1xEpm5zE1KSU+MF5HL6ac0A9uUs7sLV5G/kVgl1p3rXbjnv+w==
   dependencies:
     tslib "^2.3.0"
 
