@@ -4567,10 +4567,10 @@ algoliasearch@^3.24.5:
     semver "^5.1.0"
     tunnel-agent "^0.6.0"
 
-angular-gridster2@^17.0.0:
-  version "17.0.0"
-  resolved "https://registry.npmjs.org/angular-gridster2/-/angular-gridster2-17.0.0.tgz#9c9cee9db54eaf69fa9f322913149c4795ccbff3"
-  integrity sha512-HYUQSAuhDlbsVWxIUqgSPfWKqzxkT96qsSrLWB0WjzcEdJ2yVjX4R0AY/VJyzmKFzdFU7adGEPJkJ8volRSsWQ==
+angular-gridster2@18.0.1:
+  version "18.0.1"
+  resolved "https://registry.npmmirror.com/angular-gridster2/-/angular-gridster2-18.0.1.tgz#ad04eff2c05aa693fe892ee66b6aa5e956e4dd13"
+  integrity sha512-+Nar4lkRGl5kgmU+WFi5d57F7X4jbehRzBZ+JQifVZKtGA1OYKzBYA2Wd1ZQP246oHXakl14BBkxTu8hLer0Cg==
   dependencies:
     tslib "^2.4.0"
 
