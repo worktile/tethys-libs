@@ -3660,17 +3660,10 @@
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
-"@tethys/cdk@18.0.0":
+"@tethys/cdk@18.0.0", "@tethys/cdk@^18.0.0":
   version "18.0.0"
   resolved "https://registry.npmmirror.com/@tethys/cdk/-/cdk-18.0.0.tgz#5e24bccca3d477e66871525122d535b4066ee491"
   integrity sha512-V3gR3/RaHsUfT54e9U8Owsyq85B2BvPfxFm7Nhs4FXGHabGVR9ObhrPv5zsOwuzIcOgOsmIqjo8tu9iq0TyHeA==
-  dependencies:
-    tslib "^2.3.0"
-
-"@tethys/cdk@^17.0.0":
-  version "17.0.1"
-  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-17.0.1.tgz#bb01b698912f3073093cee5d6449569ebef1938f"
-  integrity sha512-Hny5gOzMgJpHK13keWACUykJp9dL4FlJhIgc/lc/G83IpQO89wo8x52/27qwpQACfRPb/tNcs4+EfdqB5j1XLw==
   dependencies:
     tslib "^2.3.0"
 
@@ -3679,12 +3672,12 @@
   resolved "https://registry.npmmirror.com/@tethys/icons/-/icons-1.4.69.tgz#fba983b1237fe3c230bd6bf0e2ff471437a070aa"
   integrity sha512-suauYSb6QIE9YCRMbeIVzceAfxdZxCe0WwPyUkbCTJxyIAwMY1YFDiJzVNwKQ8227UHy7Z2tUdxgUWXmpiRVgA==
 
-"@tethys/store@17.0.0":
-  version "17.0.0"
-  resolved "https://registry.npmjs.org/@tethys/store/-/store-17.0.0.tgz#e3de28f1b3a63b0533bc6ec41920675541ea896f"
-  integrity sha512-u7A2xWUsUTvSYB7//E3R+JrAur5mVpqvbU33gdS5hstdl6U7wvenKJvkDV4i8Qh3Tgh3vld5xWK/OzBgC/xc5g==
+"@tethys/store@18.0.0-next.0":
+  version "18.0.0-next.0"
+  resolved "https://registry.npmmirror.com/@tethys/store/-/store-18.0.0-next.0.tgz#c45f3e9ee05cd43d0a9705210f2a93ccdabc9344"
+  integrity sha512-CppDV3HO4YtBiZk1iNbdr2V7iC3i0Pae6pi0aiGWQB76sKHWNblWNwLHdzvk/Qvthqm4rPlCxqyX+y++sv+URw==
   dependencies:
-    "@tethys/cdk" "^17.0.0"
+    "@tethys/cdk" "^18.0.0"
     tslib "^2.0.0"
 
 "@tootallnate/once@1":
