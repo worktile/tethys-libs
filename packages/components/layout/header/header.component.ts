@@ -29,7 +29,7 @@ export class ThyProHeaderComponent extends mixinUnsubscribe(MixinBase) implement
 
     constructor(public globalStore: ThyGlobalStore) {
         super();
-        this.title$ = this.globalStore.select((state) => state.activeMenu);
+        this.title$ = this.globalStore.select$((state) => state.activeMenu);
     }
     ngOnInit(): void {}
 

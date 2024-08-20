@@ -25,15 +25,15 @@ import { ThyMediaProgressComponent } from './progress.component';
                     <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'pause' : 'play-fill'"></thy-icon>
                 </a>
                 <div class="controls-content">
-                    @if(!errorTips){
-                    <div class="file-description" [class.hidden]="!fileName">
-                        <thy-flexible-text class="file-name" [thyTooltipContent]="fileName"> {{ fileName }}</thy-flexible-text>
-                        <span class="file-size" *ngIf="fileSize">{{ fileSize }}</span>
-                    </div>
+                    @if (!errorTips) {
+                        <div class="file-description" [class.hidden]="!fileName">
+                            <thy-flexible-text class="file-name" [thyTooltipContent]="fileName"> {{ fileName }}</thy-flexible-text>
+                            <span class="file-size" *ngIf="fileSize">{{ fileSize }}</span>
+                        </div>
                     } @else {
-                    <thy-flexible-text [thyTooltipContent]="errorTips" class="error-tip">
-                        {{ errorTips }}
-                    </thy-flexible-text>
+                        <thy-flexible-text [thyTooltipContent]="errorTips" class="error-tip">
+                            {{ errorTips }}
+                        </thy-flexible-text>
                     }
 
                     <div class="d-flex align-items-center">

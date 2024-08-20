@@ -75,7 +75,10 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     public audio!: ElementRef;
 
-    constructor(public sanitizer: DomSanitizer, public cdr: ChangeDetectorRef) {
+    constructor(
+        public sanitizer: DomSanitizer,
+        public cdr: ChangeDetectorRef
+    ) {
         super(sanitizer);
     }
 
