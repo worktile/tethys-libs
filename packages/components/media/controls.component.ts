@@ -53,6 +53,8 @@ import { ThyMediaProgressComponent } from './progress.component';
                     [thyDropdown]="volume"
                     thyPanelClass="volume-dropdown-panel"
                     [thyPlacement]="placement"
+                    [thyTrigger]="'hover'"
+                    [thyPopoverOptions]="popoverOptions"
                     (thyActiveChange)="actionActiveChange($event)"
                 >
                     <thy-icon [thyIconName]="mediaHtmlElement?.muted ? 'muted' : 'volume'"></thy-icon>
@@ -63,6 +65,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                     [thyDropdown]="playbackRate"
                     [thyPlacement]="'topRight'"
                     thyDropdownActive="active"
+                    thyPanelClass="playback-rate-dropdown-panel"
                     (thyActiveChange)="actionActiveChange($event)"
                     class="controls-playback-rate"
                     href="javascript:;"
@@ -141,7 +144,7 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
 
     tempVolume: number = 1;
 
-    popoverOptions = { placement: 'top', width: '48px', insideClosable: false };
+    popoverOptions = { insideClosable: false, outsideClosable: false };
 
     private hostRenderer = useHostRenderer();
 

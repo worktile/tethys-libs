@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.0.0-next.0](https://github.com/tethys-org/libs/compare/v17.1.0-next.3...v18.0.0-next.0) (2024-08-20)
+
+### Bug Fixes
+
+- **components:** fix media style error #POR-11102 ([#95](https://github.com/tethys-org/libs/issues/95)) ([2bad99e](https://github.com/tethys-org/libs/commit/2bad99e0f320d1aae688d0f5194df746b29b8d53)), closes [#POR-11102](https://github.com/tethys-org/libs/issues/POR-11102)
+
+# [17.1.0-next.4](https://github.com/tethys-org/libs/compare/v17.1.0-next.3...v17.1.0-next.4) (2024-08-16)
+
+### Bug Fixes
+
+- **components:** fix media style error #POR-11102 ([#95](https://github.com/tethys-org/libs/issues/95)) ([2bad99e](https://github.com/tethys-org/libs/commit/2bad99e0f320d1aae688d0f5194df746b29b8d53)), closes [#POR-11102](https://github.com/tethys-org/libs/issues/POR-11102)
+
 # [17.1.0-next.3](https://github.com/tethys-org/libs/compare/v17.1.0-next.2...v17.1.0-next.3) (2024-08-09)
 
 ### Features

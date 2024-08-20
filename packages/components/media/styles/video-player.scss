@@ -15,6 +15,14 @@
                 }
             }
         }
+        .controls-playback-rate {
+            &.active,
+            &:hover {
+                span {
+                    color: basic.$white;
+                }
+            }
+        }
     }
     .thy-media-controls-paused {
         opacity: 1;

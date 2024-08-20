@@ -1,7 +1,7 @@
 {
   "name": "libs",
   "private": true,
-  "version": "17.1.0-next.3",
+  "version": "18.0.0-next.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve site --port 4801",
@@ -18,7 +18,9 @@
     "build:libs": "ts-node --project ./scripts/tsconfig.json ./scripts/build-packages.ts",
     "release": "wpm release",
     "pub-only": "ts-node --project ./scripts/tsconfig.json ./scripts/npm-publish.ts",
-    "pub": "wpm publish",
+    "pub-next-only": "ts-node --project ./scripts/tsconfig.json ./scripts/npm-publish.ts --next",
+    "pub": "wpm publish && yarn pub-only",
+    "pub-next": "wpm publish && yarn pub-next-only",
     "sync-styles": "ts-node --project ./scripts/tsconfig.json ./scripts/sync-styles.ts",
     "prepare": "husky install",
     "pre-commit": "pretty-quick --staged",
