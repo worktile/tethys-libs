@@ -3548,10 +3548,10 @@
   resolved "https://registry.npmjs.org/@tethys/icons/-/icons-1.4.69.tgz#fba983b1237fe3c230bd6bf0e2ff471437a070aa"
   integrity sha512-suauYSb6QIE9YCRMbeIVzceAfxdZxCe0WwPyUkbCTJxyIAwMY1YFDiJzVNwKQ8227UHy7Z2tUdxgUWXmpiRVgA==
 
-"@tethys/store@18.0.0-next.0":
-  version "18.0.0-next.0"
-  resolved "https://registry.npmjs.org/@tethys/store/-/store-18.0.0-next.0.tgz#c45f3e9ee05cd43d0a9705210f2a93ccdabc9344"
-  integrity sha512-CppDV3HO4YtBiZk1iNbdr2V7iC3i0Pae6pi0aiGWQB76sKHWNblWNwLHdzvk/Qvthqm4rPlCxqyX+y++sv+URw==
+"@tethys/store@18.0.0-next.1":
+  version "18.0.0-next.1"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-18.0.0-next.1.tgz#c65ee9dc4b4a9e1b0914b099564243ac8bade792"
+  integrity sha512-ZKWSUdF4aAd/tiHlmoenmQhtHonpyokALGp09uiNEDrO+yE3ihrtZzMd4Bew8g4N+NK0Wtw11nCL9rSK5eNS5w==
   dependencies:
     "@tethys/cdk" "^18.0.0"
     tslib "^2.0.0"

@@ -17,7 +17,7 @@
   </div>
   <div class="content-main-body">
     <thy-table
-      [thyModel]="userListStore.entities"
+      [thyModel]="userListStore.snapshot.entities"
       [thyTheme]="'bordered'"
       thyRowKey="id"
       [thyHoverDisplayOperation]="false"
@@ -34,9 +34,9 @@
       <thy-table-column thyTitle="备注" thyModelKey="description" thyDefaultText="-"></thy-table-column>
       <thy-table-column thyTitle="" thyClassName="thy-operation-links">
         <ng-template #cell let-user>
-            <a class="" href="javascript:;" (click)="deleteUser(user)">
-                <thy-icon thyIconName="pen"></thy-icon>
-              </a>
+          <a class="" href="javascript:;" (click)="deleteUser(user)">
+            <thy-icon thyIconName="pen"></thy-icon>
+          </a>
           <a class="link-danger-weak" href="javascript:;" (click)="deleteUser(user)">
             <thy-icon thyIconName="trash"></thy-icon>
           </a>
