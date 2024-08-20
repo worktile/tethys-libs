@@ -128,7 +128,7 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
         return !!this.mediaHtmlElement?.duration && !this.mediaHtmlElement?.paused;
     }
 
-    public get mediaHtmlElement(): HTMLMediaElement {
+    public get mediaHtmlElement(): HTMLMediaElement | undefined {
         return this.media?.nativeElement;
     }
 
@@ -173,8 +173,11 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     onCanPlay() {
-        this.mediaHtmlElement.ontimeupdate = this.onTimeUpdate;
-        this.mediaHtmlElement.onwaiting = this.onWaiting;
+        if (this.mediaHtmlElement) {
+            this.mediaHtmlElement.ontimeupdate = this.onTimeUpdate;
+            this.mediaHtmlElement.onwaiting = this.onWaiting;
+        }
+
         this.cdr.markForCheck();
     }
 
@@ -183,16 +186,20 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
      * 非禁用或当前时间为总时长重新设置进度
      */
     onTimeUpdate = () => {
-        const { currentTime, duration, paused } = this.mediaHtmlElement;
-        if (currentTime === duration || !paused) {
-            this.setProgressValue();
+        if (this.mediaHtmlElement) {
+            const { currentTime, duration, paused } = this.mediaHtmlElement;
+            if (currentTime === duration || !paused) {
+                this.setProgressValue();
+            }
         }
     };
 
     onWaiting = () => {
-        const { currentTime, duration, paused } = this.mediaHtmlElement;
-        if (currentTime === duration || !paused) {
-            this.setProgressValue();
+        if (this.mediaHtmlElement) {
+            const { currentTime, duration, paused } = this.mediaHtmlElement;
+            if (currentTime === duration || !paused) {
+                this.setProgressValue();
+            }
         }
     };
 
@@ -202,7 +209,7 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
      * 根据最新缓存和总时长重新计算缓存
      */
     setProgressValue() {
-        const { currentTime, duration, buffered } = this.mediaHtmlElement;
+        const { currentTime, duration, buffered } = this.mediaHtmlElement!;
         let ratio = currentTime / duration;
         this.progressValue = Math.round(ratio * 100);
         if (ratio !== 0 && ratio !== 1) {
@@ -210,7 +217,7 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
             this.bufferedValue = Math.round(bufferedValue);
         }
         if (this.progressValue === 100) {
-            this.mediaHtmlElement.currentTime = 0;
+            this.mediaHtmlElement!.currentTime = 0;
             this.setProgressValue();
         }
         this.cdr.markForCheck();
@@ -221,7 +228,7 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     onMouseMove() {
-        this.mediaHtmlElement.pause();
+        this.mediaHtmlElement?.pause();
     }
 
     onMouseEnd() {
@@ -256,12 +263,12 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
      * chrome 50后触发video.play会返回promise对象 播放失败会inject
      */
     onPause() {
-        const playPromise = this.mediaHtmlElement.play && this.mediaHtmlElement.play();
+        const playPromise = this.mediaHtmlElement?.play && this.mediaHtmlElement?.play();
 
         if (playPromise !== undefined) {
             playPromise
                 .then(() => {
-                    this.mediaHtmlElement.pause();
+                    this.mediaHtmlElement?.pause();
                     this.cdr.markForCheck();
                 })
                 .catch(() => {});
@@ -269,16 +276,20 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     afterVolumeChange(value: number) {
-        this.mediaHtmlElement.volume = value / 100;
-        this.tempVolume = this.mediaHtmlElement.volume;
-        this.mediaHtmlElement.muted = false;
-        this.cdr.markForCheck();
+        if (this.mediaHtmlElement) {
+            this.mediaHtmlElement.volume = value / 100;
+            this.tempVolume = this.mediaHtmlElement.volume;
+            this.mediaHtmlElement.muted = false;
+            this.cdr.markForCheck();
+        }
     }
 
     muted() {
-        this.mediaHtmlElement.volume = this.mediaHtmlElement.muted ? this.tempVolume : 0;
-        this.mediaHtmlElement.muted = !this.mediaHtmlElement.muted;
-        this.cdr.markForCheck();
+        if (this.mediaHtmlElement) {
+            this.mediaHtmlElement.volume = this.mediaHtmlElement.muted ? this.tempVolume : 0;
+            this.mediaHtmlElement.muted = !this.mediaHtmlElement.muted;
+            this.cdr.markForCheck();
+        }
     }
 
     /**
@@ -288,13 +299,13 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
      * buffered.end 取值为 0-1
      */
     afterProgressChange(value: number) {
-        const { duration, buffered } = this.mediaHtmlElement;
+        const { duration, buffered } = this.mediaHtmlElement!;
 
         const currentTime = (value / 100) * duration;
         // 防止 duration 值为NaN
         if (isFinite(currentTime)) {
-            this.mediaHtmlElement.currentTime = currentTime;
-            const ratio = this.mediaHtmlElement.currentTime / duration;
+            this.mediaHtmlElement!.currentTime = currentTime;
+            const ratio = this.mediaHtmlElement!.currentTime / duration;
             if (ratio !== 0 && ratio !== 1) {
                 this.bufferedValue = (((buffered?.end && buffered.end(ratio)) || 0) / duration) * 100;
             }
@@ -303,7 +314,7 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     playBackRateChange(rate: number) {
-        this.mediaHtmlElement.playbackRate = rate;
+        this.mediaHtmlElement!.playbackRate = rate;
         this.cdr.markForCheck();
     }
 
