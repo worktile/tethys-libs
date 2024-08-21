@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.0.0](https://github.com/tethys-org/libs/compare/v18.0.0-next.0...v18.0.0-next.1) (2024-08-20)
+
+### Features
+
+- upgrade ng to 18 #TINFR-374 ([#97](https://github.com/tethys-org/libs/issues/97)) ([#99](https://github.com/tethys-org/libs/issues/99)) ([123698d](https://github.com/tethys-org/libs/commit/123698dedc62d33af8ce5cbebfe6369b158c06cd)), closes [#TINFR-374](https://github.com/tethys-org/libs/issues/TINFR-374)
+
 # [18.0.0-next.1](https://github.com/tethys-org/libs/compare/v18.0.0-next.0...v18.0.0-next.1) (2024-08-20)
 
 ### Features
