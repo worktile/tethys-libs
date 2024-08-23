@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.1](https://github.com/tethys-org/libs/compare/v18.0.0...v18.0.1) (2024-08-23)
+
+### Bug Fixes
+
+- **components:** fix audio duration-time style error #POR-11154 ([140f688](https://github.com/tethys-org/libs/commit/140f688aa400bf9d1bffa6e33cb73d92a30d9332)), closes [#POR-11154](https://github.com/tethys-org/libs/issues/POR-11154)
+
 # [18.0.0](https://github.com/tethys-org/libs/compare/v18.0.0-next.0...v18.0.0-next.1) (2024-08-20)
 
 ### Features
