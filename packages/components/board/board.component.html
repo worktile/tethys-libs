@@ -2,7 +2,7 @@
   [hasLane]="thyShowLane()"
   [entries]="entriesWithCards()"
   [headerTemplateRef]="headerTemplateRef"
-  [isExpandAll]="thyAllLanesExpanded"
+  [isExpandAll]="allLanesExpanded()"
   (expandAll)="expandAll($event)"
 >
 </thy-board-header>
@@ -13,28 +13,30 @@
   #boardScrollElement
   [class.board-single-swimlane]="!thyShowLane()"
 >
-  @if(thyShowLane()) { @for(lane of lanesWithEntriesAndCards(); track lane._id){
-  <thy-board-lane
-    [lane]="lane"
-    [entries]="entriesWithCards()"
-    [hasLane]="thyShowLane()"
-    [virtualScroll]="thyVirtualScroll"
-    [laneTemplateRef]="laneTemplateRef"
-    [cardTemplateRef]="cardTemplateRef()"
-    [allLanesExpanded]="thyAllLanesExpanded"
-    [container]="boardScrollElement"
-    [defaultCardSize]="thyDefaultCardSize"
-    (expandLane)="thyExpandLane.emit($event)"
-  ></thy-board-lane>
-  } } @else{
-  <thy-board-lane
-    [entries]="entriesWithCards()"
-    [hasLane]="thyShowLane()"
-    [virtualScroll]="thyVirtualScroll"
-    [laneTemplateRef]="laneTemplateRef"
-    [cardTemplateRef]="cardTemplateRef()"
-    [container]="boardScrollElement"
-    [defaultCardSize]="thyDefaultCardSize"
-  ></thy-board-lane>
+  @if (thyShowLane()) {
+    @for (lane of lanesWithEntriesAndCards(); track lane._id) {
+      <thy-board-lane
+        [lane]="lane"
+        [entries]="entriesWithCards()"
+        [hasLane]="thyShowLane()"
+        [virtualScroll]="thyVirtualScroll"
+        [laneTemplateRef]="laneTemplateRef"
+        [cardTemplateRef]="cardTemplateRef()"
+        [allLanesExpanded]="allLanesExpanded()"
+        [container]="boardScrollElement"
+        [defaultCardSize]="thyDefaultCardSize"
+        (expandLane)="expandLane($event)"
+      ></thy-board-lane>
+    }
+  } @else {
+    <thy-board-lane
+      [entries]="entriesWithCards()"
+      [hasLane]="thyShowLane()"
+      [virtualScroll]="thyVirtualScroll"
+      [laneTemplateRef]="laneTemplateRef"
+      [cardTemplateRef]="cardTemplateRef()"
+      [container]="boardScrollElement"
+      [defaultCardSize]="thyDefaultCardSize"
+    ></thy-board-lane>
   }
 </div>

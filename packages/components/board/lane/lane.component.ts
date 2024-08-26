@@ -75,17 +75,12 @@ export class ThyBoardLaneComponent implements OnInit {
 
         effect(
             () => {
-                const allLanesExpanded = this.allLanesExpanded();
-                this.laneIsExpanded.set(allLanesExpanded);
-            },
-            { allowSignalWrites: true }
-        );
-
-        effect(
-            () => {
                 const lane = this.lane();
+                const allLanesExpanded = this.allLanesExpanded();
                 if (!helpers.isUndefinedOrNull(lane?.expanded)) {
                     this.laneIsExpanded.set(!!lane?.expanded);
+                } else {
+                    this.laneIsExpanded.set(allLanesExpanded);
                 }
             },
             { allowSignalWrites: true }
