@@ -8,11 +8,14 @@ import {
     Output,
     Signal,
     TemplateRef,
+    WritableSignal,
     booleanAttribute,
     computed,
     contentChild,
+    effect,
     input,
-    numberAttribute
+    numberAttribute,
+    signal
 } from '@angular/core';
 import { ThyBoardVirtualScrolledIndexChangeEvent, ThyBoardCard, ThyBoardEntry, ThyBoardLane } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
@@ -20,6 +23,7 @@ import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
 import { EMPTY_OBJECT_ID_STR } from './constants';
 import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
+import { helpers } from 'ngx-tethys/util';
 
 @Component({
     selector: 'thy-board',
@@ -112,7 +116,7 @@ export class ThyBoardComponent implements OnInit {
      * @default true
      * @type boolean
      */
-    @Input({ transform: booleanAttribute }) thyAllLanesExpanded = true;
+    thyAllLanesExpanded = input(true, { transform: booleanAttribute });
 
     // @Input() dragStartFn: (card: ThyBoardCard) => Observable<[]>;
 
@@ -142,8 +146,9 @@ export class ThyBoardComponent implements OnInit {
         const entries = this.thyEntries();
         const cards = this.thyCards();
         const lanes = this.thyLanes();
+        const thyAllLanesExpanded = this.thyAllLanesExpanded();
 
-        return this.buildLanesWithEntriesAndCards(lanes, entries, cards);
+        return this.buildLanesWithEntriesAndCards(lanes, entries, cards, thyAllLanesExpanded);
     });
 
     public entriesWithCards: Signal<ThyBoardEntry[]> = computed(() => {
@@ -152,9 +157,27 @@ export class ThyBoardComponent implements OnInit {
         return this.buildEntriesWithCardsByLanes(lanesWithEntriesAndCards, entries);
     });
 
-    constructor() {}
+    public allLanesExpanded: WritableSignal<boolean> = signal<boolean>(true);
+
+    constructor() {
+        effect(
+            () => {
+                this.calculateAllLanesExpanded();
+            },
+            { allowSignalWrites: true }
+        );
+    }
 
     ngOnInit() {}
+
+    private calculateAllLanesExpanded() {
+        const thyAllLanesExpanded = this.thyAllLanesExpanded();
+        const lanes = this.lanesWithEntriesAndCards();
+        const allLanesExpanded = (lanes || []).every((lane) => {
+            return !helpers.isUndefinedOrNull(lane?.expanded) ? lane?.expanded : thyAllLanesExpanded;
+        });
+        this.allLanesExpanded.set(allLanesExpanded);
+    }
 
     private buildCardsMap(cards: ThyBoardCard[]): Record<string, ThyBoardCard[]> {
         const cardsMapByEntryId: Record<string, ThyBoardCard[]> = {};
@@ -191,7 +214,12 @@ export class ThyBoardComponent implements OnInit {
         });
     }
 
-    private buildLanesWithEntriesAndCards(lanes: ThyBoardLane[], entries: ThyBoardEntry[], cards: ThyBoardCard[]) {
+    private buildLanesWithEntriesAndCards(
+        lanes: ThyBoardLane[],
+        entries: ThyBoardEntry[],
+        cards: ThyBoardCard[],
+        allLanesExpanded: boolean
+    ) {
         const unGroup: ThyBoardLane = {
             _id: EMPTY_OBJECT_ID_STR,
             name: '未分组',
@@ -221,13 +249,23 @@ export class ThyBoardComponent implements OnInit {
 
             return {
                 ...lane,
+                expanded: helpers.isUndefinedOrNull(lane.expanded) ? allLanesExpanded : lane.expanded,
                 entries: this.buildEntriesWithCards(lane.cards, entries)
             };
         });
     }
 
     expandAll(event: boolean) {
-        this.thyAllLanesExpanded = event;
-        this.thyExpandAllLanes.emit({ expanded: this.thyAllLanesExpanded });
+        this.allLanesExpanded.set(event);
+        this.lanesWithEntriesAndCards().forEach((lane) => {
+            lane.expanded = event;
+        });
+
+        this.thyExpandAllLanes.emit({ expanded: event });
+    }
+
+    expandLane(event: { lane: ThyBoardLane; expanded: boolean }) {
+        this.calculateAllLanesExpanded();
+        this.thyExpandLane.emit(event);
     }
 }
