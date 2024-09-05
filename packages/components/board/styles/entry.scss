@@ -1,9 +1,41 @@
 @use 'ngx-tethys/styles/variables.scss' as variables;
+@use './variables.scss' as board;
 
 .thy-entry-container {
     display: block;
     height: 100%;
     position: relative;
+
+    &.board-lane-body-entry {
+        width: 320px;
+        border-right: 1px solid variables.$gray-200;
+
+        &:first-child {
+            margin-left: 0px;
+        }
+        &.board-lane-body-entry-is-empty {
+            min-height: 200px;
+        }
+        &.board-lane-body-entry-is-collapsed {
+            height: 64px;
+            line-height: 64px;
+            border-right: none;
+        }
+    }
+
+    &.thy-entry-collapsed {
+        width: 49px;
+        min-width: 49px;
+        border-right: none;
+        visibility: hidden;
+        * {
+            visibility: hidden;
+        }
+        .entry-collapsed {
+            display: inline-block;
+        }
+    }
+
     .entry-body {
         position: relative;
         height: 100%;

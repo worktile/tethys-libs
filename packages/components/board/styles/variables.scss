@@ -1,0 +1,14 @@
+@use 'ngx-tethys/styles/variables.scss' as variables;
+
+$thy-board-entry-width: 320px;
+$thy-board-entry-width-split: 640px;
+$thy-board-entry-margin: 0px;
+$thy-board-inside-margin: 15px;
+$thy-board-wip-limit-color: variables.$danger;
+$thy-board-border-radius: 4px;
+$thy-board-border: solid 1px variables.$gray-200;
+$thy-board-border-wip-limit: solid 1px
+    rgba(
+        $color: $thy-board-wip-limit-color,
+        $alpha: 0.3
+    );

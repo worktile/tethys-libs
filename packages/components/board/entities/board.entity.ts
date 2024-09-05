@@ -23,6 +23,9 @@ export interface ThyBoardEntry {
     split?: boolean;
 
     cards?: ThyBoardCard[];
+
+    // 设置泳道展开收起状态，true 为展开
+    expanded?: boolean;
 }
 
 export interface ThyBoardCard {

@@ -1,22 +1,68 @@
 @use 'ngx-tethys/styles/mixins/shadow';
 @use 'ngx-tethys/styles/variables.scss' as variables;
+@use './variables.scss' as board;
 
-.thy-board-groups-header {
+.thy-board-header {
     display: block;
     width: 100%;
     line-height: 48px;
     border-bottom: solid 1px variables.$gray-200;
 
-    .states {
+    .entries {
         position: relative;
         display: flex;
-        .state {
+        .entry {
+            display: flex;
+            align-items: center;
             width: 320px;
             min-width: 320px;
-            padding: 0 20px;
+            padding: 0 4px 0 20px;
             overflow: hidden;
             border-right: solid 1px variables.$gray-200;
             color: variables.$gray-800;
+            .operator {
+                display: none;
+            }
+            &:hover {
+                .operator {
+                    display: inherit;
+                }
+            }
+        }
+
+        .entry-collapsed {
+            position: relative;
+            width: 49px;
+            min-width: 49px;
+            line-height: 1.5715;
+            border-right: none;
+
+            .entry-collapsed-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 48px;
+                border-right: board.$thy-board-border;
+                border-bottom: board.$thy-board-border;
+                background: variables.$gray-80;
+
+                .title {
+                    margin: 16px auto 0px auto;
+                    max-height: 11rem;
+                    writing-mode: tb;
+                    width: 20px;
+                    letter-spacing: 3px;
+                }
+                .count {
+                    margin: 0px auto;
+                }
+                .operator {
+                    margin: 0px auto;
+                }
+            }
         }
     }
 

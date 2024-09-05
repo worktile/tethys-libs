@@ -1,6 +1,6 @@
 import { CdkVirtualScrollViewport, ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
-import { NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -28,6 +28,7 @@ import { CdkDragDrop, CdkDragStart, DragDropModule } from '@angular/cdk/drag-dro
     imports: [
         NgStyle,
         NgTemplateOutlet,
+        NgClass,
         ScrollingModule,
         DragDropModule,
         ExperimentalScrollingModule,
@@ -35,7 +36,8 @@ import { CdkDragDrop, CdkDragStart, DragDropModule } from '@angular/cdk/drag-dro
         ThyBoardEntryVirtualScroll
     ],
     host: {
-        class: 'thy-entry-container'
+        class: 'thy-entry-container board-lane-body-entry',
+        '[class.thy-entry-collapsed]': '!entry?.expanded'
     }
 })
 export class ThyBoardEntryComponent implements OnInit {
@@ -46,8 +48,6 @@ export class ThyBoardEntryComponent implements OnInit {
     @ViewChild('entryBody') entryBody!: ElementRef;
 
     @Input({ required: true }) entry!: ThyBoardEntry;
-
-    @Input() lane: ThyBoardLane | undefined;
 
     @Input() hasLane = false;
 

@@ -59,21 +59,8 @@
     }
     .board-lane-body {
         display: flex;
-        .board-lane-body-entry {
-            width: 320px;
-            border-right: 1px solid variables.$gray-200;
-
-            &:first-child {
-                margin-left: 0px;
-            }
-            &.board-lane-body-entry-is-empty {
-                min-height: 200px;
-            }
-            &.board-lane-body-entry-is-collapsed {
-                height: 64px;
-                line-height: 64px;
-                border-right: none;
-            }
+        .board-lane-collapsed {
+            line-height: 62px;
         }
     }
 }
