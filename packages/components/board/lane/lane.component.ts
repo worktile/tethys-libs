@@ -8,12 +8,10 @@ import {
     QueryList,
     TemplateRef,
     ViewChildren,
-    WritableSignal,
     booleanAttribute,
     effect,
     input,
-    numberAttribute,
-    signal
+    numberAttribute
 } from '@angular/core';
 import { ThyBoardEntryComponent } from '../entry/entry.component';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
@@ -62,29 +60,21 @@ export class ThyBoardLaneComponent implements OnInit {
     @Input({ transform: numberAttribute }) defaultCardSize = 112;
 
     /**
+     * 是否支持栏的收起展开
+     * @default false
+     * @type boolean
+     */
+    laneCollapsible = input(true, { transform: booleanAttribute });
+
+    /**
      * 展开收起泳道事件
      */
     @Output() expandLane = new EventEmitter<{ lane: ThyBoardLane; expanded: boolean }>();
-
-    laneIsExpanded: WritableSignal<boolean> = signal(true);
 
     constructor() {
         effect(() => {
             this.setLaneHeight();
         });
-
-        effect(
-            () => {
-                const lane = this.lane();
-                const allLanesExpanded = this.allLanesExpanded();
-                if (!helpers.isUndefinedOrNull(lane?.expanded)) {
-                    this.laneIsExpanded.set(!!lane?.expanded);
-                } else {
-                    this.laneIsExpanded.set(allLanesExpanded);
-                }
-            },
-            { allowSignalWrites: true }
-        );
     }
 
     ngOnInit() {}
@@ -97,15 +87,13 @@ export class ThyBoardLaneComponent implements OnInit {
                 entrySpacer = entrySpacer < entry.entryBodyHeight ? entry.entryBodyHeight : entrySpacer;
                 laneHeight = Math.max(laneHeight, entrySpacer);
             });
-            laneHeight = this.laneIsExpanded() && this.lane()?.cards?.length === 0 ? emptyLaneHeight : laneHeight;
+            laneHeight = this.lane()?.expanded && this.lane()?.cards?.length === 0 ? emptyLaneHeight : laneHeight;
             this.laneHeight = laneHeight;
         }
     }
 
     public expand() {
-        const isExpanded = this.laneIsExpanded();
-        this.lane()!.expanded = !isExpanded;
-        this.laneIsExpanded.set(!isExpanded);
+        const isExpanded = this.lane()?.expanded;
         this.expandLane.emit({ lane: this.lane()!, expanded: !isExpanded });
     }
 }

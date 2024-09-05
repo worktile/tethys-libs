@@ -2,28 +2,24 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
+    ElementRef,
     EventEmitter,
     Input,
     OnInit,
     Output,
-    Signal,
     TemplateRef,
-    WritableSignal,
     booleanAttribute,
-    computed,
     contentChild,
     effect,
     input,
-    numberAttribute,
-    signal
+    numberAttribute
 } from '@angular/core';
 import { ThyBoardVirtualScrolledIndexChangeEvent, ThyBoardCard, ThyBoardEntry, ThyBoardLane } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
-import { EMPTY_OBJECT_ID_STR } from './constants';
 import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
-import { helpers } from 'ngx-tethys/util';
+import { ThyBoardService } from './board.service';
 
 @Component({
     selector: 'thy-board',
@@ -33,7 +29,8 @@ import { helpers } from 'ngx-tethys/util';
     imports: [ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent, ThyBoardBodyScrollableDirective],
     host: {
         class: 'thy-board-container'
-    }
+    },
+    providers: [ThyBoardService]
 })
 export class ThyBoardComponent implements OnInit {
     /**
@@ -118,6 +115,13 @@ export class ThyBoardComponent implements OnInit {
      */
     thyAllLanesExpanded = input(true, { transform: booleanAttribute });
 
+    /**
+     * 是否支持栏的收起展开
+     * @default false
+     * @type boolean
+     */
+    thyEntryCollapsible = input(false, { transform: booleanAttribute });
+
     // @Input() dragStartFn: (card: ThyBoardCard) => Observable<[]>;
 
     // @Input() dragDropFn: (data: { card: ThyBoardCard }) => Observable<any>;
@@ -138,31 +142,50 @@ export class ThyBoardComponent implements OnInit {
     @Output() thyExpandAllLanes = new EventEmitter<{ expanded: boolean }>();
 
     /**
+     * 展开收起栏事件
+     */
+    @Output() thyExpandEntry = new EventEmitter<{ entry: ThyBoardEntry; expanded: boolean }>();
+
+    /**
      * 拖拽后触发事件
      */
     @Output() thyDroppableChange = new EventEmitter<boolean>();
 
-    public lanesWithEntriesAndCards: Signal<ThyBoardLane[]> = computed(() => {
-        const entries = this.thyEntries();
-        const cards = this.thyCards();
-        const lanes = this.thyLanes();
-        const thyAllLanesExpanded = this.thyAllLanesExpanded();
-
-        return this.buildLanesWithEntriesAndCards(lanes, entries, cards, thyAllLanesExpanded);
-    });
-
-    public entriesWithCards: Signal<ThyBoardEntry[]> = computed(() => {
-        const lanesWithEntriesAndCards = this.lanesWithEntriesAndCards();
-        const entries = this.thyEntries();
-        return this.buildEntriesWithCardsByLanes(lanesWithEntriesAndCards, entries);
-    });
-
-    public allLanesExpanded: WritableSignal<boolean> = signal<boolean>(true);
-
-    constructor() {
+    constructor(
+        public elementRef: ElementRef,
+        public thyBoardService: ThyBoardService
+    ) {
         effect(
             () => {
-                this.calculateAllLanesExpanded();
+                this.thyBoardService.setCards(this.thyCards());
+            },
+            { allowSignalWrites: true }
+        );
+
+        effect(
+            () => {
+                this.thyBoardService.setEntities(this.thyEntries());
+            },
+            { allowSignalWrites: true }
+        );
+
+        effect(
+            () => {
+                this.thyBoardService.setLanes(this.thyLanes());
+            },
+            { allowSignalWrites: true }
+        );
+
+        effect(
+            () => {
+                this.thyBoardService.setAllLanesExpanded(this.thyAllLanesExpanded());
+            },
+            { allowSignalWrites: true }
+        );
+
+        effect(
+            () => {
+                this.thyBoardService.setInnerEntryCollapsible(this.thyEntryCollapsible());
             },
             { allowSignalWrites: true }
         );
@@ -170,102 +193,18 @@ export class ThyBoardComponent implements OnInit {
 
     ngOnInit() {}
 
-    private calculateAllLanesExpanded() {
-        const thyAllLanesExpanded = this.thyAllLanesExpanded();
-        const lanes = this.lanesWithEntriesAndCards();
-        const allLanesExpanded = (lanes || []).every((lane) => {
-            return !helpers.isUndefinedOrNull(lane?.expanded) ? lane?.expanded : thyAllLanesExpanded;
-        });
-        this.allLanesExpanded.set(allLanesExpanded);
-    }
-
-    private buildCardsMap(cards: ThyBoardCard[]): Record<string, ThyBoardCard[]> {
-        const cardsMapByEntryId: Record<string, ThyBoardCard[]> = {};
-
-        (cards || []).forEach((card) => {
-            cardsMapByEntryId[card.entryId] = cardsMapByEntryId[card.entryId] ? cardsMapByEntryId[card.entryId].concat([card]) : [card];
-        });
-        return cardsMapByEntryId;
-    }
-
-    private buildEntriesWithCardsByLanes(lanes: ThyBoardLane[], entries: ThyBoardEntry[]) {
-        const entriesMapById: Record<string, ThyBoardEntry> = {};
-        (entries || []).forEach((entry) => {
-            entriesMapById[entry._id] = entry;
-            entriesMapById[entry._id].cards = [];
-        });
-        (lanes || []).forEach((lane) => {
-            lane.entries!.forEach((entry) => {
-                entriesMapById[entry._id].cards = (entriesMapById[entry._id].cards || []).concat(entry.cards || []);
-            });
-        });
-
-        return entries;
-    }
-
-    private buildEntriesWithCards(cards: ThyBoardCard[], entries: ThyBoardEntry[]) {
-        const cardsMapByEntryId = this.buildCardsMap(cards);
-
-        return (entries || []).map((entry) => {
-            return {
-                ...entry,
-                cards: cardsMapByEntryId[entry._id] || []
-            };
-        });
-    }
-
-    private buildLanesWithEntriesAndCards(
-        lanes: ThyBoardLane[],
-        entries: ThyBoardEntry[],
-        cards: ThyBoardCard[],
-        allLanesExpanded: boolean
-    ) {
-        const unGroup: ThyBoardLane = {
-            _id: EMPTY_OBJECT_ID_STR,
-            name: '未分组',
-            cards: []
-        };
-
-        const lanesMapById: Record<string, ThyBoardLane> = {};
-        (lanes || []).forEach((lane) => {
-            lane.cards = [];
-            lanesMapById[lane._id] = lane;
-        });
-
-        (cards || []).forEach((card) => {
-            let lane = lanesMapById[card.laneId];
-
-            if (lane) {
-                lane.cards = lane.cards?.concat(card);
-            } else {
-                unGroup.cards = unGroup.cards?.concat(card);
-            }
-        });
-        lanes = unGroup.cards!.length > 0 ? [...lanes, unGroup] : [...lanes];
-        return lanes.map((lane) => {
-            if (!lane.cards) {
-                lane.cards = [];
-            }
-
-            return {
-                ...lane,
-                expanded: helpers.isUndefinedOrNull(lane.expanded) ? allLanesExpanded : lane.expanded,
-                entries: this.buildEntriesWithCards(lane.cards, entries)
-            };
-        });
-    }
-
-    expandAll(event: boolean) {
-        this.allLanesExpanded.set(event);
-        this.lanesWithEntriesAndCards().forEach((lane) => {
-            lane.expanded = event;
-        });
-
+    expandAllLanes(event: boolean) {
+        this.thyBoardService.expandAllLanes(event);
         this.thyExpandAllLanes.emit({ expanded: event });
     }
 
     expandLane(event: { lane: ThyBoardLane; expanded: boolean }) {
-        this.calculateAllLanesExpanded();
-        this.thyExpandLane.emit(event);
+        this.thyBoardService.expandLane(event);
+        this.thyExpandLane.emit({ lane: { ...event.lane, expanded: event.expanded }, expanded: event.expanded });
+    }
+
+    expandEntry(event: { entry: ThyBoardEntry; expanded: boolean }) {
+        this.thyBoardService.expandEntry(event);
+        this.thyExpandEntry.emit({ entry: { ...event.entry, expanded: event.expanded }, expanded: event.expanded });
     }
 }

@@ -1,29 +1,82 @@
-<div class="states">
+<div class="entries">
   @if (hasLane) {
-  <div class="state d-flex align-items-center">
-    <a href="javascript:;" class="link-muted pr-2" (click)="expandAllLane()" [thyTooltip]="isExpandAll ? '全部收起' : '全部展开'">
-      <thy-icon [thyIconName]="isExpandAll ? 'stow' : 'open'"></thy-icon>
-    </a>
+    <div class="entry">
+      @if (!hasCollapsedEntry()) {
+        <a href="javascript:;" class="link-muted pr-2" (click)="expandAllLane()" [thyTooltip]="allLanesExpanded ? '全部收起' : '全部展开'">
+          <thy-icon [thyIconName]="allLanesExpanded ? 'stow' : 'open'"></thy-icon>
+        </a>
+      }
 
-    @if (headerTemplateRef) {
-    <ng-template [ngTemplateOutlet]="headerTemplateRef"></ng-template>
-    } @else {
-    <span>泳道</span>
-    }
-  </div>
-  } @for (entry of entries(); track entry._id) {
-  <div class="state d-flex align-items-center">
-    @if (headerTemplateRef) {
-    <ng-template [ngTemplateOutlet]="headerTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: entry }"></ng-template>
-    } @else {
-    <div class="text-truncate">
-      <span thyFlexibleText [thyTooltipContent]="entry.name"> {{ entry.name }}</span>
+      @if (headerTemplateRef) {
+        <ng-template [ngTemplateOutlet]="headerTemplateRef"></ng-template>
+      } @else {
+        <span>泳道</span>
+      }
     </div>
-    <div class="flex-fill">
-      <span class="mx-1">·</span>
-      <span>{{ entry.cards?.length || 0 }}</span>
-    </div>
+  }
+  @for (entry of entries(); track entry._id) {
+    @if (entry.expanded) {
+      <div class="entry justify-content-between">
+        @if (headerTemplateRef) {
+          <ng-template [ngTemplateOutlet]="headerTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: entry }"></ng-template>
+        } @else {
+          <div class="text-truncate">
+            <span thyFlexibleText [thyTooltipContent]="entry.name"> {{ entry.name }}</span>
+          </div>
+          <div class="flex-fill">
+            <span class="mx-1">·</span>
+            <span>{{ entry.cards?.length || 0 }}</span>
+          </div>
+        }
+        @if (entryCollapsible()) {
+          <a
+            href="javascript:;"
+            class="operator"
+            thyAction
+            thyIcon="angle-left"
+            thyTooltip="收起"
+            thyTooltipPlacement="top"
+            (click)="expandBoardEntry(entry)"
+          ></a>
+        }
+      </div>
+    } @else {
+      <div class="entry-collapsed">
+        <div class="entry-collapsed-content" #collapsedHeader [ngStyle]="{ height: containerClientHeight() + 'px' }">
+          @if (headerTemplateRef) {
+            <ng-template
+              [ngTemplateOutlet]="headerTemplateRef"
+              [ngTemplateOutletContext]="{ entry: entry, $implicit: entry }"
+            ></ng-template>
+          } @else {
+            <div class="title" thyFlexibleText [thyTooltipContent]="entry.name">{{ entry.name }}</div>
+            <span class="mx-auto">·</span>
+            @let count = entry.cards?.length || 0;
+            @if (entry.wipLimit) {
+              <div class="count" [thyTooltip]="'共 ' + count + ' 个工 / 在制品限制 ' + entry.wipLimit + ' 个'">
+                <span class="count-num">
+                  <span [ngClass]="{ 'count--wip-limit': count > entry.wipLimit }">{{ count }}</span>
+                  /
+                  {{ entry.wipLimit }}
+                </span>
+              </div>
+            } @else {
+              <div class="count" [thyTooltip]="'共 ' + count + ' 个'">
+                {{ count }}
+              </div>
+            }
+          }
+          <a
+            href="javascript:;"
+            class="operator"
+            thyAction
+            thyIcon="angle-right"
+            thyTooltip="展开"
+            thyTooltipPlacement="top"
+            (click)="expandBoardEntry(entry)"
+          ></a>
+        </div>
+      </div>
     }
-  </div>
   }
 </div>

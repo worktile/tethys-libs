@@ -1,77 +1,74 @@
-@if(hasLane){
-<div class="board-lane-header-container d-flex" [class.board-lane-header-expanded]="laneIsExpanded()">
-  <div class="board-lane-header">
-    <thy-icon
-      thyIconName="angle-down"
-      class="lane-expand-icon mr-2"
-      [class.lane-expand-icon-collapsed]="!laneIsExpanded()"
-      (click)="expand()"
-    ></thy-icon>
+@if (hasLane) {
+  <div class="board-lane-header-container d-flex" [class.board-lane-header-expanded]="lane()?.expanded">
+    <div class="board-lane-header">
+      @if (laneCollapsible()) {
+        <thy-icon
+          thyIconName="angle-down"
+          class="lane-expand-icon mr-2"
+          [class.lane-expand-icon-collapsed]="!lane()?.expanded"
+          (click)="expand()"
+        ></thy-icon>
+      }
 
-    @if(laneTemplateRef) {
-
-    <ng-template
-      [ngTemplateOutlet]="laneTemplateRef"
-      [ngTemplateOutletContext]="{ lane: lane(), $implicit: lane(), laneIsExpanded: laneIsExpanded() }"
-    ></ng-template>
-    } @else{
-    <div class="d-flex justify-content-between text-secondary flex-grow-1 type-container">
-      <span thyFlexibleText [thyTooltipContent]="lane()!.name">
-        <span>{{ lane()?.name }}</span>
-      </span>
-      @if(laneIsExpanded()) {
-      <span class="text-muted flex-shrink-0"
-        ><span class="text-secondary mr-1">{{ lane()?.cards?.length || 0 }}</span
-        >个</span
-      >
+      @if (laneTemplateRef) {
+        <ng-template
+          [ngTemplateOutlet]="laneTemplateRef"
+          [ngTemplateOutletContext]="{ lane: lane(), $implicit: lane(), laneIsExpanded: lane()?.expanded }"
+        ></ng-template>
+      } @else {
+        <div class="d-flex justify-content-between text-secondary flex-grow-1 type-container">
+          <span thyFlexibleText [thyTooltipContent]="lane()!.name">
+            <span>{{ lane()?.name }}</span>
+          </span>
+          @if (lane()?.expanded) {
+            <span class="text-muted flex-shrink-0"
+              ><span class="text-secondary mr-1">{{ lane()?.cards?.length || 0 }}</span
+              >个</span
+            >
+          }
+        </div>
       }
     </div>
-    }
   </div>
-</div>
 }
 
 <div
   class="board-lane-body"
   cdkDropListGroup
   [class.board-no-lane-body]="!hasLane"
-  [ngStyle]="{ height: laneIsExpanded() && hasLane && laneHeight ? laneHeight + 'px' : 'unset' }"
+  [ngStyle]="{ height: lane()?.expanded && hasLane && laneHeight ? laneHeight + 'px' : 'unset' }"
 >
-  @if(hasLane) { @for (entry of lane()?.entries; track entry._id) {
-  <div
-    class="board-lane-body-entry"
-    [class.board-lane-body-entry-is-empty]="laneIsExpanded() && lane()?.cards?.length === 0"
-    [class.board-lane-body-entry-is-collapsed]="!laneIsExpanded()"
-  >
-    @if(laneIsExpanded()){
-    <thy-board-entry
-      [hasLane]="hasLane"
-      [virtualScroll]="virtualScroll"
-      [entry]="entry"
-      [cardTemplateRef]="cardTemplateRef"
-      [lane]="lane()"
-      [container]="container()"
-      [defaultCardSize]="defaultCardSize"
-    ></thy-board-entry>
-    }@else {
-    <div class="text-muted mx-5 text-truncate">
-      <span class="text-secondary mr-1">{{ entry.cards!.length }}</span
-      >个{{ entry.name }}
-    </div>
-
+  @if (hasLane) {
+    @for (entry of lane()?.entries; track entry._id) {
+      @if (lane()?.expanded) {
+        <thy-board-entry
+          [class.board-lane-body-entry-is-empty]="lane()?.expanded && lane()?.cards?.length === 0"
+          [class.board-lane-body-entry-is-collapsed]="!lane()?.expanded"
+          [hasLane]="hasLane"
+          [virtualScroll]="virtualScroll"
+          [entry]="entry"
+          [cardTemplateRef]="cardTemplateRef"
+          [container]="container()"
+          [defaultCardSize]="defaultCardSize"
+        ></thy-board-entry>
+      } @else {
+        <div class="text-muted mx-5 text-truncate board-lane-collapsed">
+          <span class="text-secondary mr-1">{{ entry.cards!.length }}</span
+          >个{{ entry.name }}
+        </div>
+      }
     }
-  </div>
-  } } @else{ @for (entry of entries(); track entry._id) {
-  <div class="board-lane-body-entry">
-    <thy-board-entry
-      [hasLane]="hasLane"
-      [virtualScroll]="virtualScroll"
-      [entry]="entry"
-      [cardTemplateRef]="cardTemplateRef"
-      [container]="container()"
-      [defaultCardSize]="defaultCardSize"
-    >
-    </thy-board-entry>
-  </div>
-  } }
+  } @else {
+    @for (entry of entries(); track entry._id) {
+      <thy-board-entry
+        [hasLane]="hasLane"
+        [virtualScroll]="virtualScroll"
+        [entry]="entry"
+        [cardTemplateRef]="cardTemplateRef"
+        [container]="container()"
+        [defaultCardSize]="defaultCardSize"
+      >
+      </thy-board-entry>
+    }
+  }
 </div>
