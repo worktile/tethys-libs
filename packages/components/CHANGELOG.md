@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.2](https://github.com/tethys-org/libs/compare/v18.0.1...v18.0.2) (2024-09-10)
+
+### Features
+
+- **components:** board support collapse entry #INFR-13153 ([13a297e](https://github.com/tethys-org/libs/commit/13a297e7f5e0ba6d97abe528e47a6b3a31fc9ca5)), closes [#INFR-13153](https://github.com/tethys-org/libs/issues/INFR-13153)
+- **components:** relate allExpand with lane.expanded #TINFR-460 ([f6d7293](https://github.com/tethys-org/libs/commit/f6d7293930c7fb7c16178b2c082ff1e472835d26)), closes [#TINFR-460](https://github.com/tethys-org/libs/issues/TINFR-460)
+
 ## [18.0.1](https://github.com/tethys-org/libs/compare/v18.0.0...v18.0.1) (2024-08-23)
 
 ### Bug Fixes
