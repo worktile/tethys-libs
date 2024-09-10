@@ -3,30 +3,46 @@ import {
     Component,
     ContentChild,
     ElementRef,
-    EventEmitter,
-    Input,
     OnInit,
-    Output,
     TemplateRef,
     booleanAttribute,
     contentChild,
     effect,
     input,
-    numberAttribute
+    numberAttribute,
+    output
 } from '@angular/core';
-import { ThyBoardVirtualScrolledIndexChangeEvent, ThyBoardCard, ThyBoardEntry, ThyBoardLane } from './entities';
+import {
+    ThyBoardCard,
+    ThyBoardEntry,
+    ThyBoardLane,
+    ThyBoardDragScopeType,
+    ThyBoardDropActionEvent,
+    ThyBoardDragStartEvent,
+    ThyBoardDropEnterPredicateEvent,
+    ThyBoardDragContainer
+} from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
 import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 import { ThyBoardService } from './board.service';
+import { CdkDragDrop, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
+import { Observable, of } from 'rxjs';
 
 @Component({
     selector: 'thy-board',
     templateUrl: 'board.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ThyBoardHeaderComponent, ThyBoardLaneComponent, ThyBoardEntryComponent, ThyBoardBodyScrollableDirective],
+    imports: [
+        CdkDropListGroup,
+        DragDropModule,
+        ThyBoardHeaderComponent,
+        ThyBoardLaneComponent,
+        ThyBoardEntryComponent,
+        ThyBoardBodyScrollableDirective
+    ],
     host: {
         class: 'thy-board-container'
     },
@@ -85,28 +101,26 @@ export class ThyBoardComponent implements OnInit {
      * @default false
      * @type boolean
      */
-    @Input({ transform: booleanAttribute }) thyVirtualScroll = false;
+    thyVirtualScroll = input(false, { transform: booleanAttribute });
 
     /**
      * 卡片默认高度
      * @default false
      * @type boolean
      */
-    @Input({ transform: numberAttribute }) thyDefaultCardSize = 112;
+    thyDefaultCardSize = input(112, { transform: numberAttribute });
 
     /**
      * 是否支持排序,开启后支持同栏排序
-     * @default false
-     * @type boolean
+     * @type ThyBoardDragScopeType
      */
-    @Input({ transform: booleanAttribute }) thySortable = false;
+    thySortable = input<ThyBoardDragScopeType>();
 
     /**
      * 是否支持拖动，变更栏和泳道
-     * @default false
-     * @type boolean
+     * @type ThyBoardDragScopeType
      */
-    @Input({ transform: booleanAttribute }) thyMovable = false;
+    thyMovable = input<ThyBoardDragScopeType>();
 
     /**
      * 是否展开所有泳道
@@ -122,34 +136,48 @@ export class ThyBoardComponent implements OnInit {
      */
     thyEntryCollapsible = input(false, { transform: booleanAttribute });
 
-    // @Input() dragStartFn: (card: ThyBoardCard) => Observable<[]>;
-
-    // @Input() dragDropFn: (data: { card: ThyBoardCard }) => Observable<any>;
+    /**
+     * 判断是否允许拖起的卡片放到另外位置
+     * @type (event: { drag: CdkDrag; drop: CdkDropList }) => boolean
+     */
+    thyDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
 
     /**
-     * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
+     * 当把卡片拖动到另一个位置时触发
+     * @type (event: CdkDragDrop<ThyBoardCard[] | undefined>) => Observable<boolean>
      */
-    @Output() thyVirtualScrolledIndexChange = new EventEmitter<ThyBoardVirtualScrolledIndexChangeEvent>();
+    thyDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
+
+    // /**
+    //  * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
+    //  */
+    // thyVirtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
 
     /**
      * 展开收起泳道事件
+     * @type { lane: ThyBoardLane; expanded: boolean }
      */
-    @Output() thyExpandLane = new EventEmitter<{ lane: ThyBoardLane; expanded: boolean }>();
+    thyExpandLane = output<{ lane: ThyBoardLane; expanded: boolean }>();
 
     /**
      * 展开收起所有泳道事件
+     * @type { expanded: boolean }
      */
-    @Output() thyExpandAllLanes = new EventEmitter<{ expanded: boolean }>();
+    thyExpandAllLanes = output<{ expanded: boolean }>();
 
     /**
      * 展开收起栏事件
+     * @type { entry: ThyBoardEntry; expanded: boolean }
      */
-    @Output() thyExpandEntry = new EventEmitter<{ entry: ThyBoardEntry; expanded: boolean }>();
+    thyExpandEntry = output<{ entry: ThyBoardEntry; expanded: boolean }>();
 
     /**
-     * 拖拽后触发事件
+     * 拖起卡片后触发事件
+     * @type ThyBoardCard
      */
-    @Output() thyDroppableChange = new EventEmitter<boolean>();
+    thyDragStart = output<ThyBoardDragStartEvent>();
+
+    public draggingCard: ThyBoardCard | undefined;
 
     constructor(
         public elementRef: ElementRef,
@@ -207,4 +235,25 @@ export class ThyBoardComponent implements OnInit {
         this.thyBoardService.expandEntry(event);
         this.thyExpandEntry.emit({ entry: { ...event.entry, expanded: event.expanded }, expanded: event.expanded });
     }
+
+    dragCardStarted(event: ThyBoardDragStartEvent) {
+        this.draggingCard = event.card;
+        this.thyDragStart.emit(event);
+    }
+
+    dropListDropped = (event: CdkDragDrop<ThyBoardDragContainer | undefined>) => {
+        this.draggingCard = undefined;
+        const dropAction = this.thyDropAction();
+        if (dropAction) {
+            return dropAction({
+                card: event.item.data,
+                previousContainer: event.previousContainer.data!,
+                previousIndex: event.previousIndex,
+                container: event.container.data!,
+                currentIndex: event.currentIndex
+            });
+        } else {
+            return of(true);
+        }
+    };
 }

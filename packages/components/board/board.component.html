@@ -13,7 +13,8 @@
 <div
   class="board-body"
   cdkDropListGroup
-  [thyBoardBodyScrollable]="!thyShowLane() || !thyVirtualScroll"
+  [cdkDropListGroupDisabled]="!thySortable() && !thyMovable()"
+  [thyBoardBodyScrollable]="!thyShowLane() || !thyVirtualScroll()"
   #boardScrollElement
   [class.board-single-swimlane]="!thyShowLane()"
 >
@@ -23,25 +24,37 @@
         [lane]="lane"
         [entries]="thyBoardService.entriesWithCards()"
         [hasLane]="thyShowLane()"
-        [virtualScroll]="thyVirtualScroll"
+        [virtualScroll]="thyVirtualScroll()"
         [laneTemplateRef]="laneTemplateRef"
         [cardTemplateRef]="cardTemplateRef()"
         [allLanesExpanded]="thyBoardService.allLanesExpanded()"
         [laneCollapsible]="thyBoardService.laneCollapsible()"
         [container]="boardScrollElement"
-        [defaultCardSize]="thyDefaultCardSize"
+        [defaultCardSize]="thyDefaultCardSize()"
+        [movable]="thyMovable()"
+        [sortable]="thySortable()"
         (expandLane)="expandLane($event)"
+        [dropEnterPredicate]="thyDropEnterPredicate()"
+        (dragStarted)="dragCardStarted($event)"
+        [dropAction]="dropListDropped"
+        [draggingCard]="draggingCard"
       ></thy-board-lane>
     }
   } @else {
     <thy-board-lane
       [entries]="thyBoardService.entriesWithCards()"
       [hasLane]="thyShowLane()"
-      [virtualScroll]="thyVirtualScroll"
+      [virtualScroll]="thyVirtualScroll()"
       [laneTemplateRef]="laneTemplateRef"
       [cardTemplateRef]="cardTemplateRef()"
       [container]="boardScrollElement"
-      [defaultCardSize]="thyDefaultCardSize"
+      [defaultCardSize]="thyDefaultCardSize()"
+      [movable]="thyMovable()"
+      [sortable]="thySortable()"
+      [dropEnterPredicate]="thyDropEnterPredicate()"
+      (dragStarted)="dragCardStarted($event)"
+      [dropAction]="dropListDropped"
+      [draggingCard]="draggingCard"
     ></thy-board-lane>
   }
 </div>

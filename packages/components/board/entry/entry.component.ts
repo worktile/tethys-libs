@@ -3,22 +3,38 @@ import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-exp
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     Input,
     OnInit,
+    Renderer2,
     TemplateRef,
     ViewChild,
     booleanAttribute,
+    computed,
     effect,
     input,
-    numberAttribute
+    numberAttribute,
+    output
 } from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyFlexItem } from 'ngx-tethys/grid';
-import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from '../entities';
+import {
+    ThyBoardCard,
+    ThyBoardDragContainer,
+    ThyBoardDragScopeType,
+    ThyBoardDragScopeTypes,
+    ThyBoardDragStartEvent,
+    ThyBoardDropEnterPredicateEvent,
+    ThyBoardEntry,
+    ThyBoardLane
+} from '../entities';
 import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
-import { CdkDragDrop, CdkDragStart, DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDragMove, CdkDragStart, CdkDropList, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ThyDragDropDirective } from 'ngx-tethys/shared';
+import { Observable } from 'rxjs';
+import { EMPTY_OBJECT_ID_STR } from '../constants';
 
 @Component({
     selector: 'thy-board-entry',
@@ -33,7 +49,8 @@ import { CdkDragDrop, CdkDragStart, DragDropModule } from '@angular/cdk/drag-dro
         DragDropModule,
         ExperimentalScrollingModule,
         ThyFlexItem,
-        ThyBoardEntryVirtualScroll
+        ThyBoardEntryVirtualScroll,
+        ThyDragDropDirective
     ],
     host: {
         class: 'thy-entry-container board-lane-body-entry',
@@ -51,6 +68,8 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() hasLane = false;
 
+    @Input() lane: ThyBoardLane | undefined;
+
     @Input({ transform: booleanAttribute }) virtualScroll = false;
 
     @Input() cardTemplateRef: TemplateRef<SafeAny> | null = null;
@@ -59,11 +78,55 @@ export class ThyBoardEntryComponent implements OnInit {
 
     container = input.required<HTMLElement>();
 
+    draggingCard = input<ThyBoardCard>();
+
     @Input({ transform: numberAttribute }) defaultCardSize = 112;
+
+    /**
+     * 是否支持排序,开启后支持同栏排序
+     * @default false
+     * @type boolean
+     */
+    sortable = input<ThyBoardDragScopeType>();
+
+    /**
+     * 是否支持拖动，变更栏和泳道
+     * @default false
+     * @type boolean
+     */
+    movable = input<ThyBoardDragScopeType>();
+
+    @Input() dropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
+
+    @Input() dropAction: ((event: CdkDragDrop<ThyBoardDragContainer | undefined>) => Observable<boolean>) | undefined;
+
+    dragStarted = output<ThyBoardDragStartEvent>();
 
     public entryBodyHeight = 0;
 
-    constructor() {
+    public isDraggingList = false;
+
+    public showBackDropWhenDragging = computed(() => {
+        const movable = this.movable();
+        const sortable = this.sortable();
+        const draggingCard = this.draggingCard();
+        if (draggingCard) {
+            if (movable) {
+                return this.checkCardDrapableOnMovable(draggingCard, { entry: this.entry, lane: this.lane });
+            }
+            if (sortable) {
+                return false;
+            }
+        } else {
+            this.isDraggingList = false;
+        }
+        return false;
+    });
+
+    constructor(
+        private renderer: Renderer2,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {
         effect(() => {
             this.setBodyHeight();
         });
@@ -85,13 +148,97 @@ export class ThyBoardEntryComponent implements OnInit {
 
     scrolledIndexChange(event: number) {}
 
-    cdkDragStarted(event: CdkDragStart) {}
+    cdkDragStarted(event: CdkDragStart) {
+        this.isDraggingList = true;
+        const cardHeight = event.source.dropContainer.element.nativeElement.clientHeight;
+        this.renderer.setStyle(event.source.dropContainer.element.nativeElement, 'height', cardHeight + 'px');
+        this.dragStarted.emit({ card: event.source.data });
+    }
 
-    cdkDropListEnterPredicate = () => {
+    checkCardDrapableOnMovable(card: ThyBoardCard, container: ThyBoardDragContainer) {
+        if (this.movable()) {
+            if (this.movable() === ThyBoardDragScopeTypes.entries) {
+                // 支持变更栏 entry：泳道相同，且 不在原来的栏
+                return this.hasLane
+                    ? card.laneId === container.lane?._id && card.entryId !== container.entry?._id
+                    : card.entryId !== container.entry?._id;
+            }
+            if (this.movable() === ThyBoardDragScopeTypes.lanes) {
+                // 支持变更泳道 lane: 栏相同 且 不在原来的泳道
+                return this.hasLane
+                    ? card.entryId === container.entry?._id && !(container.lane?.cards || []).find((item) => item._id === card._id)
+                    : false;
+            }
+            if (this.movable() === ThyBoardDragScopeTypes.all) {
+                // 支持变更栏和泳道
+                return (
+                    !(container.lane?.cards || []).find((item) => item._id === card._id) ||
+                    !(container.entry?.cards || []).find((item) => item._id === card._id)
+                );
+            }
+        }
         return false;
+    }
+
+    checkCardDrapableOnSortable(card: ThyBoardCard, container: ThyBoardDragContainer) {
+        if (this.sortable()) {
+            if (this.sortable() === ThyBoardDragScopeTypes.entries) {
+                // 支持拖动变更栏，并且排序
+                return this.hasLane ? card.laneId === container.lane?._id : true;
+            }
+            if (this.sortable() === ThyBoardDragScopeTypes.lanes) {
+                // 支持拖动变更泳道，并且排序
+                return card.entryId === container.entry?._id;
+            }
+            if (this.sortable() === ThyBoardDragScopeTypes.all) {
+                // 支持拖动变更栏和泳道，并且排序
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private checkCardDropInLaneAndEntry(card: ThyBoardCard, container: ThyBoardDragContainer): boolean {
+        if (this.movable()) {
+            return this.checkCardDrapableOnMovable(card, container);
+        }
+        if (this.sortable()) {
+            return this.checkCardDrapableOnSortable(card, container);
+        }
+        return false;
+    }
+
+    dropListEnterPredicate = (drag: CdkDrag<ThyBoardCard>, drop: CdkDropList<ThyBoardDragContainer>) => {
+        const container: ThyBoardDragContainer = { entry: drop.data.entry, lane: drop.data.lane, cards: drop.data.cards };
+        if (!this.checkCardDropInLaneAndEntry(drag.data, container)) {
+            return false;
+        } else {
+            if (this.dropEnterPredicate) {
+                return this.dropEnterPredicate({
+                    card: drag.data,
+                    container: container
+                });
+            } else {
+                return false;
+            }
+        }
     };
 
-    drop(event: CdkDragDrop<ThyBoardCard>) {}
+    drop(event: CdkDragDrop<ThyBoardDragContainer | SafeAny>) {
+        const previousIndex = (event.previousContainer.data?.cards || []).findIndex(
+            (card: ThyBoardCard) => card._id === event.item.data._id
+        );
+        const currentIndex = (event.container.data?.cards || []).findIndex((card: ThyBoardCard) => card._id === event.item.data._id);
+        transferArrayItem(event.previousContainer.data?.cards!, event.container.data?.cards!, previousIndex, currentIndex);
+        if (this.dropAction) {
+            this.dropAction(event!).subscribe((result: boolean) => {
+                if (!result) {
+                    transferArrayItem(event.container.data?.cards!, event.previousContainer.data?.cards!, currentIndex, previousIndex);
+                    this.changeDetectorRef.markForCheck();
+                }
+            });
+        }
+    }
 
     scrollToOffset(payload: { position: 'top' | 'middle' | 'bottom'; scrollTop: number; laneHight: number }) {
         const realHeight = this.entryVirtualScroll.scrollStrategy.entrySpacer();

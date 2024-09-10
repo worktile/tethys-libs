@@ -7,6 +7,10 @@
     [thyEntryCollapsible]="true"
     (thyExpandLane)="expandLane($event)"
     (thyExpandAllLanes)="expandAllLanes($event)"
+    [thyMovable]="'all'"
+    (thyDragStart)="thyDragStart($event)"
+    [thyDropEnterPredicate]="thyDropEnterPredicate"
+    [thyDropAction]="thyDropAction"
   >
     <ng-template #card let-item="">
       <thy-board-basic-card [card]="item"></thy-board-basic-card>

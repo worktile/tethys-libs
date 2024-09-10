@@ -34,7 +34,6 @@
 
 <div
   class="board-lane-body"
-  cdkDropListGroup
   [class.board-no-lane-body]="!hasLane"
   [ngStyle]="{ height: lane()?.expanded && hasLane && laneHeight ? laneHeight + 'px' : 'unset' }"
 >
@@ -47,9 +46,16 @@
           [hasLane]="hasLane"
           [virtualScroll]="virtualScroll"
           [entry]="entry"
+          [lane]="lane()"
           [cardTemplateRef]="cardTemplateRef"
           [container]="container()"
           [defaultCardSize]="defaultCardSize"
+          [draggingCard]="draggingCard()"
+          [movable]="movable()"
+          [sortable]="sortable()"
+          (dragStarted)="dragCardStarted($event)"
+          [dropEnterPredicate]="dropEnterPredicate"
+          [dropAction]="dropListDropped"
         ></thy-board-entry>
       } @else {
         <div class="text-muted mx-5 text-truncate board-lane-collapsed">
@@ -64,9 +70,16 @@
         [hasLane]="hasLane"
         [virtualScroll]="virtualScroll"
         [entry]="entry"
+        [lane]="lane()"
         [cardTemplateRef]="cardTemplateRef"
         [container]="container()"
         [defaultCardSize]="defaultCardSize"
+        [draggingCard]="draggingCard()"
+        [movable]="movable()"
+        [sortable]="sortable()"
+        [dropEnterPredicate]="dropEnterPredicate"
+        (dragStarted)="dragCardStarted($event)"
+        [dropAction]="dropListDropped"
       >
       </thy-board-entry>
     }
