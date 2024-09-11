@@ -53,9 +53,9 @@
           [draggingCard]="draggingCard()"
           [movable]="movable()"
           [sortable]="sortable()"
-          (dragStarted)="dragCardStarted($event)"
-          [dropEnterPredicate]="dropEnterPredicate"
-          [droppedAction]="dropListDropped"
+          (cardDragStarted)="dragCardStarted($event)"
+          [cardDropEnterPredicate]="cardDropEnterPredicate"
+          [cardDroppedAction]="dropListDropped"
         ></thy-board-entry>
       } @else {
         <div class="text-muted mx-5 text-truncate board-lane-collapsed">
@@ -77,9 +77,9 @@
         [draggingCard]="draggingCard()"
         [movable]="movable()"
         [sortable]="sortable()"
-        [dropEnterPredicate]="dropEnterPredicate"
-        (dragStarted)="dragCardStarted($event)"
-        [droppedAction]="dropListDropped"
+        [cardDropEnterPredicate]="cardDropEnterPredicate"
+        (cardDragStarted)="dragCardStarted($event)"
+        [cardDroppedAction]="dropListDropped"
       >
       </thy-board-entry>
     }

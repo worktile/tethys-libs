@@ -8,9 +8,9 @@
     (thyExpandLane)="expandLane($event)"
     (thyExpandAllLanes)="expandAllLanes($event)"
     [thyMovable]="'all'"
-    (thyDragStart)="thyDragStart($event)"
-    [thyDropEnterPredicate]="thyDropEnterPredicate"
-    [thyDroppedAction]="thyDropAction"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDroppedAction]="thyDropAction"
   >
     <ng-template #card let-item="">
       <thy-board-basic-card [card]="item"></thy-board-basic-card>

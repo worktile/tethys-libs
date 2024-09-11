@@ -7,9 +7,9 @@
     [thyShowLane]="false"
     [thyVirtualScroll]="true"
     [thyMovable]="'all'"
-    (thyDragStart)="thyDragStart($event)"
-    [thyDropEnterPredicate]="thyDropEnterPredicate"
-    [thyDroppedAction]="thyDropAction"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDroppedAction]="thyDropAction"
   >
     <ng-template #card let-item="">
       <div class="card-container">
@@ -30,9 +30,9 @@
     [thyShowLane]="true"
     [thyVirtualScroll]="true"
     [thyMovable]="'all'"
-    (thyDragStart)="thyDragStart($event)"
-    [thyDropEnterPredicate]="thyDropEnterPredicate"
-    [thyDroppedAction]="thyDropAction"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDroppedAction]="thyDropAction"
   >
     <ng-template #card let-item="">
       <div class="card-container">

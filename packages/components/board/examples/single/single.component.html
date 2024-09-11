@@ -6,9 +6,9 @@
     [thyShowLane]="false"
     [thyVirtualScroll]="false"
     [thyMovable]="'all'"
-    (thyDragStart)="thyDragStart($event)"
-    [thyDropEnterPredicate]="thyDropEnterPredicate"
-    [thyDroppedAction]="thyDropAction"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDroppedAction]="thyDropAction"
   >
     <ng-template #lane let-lane="">
       <span>{{ lane.name }} **</span>

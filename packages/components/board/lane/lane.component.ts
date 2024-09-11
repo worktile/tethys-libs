@@ -92,11 +92,11 @@ export class ThyBoardLaneComponent implements OnInit {
 
     draggingCard = input<ThyBoardCard>();
 
-    @Input() dropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
+    @Input() cardDropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
 
-    @Input() droppedAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
+    @Input() cardDroppedAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
-    dragStarted = output<ThyBoardDragStartEvent>();
+    cardDragStarted = output<ThyBoardDragStartEvent>();
     /**
      * 展开收起泳道事件
      */
@@ -129,12 +129,12 @@ export class ThyBoardLaneComponent implements OnInit {
     }
 
     dragCardStarted(event: ThyBoardDragStartEvent) {
-        this.dragStarted.emit(event);
+        this.cardDragStarted.emit(event);
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
-        if (this.droppedAction) {
-            return this.droppedAction(event);
+        if (this.cardDroppedAction) {
+            return this.cardDroppedAction(event);
         } else {
             return of(true);
         }

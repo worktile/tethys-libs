@@ -95,11 +95,11 @@ export class ThyBoardEntryComponent implements OnInit {
      */
     movable = input<ThyBoardDragScopeType>();
 
-    @Input() dropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
+    @Input() cardDropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
 
-    @Input() droppedAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
+    @Input() cardDroppedAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
-    dragStarted = output<ThyBoardDragStartEvent>();
+    cardDragStarted = output<ThyBoardDragStartEvent>();
 
     public entryBodyHeight = 0;
 
@@ -151,7 +151,7 @@ export class ThyBoardEntryComponent implements OnInit {
         this.isDraggingList = true;
         const cardHeight = event.source.dropContainer.element.nativeElement.clientHeight;
         this.renderer.setStyle(event.source.dropContainer.element.nativeElement, 'height', cardHeight + 'px');
-        this.dragStarted.emit({ card: event.source.data });
+        this.cardDragStarted.emit({ card: event.source.data });
     }
 
     checkCardDrapableOnMovable(card: ThyBoardCard, container: ThyBoardDragContainer) {
@@ -212,8 +212,8 @@ export class ThyBoardEntryComponent implements OnInit {
         if (!this.checkCardDropInLaneAndEntry(drag.data, container)) {
             return false;
         } else {
-            if (this.dropEnterPredicate) {
-                return this.dropEnterPredicate({
+            if (this.cardDropEnterPredicate) {
+                return this.cardDropEnterPredicate({
                     card: drag.data,
                     container: container
                 });
@@ -229,8 +229,8 @@ export class ThyBoardEntryComponent implements OnInit {
         );
         const currentIndex = (event.container.data?.cards || []).findIndex((card: ThyBoardCard) => card._id === event.item.data._id);
         transferArrayItem(event.previousContainer.data?.cards!, event.container.data?.cards!, previousIndex, currentIndex);
-        if (this.droppedAction) {
-            this.droppedAction({
+        if (this.cardDroppedAction) {
+            this.cardDroppedAction({
                 card: event.item.data,
                 previousContainer: event.previousContainer.data!,
                 previousIndex: event.previousIndex,

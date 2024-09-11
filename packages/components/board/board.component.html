@@ -34,9 +34,9 @@
         [movable]="thyMovable()"
         [sortable]="thySortable()"
         (expandLane)="expandLane($event)"
-        [dropEnterPredicate]="thyDropEnterPredicate()"
-        (dragStarted)="dragCardStarted($event)"
-        [droppedAction]="dropListDropped"
+        [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
+        (cardDragStarted)="dragCardStarted($event)"
+        [cardDroppedAction]="dropListDropped"
         [draggingCard]="draggingCard"
       ></thy-board-lane>
     }
@@ -51,9 +51,9 @@
       [defaultCardSize]="thyDefaultCardSize()"
       [movable]="thyMovable()"
       [sortable]="thySortable()"
-      [dropEnterPredicate]="thyDropEnterPredicate()"
-      (dragStarted)="dragCardStarted($event)"
-      [droppedAction]="dropListDropped"
+      [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
+      (cardDragStarted)="dragCardStarted($event)"
+      [cardDroppedAction]="dropListDropped"
       [draggingCard]="draggingCard"
     ></thy-board-lane>
   }

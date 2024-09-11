@@ -139,13 +139,13 @@ export class ThyBoardComponent implements OnInit {
      * 判断是否允许拖起的卡片放到另外位置
      * @type (event: { drag: CdkDrag; drop: CdkDropList }) => boolean
      */
-    thyDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
+    thyCardDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
 
     /**
      * 当把卡片拖动到另一个位置时触发
      * @type (event: CdkDragDrop<ThyBoardCard[] | undefined>) => Observable<boolean>
      */
-    thyDroppedAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
+    thyCardDroppedAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
     // /**
     //  * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
@@ -174,7 +174,7 @@ export class ThyBoardComponent implements OnInit {
      * 拖起卡片后触发事件
      * @type ThyBoardCard
      */
-    thyDragStart = output<ThyBoardDragStartEvent>();
+    thyCardDragStart = output<ThyBoardDragStartEvent>();
 
     public draggingCard: ThyBoardCard | undefined;
 
@@ -237,14 +237,14 @@ export class ThyBoardComponent implements OnInit {
 
     dragCardStarted(event: ThyBoardDragStartEvent) {
         this.draggingCard = event.card;
-        this.thyDragStart.emit(event);
+        this.thyCardDragStart.emit(event);
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
         this.draggingCard = undefined;
-        const thyDroppedAction = this.thyDroppedAction();
-        if (thyDroppedAction) {
-            return thyDroppedAction(event);
+        const thyCardDroppedAction = this.thyCardDroppedAction();
+        if (thyCardDroppedAction) {
+            return thyCardDroppedAction(event);
         } else {
             return of(true);
         }
