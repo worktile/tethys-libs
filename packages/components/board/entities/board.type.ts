@@ -1,6 +1,4 @@
-export type ThyBoardDragScopeType = 'entries' | 'lanes' | 'all';
-
-export enum ThyBoardDragScopeTypes {
+export enum ThyBoardDragScopeType {
     entries = 'entries',
     lanes = 'lanes',
     all = 'all'

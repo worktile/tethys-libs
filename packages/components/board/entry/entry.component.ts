@@ -24,7 +24,6 @@ import {
     ThyBoardCard,
     ThyBoardDragContainer,
     ThyBoardDragScopeType,
-    ThyBoardDragScopeTypes,
     ThyBoardDragStartEvent,
     ThyBoardDropActionEvent,
     ThyBoardDropEnterPredicateEvent,
@@ -157,19 +156,19 @@ export class ThyBoardEntryComponent implements OnInit {
 
     checkCardDrapableOnMovable(card: ThyBoardCard, container: ThyBoardDragContainer) {
         if (this.movable()) {
-            if (this.movable() === ThyBoardDragScopeTypes.entries) {
+            if (this.movable() === ThyBoardDragScopeType.entries) {
                 // 支持变更栏 entry：泳道相同，且 不在原来的栏
                 return this.hasLane
                     ? card.laneId === container.lane?._id && card.entryId !== container.entry?._id
                     : card.entryId !== container.entry?._id;
             }
-            if (this.movable() === ThyBoardDragScopeTypes.lanes) {
+            if (this.movable() === ThyBoardDragScopeType.lanes) {
                 // 支持变更泳道 lane: 栏相同 且 不在原来的泳道
                 return this.hasLane
                     ? card.entryId === container.entry?._id && !(container.lane?.cards || []).find((item) => item._id === card._id)
                     : false;
             }
-            if (this.movable() === ThyBoardDragScopeTypes.all) {
+            if (this.movable() === ThyBoardDragScopeType.all) {
                 // 支持变更栏和泳道
                 return (
                     !(container.lane?.cards || []).find((item) => item._id === card._id) ||
@@ -182,15 +181,15 @@ export class ThyBoardEntryComponent implements OnInit {
 
     checkCardDrapableOnSortable(card: ThyBoardCard, container: ThyBoardDragContainer) {
         if (this.sortable()) {
-            if (this.sortable() === ThyBoardDragScopeTypes.entries) {
+            if (this.sortable() === ThyBoardDragScopeType.entries) {
                 // 支持拖动变更栏，并且排序
                 return this.hasLane ? card.laneId === container.lane?._id : true;
             }
-            if (this.sortable() === ThyBoardDragScopeTypes.lanes) {
+            if (this.sortable() === ThyBoardDragScopeType.lanes) {
                 // 支持拖动变更泳道，并且排序
                 return card.entryId === container.entry?._id;
             }
-            if (this.sortable() === ThyBoardDragScopeTypes.all) {
+            if (this.sortable() === ThyBoardDragScopeType.all) {
                 // 支持拖动变更栏和泳道，并且排序
                 return true;
             }
