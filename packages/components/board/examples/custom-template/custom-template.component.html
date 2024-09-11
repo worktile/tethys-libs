@@ -30,5 +30,13 @@
         </div>
       </div>
     </ng-template>
+
+    <ng-template #entryTop let-entry="entry" let-lane="lane">
+      <div>栏的顶部：泳道：{{ lane.name }}；栏：{{ entry.name }}</div>
+    </ng-template>
+
+    <ng-template #entryBottom let-entry="entry" let-lane="lane">
+      <div>栏的底部：泳道：{{ lane.name }}；栏：{{ entry.name }}</div>
+    </ng-template>
   </thy-board>
 </div>

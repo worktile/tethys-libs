@@ -56,6 +56,8 @@
           (cardDragStarted)="cardDragStarted.emit($event)"
           [cardDropEnterPredicate]="cardDropEnterPredicate"
           [cardDropAction]="dropListDropped"
+          [topTemplateRef]="entryTopTemplateRef()"
+          [bottomTemplateRef]="entryBottomTemplateRef()"
         ></thy-board-entry>
       } @else {
         <div class="text-muted mx-5 text-truncate board-lane-collapsed">
@@ -80,6 +82,8 @@
         [cardDropEnterPredicate]="cardDropEnterPredicate"
         (cardDragStarted)="cardDragStarted.emit($event)"
         [cardDropAction]="dropListDropped"
+        [topTemplateRef]="entryTopTemplateRef()"
+        [bottomTemplateRef]="entryBottomTemplateRef()"
       >
       </thy-board-entry>
     }

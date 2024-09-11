@@ -1,7 +1,6 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ContentChild,
     ElementRef,
     OnInit,
     TemplateRef,
@@ -28,6 +27,7 @@ import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 import { ThyBoardService } from './board.service';
 import { CdkDrag, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
+import { SafeAny } from 'ngx-tethys/types';
 
 @Component({
     selector: 'thy-board',
@@ -53,21 +53,31 @@ export class ThyBoardComponent implements OnInit {
      * @type TemplateRef
      */
 
-    cardTemplateRef = contentChild.required<TemplateRef<any>>('card');
+    cardTemplateRef = contentChild.required<TemplateRef<SafeAny>>('card');
 
     /**
      * 栏展示模板
      * @type TemplateRef
      */
-    @ContentChild('lane')
-    public laneTemplateRef: TemplateRef<any> | null = null;
+    laneTemplateRef = contentChild<TemplateRef<SafeAny>>('lane');
 
     /**
      * header 展示模板
      * @type TemplateRef
      */
-    @ContentChild('header')
-    public headerTemplateRef: TemplateRef<any> | null = null;
+    headerTemplateRef = contentChild<TemplateRef<SafeAny>>('header');
+
+    /**
+     * entry 顶部展示模板
+     * @type TemplateRef
+     */
+    entryTopTemplateRef = contentChild<TemplateRef<SafeAny>>('entryTop');
+
+    /**
+     * entry 底部展示模板
+     * @type TemplateRef
+     */
+    entryBottomTemplateRef = contentChild<TemplateRef<SafeAny>>('entryBottom');
 
     /**
      * 泳道列表

@@ -7,6 +7,10 @@
   [ngClass]="{ 'entry-collapsed': !entry.expanded }"
 >
   <div class="entry-cards" [ngClass]="{ 'entry-cards-dragging': showBackDropWhenDragging() && !isDraggingList }">
+    @if (topTemplateRef()) {
+      <ng-template [ngTemplateOutlet]="topTemplateRef()!" [ngTemplateOutletContext]="{ entry: entry, lane: lane }"></ng-template>
+    }
+
     @if (virtualScroll) {
       <!-- 开启虚拟滚动 -->
       @if (!hasLane) {
@@ -78,8 +82,8 @@
         </div>
       }
     }
-    @if (entryBodyFooter) {
-      <ng-template [ngTemplateOutlet]="entryBodyFooter" [ngTemplateOutletContext]="{ entry: entry }"></ng-template>
+    @if (bottomTemplateRef()) {
+      <ng-template [ngTemplateOutlet]="bottomTemplateRef()!" [ngTemplateOutletContext]="{ entry: entry, lane: lane }"></ng-template>
     }
   </div>
 </div>

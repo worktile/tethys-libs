@@ -72,13 +72,15 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() cardTemplateRef: TemplateRef<SafeAny> | null = null;
 
-    @Input() entryBodyFooter: TemplateRef<SafeAny> | null = null;
-
     container = input.required<HTMLElement>();
 
     @Input({ transform: numberAttribute }) defaultCardSize = 112;
 
     draggingCard = input<CdkDrag<ThyBoardCard>>();
+
+    topTemplateRef = input<TemplateRef<SafeAny>>();
+
+    bottomTemplateRef = input<TemplateRef<SafeAny>>();
 
     /**
      * 是否支持排序,开启后支持同栏排序
@@ -164,7 +166,9 @@ export class ThyBoardEntryComponent implements OnInit {
             }
             if (this.movable() === ThyBoardDragScopeType.lanes) {
                 // 支持变更泳道 lane: 栏相同 且 不在原来的泳道
-                return this.hasLane ? originContainer.entry._id === container.entry?._id && originContainer.lane._id !== container.lane?._id : false;
+                return this.hasLane
+                    ? originContainer.entry._id === container.entry?._id && originContainer.lane._id !== container.lane?._id
+                    : false;
             }
             if (this.movable() === ThyBoardDragScopeType.all) {
                 // 支持变更栏和泳道: 不在原来的栏或者不在原来的泳道
