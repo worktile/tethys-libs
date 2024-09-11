@@ -94,7 +94,7 @@ export class ThyBoardLaneComponent implements OnInit {
 
     @Input() cardDropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
 
-    @Input() cardDroppedAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
+    @Input() cardDropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
     cardDragStarted = output<ThyBoardDragStartEvent>();
     /**
@@ -133,8 +133,8 @@ export class ThyBoardLaneComponent implements OnInit {
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
-        if (this.cardDroppedAction) {
-            return this.cardDroppedAction(event);
+        if (this.cardDropAction) {
+            return this.cardDropAction(event);
         } else {
             return of(true);
         }

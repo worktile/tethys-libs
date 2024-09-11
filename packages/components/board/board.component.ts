@@ -145,7 +145,7 @@ export class ThyBoardComponent implements OnInit {
      * 当把卡片拖动到另一个位置时触发
      * @type (event: CdkDragDrop<ThyBoardCard[] | undefined>) => Observable<boolean>
      */
-    thyCardDroppedAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
+    thyCardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
     // /**
     //  * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
@@ -242,9 +242,9 @@ export class ThyBoardComponent implements OnInit {
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
         this.draggingCard = undefined;
-        const thyCardDroppedAction = this.thyCardDroppedAction();
-        if (thyCardDroppedAction) {
-            return thyCardDroppedAction(event);
+        const thyCardDropAction = this.thyCardDropAction();
+        if (thyCardDropAction) {
+            return thyCardDropAction(event);
         } else {
             return of(true);
         }

@@ -36,7 +36,7 @@
         (expandLane)="expandLane($event)"
         [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
         (cardDragStarted)="dragCardStarted($event)"
-        [cardDroppedAction]="dropListDropped"
+        [cardDropAction]="dropListDropped"
         [draggingCard]="draggingCard"
       ></thy-board-lane>
     }
@@ -53,7 +53,7 @@
       [sortable]="thySortable()"
       [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
       (cardDragStarted)="dragCardStarted($event)"
-      [cardDroppedAction]="dropListDropped"
+      [cardDropAction]="dropListDropped"
       [draggingCard]="draggingCard"
     ></thy-board-lane>
   }
