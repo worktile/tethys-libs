@@ -31,9 +31,9 @@ export interface ThyBoardEntry {
 export interface ThyBoardCard {
     _id: string;
 
-    laneId: string;
+    laneIds: string[];
 
-    entryId: string;
+    entryIds: string[];
 
     [key: string]: any;
 }

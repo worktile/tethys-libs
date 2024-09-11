@@ -26,7 +26,7 @@ import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
 import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 import { ThyBoardService } from './board.service';
-import { CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -176,7 +176,7 @@ export class ThyBoardComponent implements OnInit {
      */
     thyCardDragStart = output<ThyBoardDragStartEvent>();
 
-    public draggingCard: ThyBoardCard | undefined;
+    public draggingCard: CdkDrag<ThyBoardCard> | undefined;
 
     constructor(
         public elementRef: ElementRef,
@@ -235,9 +235,9 @@ export class ThyBoardComponent implements OnInit {
         this.thyExpandEntry.emit({ entry: { ...event.entry, expanded: event.expanded }, expanded: event.expanded });
     }
 
-    dragCardStarted(event: ThyBoardDragStartEvent) {
-        this.draggingCard = event.card;
-        this.thyCardDragStart.emit(event);
+    dragCardStarted(event: CdkDrag<ThyBoardCard>) {
+        this.draggingCard = event;
+        this.thyCardDragStart.emit({ card: event.data });
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {

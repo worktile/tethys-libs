@@ -119,7 +119,9 @@ export class ThyBoardService {
         const cardsMapByEntryId: Record<string, ThyBoardCard[]> = {};
 
         (cards || []).forEach((card) => {
-            cardsMapByEntryId[card.entryId] = cardsMapByEntryId[card.entryId] ? cardsMapByEntryId[card.entryId].concat([card]) : [card];
+            (card.entryIds || []).forEach((entryId) => {
+                cardsMapByEntryId[entryId] = cardsMapByEntryId[entryId] ? cardsMapByEntryId[entryId].concat([card]) : [card];
+            });
         });
         return cardsMapByEntryId;
     }
@@ -154,11 +156,16 @@ export class ThyBoardService {
         });
 
         (cards || []).forEach((card) => {
-            let lane = lanesMapById[card.laneId];
+            const cardLanes = [];
+            (card.laneIds || []).forEach((laneId) => {
+                let lane = lanesMapById[laneId];
+                if (lane) {
+                    cardLanes.push(lane);
+                    lane.cards = lane.cards?.concat(card);
+                }
+            });
 
-            if (lane) {
-                lane.cards = lane.cards?.concat(card);
-            } else {
+            if (cardLanes.length === 0) {
                 unGroup.cards = unGroup.cards?.concat(card);
             }
         });

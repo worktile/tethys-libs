@@ -53,7 +53,7 @@
           [draggingCard]="draggingCard()"
           [movable]="movable()"
           [sortable]="sortable()"
-          (cardDragStarted)="dragCardStarted($event)"
+          (cardDragStarted)="cardDragStarted.emit($event)"
           [cardDropEnterPredicate]="cardDropEnterPredicate"
           [cardDropAction]="dropListDropped"
         ></thy-board-entry>
@@ -78,7 +78,7 @@
         [movable]="movable()"
         [sortable]="sortable()"
         [cardDropEnterPredicate]="cardDropEnterPredicate"
-        (cardDragStarted)="dragCardStarted($event)"
+        (cardDragStarted)="cardDragStarted.emit($event)"
         [cardDropAction]="dropListDropped"
       >
       </thy-board-entry>

@@ -24,7 +24,6 @@ import {
     ThyBoardCard,
     ThyBoardDragContainer,
     ThyBoardDragScopeType,
-    ThyBoardDragStartEvent,
     ThyBoardDropActionEvent,
     ThyBoardDropEnterPredicateEvent,
     ThyBoardEntry,
@@ -77,9 +76,9 @@ export class ThyBoardEntryComponent implements OnInit {
 
     container = input.required<HTMLElement>();
 
-    draggingCard = input<ThyBoardCard>();
-
     @Input({ transform: numberAttribute }) defaultCardSize = 112;
+
+    draggingCard = input<CdkDrag<ThyBoardCard>>();
 
     /**
      * 是否支持排序,开启后支持同栏排序
@@ -99,7 +98,7 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() cardDropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
-    cardDragStarted = output<ThyBoardDragStartEvent>();
+    cardDragStarted = output<CdkDrag<ThyBoardCard>>();
 
     public entryBodyHeight = 0;
 
@@ -151,53 +150,52 @@ export class ThyBoardEntryComponent implements OnInit {
         this.isDraggingList = true;
         const cardHeight = event.source.dropContainer.element.nativeElement.clientHeight;
         this.renderer.setStyle(event.source.dropContainer.element.nativeElement, 'height', cardHeight + 'px');
-        this.cardDragStarted.emit({ card: event.source.data });
+        this.cardDragStarted.emit(event.source);
     }
 
-    checkCardDrapableOnMovable(card: ThyBoardCard, container: ThyBoardDragContainer) {
+    checkCardDrapableOnMovable(drag: CdkDrag<ThyBoardCard>, container: ThyBoardDragContainer) {
+        const originContainer = drag.dropContainer.data;
         if (this.movable()) {
             if (this.movable() === ThyBoardDragScopeType.entries) {
                 // 支持变更栏 entry：泳道相同，且 不在原来的栏
                 return this.hasLane
-                    ? card.laneId === container.lane?._id && card.entryId !== container.entry?._id
-                    : card.entryId !== container.entry?._id;
+                    ? originContainer.lane._id === container.lane?._id && originContainer.entry._id !== container.entry?._id
+                    : originContainer.entry._id !== container.entry?._id;
             }
             if (this.movable() === ThyBoardDragScopeType.lanes) {
                 // 支持变更泳道 lane: 栏相同 且 不在原来的泳道
-                return this.hasLane
-                    ? card.entryId === container.entry?._id && !(container.lane?.cards || []).find((item) => item._id === card._id)
-                    : false;
+                return this.hasLane ? originContainer.entry._id === container.entry?._id && originContainer.lane._id !== container.lane?._id : false;
             }
             if (this.movable() === ThyBoardDragScopeType.all) {
-                // 支持变更栏和泳道
-                return (
-                    !(container.lane?.cards || []).find((item) => item._id === card._id) ||
-                    !(container.entry?.cards || []).find((item) => item._id === card._id)
-                );
+                // 支持变更栏和泳道: 不在原来的栏或者不在原来的泳道
+                return this.hasLane
+                    ? originContainer.entry._id !== container.entry?._id || originContainer.lane._id !== container.lane?._id
+                    : originContainer.entry._id !== container.entry?._id;
             }
         }
         return false;
     }
 
-    checkCardDrapableOnSortable(card: ThyBoardCard, container: ThyBoardDragContainer) {
+    checkCardDrapableOnSortable(drag: CdkDrag<ThyBoardCard>, container: ThyBoardDragContainer) {
+        const originContainer = drag.dropContainer.data;
         if (this.sortable()) {
             if (this.sortable() === ThyBoardDragScopeType.entries) {
-                // 支持拖动变更栏，并且排序
-                return this.hasLane ? card.laneId === container.lane?._id : true;
+                // 支持拖动变更栏，并且排序: 泳道相同
+                return this.hasLane ? originContainer.lane._id === container.lane?._id : true;
             }
             if (this.sortable() === ThyBoardDragScopeType.lanes) {
-                // 支持拖动变更泳道，并且排序
-                return card.entryId === container.entry?._id;
+                // 支持拖动变更泳道，并且排序: 栏相同
+                return originContainer.entry._id === container.entry?._id;
             }
             if (this.sortable() === ThyBoardDragScopeType.all) {
-                // 支持拖动变更栏和泳道，并且排序
+                // 支持拖动变更栏和泳道，并且排序: 任意栏
                 return true;
             }
         }
         return false;
     }
 
-    private checkCardDropInLaneAndEntry(card: ThyBoardCard, container: ThyBoardDragContainer): boolean {
+    private checkCardDropInLaneAndEntry(card: CdkDrag<ThyBoardCard>, container: ThyBoardDragContainer): boolean {
         if (this.movable()) {
             return this.checkCardDrapableOnMovable(card, container);
         }
@@ -209,7 +207,7 @@ export class ThyBoardEntryComponent implements OnInit {
 
     dropListEnterPredicate = (drag: CdkDrag<ThyBoardCard>, drop: CdkDropList<ThyBoardDragContainer>) => {
         const container: ThyBoardDragContainer = { entry: drop.data.entry, lane: drop.data.lane, cards: drop.data.cards };
-        if (!this.checkCardDropInLaneAndEntry(drag.data, container)) {
+        if (!this.checkCardDropInLaneAndEntry(drag, container)) {
             return false;
         } else {
             if (this.cardDropEnterPredicate) {
