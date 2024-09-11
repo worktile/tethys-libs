@@ -11,14 +11,24 @@ import {
     booleanAttribute,
     effect,
     input,
-    numberAttribute
+    numberAttribute,
+    output
 } from '@angular/core';
 import { ThyBoardEntryComponent } from '../entry/entry.component';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
-import { ThyBoardEntry, ThyBoardLane } from '../entities';
-import { helpers } from 'ngx-tethys/util';
+import {
+    ThyBoardDropEnterPredicateEvent,
+    ThyBoardEntry,
+    ThyBoardLane,
+    ThyBoardDragStartEvent,
+    ThyBoardDragScopeType,
+    ThyBoardCard,
+    ThyBoardDropActionEvent
+} from '../entities';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { Observable, of } from 'rxjs';
 
 const emptyLaneHeight = 200;
 
@@ -27,7 +37,7 @@ const emptyLaneHeight = 200;
     templateUrl: 'lane.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgStyle, NgClass, NgTemplateOutlet, ThyIcon, ThyFlexibleText, ThyBoardEntryComponent],
+    imports: [NgStyle, NgClass, NgTemplateOutlet, DragDropModule, ThyIcon, ThyFlexibleText, ThyBoardEntryComponent],
     host: {
         class: 'thy-board-lane-container'
     }
@@ -67,6 +77,27 @@ export class ThyBoardLaneComponent implements OnInit {
     laneCollapsible = input(true, { transform: booleanAttribute });
 
     /**
+     * 是否支持排序,开启后支持同栏排序
+     * @default false
+     * @type boolean
+     */
+    sortable = input<ThyBoardDragScopeType>();
+
+    /**
+     * 是否支持拖动，变更栏和泳道
+     * @default false
+     * @type boolean
+     */
+    movable = input<ThyBoardDragScopeType>();
+
+    draggingCard = input<ThyBoardCard>();
+
+    @Input() cardDropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
+
+    @Input() cardDropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
+
+    cardDragStarted = output<ThyBoardDragStartEvent>();
+    /**
      * 展开收起泳道事件
      */
     @Output() expandLane = new EventEmitter<{ lane: ThyBoardLane; expanded: boolean }>();
@@ -96,4 +127,16 @@ export class ThyBoardLaneComponent implements OnInit {
         const isExpanded = this.lane()?.expanded;
         this.expandLane.emit({ lane: this.lane()!, expanded: !isExpanded });
     }
+
+    dragCardStarted(event: ThyBoardDragStartEvent) {
+        this.cardDragStarted.emit(event);
+    }
+
+    dropListDropped = (event: ThyBoardDropActionEvent) => {
+        if (this.cardDropAction) {
+            return this.cardDropAction(event);
+        } else {
+            return of(true);
+        }
+    };
 }

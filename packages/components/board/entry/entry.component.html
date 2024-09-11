@@ -4,9 +4,9 @@
   [ngStyle]="{
     height: virtualScroll && hasLane ? entryBodyHeight + 'px' : '100%'
   }"
-  [ngClass]="{ 'entry-collapsed': entry.expanded }"
+  [ngClass]="{ 'entry-collapsed': !entry.expanded }"
 >
-  <div class="entry-cards">
+  <div class="entry-cards" [ngClass]="{ 'entry-cards-dragging': showBackDropWhenDragging() && !isDraggingList }">
     @if (virtualScroll) {
       <!-- 开启虚拟滚动 -->
       @if (!hasLane) {
@@ -17,8 +17,16 @@
             #card
             [attr.name]="card._id + '-' + i"
             class="entry-card"
+            cdkDropList
+            [cdkDropListAutoScrollStep]="5"
+            thyDragDrop
+            [cdkDropListData]="{ entry: entry, lane: lane, cards: entry.cards, changeDetectorRef: changeDetectorRef }"
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
-            <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+            <div cdkDrag [cdkDragData]="card" (cdkDragStarted)="cdkDragStarted($event)">
+              <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+            </div>
           </div>
         </cdk-virtual-scroll-viewport>
       } @else {
@@ -38,18 +46,35 @@
             #card
             [attr.name]="card._id + '-' + i"
             class="entry-card"
+            cdkDropList
+            [cdkDropListAutoScrollStep]="5"
+            thyDragDrop
+            [cdkDropListData]="{ entry: entry, lane: lane, cards: entry.cards, changeDetectorRef: changeDetectorRef }"
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
-            <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+            <div cdkDrag [cdkDragData]="card" (cdkDragStarted)="cdkDragStarted($event)">
+              <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+            </div>
           </div>
         </cdk-virtual-scroll-viewport>
       }
     } @else {
       <!-- 不开启虚拟滚动 -->
+
       @for (card of entry.cards; track card._id) {
-        <div class="entry-card">
-          <!-- <div> -->
-          <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
-          <!-- </div> -->
+        <div
+          class="entry-card"
+          cdkDropList
+          [cdkDropListAutoScrollStep]="5"
+          thyDragDrop
+          [cdkDropListData]="{ entry: entry, lane: lane, cards: entry.cards, changeDetectorRef: changeDetectorRef }"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListEnterPredicate]="dropListEnterPredicate"
+        >
+          <div cdkDrag [cdkDragData]="card" (cdkDragStarted)="cdkDragStarted($event)">
+            <ng-template [ngTemplateOutlet]="cardTemplateRef" [ngTemplateOutletContext]="{ entry: entry, $implicit: card }"></ng-template>
+          </div>
         </div>
       }
     }
@@ -58,3 +83,17 @@
     }
   </div>
 </div>
+<div
+  class="entry-drop"
+  [class.flex-row]="!showBackDropWhenDragging()"
+  [class.invisible]="!showBackDropWhenDragging() || (showBackDropWhenDragging() && isDraggingList)"
+  [class.entry-states-dragging]="showBackDropWhenDragging() && !isDraggingList"
+  [class.invisible]="!showBackDropWhenDragging() || (showBackDropWhenDragging() && isDraggingList)"
+  [class.d-none]="showBackDropWhenDragging() && isDraggingList"
+  cdkDropList
+  [cdkDropListAutoScrollStep]="5"
+  thyDragDrop
+  [cdkDropListData]="{ entry: entry, lane: lane, cards: entry.cards, changeDetectorRef: changeDetectorRef }"
+  (cdkDropListDropped)="drop($event)"
+  [cdkDropListEnterPredicate]="dropListEnterPredicate"
+></div>

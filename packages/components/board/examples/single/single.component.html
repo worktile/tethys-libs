@@ -1,5 +1,15 @@
 <div class="thy-pro-board-basic-example-container">
-  <thy-board [thyEntries]="entries" [thyCards]="items" [thyLanes]="lanes" [thyShowLane]="false" [thyVirtualScroll]="true">
+  <thy-board
+    [thyEntries]="entries"
+    [thyCards]="items"
+    [thyLanes]="lanes"
+    [thyShowLane]="false"
+    [thyVirtualScroll]="false"
+    [thyMovable]="'all'"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDropAction]="thyDropAction"
+  >
     <ng-template #lane let-lane="">
       <span>{{ lane.name }} **</span>
     </ng-template>
