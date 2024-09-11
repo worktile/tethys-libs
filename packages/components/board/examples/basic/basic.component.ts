@@ -54,6 +54,6 @@ export class ThyProBoardBasicExampleComponent implements OnInit {
 
     thyDropAction = (event: ThyBoardDropActionEvent) => {
         console.log(`拖动到：`, event);
-        return of(false).pipe(delay(2000));
+        return of(false).pipe(delay(1000));
     };
 }

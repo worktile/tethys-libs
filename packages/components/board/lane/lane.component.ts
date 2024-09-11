@@ -23,9 +23,9 @@ import {
     ThyBoardEntry,
     ThyBoardLane,
     ThyBoardDragStartEvent,
-    ThyBoardDragContainer,
     ThyBoardDragScopeType,
-    ThyBoardCard
+    ThyBoardCard,
+    ThyBoardDropActionEvent
 } from '../entities';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
@@ -94,7 +94,7 @@ export class ThyBoardLaneComponent implements OnInit {
 
     @Input() dropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
 
-    @Input() dropAction: ((event: CdkDragDrop<ThyBoardDragContainer | undefined>) => Observable<boolean>) | undefined;
+    @Input() dropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
     dragStarted = output<ThyBoardDragStartEvent>();
     /**
@@ -132,7 +132,7 @@ export class ThyBoardLaneComponent implements OnInit {
         this.dragStarted.emit(event);
     }
 
-    dropListDropped = (event: CdkDragDrop<ThyBoardDragContainer | undefined>) => {
+    dropListDropped = (event: ThyBoardDropActionEvent) => {
         if (this.dropAction) {
             return this.dropAction(event);
         } else {

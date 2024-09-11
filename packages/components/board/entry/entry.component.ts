@@ -26,15 +26,15 @@ import {
     ThyBoardDragScopeType,
     ThyBoardDragScopeTypes,
     ThyBoardDragStartEvent,
+    ThyBoardDropActionEvent,
     ThyBoardDropEnterPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane
 } from '../entities';
 import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
-import { CdkDrag, CdkDragDrop, CdkDragMove, CdkDragStart, CdkDropList, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDragStart, CdkDropList, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ThyDragDropDirective } from 'ngx-tethys/shared';
-import { Observable } from 'rxjs';
-import { EMPTY_OBJECT_ID_STR } from '../constants';
+import { Observable, tap } from 'rxjs';
 
 @Component({
     selector: 'thy-board-entry',
@@ -98,7 +98,7 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() dropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
 
-    @Input() dropAction: ((event: CdkDragDrop<ThyBoardDragContainer | undefined>) => Observable<boolean>) | undefined;
+    @Input() dropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
     dragStarted = output<ThyBoardDragStartEvent>();
 
@@ -125,7 +125,7 @@ export class ThyBoardEntryComponent implements OnInit {
 
     constructor(
         private renderer: Renderer2,
-        private changeDetectorRef: ChangeDetectorRef
+        public changeDetectorRef: ChangeDetectorRef
     ) {
         effect(() => {
             this.setBodyHeight();
@@ -231,12 +231,28 @@ export class ThyBoardEntryComponent implements OnInit {
         const currentIndex = (event.container.data?.cards || []).findIndex((card: ThyBoardCard) => card._id === event.item.data._id);
         transferArrayItem(event.previousContainer.data?.cards!, event.container.data?.cards!, previousIndex, currentIndex);
         if (this.dropAction) {
-            this.dropAction(event!).subscribe((result: boolean) => {
-                if (!result) {
-                    transferArrayItem(event.container.data?.cards!, event.previousContainer.data?.cards!, currentIndex, previousIndex);
-                    this.changeDetectorRef.markForCheck();
-                }
-            });
+            this.dropAction({
+                card: event.item.data,
+                previousContainer: event.previousContainer.data!,
+                previousIndex: event.previousIndex,
+                container: event.container.data!,
+                currentIndex: event.currentIndex
+            })
+                .pipe(
+                    tap((result: boolean) => {
+                        if (!result) {
+                            transferArrayItem(
+                                event.container.data?.cards!,
+                                event.previousContainer.data?.cards!,
+                                currentIndex,
+                                previousIndex
+                            );
+                            event.previousContainer.data.changeDetectorRef.markForCheck();
+                            this.changeDetectorRef.markForCheck();
+                        }
+                    })
+                )
+                .subscribe();
         }
     }
 

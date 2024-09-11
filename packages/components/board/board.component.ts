@@ -19,15 +19,14 @@ import {
     ThyBoardDragScopeType,
     ThyBoardDropActionEvent,
     ThyBoardDragStartEvent,
-    ThyBoardDropEnterPredicateEvent,
-    ThyBoardDragContainer
+    ThyBoardDropEnterPredicateEvent
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
 import { ThyBoardEntryComponent } from './entry/entry.component';
 import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 import { ThyBoardService } from './board.service';
-import { CdkDragDrop, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -241,17 +240,11 @@ export class ThyBoardComponent implements OnInit {
         this.thyDragStart.emit(event);
     }
 
-    dropListDropped = (event: CdkDragDrop<ThyBoardDragContainer | undefined>) => {
+    dropListDropped = (event: ThyBoardDropActionEvent) => {
         this.draggingCard = undefined;
         const dropAction = this.thyDropAction();
         if (dropAction) {
-            return dropAction({
-                card: event.item.data,
-                previousContainer: event.previousContainer.data!,
-                previousIndex: event.previousIndex,
-                container: event.container.data!,
-                currentIndex: event.currentIndex
-            });
+            return dropAction(event);
         } else {
             return of(true);
         }
