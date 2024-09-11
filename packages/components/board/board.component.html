@@ -1,7 +1,7 @@
 <thy-board-header
   [hasLane]="thyShowLane()"
   [entries]="thyBoardService.entriesWithCards()"
-  [headerTemplateRef]="headerTemplateRef"
+  [headerTemplateRef]="headerTemplateRef()"
   [allLanesExpanded]="thyBoardService.allLanesExpanded()"
   [entryCollapsible]="thyBoardService.entryCollapsible()"
   [hasCollapsedEntry]="thyBoardService.hasCollapsedEntry()"
@@ -25,7 +25,7 @@
         [entries]="thyBoardService.entriesWithCards()"
         [hasLane]="thyShowLane()"
         [virtualScroll]="thyVirtualScroll()"
-        [laneTemplateRef]="laneTemplateRef"
+        [laneTemplateRef]="laneTemplateRef()"
         [cardTemplateRef]="cardTemplateRef()"
         [allLanesExpanded]="thyBoardService.allLanesExpanded()"
         [laneCollapsible]="thyBoardService.laneCollapsible()"
@@ -38,6 +38,8 @@
         (cardDragStarted)="dragCardStarted($event)"
         [cardDropAction]="dropListDropped"
         [draggingCard]="draggingCard"
+        [entryTopTemplateRef]="entryTopTemplateRef()"
+        [entryBottomTemplateRef]="entryBottomTemplateRef()"
       ></thy-board-lane>
     }
   } @else {
@@ -45,7 +47,7 @@
       [entries]="thyBoardService.entriesWithCards()"
       [hasLane]="thyShowLane()"
       [virtualScroll]="thyVirtualScroll()"
-      [laneTemplateRef]="laneTemplateRef"
+      [laneTemplateRef]="laneTemplateRef()"
       [cardTemplateRef]="cardTemplateRef()"
       [container]="boardScrollElement"
       [defaultCardSize]="thyDefaultCardSize()"
@@ -55,6 +57,8 @@
       (cardDragStarted)="dragCardStarted($event)"
       [cardDropAction]="dropListDropped"
       [draggingCard]="draggingCard"
+      [entryTopTemplateRef]="entryTopTemplateRef()"
+      [entryBottomTemplateRef]="entryBottomTemplateRef()"
     ></thy-board-lane>
   }
 </div>

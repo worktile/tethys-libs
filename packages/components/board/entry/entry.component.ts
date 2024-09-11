@@ -73,13 +73,15 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() cardTemplateRef: TemplateRef<SafeAny> | null = null;
 
-    @Input() entryBodyFooter: TemplateRef<SafeAny> | null = null;
-
     container = input.required<HTMLElement>();
 
     draggingCard = input<ThyBoardCard>();
 
     @Input({ transform: numberAttribute }) defaultCardSize = 112;
+
+    topTemplateRef = input<TemplateRef<SafeAny>>();
+
+    bottomTemplateRef = input<TemplateRef<SafeAny>>();
 
     /**
      * 是否支持排序,开启后支持同栏排序
