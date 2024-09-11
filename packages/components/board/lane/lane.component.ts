@@ -27,8 +27,9 @@ import {
     ThyBoardCard,
     ThyBoardDropActionEvent
 } from '../entities';
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
+import { SafeAny } from 'ngx-tethys/types';
 
 const emptyLaneHeight = 200;
 
@@ -61,11 +62,15 @@ export class ThyBoardLaneComponent implements OnInit {
 
     @Input({ transform: booleanAttribute }) virtualScroll = false;
 
-    @Input() laneTemplateRef: TemplateRef<any> | null = null;
+    @Input() laneTemplateRef: TemplateRef<any> | undefined;
 
     @Input() cardTemplateRef: TemplateRef<any> | null = null;
 
     container = input.required<HTMLDivElement>();
+
+    entryTopTemplateRef = input<TemplateRef<SafeAny>>();
+
+    entryBottomTemplateRef = input<TemplateRef<SafeAny>>();
 
     @Input({ transform: numberAttribute }) defaultCardSize = 112;
 

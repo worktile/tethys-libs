@@ -35,7 +35,7 @@ export class ThyBoardHeaderComponent implements OnInit {
 
     @Input() allLanesExpanded = true;
 
-    @Input() headerTemplateRef: TemplateRef<any> | null = null;
+    @Input() headerTemplateRef: TemplateRef<any> | undefined;
 
     /**
      * 是否支持栏的收起展开
