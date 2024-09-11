@@ -97,7 +97,7 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @Input() dropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
 
-    @Input() dropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
+    @Input() droppedAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
     dragStarted = output<ThyBoardDragStartEvent>();
 
@@ -229,8 +229,8 @@ export class ThyBoardEntryComponent implements OnInit {
         );
         const currentIndex = (event.container.data?.cards || []).findIndex((card: ThyBoardCard) => card._id === event.item.data._id);
         transferArrayItem(event.previousContainer.data?.cards!, event.container.data?.cards!, previousIndex, currentIndex);
-        if (this.dropAction) {
-            this.dropAction({
+        if (this.droppedAction) {
+            this.droppedAction({
                 card: event.item.data,
                 previousContainer: event.previousContainer.data!,
                 previousIndex: event.previousIndex,

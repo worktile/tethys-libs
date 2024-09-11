@@ -55,7 +55,7 @@
           [sortable]="sortable()"
           (dragStarted)="dragCardStarted($event)"
           [dropEnterPredicate]="dropEnterPredicate"
-          [dropAction]="dropListDropped"
+          [droppedAction]="dropListDropped"
         ></thy-board-entry>
       } @else {
         <div class="text-muted mx-5 text-truncate board-lane-collapsed">
@@ -79,7 +79,7 @@
         [sortable]="sortable()"
         [dropEnterPredicate]="dropEnterPredicate"
         (dragStarted)="dragCardStarted($event)"
-        [dropAction]="dropListDropped"
+        [droppedAction]="dropListDropped"
       >
       </thy-board-entry>
     }

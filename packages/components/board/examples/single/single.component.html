@@ -8,7 +8,7 @@
     [thyMovable]="'all'"
     (thyDragStart)="thyDragStart($event)"
     [thyDropEnterPredicate]="thyDropEnterPredicate"
-    [thyDropAction]="thyDropAction"
+    [thyDroppedAction]="thyDropAction"
   >
     <ng-template #lane let-lane="">
       <span>{{ lane.name }} **</span>
