@@ -22,12 +22,11 @@ import {
     ThyBoardDropEnterPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane,
-    ThyBoardDragStartEvent,
     ThyBoardDragScopeType,
     ThyBoardCard,
     ThyBoardDropActionEvent
 } from '../entities';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
 import { SafeAny } from 'ngx-tethys/types';
 
@@ -95,13 +94,13 @@ export class ThyBoardLaneComponent implements OnInit {
      */
     movable = input<ThyBoardDragScopeType>();
 
-    draggingCard = input<ThyBoardCard>();
+    draggingCard = input<CdkDrag<ThyBoardCard>>();
 
     @Input() cardDropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
 
     @Input() cardDropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
 
-    cardDragStarted = output<ThyBoardDragStartEvent>();
+    cardDragStarted = output<CdkDrag<ThyBoardCard>>();
     /**
      * 展开收起泳道事件
      */
@@ -131,10 +130,6 @@ export class ThyBoardLaneComponent implements OnInit {
     public expand() {
         const isExpanded = this.lane()?.expanded;
         this.expandLane.emit({ lane: this.lane()!, expanded: !isExpanded });
-    }
-
-    dragCardStarted(event: ThyBoardDragStartEvent) {
-        this.cardDragStarted.emit(event);
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
