@@ -6,7 +6,6 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    Input,
     OnInit,
     Renderer2,
     TemplateRef,
@@ -52,7 +51,7 @@ import { Observable, tap } from 'rxjs';
     ],
     host: {
         class: 'thy-entry-container board-lane-body-entry',
-        '[class.thy-entry-collapsed]': '!entry?.expanded'
+        '[class.thy-entry-collapsed]': '!entry()?.expanded'
     }
 })
 export class ThyBoardEntryComponent implements OnInit {
@@ -62,19 +61,19 @@ export class ThyBoardEntryComponent implements OnInit {
 
     @ViewChild('entryBody') entryBody!: ElementRef;
 
-    @Input({ required: true }) entry!: ThyBoardEntry;
+    entry = input.required<ThyBoardEntry>();
 
-    @Input() hasLane = false;
+    hasLane = input(false, { transform: booleanAttribute });
 
-    @Input() lane: ThyBoardLane | undefined;
+    lane = input<ThyBoardLane>();
 
-    @Input({ transform: booleanAttribute }) virtualScroll = false;
+    virtualScroll = input(false, { transform: booleanAttribute });
 
-    @Input() cardTemplateRef: TemplateRef<SafeAny> | null = null;
+    cardTemplateRef = input<TemplateRef<SafeAny>>();
 
     container = input.required<HTMLElement>();
 
-    @Input({ transform: numberAttribute }) defaultCardSize = 112;
+    defaultCardSize = input(112, { transform: numberAttribute });
 
     draggingCard = input<CdkDrag<ThyBoardCard>>();
 
@@ -96,9 +95,9 @@ export class ThyBoardEntryComponent implements OnInit {
      */
     movable = input<ThyBoardDragScopeType>();
 
-    @Input() cardDropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
+    cardDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
 
-    @Input() cardDropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
+    cardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
     cardDragStarted = output<CdkDrag<ThyBoardCard>>();
 
@@ -112,7 +111,7 @@ export class ThyBoardEntryComponent implements OnInit {
         const draggingCard = this.draggingCard();
         if (draggingCard) {
             if (movable) {
-                return this.checkCardDrapableOnMovable(draggingCard, { entry: this.entry, lane: this.lane });
+                return this.checkCardDrapableOnMovable(draggingCard, { entry: this.entry(), lane: this.lane() });
             }
             if (sortable) {
                 return false;
@@ -135,7 +134,7 @@ export class ThyBoardEntryComponent implements OnInit {
     ngOnInit() {}
 
     setBodyHeight() {
-        if (this.hasLane && this.virtualScroll) {
+        if (this.hasLane() && this.virtualScroll()) {
             const entrySpacer = this.entryVirtualScroll?.scrollStrategy?.entrySpacer();
             const containerHeight = this.container()?.clientHeight;
             if (this.entryVirtualScroll) {
@@ -160,19 +159,19 @@ export class ThyBoardEntryComponent implements OnInit {
         if (this.movable()) {
             if (this.movable() === ThyBoardDragScopeType.entries) {
                 // 支持变更栏 entry：泳道相同，且 不在原来的栏
-                return this.hasLane
+                return this.hasLane()
                     ? originContainer.lane._id === container.lane?._id && originContainer.entry._id !== container.entry?._id
                     : originContainer.entry._id !== container.entry?._id;
             }
             if (this.movable() === ThyBoardDragScopeType.lanes) {
                 // 支持变更泳道 lane: 栏相同 且 不在原来的泳道
-                return this.hasLane
+                return this.hasLane()
                     ? originContainer.entry._id === container.entry?._id && originContainer.lane._id !== container.lane?._id
                     : false;
             }
             if (this.movable() === ThyBoardDragScopeType.all) {
                 // 支持变更栏和泳道: 不在原来的栏或者不在原来的泳道
-                return this.hasLane
+                return this.hasLane()
                     ? originContainer.entry._id !== container.entry?._id || originContainer.lane._id !== container.lane?._id
                     : originContainer.entry._id !== container.entry?._id;
             }
@@ -185,7 +184,7 @@ export class ThyBoardEntryComponent implements OnInit {
         if (this.sortable()) {
             if (this.sortable() === ThyBoardDragScopeType.entries) {
                 // 支持拖动变更栏，并且排序: 泳道相同
-                return this.hasLane ? originContainer.lane._id === container.lane?._id : true;
+                return this.hasLane() ? originContainer.lane._id === container.lane?._id : true;
             }
             if (this.sortable() === ThyBoardDragScopeType.lanes) {
                 // 支持拖动变更泳道，并且排序: 栏相同
@@ -214,8 +213,9 @@ export class ThyBoardEntryComponent implements OnInit {
         if (!this.checkCardDropInLaneAndEntry(drag, container)) {
             return false;
         } else {
-            if (this.cardDropEnterPredicate) {
-                return this.cardDropEnterPredicate({
+            const cardDropEnterPredicate = this.cardDropEnterPredicate();
+            if (cardDropEnterPredicate) {
+                return cardDropEnterPredicate({
                     card: drag.data,
                     container: container
                 });
@@ -231,8 +231,9 @@ export class ThyBoardEntryComponent implements OnInit {
         );
         const currentIndex = (event.container.data?.cards || []).findIndex((card: ThyBoardCard) => card._id === event.item.data._id);
         transferArrayItem(event.previousContainer.data?.cards!, event.container.data?.cards!, previousIndex, currentIndex);
-        if (this.cardDropAction) {
-            this.cardDropAction({
+        const cardDropAction = this.cardDropAction();
+        if (cardDropAction) {
+            cardDropAction({
                 card: event.item.data,
                 previousContainer: event.previousContainer.data!,
                 previousIndex: event.previousIndex,

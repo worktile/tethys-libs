@@ -1,4 +1,4 @@
-@if (hasLane) {
+@if (hasLane()) {
   <div class="board-lane-header-container d-flex" [class.board-lane-header-expanded]="lane()?.expanded">
     <div class="board-lane-header">
       @if (laneCollapsible()) {
@@ -10,9 +10,9 @@
         ></thy-icon>
       }
 
-      @if (laneTemplateRef) {
+      @if (laneTemplateRef()) {
         <ng-template
-          [ngTemplateOutlet]="laneTemplateRef"
+          [ngTemplateOutlet]="laneTemplateRef()!"
           [ngTemplateOutletContext]="{ lane: lane(), $implicit: lane(), laneIsExpanded: lane()?.expanded }"
         ></ng-template>
       } @else {
@@ -34,27 +34,27 @@
 
 <div
   class="board-lane-body"
-  [class.board-no-lane-body]="!hasLane"
-  [ngStyle]="{ height: lane()?.expanded && hasLane && laneHeight ? laneHeight + 'px' : 'unset' }"
+  [class.board-no-lane-body]="!hasLane()"
+  [ngStyle]="{ height: lane()?.expanded && hasLane() && laneHeight ? laneHeight + 'px' : 'unset' }"
 >
-  @if (hasLane) {
+  @if (hasLane()) {
     @for (entry of lane()?.entries; track entry._id) {
       @if (lane()?.expanded) {
         <thy-board-entry
           [class.board-lane-body-entry-is-empty]="lane()?.expanded && lane()?.cards?.length === 0"
           [class.board-lane-body-entry-is-collapsed]="!lane()?.expanded"
-          [hasLane]="hasLane"
-          [virtualScroll]="virtualScroll"
+          [hasLane]="hasLane()"
+          [virtualScroll]="virtualScroll()"
           [entry]="entry"
           [lane]="lane()"
-          [cardTemplateRef]="cardTemplateRef"
+          [cardTemplateRef]="cardTemplateRef()"
           [container]="container()"
-          [defaultCardSize]="defaultCardSize"
+          [defaultCardSize]="defaultCardSize()"
           [draggingCard]="draggingCard()"
           [movable]="movable()"
           [sortable]="sortable()"
           (cardDragStarted)="cardDragStarted.emit($event)"
-          [cardDropEnterPredicate]="cardDropEnterPredicate"
+          [cardDropEnterPredicate]="cardDropEnterPredicate()"
           [cardDropAction]="dropListDropped"
           [topTemplateRef]="entryTopTemplateRef()"
           [bottomTemplateRef]="entryBottomTemplateRef()"
@@ -69,17 +69,17 @@
   } @else {
     @for (entry of entries(); track entry._id) {
       <thy-board-entry
-        [hasLane]="hasLane"
-        [virtualScroll]="virtualScroll"
+        [hasLane]="hasLane()"
+        [virtualScroll]="virtualScroll()"
         [entry]="entry"
         [lane]="lane()"
-        [cardTemplateRef]="cardTemplateRef"
+        [cardTemplateRef]="cardTemplateRef()"
         [container]="container()"
-        [defaultCardSize]="defaultCardSize"
+        [defaultCardSize]="defaultCardSize()"
         [draggingCard]="draggingCard()"
         [movable]="movable()"
         [sortable]="sortable()"
-        [cardDropEnterPredicate]="cardDropEnterPredicate"
+        [cardDropEnterPredicate]="cardDropEnterPredicate()"
         (cardDragStarted)="cardDragStarted.emit($event)"
         [cardDropAction]="dropListDropped"
         [topTemplateRef]="entryTopTemplateRef()"
