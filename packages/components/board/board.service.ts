@@ -195,7 +195,7 @@ export class ThyBoardService {
             });
         });
 
-        return entries;
+        return [...entries];
     }
 
     public expandEntry(event: { entry: ThyBoardEntry; expanded: boolean }) {

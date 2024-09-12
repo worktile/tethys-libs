@@ -1,10 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
-    Input,
     OnInit,
-    Output,
     QueryList,
     TemplateRef,
     ViewChildren,
@@ -57,13 +54,13 @@ export class ThyBoardLaneComponent implements OnInit {
 
     allLanesExpanded = input<boolean>(true);
 
-    @Input({ transform: booleanAttribute }) hasLane = false;
+    hasLane = input(false, { transform: booleanAttribute });
 
-    @Input({ transform: booleanAttribute }) virtualScroll = false;
+    virtualScroll = input(false, { transform: booleanAttribute });
 
-    @Input() laneTemplateRef: TemplateRef<any> | undefined;
+    laneTemplateRef = input<TemplateRef<SafeAny>>();
 
-    @Input() cardTemplateRef: TemplateRef<any> | null = null;
+    cardTemplateRef = input.required<TemplateRef<SafeAny>>();
 
     container = input.required<HTMLDivElement>();
 
@@ -71,7 +68,7 @@ export class ThyBoardLaneComponent implements OnInit {
 
     entryBottomTemplateRef = input<TemplateRef<SafeAny>>();
 
-    @Input({ transform: numberAttribute }) defaultCardSize = 112;
+    defaultCardSize = input(112, { transform: numberAttribute });
 
     /**
      * 是否支持栏的收起展开
@@ -96,15 +93,15 @@ export class ThyBoardLaneComponent implements OnInit {
 
     draggingCard = input<CdkDrag<ThyBoardCard>>();
 
-    @Input() cardDropEnterPredicate: ((event: ThyBoardDropEnterPredicateEvent) => boolean) | undefined;
+    cardDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
 
-    @Input() cardDropAction: ((event: ThyBoardDropActionEvent) => Observable<boolean>) | undefined;
+    cardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
     cardDragStarted = output<CdkDrag<ThyBoardCard>>();
     /**
      * 展开收起泳道事件
      */
-    @Output() expandLane = new EventEmitter<{ lane: ThyBoardLane; expanded: boolean }>();
+    expandLane = output<{ lane: ThyBoardLane; expanded: boolean }>();
 
     constructor() {
         effect(() => {
@@ -115,7 +112,7 @@ export class ThyBoardLaneComponent implements OnInit {
     ngOnInit() {}
 
     private setLaneHeight() {
-        if (this.entryComponents?.toArray().length > 0 && this.hasLane && this.virtualScroll) {
+        if (this.entryComponents?.toArray().length > 0 && this.hasLane() && this.virtualScroll()) {
             let laneHeight = 0;
             this.entryComponents.toArray().forEach((entry, index) => {
                 let entrySpacer = entry.entryVirtualScroll?.scrollStrategy?.entrySpacer();
@@ -133,8 +130,9 @@ export class ThyBoardLaneComponent implements OnInit {
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
-        if (this.cardDropAction) {
-            return this.cardDropAction(event);
+        const cardDropAction = this.cardDropAction();
+        if (cardDropAction) {
+            return cardDropAction(event);
         } else {
             return of(true);
         }
