@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ThyAudioControlsComponent } from './audio-controls.component';
@@ -10,17 +9,18 @@ import { ThyMediaProgressComponent } from './progress.component';
     selector: 'thy-audio-player',
     template: `
         <div class="media-content audio-content">
-            <audio
-                #audioElement
-                class="audio"
-                [src]="fileSrc"
-                [muted]="false"
-                [autoplay]="thyAutoPlay"
-                (loadedmetadata)="onLoadedmetadata($event)"
-                (error)="onError($event)"
-                (canplay)="onCanPlay()"
-                *ngIf="showMedia"
-            ></audio>
+            @if (showMedia) {
+                <audio
+                    #audioElement
+                    class="audio"
+                    [src]="fileSrc"
+                    [muted]="false"
+                    [autoplay]="thyAutoPlay"
+                    (loadedmetadata)="onLoadedmetadata($event)"
+                    (error)="onError($event)"
+                    (canplay)="onCanPlay()"
+                ></audio>
+            }
             <thy-audio-controls
                 #controls
                 [thyMedia]="audio"
@@ -33,7 +33,7 @@ import { ThyMediaProgressComponent } from './progress.component';
         </div>
     `,
     standalone: true,
-    imports: [NgIf, ThyMediaProgressComponent, ThyAudioControlsComponent]
+    imports: [ThyMediaProgressComponent, ThyAudioControlsComponent]
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit {
     @HostBinding('class') class = 'thy-audio-player thy-media-player';

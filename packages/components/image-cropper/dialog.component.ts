@@ -8,7 +8,7 @@ import { finalize } from 'rxjs/operators';
 import { ThyImageCropperComponent } from './cropper.component';
 import { ThyCropperImageSize, ThyCropperShape, ThyCropperViewMode } from './cropper.entity';
 import { ThyCropperSizeTextPipe, ThyCropperSizeStylePipe } from './cropper.pipe';
-import { NgIf, NgFor, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyUploadModule } from 'ngx-tethys/upload';
 import { ThyButtonModule } from 'ngx-tethys/button';
@@ -30,8 +30,6 @@ import { FormsModule } from '@angular/forms';
         ThyButtonModule,
         ThyUploadModule,
         ThyIcon,
-        NgIf,
-        NgFor,
         NgStyle,
         ThyCropperSizeTextPipe,
         ThyCropperSizeStylePipe
@@ -115,7 +113,11 @@ export class ThyImageCropperDialogComponent implements OnInit {
 
     sliderType: ThySliderType = 'primary';
 
-    constructor(public dialog: ThyDialog, @Optional() public dialogContainer: ThyDialogContainer, private ngZone: NgZone) {}
+    constructor(
+        public dialog: ThyDialog,
+        @Optional() public dialogContainer: ThyDialogContainer,
+        private ngZone: NgZone
+    ) {}
 
     ngOnInit(): void {}
 

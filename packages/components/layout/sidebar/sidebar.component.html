@@ -1,19 +1,24 @@
 <thy-sidebar-header class="thy-pro-sidebar-header" [ngClass]="{ 'justify-content-center': sidebarCollapsed }">
-  <ng-container
-    *ngIf="headerTemplate"
-    [ngTemplateOutlet]="headerTemplate"
-    [ngTemplateOutletContext]="{ value: { logo: this.logo, title: this.title } }"
-  ></ng-container>
-  <ng-container *ngIf="!headerTemplate">
+  @if (headerTemplate) {
+    <ng-container
+      [ngTemplateOutlet]="headerTemplate"
+      [ngTemplateOutletContext]="{ value: { logo: this.logo, title: this.title } }"
+    ></ng-container>
+  }
+  @if (!headerTemplate) {
     <img class="header-logo" [src]="logo" />
-    <span class="header-title text-truncate" *ngIf="!sidebarCollapsed">{{ title }}</span>
-  </ng-container>
+    @if (!sidebarCollapsed) {
+      <span class="header-title text-truncate">{{ title }}</span>
+    }
+  }
 </thy-sidebar-header>
 <thy-sidebar-content>
-  <ng-container *ngIf="menuTemplate" [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ menus }"> </ng-container>
-  <ng-container *ngIf="!menuTemplate">
+  @if (menuTemplate) {
+    <ng-container [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ menus }"> </ng-container>
+  }
+  @if (!menuTemplate) {
     <thy-menu [thyCollapsed]="sidebarCollapsed" thyTheme="dark">
-      <ng-container *ngFor="let menu of menus">
+      @for (menu of menus; track menu) {
         <thy-menu-group
           [thyShowIcon]="true"
           [thyCollapsed]="menu.isCollapsed || false"
@@ -36,30 +41,23 @@
         >
           <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menu, path: menu.path }"> </ng-template>
         </thy-menu-group>
-      </ng-container>
+      }
     </thy-menu>
-  </ng-container>
+  }
 </thy-sidebar-content>
 
 <ng-template #menuItems let-menu let-path="path">
-  <ng-container *ngFor="let menuItem of menu.children">
-    <a
-      thyMenuItem
-      *ngIf="!menuItem.children?.length"
-      class="ml-2"
-      [routerLink]="[path, menuItem?.path]"
-      (click)="setActiveMenu(menu, menuItem)"
-      routerLinkActive="active"
-    >
-      <span thyMenuItemName> {{ menuItem.data?.title }} </span>
-    </a>
-    <ng-template
-      *ngIf="menuItem.children?.length"
-      [ngTemplateOutlet]="submenuGroup"
-      [ngTemplateOutletContext]="{ $implicit: menuItem, path: path + '/' + menuItem.path }"
-    >
-    </ng-template>
-  </ng-container>
+  @for (menuItem of menu.children; track menuItem) {
+    @if (!menuItem.children?.length) {
+      <a thyMenuItem class="ml-2" [routerLink]="[path, menuItem?.path]" (click)="setActiveMenu(menu, menuItem)" routerLinkActive="active">
+        <span thyMenuItemName> {{ menuItem.data?.title }} </span>
+      </a>
+    }
+    @if (menuItem.children?.length) {
+      <ng-template [ngTemplateOutlet]="submenuGroup" [ngTemplateOutletContext]="{ $implicit: menuItem, path: path + '/' + menuItem.path }">
+      </ng-template>
+    }
+  }
 </ng-template>
 
 <ng-template #submenuGroup let-menuItem let-path="path">
@@ -75,5 +73,7 @@
 </ng-template>
 
 <thy-sidebar-footer>
-  <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
+  @if (footerTemplate) {
+    <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
+  }
 </thy-sidebar-footer>

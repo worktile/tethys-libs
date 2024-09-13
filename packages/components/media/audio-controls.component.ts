@@ -1,4 +1,3 @@
-import { CommonModule, NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
@@ -28,7 +27,9 @@ import { ThyMediaProgressComponent } from './progress.component';
                     @if (!errorTips) {
                         <div class="file-description" [class.hidden]="!fileName">
                             <thy-flexible-text class="file-name" [thyTooltipContent]="fileName"> {{ fileName }}</thy-flexible-text>
-                            <span class="file-size" *ngIf="fileSize">{{ fileSize }}</span>
+                            @if (fileSize) {
+                                <span class="file-size">{{ fileSize }}</span>
+                            }
                         </div>
                     } @else {
                         <thy-flexible-text [thyTooltipContent]="errorTips" class="error-tip">
@@ -72,21 +73,20 @@ import { ThyMediaProgressComponent } from './progress.component';
         </ng-container>
 
         <thy-dropdown-menu #menu>
-            <a
-                [class.active]="mediaHtmlElement?.playbackRate === item"
-                *ngFor="let item of playBackRates"
-                thyDropdownMenuItem
-                href="javascript:;"
-                (click)="playBackRateChange(item)"
-            >
-                <span>{{ item }}X</span>
-            </a>
+            @for (item of playBackRates; track item) {
+                <a
+                    [class.active]="mediaHtmlElement?.playbackRate === item"
+                    thyDropdownMenuItem
+                    href="javascript:;"
+                    (click)="playBackRateChange(item)"
+                >
+                    <span>{{ item }}X</span>
+                </a>
+            }
         </thy-dropdown-menu>
     `,
     standalone: true,
     imports: [
-        NgIf,
-        CommonModule,
         ThyIconModule,
         ThyFlexibleTextModule,
         ThyDropdownModule,

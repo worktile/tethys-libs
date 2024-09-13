@@ -3,7 +3,7 @@ import { isString } from '@tethys/cdk';
 import Cropper from 'cropperjs';
 import { InputNumber } from 'ngx-tethys/core';
 import { ThyCropperOptions, ThyCropperShape, ThyCropperViewMode, thyCropDataChangeEvent } from './cropper.entity';
-import { NgIf } from '@angular/common';
+
 import { ThyLoadingModule } from 'ngx-tethys/loading';
 
 @Component({
@@ -14,7 +14,7 @@ import { ThyLoadingModule } from 'ngx-tethys/loading';
         '[class.thy-image-cropper-round]': 'thyShape === "round"'
     },
     standalone: true,
-    imports: [ThyLoadingModule, NgIf]
+    imports: [ThyLoadingModule]
 })
 export class ThyImageCropperComponent implements OnInit {
     @HostBinding('class.thy-image-cropper') cropperClass = true;
