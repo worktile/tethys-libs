@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ThyBoardCard, ThyBoardDragStartEvent, ThyBoardDropActionEvent, ThyBoardDropEnterPredicateEvent, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
+import {
+    ThyBoardCard,
+    ThyBoardDragStartEvent,
+    ThyBoardDropActionEvent,
+    ThyBoardDropEnterPredicateEvent,
+    ThyBoardEntry,
+    ThyBoardLane
+} from '@tethys/pro/board';
 import { entries, lanes } from '../mock';
 import { items } from './mock';
 import { delay, of } from 'rxjs';
@@ -22,7 +29,19 @@ export class ThyProBoardMultiExampleComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        setTimeout(() => {
+            this.items = [
+                ...this.items,
+                {
+                    _id: 'add',
+                    title: '项目add',
+                    laneIds: ['1'],
+                    entryIds: ['3']
+                }
+            ];
+        }, 2000);
+    }
 
     thyDragStart(event: ThyBoardDragStartEvent) {
         console.log(`开始拖动：`, event);

@@ -20,5 +20,17 @@ export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        setTimeout(() => {
+            this.items = [
+                ...this.items,
+                {
+                    _id: 'add',
+                    title: '项目add',
+                    laneIds: ['1'],
+                    entryIds: ['3']
+                }
+            ];
+        }, 2000);
+    }
 }

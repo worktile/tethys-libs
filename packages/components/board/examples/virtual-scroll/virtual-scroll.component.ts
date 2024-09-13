@@ -30,7 +30,19 @@ export class ThyProBoardVirtualScrollExampleComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        setTimeout(() => {
+            this.items = [
+                ...this.items,
+                {
+                    _id: 'add',
+                    title: '项目add',
+                    laneIds: ['1'],
+                    entryIds: ['3']
+                }
+            ];
+        }, 2000);
+    }
 
     thyDragStart(event: ThyBoardDragStartEvent) {
         console.log(`开始拖动：`, event);
