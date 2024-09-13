@@ -1,0 +1,11 @@
+<a href="javascript:;" thyAction [thyDropdown]="menu" thyTrigger="hover">
+  <thy-icon [thyIconName]="themesMap[theme].icon"></thy-icon>
+</a>
+
+<thy-dropdown-menu #menu>
+  @for (item of themes; track item.key) {
+    <a thyDropdownMenuItem [ngClass]="{ active: item.key === theme }" href="javascript:;" (click)="setTheme(item.key)">
+      <span>{{ item.name }}</span>
+    </a>
+  }
+</thy-dropdown-menu>
