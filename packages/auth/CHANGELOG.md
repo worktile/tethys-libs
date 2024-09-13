@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.4](https://github.com/tethys-org/libs/compare/v18.0.2...v18.0.4) (2024-09-13)
+
+**Note:** Version bump only for package @tethys/auth
+
 # [18.0.0-next.1](https://github.com/tethys-org/libs/compare/v18.0.0-next.0...v18.0.0-next.1) (2024-08-20)
 
 **Note:** Version bump only for package @tethys/auth
