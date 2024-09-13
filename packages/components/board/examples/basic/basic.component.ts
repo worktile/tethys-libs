@@ -8,7 +8,6 @@ import {
     ThyBoardLane
 } from '@tethys/pro/board';
 import { entries, items, lanes } from '../mock';
-import { helpers } from 'ngx-tethys/util';
 import { delay, of } from 'rxjs';
 
 interface CardInfo extends ThyBoardCard {
@@ -33,6 +32,17 @@ export class ThyProBoardBasicExampleComponent implements OnInit {
 
     ngOnInit(): void {
         console.log(this.lanes);
+        setTimeout(() => {
+            this.items = [
+                ...this.items,
+                {
+                    _id: 'add',
+                    title: '项目add',
+                    laneIds: ['1'],
+                    entryIds: ['3']
+                }
+            ];
+        }, 2000);
     }
 
     expandLane(event: { lane: ThyBoardLane; expanded: boolean }) {

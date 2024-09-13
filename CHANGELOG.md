@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.4](https://github.com/tethys-org/libs/compare/v18.0.2...v18.0.4) (2024-09-13)
+
+### Bug Fixes
+
+- **components:** display new card after add in board #TINFR-648 ([f0bc7d5](https://github.com/tethys-org/libs/commit/f0bc7d5eb64570e19e8968a033294249e968fbe5)), closes [#TINFR-648](https://github.com/tethys-org/libs/issues/TINFR-648)
+
 ## [18.0.3](https://github.com/tethys-org/libs/compare/v18.0.2...v18.0.3) (2024-09-12)
 
 ### Features

@@ -2,14 +2,13 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    EventEmitter,
     Input,
     OnInit,
-    Output,
     TemplateRef,
     booleanAttribute,
     computed,
-    input
+    input,
+    output
 } from '@angular/core';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import { ThyIcon } from 'ngx-tethys/icon';
@@ -17,6 +16,7 @@ import { ThyTooltipDirective } from 'ngx-tethys/tooltip';
 import { ThyBoardEntry } from '../entities';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ThyAction } from 'ngx-tethys/action';
+import { SafeAny } from 'ngx-tethys/types';
 
 @Component({
     selector: 'thy-board-header',
@@ -31,11 +31,11 @@ import { ThyAction } from 'ngx-tethys/action';
 export class ThyBoardHeaderComponent implements OnInit {
     entries = input.required<ThyBoardEntry[]>();
 
-    @Input({ transform: booleanAttribute }) hasLane = false;
+    hasLane = input(false, { transform: booleanAttribute });
 
-    @Input() allLanesExpanded = true;
+    @Input({ transform: booleanAttribute }) allLanesExpanded = true;
 
-    @Input() headerTemplateRef: TemplateRef<any> | undefined;
+    headerTemplateRef = input<TemplateRef<SafeAny>>();
 
     /**
      * 是否支持栏的收起展开
@@ -53,12 +53,12 @@ export class ThyBoardHeaderComponent implements OnInit {
 
     container = input.required<ElementRef>();
 
-    @Output() expandAllLanes = new EventEmitter<boolean>();
+    expandAllLanes = output<boolean>();
 
     /**
      * 展开收起栏事件
      */
-    @Output() expandEntry = new EventEmitter<{ entry: ThyBoardEntry; expanded: boolean }>();
+    expandEntry = output<{ entry: ThyBoardEntry; expanded: boolean }>();
 
     public isFullscreen = false;
 
@@ -74,10 +74,6 @@ export class ThyBoardHeaderComponent implements OnInit {
         this.allLanesExpanded = !this.allLanesExpanded;
         this.expandAllLanes.emit(this.allLanesExpanded);
     }
-
-    existFullscreen() {}
-
-    enterFullscreen() {}
 
     expandBoardEntry(event: ThyBoardEntry) {
         this.expandEntry.emit({ entry: event, expanded: !event.expanded });
