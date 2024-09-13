@@ -9,12 +9,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - **components:** display new card after add in board #TINFR-648 ([f0bc7d5](https://github.com/tethys-org/libs/commit/f0bc7d5eb64570e19e8968a033294249e968fbe5)), closes [#TINFR-648](https://github.com/tethys-org/libs/issues/TINFR-648)
 
-### Features
-
-- **components:** board entry support define template in top and bottom #INFR-13161 ([#108](https://github.com/tethys-org/libs/issues/108)) ([2ba59cb](https://github.com/tethys-org/libs/commit/2ba59cb32f6a71277fc0a22681d906114a91d423)), closes [#INFR-13161](https://github.com/tethys-org/libs/issues/INFR-13161)
-- **components:** board support card set multi lane and entry #TINFR-630 ([#109](https://github.com/tethys-org/libs/issues/109)) ([df41736](https://github.com/tethys-org/libs/commit/df41736f2f6acdddad73360aa62d79e365c37bba)), closes [#TINFR-630](https://github.com/tethys-org/libs/issues/TINFR-630)
-- **components:** board support move card #INFR-12955 ([#107](https://github.com/tethys-org/libs/issues/107)) ([b30c021](https://github.com/tethys-org/libs/commit/b30c0213c16ca6b79257a3b599d17fe1d50f18e2)), closes [#INFR-12955](https://github.com/tethys-org/libs/issues/INFR-12955)
-
 ## [18.0.3](https://github.com/tethys-org/libs/compare/v18.0.2...v18.0.3) (2024-09-12)
 
 ### Features
