@@ -185,7 +185,7 @@ export class ThyBoardService {
     private buildEntriesWithCardsByLanes(lanes: ThyBoardLane[], entries: ThyBoardEntry[]) {
         const entriesMapById: Record<string, ThyBoardEntry> = {};
         (entries || []).forEach((entry) => {
-            entriesMapById[entry._id] = entry;
+            entriesMapById[entry._id] = { ...entry };
             entriesMapById[entry._id].cards = [];
             entriesMapById[entry._id].expanded = !helpers.isUndefinedOrNull(entry.expanded) ? entry.expanded : true;
         });
@@ -195,7 +195,9 @@ export class ThyBoardService {
             });
         });
 
-        return [...entries];
+        return entries.map((entry) => {
+            return entriesMapById[entry._id];
+        });
     }
 
     public expandEntry(event: { entry: ThyBoardEntry; expanded: boolean }) {
