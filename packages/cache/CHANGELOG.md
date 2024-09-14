@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.5](https://github.com/tethys-org/libs/compare/v18.0.2...v18.0.5) (2024-09-14)
+
+**Note:** Version bump only for package @tethys/cache
+
 ## [18.0.4](https://github.com/tethys-org/libs/compare/v18.0.2...v18.0.4) (2024-09-13)
 
 **Note:** Version bump only for package @tethys/cache
