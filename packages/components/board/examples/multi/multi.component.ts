@@ -3,7 +3,7 @@ import {
     ThyBoardCard,
     ThyBoardDragStartEvent,
     ThyBoardDropActionEvent,
-    ThyBoardDropEnterPredicateEvent,
+    ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane
 } from '@tethys/pro/board';
@@ -47,7 +47,7 @@ export class ThyProBoardMultiExampleComponent implements OnInit {
         console.log(`开始拖动：`, event);
     }
 
-    thyDropEnterPredicate = (event: ThyBoardDropEnterPredicateEvent) => {
+    thyDropEnterPredicate = (event: ThyBoardDragPredicateEvent) => {
         console.log(`判断是否可拖动到：`, event);
         return true;
     };

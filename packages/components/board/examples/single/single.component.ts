@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ThyBoardCard, ThyBoardDragStartEvent, ThyBoardDropActionEvent, ThyBoardDropEnterPredicateEvent, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
+import { ThyBoardCard, ThyBoardDragStartEvent, ThyBoardDropActionEvent, ThyBoardDragPredicateEvent, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
 import { entries, items, lanes } from '../mock';
 import { delay, of } from 'rxjs';
 
@@ -39,7 +39,7 @@ export class ThyProBoardSingleExampleComponent implements OnInit {
         console.log(`开始拖动：`, event);
     }
 
-    thyDropEnterPredicate = (event: ThyBoardDropEnterPredicateEvent) => {
+    thyDropEnterPredicate = (event: ThyBoardDragPredicateEvent) => {
         console.log(`判断是否可拖动到：`, event);
         return true;
     };

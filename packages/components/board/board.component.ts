@@ -18,7 +18,7 @@ import {
     ThyBoardDragScopeType,
     ThyBoardDropActionEvent,
     ThyBoardDragStartEvent,
-    ThyBoardDropEnterPredicateEvent
+    ThyBoardDragPredicateEvent
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
@@ -146,10 +146,16 @@ export class ThyBoardComponent implements OnInit {
     thyEntryCollapsible = input(false, { transform: booleanAttribute });
 
     /**
-     * 判断是否允许拖起的卡片放到另外位置
-     * @type (event: { drag: CdkDrag; drop: CdkDropList }) => boolean
+     * 判断是否允许卡片拖动
+     * @type (event: ThyBoardDragPredicateEvent) => boolean
      */
-    thyCardDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
+    thyCardDraggablePredicate = input<(event: ThyBoardDragPredicateEvent) => boolean>();
+
+    /**
+     * 判断是否允许拖起的卡片放到另外位置
+     * @type (event: ThyBoardDragPredicateEvent) => boolean
+     */
+    thyCardDropEnterPredicate = input<(event: ThyBoardDragPredicateEvent) => boolean>();
 
     /**
      * 当把卡片拖动到另一个位置时触发

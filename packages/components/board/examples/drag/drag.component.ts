@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
     ThyBoardCard,
+    ThyBoardDragPredicateEvent,
     ThyBoardDragStartEvent,
     ThyBoardDropActionEvent,
-    ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane
 } from '@tethys/pro/board';
@@ -15,18 +15,24 @@ interface CardInfo extends ThyBoardCard {
 }
 
 @Component({
-    selector: 'thy-pro-board-virtual-scroll-example',
-    templateUrl: './virtual-scroll.component.html',
-    styleUrls: ['./virtual-scroll.component.scss']
+    selector: 'thy-pro-board-drag-example',
+    templateUrl: './drag.component.html',
+    styleUrls: ['./drag.component.scss']
 })
-export class ThyProBoardVirtualScrollExampleComponent implements OnInit {
+export class ThyProBoardDragExampleComponent implements OnInit {
     entries: ThyBoardEntry[] = [...entries];
 
-    items: CardInfo[] = [...(items as CardInfo[])];
+    items: CardInfo[] = [
+        {
+            _id: '0',
+            title: '项目0(不可拖动)',
+            laneIds: ['1'],
+            entryIds: ['1']
+        },
+        ...(items as CardInfo[])
+    ];
 
     lanes: ThyBoardLane[] = [...lanes];
-
-    thyShowLane = true;
 
     constructor() {}
 
@@ -44,6 +50,11 @@ export class ThyProBoardVirtualScrollExampleComponent implements OnInit {
         }, 2000);
     }
 
+    thyCardDraggablePredicate = (event: ThyBoardDragPredicateEvent) => {
+        console.log(`判断是否可拖动：`, event);
+        return event.card._id !== '0';
+    };
+
     thyDragStart(event: ThyBoardDragStartEvent) {
         console.log(`开始拖动：`, event);
     }
@@ -55,6 +66,6 @@ export class ThyProBoardVirtualScrollExampleComponent implements OnInit {
 
     thyDropAction = (event: ThyBoardDropActionEvent) => {
         console.log(`拖动到：`, event);
-        return of(true).pipe(delay(1000));
+        return of(false).pipe(delay(1000));
     };
 }

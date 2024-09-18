@@ -16,7 +16,7 @@ import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import {
-    ThyBoardDropEnterPredicateEvent,
+    ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane,
     ThyBoardDragScopeType,
@@ -93,7 +93,9 @@ export class ThyBoardLaneComponent implements OnInit {
 
     draggingCard = input<CdkDrag<ThyBoardCard>>();
 
-    cardDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
+    cardDraggablePredicate = input<(event: ThyBoardDragPredicateEvent) => boolean>();
+
+    cardDropEnterPredicate = input<(event: ThyBoardDragPredicateEvent) => boolean>();
 
     cardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 

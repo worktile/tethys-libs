@@ -8,3 +8,4 @@ export * from './constants';
 export * from './scroll/board-body-scroll';
 export * from './scroll/entry-virtual-scroll';
 export * from './board.service';
+export * from './board.pipe';

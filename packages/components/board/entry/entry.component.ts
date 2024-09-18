@@ -24,7 +24,7 @@ import {
     ThyBoardDragContainer,
     ThyBoardDragScopeType,
     ThyBoardDropActionEvent,
-    ThyBoardDropEnterPredicateEvent,
+    ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane
 } from '../entities';
@@ -32,6 +32,7 @@ import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
 import { CdkDrag, CdkDragDrop, CdkDragStart, CdkDropList, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ThyDragDropDirective } from 'ngx-tethys/shared';
 import { Observable, tap } from 'rxjs';
+import { ThyBoardFuncPipe } from '../board.pipe';
 
 @Component({
     selector: 'thy-board-entry',
@@ -47,7 +48,8 @@ import { Observable, tap } from 'rxjs';
         ExperimentalScrollingModule,
         ThyFlexItem,
         ThyBoardEntryVirtualScroll,
-        ThyDragDropDirective
+        ThyDragDropDirective,
+        ThyBoardFuncPipe
     ],
     host: {
         class: 'thy-entry-container board-lane-body-entry',
@@ -95,7 +97,9 @@ export class ThyBoardEntryComponent implements OnInit {
      */
     movable = input<ThyBoardDragScopeType>();
 
-    cardDropEnterPredicate = input<(event: ThyBoardDropEnterPredicateEvent) => boolean>();
+    cardDraggablePredicate = input<(event: ThyBoardDragPredicateEvent) => boolean>();
+
+    cardDropEnterPredicate = input<(event: ThyBoardDragPredicateEvent) => boolean>();
 
     cardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
