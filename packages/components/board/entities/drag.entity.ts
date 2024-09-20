@@ -12,7 +12,7 @@ export interface ThyBoardDragStartEvent {
     card: ThyBoardCard;
 }
 
-export interface ThyBoardDropEnterPredicateEvent {
+export interface ThyBoardDragPredicateEvent {
     card: ThyBoardCard;
 
     container: ThyBoardDragContainer;

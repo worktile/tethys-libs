@@ -6,6 +6,7 @@ import { ThyProBoardSingleExampleComponent } from './single/single.component';
 import { ThyProBoardCustomTemplateExampleComponent } from './custom-template/custom-template.component';
 import { ThyProBoardVirtualScrollExampleComponent } from './virtual-scroll/virtual-scroll.component';
 import { ThyProBoardMultiExampleComponent } from './multi/multi.component';
+import { ThyProBoardDragExampleComponent } from './drag/drag.component';
 
 export default {
     imports: [ThyProBoardModule, CommonModule],
@@ -15,6 +16,7 @@ export default {
         ThyProBoardSingleExampleComponent,
         ThyProBoardCustomTemplateExampleComponent,
         ThyProBoardVirtualScrollExampleComponent,
-        ThyProBoardMultiExampleComponent
+        ThyProBoardMultiExampleComponent,
+        ThyProBoardDragExampleComponent
     ]
 };

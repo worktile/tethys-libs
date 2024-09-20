@@ -1,0 +1,21 @@
+<div class="thy-pro-board-basic-example-container">
+  <thy-board
+    [thyEntries]="entries"
+    [thyCards]="items"
+    [thyLanes]="lanes"
+    [thyShowLane]="lanes.length > 1"
+    [thyMovable]="'all'"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDropAction]="thyDropAction"
+    [thyCardDraggablePredicate]="thyCardDraggablePredicate"
+  >
+    <ng-template #card let-item="">
+      <div class="card-container">
+        <div class="card-content-row-title">
+          <span>{{ item.title }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </thy-board>
+</div>

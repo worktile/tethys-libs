@@ -28,7 +28,12 @@
             (cdkDropListDropped)="drop($event)"
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
-            <div cdkDrag [cdkDragData]="card" (cdkDragStarted)="cdkDragStarted($event)">
+            <div
+              cdkDrag
+              [cdkDragData]="card"
+              [cdkDragDisabled]="!(card | thyBoardFunc: cardDraggablePredicate() : { entry: entry(), lane: lane(), cards: entry().cards })"
+              (cdkDragStarted)="cdkDragStarted($event)"
+            >
               <ng-template
                 [ngTemplateOutlet]="cardTemplateRef()!"
                 [ngTemplateOutletContext]="{ entry: entry(), $implicit: card }"
@@ -60,7 +65,12 @@
             (cdkDropListDropped)="drop($event)"
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
-            <div cdkDrag [cdkDragData]="card" (cdkDragStarted)="cdkDragStarted($event)">
+            <div
+              cdkDrag
+              [cdkDragData]="card"
+              [cdkDragDisabled]="!(card | thyBoardFunc: cardDraggablePredicate() : { entry: entry(), lane: lane(), cards: entry().cards })"
+              (cdkDragStarted)="cdkDragStarted($event)"
+            >
               <ng-template
                 [ngTemplateOutlet]="cardTemplateRef()!"
                 [ngTemplateOutletContext]="{ entry: entry(), $implicit: card }"
@@ -82,7 +92,12 @@
           (cdkDropListDropped)="drop($event)"
           [cdkDropListEnterPredicate]="dropListEnterPredicate"
         >
-          <div cdkDrag [cdkDragData]="card" (cdkDragStarted)="cdkDragStarted($event)">
+          <div
+            cdkDrag
+            [cdkDragData]="card"
+            [cdkDragDisabled]="!(card | thyBoardFunc: cardDraggablePredicate() : { entry: entry(), lane: lane(), cards: entry().cards })"
+            (cdkDragStarted)="cdkDragStarted($event)"
+          >
             <ng-template
               [ngTemplateOutlet]="cardTemplateRef()!"
               [ngTemplateOutletContext]="{ entry: entry(), $implicit: card }"
