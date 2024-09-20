@@ -325,7 +325,6 @@ export class ThyBoardEntryComponent implements OnInit {
                 )
                 .subscribe();
         }
-        this.changeDetectorRef.markForCheck();
     }
 
     scrollToOffset(payload: { position: 'top' | 'middle' | 'bottom'; scrollTop: number; laneHight: number }) {
