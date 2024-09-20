@@ -18,7 +18,8 @@ import {
     ThyBoardDragScopeType,
     ThyBoardDropActionEvent,
     ThyBoardDragStartEvent,
-    ThyBoardDragPredicateEvent
+    ThyBoardDragPredicateEvent,
+    ThyBoardZone
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
@@ -146,6 +147,20 @@ export class ThyBoardComponent implements OnInit {
     thyEntryCollapsible = input(false, { transform: booleanAttribute });
 
     /**
+     * 获取卡片可放置的区域
+     * @type
+     */
+    thyCardDroppableZonesAction = input<
+        (event: ThyBoardDragStartEvent) => Observable<
+            {
+                laneId?: string;
+                entryId: string;
+                droppableZones: ThyBoardZone[];
+            }[]
+        >
+    >();
+
+    /**
      * 判断是否允许卡片拖动
      * @type (event: ThyBoardDragPredicateEvent) => boolean
      */
@@ -191,6 +206,12 @@ export class ThyBoardComponent implements OnInit {
      * @type ThyBoardCard
      */
     thyCardDragStart = output<ThyBoardDragStartEvent>();
+
+    public cardDroppableZones: {
+        laneId?: string;
+        entryId: string;
+        droppableZones: ThyBoardZone[];
+    }[] = [];
 
     public draggingCard: CdkDrag<ThyBoardCard> | undefined;
 
@@ -254,9 +275,18 @@ export class ThyBoardComponent implements OnInit {
     dragCardStarted(event: CdkDrag<ThyBoardCard>) {
         this.draggingCard = event;
         this.thyCardDragStart.emit({ card: event.data });
+        const thyCardDroppableZonesAction = this.thyCardDroppableZonesAction();
+        if (thyCardDroppableZonesAction) {
+            thyCardDroppableZonesAction({ card: event.data })
+                .pipe()
+                .subscribe((data) => {
+                    this.cardDroppableZones = data;
+                });
+        }
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
+        this.cardDroppableZones = [];
         this.draggingCard = undefined;
         const thyCardDropAction = this.thyCardDropAction();
         if (thyCardDropAction) {

@@ -1,4 +1,5 @@
 @use 'ngx-tethys/styles/variables.scss' as variables;
+@use './variables.scss' as board;
 
 .thy-board-lane-container {
     display: flex;
@@ -60,6 +61,8 @@
     .board-lane-body {
         display: flex;
         .board-lane-collapsed {
+            width: board.$thy-board-entry-width;
+            padding: 0 20px;
             line-height: 62px;
         }
     }

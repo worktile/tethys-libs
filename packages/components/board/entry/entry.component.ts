@@ -26,7 +26,8 @@ import {
     ThyBoardDropActionEvent,
     ThyBoardDragPredicateEvent,
     ThyBoardEntry,
-    ThyBoardLane
+    ThyBoardLane,
+    ThyBoardZone
 } from '../entities';
 import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
 import { CdkDrag, CdkDragDrop, CdkDragStart, CdkDropList, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -69,6 +70,8 @@ export class ThyBoardEntryComponent implements OnInit {
 
     lane = input<ThyBoardLane>();
 
+    laneHeight = input(0, { transform: numberAttribute });
+
     virtualScroll = input(false, { transform: booleanAttribute });
 
     cardTemplateRef = input<TemplateRef<SafeAny>>();
@@ -78,6 +81,19 @@ export class ThyBoardEntryComponent implements OnInit {
     defaultCardSize = input(112, { transform: numberAttribute });
 
     draggingCard = input<CdkDrag<ThyBoardCard>>();
+
+    hasDroppableZones = input<boolean>();
+
+    /**
+     * 获取卡片可放置的区域
+     */
+    cardDroppableZones = input<
+        {
+            laneId: string;
+            entryId: string;
+            droppableZones: ThyBoardZone[];
+        }[]
+    >();
 
     topTemplateRef = input<TemplateRef<SafeAny>>();
 
@@ -107,6 +123,8 @@ export class ThyBoardEntryComponent implements OnInit {
 
     public entryBodyHeight = 0;
 
+    public entryDroppableZonesHeight = 0;
+
     public isDraggingList = false;
 
     public showBackDropWhenDragging = computed(() => {
@@ -126,9 +144,28 @@ export class ThyBoardEntryComponent implements OnInit {
         return false;
     });
 
+    cardDroppableZone = computed(() => {
+        const cardDroppableZones = this.cardDroppableZones();
+        const entry = this.entry();
+        const draggingCard = this.draggingCard();
+        const hasDroppableZones = this.hasDroppableZones();
+        if (hasDroppableZones) {
+            if (draggingCard) {
+                return this.hasLane()
+                    ? cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id && zone.laneId === this.lane()?._id)
+                          ?.droppableZones || []
+                    : cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id)?.droppableZones || [];
+            } else {
+                return entry.droppableZones || [];
+            }
+        }
+        return [];
+    });
+
     constructor(
         private renderer: Renderer2,
-        public changeDetectorRef: ChangeDetectorRef
+        public changeDetectorRef: ChangeDetectorRef,
+        private elementRef: ElementRef
     ) {
         effect(() => {
             this.setBodyHeight();
@@ -138,13 +175,22 @@ export class ThyBoardEntryComponent implements OnInit {
     ngOnInit() {}
 
     setBodyHeight() {
-        if (this.hasLane() && this.virtualScroll()) {
-            const entrySpacer = this.entryVirtualScroll?.scrollStrategy?.entrySpacer();
-            const containerHeight = this.container()?.clientHeight;
-            if (this.entryVirtualScroll) {
-                this.entryBodyHeight = Math.min(containerHeight, entrySpacer);
+        const virtualScroll = this.virtualScroll();
+        const containerHeight = this.container()?.clientHeight;
+        const laneHeight = this.laneHeight();
+
+        if (this.hasLane()) {
+            if (virtualScroll) {
+                const entrySpacer = this.entryVirtualScroll?.scrollStrategy?.entrySpacer();
+                if (this.entryVirtualScroll) {
+                    this.entryBodyHeight = Math.min(containerHeight, entrySpacer);
+                } else {
+                    this.entryBodyHeight = containerHeight;
+                }
+                this.entryDroppableZonesHeight = Math.min(this.laneHeight(), containerHeight);
             } else {
                 this.entryBodyHeight = containerHeight;
+                this.entryDroppableZonesHeight = Math.min(this.elementRef.nativeElement.parentElement.clientHeight, containerHeight);
             }
         }
     }
@@ -213,7 +259,12 @@ export class ThyBoardEntryComponent implements OnInit {
     }
 
     dropListEnterPredicate = (drag: CdkDrag<ThyBoardCard>, drop: CdkDropList<ThyBoardDragContainer>) => {
-        const container: ThyBoardDragContainer = { entry: drop.data.entry, lane: drop.data.lane, cards: drop.data.cards };
+        const container: ThyBoardDragContainer = {
+            entry: drop.data.entry,
+            lane: drop.data.lane,
+            cards: drop.data.cards,
+            zone: drop.data.zone
+        };
         if (!this.checkCardDropInLaneAndEntry(drag, container)) {
             return false;
         } else {

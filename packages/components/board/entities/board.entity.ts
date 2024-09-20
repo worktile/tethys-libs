@@ -26,6 +26,8 @@ export interface ThyBoardEntry {
 
     // 设置泳道展开收起状态，true 为展开
     expanded?: boolean;
+
+    droppableZones?: ThyBoardZone[];
 }
 
 export interface ThyBoardCard {
@@ -44,4 +46,10 @@ export interface ThyBoardVirtualScrolledIndexChangeEvent {
     lane: ThyBoardLane;
     nextLane: ThyBoardLane;
     expandedLanes: ThyBoardLane[];
+}
+
+export interface ThyBoardZone {
+    _id: string;
+
+    name: string;
 }

@@ -39,6 +39,8 @@
         (cardDragStarted)="dragCardStarted($event)"
         [cardDropAction]="dropListDropped"
         [draggingCard]="draggingCard"
+        [hasDroppableZones]="!!thyCardDroppableZonesAction()"
+        [cardDroppableZones]="cardDroppableZones"
         [entryTopTemplateRef]="entryTopTemplateRef()"
         [entryBottomTemplateRef]="entryBottomTemplateRef()"
       ></thy-board-lane>
@@ -59,6 +61,8 @@
       (cardDragStarted)="dragCardStarted($event)"
       [cardDropAction]="dropListDropped"
       [draggingCard]="draggingCard"
+      [hasDroppableZones]="!!thyCardDroppableZonesAction()"
+      [cardDroppableZones]="cardDroppableZones"
       [entryTopTemplateRef]="entryTopTemplateRef()"
       [entryBottomTemplateRef]="entryBottomTemplateRef()"
     ></thy-board-lane>

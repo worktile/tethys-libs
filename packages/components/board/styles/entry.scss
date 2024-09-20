@@ -55,6 +55,7 @@
             }
             .entry-card {
                 padding: 8px 8px 0 8px;
+                flex-shrink: 0;
                 &:last-child {
                     padding-bottom: 8px;
                 }
@@ -100,6 +101,10 @@
         border: dashed 1px variables.$gray-400;
         background: variables.$gray-80;
         z-index: 2;
+        &.entry-dragging {
+            position: sticky;
+            bottom: 0;
+        }
 
         &.cdk-drop-list-dragging {
             background: rgba(variables.$primary, 0.1);
@@ -111,6 +116,53 @@
         }
         .cdk-drag-placeholder {
             display: none;
+        }
+    }
+
+    .entry-drop-zones {
+        width: calc(100% + 2px);
+        height: 100%;
+        left: -1px;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+
+        &.entry-dragging {
+            position: sticky;
+            bottom: 0;
+        }
+        .entry-drop-zone {
+            flex: 1;
+            height: 100%;
+
+            padding-top: 10px;
+            padding-left: 20px;
+            border: dashed 1px variables.$gray-400;
+            background: variables.$gray-80;
+            z-index: 2;
+            margin-top: -1px;
+            &.cdk-drop-list-dragging {
+                background: rgba(variables.$primary, 0.1);
+                border-color: variables.$primary;
+                z-index: 3;
+                .dragging-text-color {
+                    color: variables.$primary !important;
+                }
+            }
+            .cdk-drag-placeholder {
+                display: none;
+            }
+        }
+    }
+
+    .empty-zone {
+        display: flex;
+        height: calc(100%);
+        background: variables.$gray-100;
+        .empty-zone-tip {
+            margin: auto;
+            color: variables.$gray-600;
         }
     }
 

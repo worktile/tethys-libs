@@ -8,7 +8,7 @@ import {
     ThyBoardLane
 } from '@tethys/pro/board';
 import { entries, items, lanes } from '../mock';
-import { delay, of } from 'rxjs';
+import { delay, map, of } from 'rxjs';
 
 interface CardInfo extends ThyBoardCard {
     title: string;
@@ -67,5 +67,23 @@ export class ThyProBoardDragExampleComponent implements OnInit {
     thyDropAction = (event: ThyBoardDropActionEvent) => {
         console.log(`拖动到：`, event);
         return of(false).pipe(delay(1000));
+    };
+
+    thyCardDroppableZonesAction = (event: ThyBoardDragPredicateEvent) => {
+        return of(true).pipe(
+            map(() => {
+                const zones: { laneId: string; entryId: string; droppableZones: { _id: string; name: string }[] }[] = [];
+                this.lanes.forEach((lane) => {
+                    this.entries.forEach((entry) => {
+                        zones.push({
+                            laneId: lane._id,
+                            entryId: entry._id,
+                            droppableZones: entry._id !== '3' ? entry.droppableZones! : []
+                        });
+                    });
+                });
+                return zones;
+            })
+        );
     };
 }

@@ -21,7 +21,8 @@ import {
     ThyBoardLane,
     ThyBoardDragScopeType,
     ThyBoardCard,
-    ThyBoardDropActionEvent
+    ThyBoardDropActionEvent,
+    ThyBoardZone
 } from '../entities';
 import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
@@ -92,6 +93,19 @@ export class ThyBoardLaneComponent implements OnInit {
     movable = input<ThyBoardDragScopeType>();
 
     draggingCard = input<CdkDrag<ThyBoardCard>>();
+
+    hasDroppableZones = input<boolean>();
+
+    /**
+     * 获取卡片可放置的区域
+     */
+    cardDroppableZones = input<
+        {
+            laneId: string;
+            entryId: string;
+            droppableZones: ThyBoardZone[];
+        }[]
+    >();
 
     cardDraggablePredicate = input<(event: ThyBoardDragPredicateEvent) => boolean>();
 

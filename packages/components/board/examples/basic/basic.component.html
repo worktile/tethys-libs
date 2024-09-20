@@ -1,9 +1,31 @@
+<div class="p-2">单泳道</div>
 <div class="thy-pro-board-basic-example-container">
   <thy-board
     [thyEntries]="entries"
     [thyCards]="items"
     [thyLanes]="lanes"
-    [thyShowLane]="lanes.length > 1"
+    [thyShowLane]="false"
+    [thyEntryCollapsible]="true"
+    (thyExpandLane)="expandLane($event)"
+    (thyExpandAllLanes)="expandAllLanes($event)"
+    [thyMovable]="'all'"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDropAction]="thyDropAction"
+  >
+    <ng-template #card let-item="">
+      <thy-board-basic-card [card]="item"></thy-board-basic-card>
+    </ng-template>
+  </thy-board>
+</div>
+
+<div class="p-2 mt-2">多泳道</div>
+<div class="thy-pro-board-basic-example-container">
+  <thy-board
+    [thyEntries]="entries"
+    [thyCards]="items"
+    [thyLanes]="lanes"
+    [thyShowLane]="true"
     [thyEntryCollapsible]="true"
     (thyExpandLane)="expandLane($event)"
     (thyExpandAllLanes)="expandAllLanes($event)"
