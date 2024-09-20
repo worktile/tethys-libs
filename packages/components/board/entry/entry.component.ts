@@ -150,16 +150,30 @@ export class ThyBoardEntryComponent implements OnInit {
         const draggingCard = this.draggingCard();
         const hasDroppableZones = this.hasDroppableZones();
         if (hasDroppableZones) {
-            if (draggingCard) {
+            if (draggingCard && cardDroppableZones) {
                 return this.hasLane()
                     ? cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id && zone.laneId === this.lane()?._id)
-                          ?.droppableZones || []
-                    : cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id)?.droppableZones || [];
+                          ?.droppableZones || null
+                    : cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id)?.droppableZones || null;
             } else {
                 return entry.droppableZones || [];
             }
         }
         return [];
+    });
+
+    dropReady = computed(() => {
+        const cardDroppableZones = this.cardDroppableZones();
+        const draggingCard = this.draggingCard();
+        const hasDroppableZones = this.hasDroppableZones();
+        if (hasDroppableZones) {
+            if (draggingCard && cardDroppableZones) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
     });
 
     constructor(
@@ -311,6 +325,7 @@ export class ThyBoardEntryComponent implements OnInit {
                 )
                 .subscribe();
         }
+        this.changeDetectorRef.markForCheck();
     }
 
     scrollToOffset(payload: { position: 'top' | 'middle' | 'bottom'; scrollTop: number; laneHight: number }) {
