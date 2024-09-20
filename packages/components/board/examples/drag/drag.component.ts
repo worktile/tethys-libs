@@ -83,7 +83,8 @@ export class ThyProBoardDragExampleComponent implements OnInit {
                     });
                 });
                 return zones;
-            })
+            }),
+            delay(1000)
         );
     };
 }

@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     OnInit,
@@ -207,17 +208,20 @@ export class ThyBoardComponent implements OnInit {
      */
     thyCardDragStart = output<ThyBoardDragStartEvent>();
 
-    public cardDroppableZones: {
-        laneId?: string;
-        entryId: string;
-        droppableZones: ThyBoardZone[];
-    }[] = [];
+    public cardDroppableZones:
+        | {
+              laneId?: string;
+              entryId: string;
+              droppableZones: ThyBoardZone[];
+          }[]
+        | undefined;
 
     public draggingCard: CdkDrag<ThyBoardCard> | undefined;
 
     constructor(
         public elementRef: ElementRef,
-        public thyBoardService: ThyBoardService
+        public thyBoardService: ThyBoardService,
+        private changeDetectorRef: ChangeDetectorRef
     ) {
         effect(
             () => {
@@ -281,14 +285,16 @@ export class ThyBoardComponent implements OnInit {
                 .pipe()
                 .subscribe((data) => {
                     this.cardDroppableZones = data;
+                    this.changeDetectorRef.markForCheck();
                 });
         }
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
-        this.cardDroppableZones = [];
+        this.cardDroppableZones = undefined;
         this.draggingCard = undefined;
         const thyCardDropAction = this.thyCardDropAction();
+        this.changeDetectorRef.markForCheck();
         if (thyCardDropAction) {
             return thyCardDropAction(event);
         } else {
