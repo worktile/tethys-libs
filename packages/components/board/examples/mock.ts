@@ -3,19 +3,59 @@ import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
 export const entries: ThyBoardEntry[] = [
     {
         _id: '1',
-        name: '未开始'
+        name: '未开始',
+        droppableZones: [
+            {
+                _id: '1',
+                name: '未开始'
+            },
+            {
+                _id: '2',
+                name: '未排期'
+            }
+        ]
     },
     {
         _id: '2',
-        name: '进行中'
+        name: '进行中',
+        droppableZones: [
+            {
+                _id: '3',
+                name: '进行中'
+            },
+            {
+                _id: '4',
+                name: '处理中'
+            }
+        ]
     },
     {
         _id: '3',
-        name: '已完成'
+        name: '已完成',
+        droppableZones: [
+            {
+                _id: '5',
+                name: '已完成'
+            },
+            {
+                _id: '6',
+                name: '已解决'
+            }
+        ]
     },
     {
         _id: '4',
-        name: '已关闭'
+        name: '已关闭',
+        droppableZones: [
+            {
+                _id: '1',
+                name: '已关闭'
+            },
+            {
+                _id: '2',
+                name: '已归档'
+            }
+        ]
     }
 ];
 

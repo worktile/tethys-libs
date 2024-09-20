@@ -47,10 +47,13 @@
           [virtualScroll]="virtualScroll()"
           [entry]="entry"
           [lane]="lane()"
+          [laneHeight]="laneHeight"
           [cardTemplateRef]="cardTemplateRef()"
           [container]="container()"
           [defaultCardSize]="defaultCardSize()"
           [draggingCard]="draggingCard()"
+          [hasDroppableZones]="hasDroppableZones()"
+          [cardDroppableZones]="cardDroppableZones()"
           [movable]="movable()"
           [sortable]="sortable()"
           (cardDragStarted)="cardDragStarted.emit($event)"
@@ -61,7 +64,7 @@
           [bottomTemplateRef]="entryBottomTemplateRef()"
         ></thy-board-entry>
       } @else {
-        <div class="text-muted mx-5 text-truncate board-lane-collapsed">
+        <div class="text-muted text-truncate board-lane-collapsed">
           <span class="text-secondary mr-1">{{ entry.cards!.length }}</span
           >个{{ entry.name }}
         </div>
@@ -74,10 +77,13 @@
         [virtualScroll]="virtualScroll()"
         [entry]="entry"
         [lane]="lane()"
+        [laneHeight]="laneHeight"
         [cardTemplateRef]="cardTemplateRef()"
         [container]="container()"
         [defaultCardSize]="defaultCardSize()"
         [draggingCard]="draggingCard()"
+        [hasDroppableZones]="hasDroppableZones()"
+        [cardDroppableZones]="cardDroppableZones()"
         [movable]="movable()"
         [sortable]="sortable()"
         [cardDraggablePredicate]="cardDraggablePredicate()"

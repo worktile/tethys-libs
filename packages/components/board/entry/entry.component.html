@@ -2,9 +2,10 @@
   class="entry-body"
   #entryBody
   [ngStyle]="{
-    height: virtualScroll() && hasLane() ? entryBodyHeight + 'px' : '100%'
+    height: virtualScroll() && entryBodyHeight ? entryBodyHeight + 'px' : '100%'
   }"
   [ngClass]="{ 'entry-collapsed': !entry().expanded }"
+  [class.d-none]="hasDroppableZones() && !isDraggingList && showBackDropWhenDragging()"
 >
   <div class="entry-cards" [ngClass]="{ 'entry-cards-dragging': showBackDropWhenDragging() && !isDraggingList }">
     @if (topTemplateRef()) {
@@ -111,17 +112,48 @@
     }
   </div>
 </div>
-<div
-  class="entry-drop"
-  [class.flex-row]="!showBackDropWhenDragging()"
-  [class.invisible]="!showBackDropWhenDragging() || (showBackDropWhenDragging() && isDraggingList)"
-  [class.entry-states-dragging]="showBackDropWhenDragging() && !isDraggingList"
-  [class.invisible]="!showBackDropWhenDragging() || (showBackDropWhenDragging() && isDraggingList)"
-  [class.d-none]="showBackDropWhenDragging() && isDraggingList"
-  cdkDropList
-  [cdkDropListAutoScrollStep]="5"
-  thyDragDrop
-  [cdkDropListData]="{ entry: entry(), lane: lane(), cards: entry().cards, changeDetectorRef: changeDetectorRef }"
-  (cdkDropListDropped)="drop($event)"
-  [cdkDropListEnterPredicate]="dropListEnterPredicate"
-></div>
+@if (hasDroppableZones()) {
+  <div
+    class="entry-drop-zones"
+    [class.flex-row]="!showBackDropWhenDragging()"
+    [class.invisible]="!dropReady() || !showBackDropWhenDragging() || (showBackDropWhenDragging() && isDraggingList)"
+    [class.entry-dragging]="showBackDropWhenDragging() && !isDraggingList"
+    [class.d-none]="showBackDropWhenDragging() && isDraggingList"
+    [ngStyle]="{
+      height: entryDroppableZonesHeight ? entryDroppableZonesHeight + 'px' : '100%'
+    }"
+  >
+    @for (zone of cardDroppableZone(); track zone._id) {
+      <div
+        class="entry-drop-zone"
+        id="{{ zone._id }}"
+        cdkDropList
+        [cdkDropListAutoScrollStep]="5"
+        thyDragDrop
+        [cdkDropListData]="{ entry: entry(), lane: lane(), cards: entry().cards, changeDetectorRef: changeDetectorRef, zone: zone }"
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListEnterPredicate]="dropListEnterPredicate"
+      >
+        <span class="text-desc dragging-text-color">{{ zone?.name }}</span>
+      </div>
+    } @empty {
+      <div class="empty-zone">
+        <div class="empty-zone-tip">不能到达此列</div>
+      </div>
+    }
+  </div>
+} @else {
+  <div
+    class="entry-drop"
+    [class.flex-row]="!showBackDropWhenDragging()"
+    [class.invisible]="!showBackDropWhenDragging() || (showBackDropWhenDragging() && isDraggingList)"
+    [class.invisible]="!showBackDropWhenDragging() || (showBackDropWhenDragging() && isDraggingList)"
+    [class.d-none]="showBackDropWhenDragging() && isDraggingList"
+    cdkDropList
+    [cdkDropListAutoScrollStep]="5"
+    thyDragDrop
+    [cdkDropListData]="{ entry: entry(), lane: lane(), cards: entry().cards, changeDetectorRef: changeDetectorRef }"
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListEnterPredicate]="dropListEnterPredicate"
+  ></div>
+}

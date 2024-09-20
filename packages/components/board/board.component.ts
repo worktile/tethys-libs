@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     OnInit,
@@ -18,7 +19,8 @@ import {
     ThyBoardDragScopeType,
     ThyBoardDropActionEvent,
     ThyBoardDragStartEvent,
-    ThyBoardDragPredicateEvent
+    ThyBoardDragPredicateEvent,
+    ThyBoardZone
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
@@ -146,6 +148,20 @@ export class ThyBoardComponent implements OnInit {
     thyEntryCollapsible = input(false, { transform: booleanAttribute });
 
     /**
+     * 获取卡片可放置的区域
+     * @type
+     */
+    thyCardDroppableZonesAction = input<
+        (event: ThyBoardDragStartEvent) => Observable<
+            {
+                laneId?: string;
+                entryId: string;
+                droppableZones: ThyBoardZone[];
+            }[]
+        >
+    >();
+
+    /**
      * 判断是否允许卡片拖动
      * @type (event: ThyBoardDragPredicateEvent) => boolean
      */
@@ -192,11 +208,20 @@ export class ThyBoardComponent implements OnInit {
      */
     thyCardDragStart = output<ThyBoardDragStartEvent>();
 
+    public cardDroppableZones:
+        | {
+              laneId?: string;
+              entryId: string;
+              droppableZones: ThyBoardZone[];
+          }[]
+        | undefined;
+
     public draggingCard: CdkDrag<ThyBoardCard> | undefined;
 
     constructor(
         public elementRef: ElementRef,
-        public thyBoardService: ThyBoardService
+        public thyBoardService: ThyBoardService,
+        private changeDetectorRef: ChangeDetectorRef
     ) {
         effect(
             () => {
@@ -254,11 +279,22 @@ export class ThyBoardComponent implements OnInit {
     dragCardStarted(event: CdkDrag<ThyBoardCard>) {
         this.draggingCard = event;
         this.thyCardDragStart.emit({ card: event.data });
+        const thyCardDroppableZonesAction = this.thyCardDroppableZonesAction();
+        if (thyCardDroppableZonesAction) {
+            thyCardDroppableZonesAction({ card: event.data })
+                .pipe()
+                .subscribe((data) => {
+                    this.cardDroppableZones = data;
+                    this.changeDetectorRef.markForCheck();
+                });
+        }
     }
 
     dropListDropped = (event: ThyBoardDropActionEvent) => {
+        this.cardDroppableZones = undefined;
         this.draggingCard = undefined;
         const thyCardDropAction = this.thyCardDropAction();
+        this.changeDetectorRef.markForCheck();
         if (thyCardDropAction) {
             return thyCardDropAction(event);
         } else {

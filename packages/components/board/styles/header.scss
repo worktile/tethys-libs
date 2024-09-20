@@ -16,12 +16,13 @@
             align-items: center;
             width: 320px;
             min-width: 320px;
-            padding: 0 4px 0 20px;
+            padding: 0 20px;
             overflow: hidden;
             border-right: solid 1px variables.$gray-200;
             color: variables.$gray-800;
             .operator {
                 display: none;
+                margin-right: -12px;
             }
             &:hover {
                 .operator {
