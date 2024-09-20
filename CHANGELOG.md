@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.6](https://github.com/tethys-org/libs/compare/v18.0.5...v18.0.6) (2024-09-20)
+
+### Features
+
+- **components:** board support judging whether the card is draggable #TINFR-673 ([#117](https://github.com/tethys-org/libs/issues/117)) ([c1b8263](https://github.com/tethys-org/libs/commit/c1b82637ef8de99f57061427b16ea76eb96551db)), closes [#TINFR-673](https://github.com/tethys-org/libs/issues/TINFR-673)
+- **components:** drop to zone in board #TINFR-672 ([#118](https://github.com/tethys-org/libs/issues/118)) ([580a66e](https://github.com/tethys-org/libs/commit/580a66ec493a8a3f89509a359fe0926d18e5db8f)), closes [#TINFR-672](https://github.com/tethys-org/libs/issues/TINFR-672)
+
 ## [18.0.5](https://github.com/tethys-org/libs/compare/v18.0.2...v18.0.5) (2024-09-14)
 
 ### Bug Fixes
