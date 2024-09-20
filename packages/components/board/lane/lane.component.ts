@@ -101,7 +101,7 @@ export class ThyBoardLaneComponent implements OnInit {
      */
     cardDroppableZones = input<
         {
-            laneId: string;
+            laneId?: string;
             entryId: string;
             droppableZones: ThyBoardZone[];
         }[]
