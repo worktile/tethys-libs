@@ -89,6 +89,13 @@ export class ThyBoardComponent implements OnInit {
     thyLanes = input<ThyBoardLane[]>([]);
 
     /**
+     * 是否自动将未在任何泳道的数据归类到“未分组”泳道中
+     * @default true
+     * @type boolean
+     */
+    thyHasAutoEmptyLane = input(true, { transform: booleanAttribute });
+
+    /**
      * 栏列表
      * @type ThyBoardEntry[]
      */
@@ -254,6 +261,13 @@ export class ThyBoardComponent implements OnInit {
         effect(
             () => {
                 this.thyBoardService.setInnerEntryCollapsible(this.thyEntryCollapsible());
+            },
+            { allowSignalWrites: true }
+        );
+
+        effect(
+            () => {
+                this.thyBoardService.setHasAutoEmptyLane(this.thyHasAutoEmptyLane());
             },
             { allowSignalWrites: true }
         );

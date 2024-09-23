@@ -16,6 +16,8 @@ export class ThyBoardService {
 
     private innerEntryCollapsible: WritableSignal<boolean> = signal(false);
 
+    private hasAutoEmptyLane: WritableSignal<boolean> = signal(true);
+
     private emptyLane: WritableSignal<ThyBoardLane> = signal({
         _id: EMPTY_OBJECT_ID_STR,
         name: '未分组',
@@ -115,6 +117,10 @@ export class ThyBoardService {
         this.innerEntryCollapsible.set(state);
     }
 
+    public setHasAutoEmptyLane(state: boolean) {
+        this.hasAutoEmptyLane.set(state);
+    }
+
     private buildCardsMap(cards: ThyBoardCard[]): Record<string, ThyBoardCard[]> {
         const cardsMapByEntryId: Record<string, ThyBoardCard[]> = {};
 
@@ -169,7 +175,7 @@ export class ThyBoardService {
                 unGroup.cards = unGroup.cards?.concat(card);
             }
         });
-        lanes = unGroup.cards!.length > 0 ? [...lanes, unGroup] : [...lanes];
+        lanes = this.hasAutoEmptyLane() && unGroup.cards!.length > 0 ? [...lanes, unGroup] : [...lanes];
         return lanes.map((lane) => {
             if (!lane.cards) {
                 lane.cards = [];
