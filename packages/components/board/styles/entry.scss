@@ -92,7 +92,7 @@
         position: absolute;
         top: 1px;
         bottom: 1px;
-        left: -1px;
+        left: 0px;
         margin-top: -1px;
         width: calc(100% + 2px);
         height: 100%;
@@ -101,6 +101,7 @@
         border: dashed 1px variables.$gray-400;
         background: variables.$gray-80;
         z-index: 2;
+        
         &.entry-dragging {
             position: sticky;
             bottom: 0;
@@ -142,6 +143,9 @@
             background: variables.$gray-80;
             z-index: 2;
             margin-top: -1px;
+            &:first-child{
+                margin-top: 0px;
+            }
             &.cdk-drop-list-dragging {
                 background: rgba(variables.$primary, 0.1);
                 border-color: variables.$primary;
@@ -159,6 +163,8 @@
     .empty-zone {
         display: flex;
         height: calc(100%);
+        width: calc(100% - 2px);
+        margin: auto;
         background: variables.$gray-100;
         .empty-zone-tip {
             margin: auto;
