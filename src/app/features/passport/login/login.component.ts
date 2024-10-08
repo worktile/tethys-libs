@@ -48,7 +48,11 @@ export class PassportLoginComponent implements OnInit {
 
     @ViewChild('stepper', { static: true }) stepperComponent: ThyStepper = new ThyStepper();
 
-    constructor(public router: Router, protected authService: ThyAuthService, public globalStore: ThyGlobalStore) {}
+    constructor(
+        public router: Router,
+        protected authService: ThyAuthService,
+        public globalStore: ThyGlobalStore
+    ) {}
 
     ngOnInit(): void {}
 

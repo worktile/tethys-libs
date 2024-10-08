@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, 
 import { ActivatedRoute, Route, Router, Routes, RouterOutlet } from '@angular/router';
 import { ThyGlobalStore } from '@tethys/pro/core';
 import { filterEmptyRoutePath } from './utils';
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
@@ -15,7 +15,7 @@ import { ThyLayoutModule } from 'ngx-tethys/layout';
         class: 'thy-layout thy-layout--has-sidebar thy-pro-layout'
     },
     standalone: true,
-    imports: [ThyLayoutModule, ThyProSidebarComponent, ThyProHeaderComponent, RouterOutlet, NgIf, NgTemplateOutlet]
+    imports: [ThyLayoutModule, ThyProSidebarComponent, ThyProHeaderComponent, RouterOutlet, NgTemplateOutlet]
 })
 export class ThyProLayoutComponent implements OnInit {
     /**
@@ -69,7 +69,11 @@ export class ThyProLayoutComponent implements OnInit {
 
     public isCollapsed: boolean = false;
 
-    constructor(public globalStore: ThyGlobalStore, private router: Router, public route: ActivatedRoute) {
+    constructor(
+        public globalStore: ThyGlobalStore,
+        private router: Router,
+        public route: ActivatedRoute
+    ) {
         const routes = this.router.config[1] as Route;
         const filterRoutes = filterEmptyRoutePath(routes);
         if (routes.children?.length) {

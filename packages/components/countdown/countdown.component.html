@@ -1,10 +1,9 @@
-<ng-container *ngIf="seconds === 0; else progress">
+@if (seconds === 0) {
   <button [disabled]="disabled" thyButton="primary" thySize="sm" (click)="onClick()">
     {{ text }}
   </button>
-</ng-container>
-<ng-template #progress>
+} @else {
   <span class="countdown-progress"
     >已发送，<span class="text-primary">{{ seconds }}</span> 秒后重新获取</span
   >
-</ng-template>
+}

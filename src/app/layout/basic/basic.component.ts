@@ -12,7 +12,11 @@ import { ThyGlobalStore } from '@tethys/pro/core';
     }
 })
 export class BasicLayoutComponent implements OnInit {
-    constructor(public globalStore: ThyGlobalStore, protected tokenService: ThyTokenService, private router: Router) {}
+    constructor(
+        public globalStore: ThyGlobalStore,
+        protected tokenService: ThyTokenService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {}
 

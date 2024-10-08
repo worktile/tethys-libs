@@ -18,7 +18,9 @@
       <router-outlet></router-outlet>
     </thy-content>
     <thy-sidebar-footer>
-      <ng-container *ngIf="footerTemplate" [ngTemplateOutlet]="footerTemplate"></ng-container>
+      @if (footerTemplate) {
+        <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
+      }
     </thy-sidebar-footer>
   </thy-layout>
 </thy-layout>
