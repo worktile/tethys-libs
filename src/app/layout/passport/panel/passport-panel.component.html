@@ -1,5 +1,7 @@
 <div class="panel-title">{{ heading }}</div>
-<div class="panel-description text-muted" *ngIf="descriptionTemplateRef">
-  <ng-template [ngTemplateOutlet]="descriptionTemplateRef"></ng-template>
-</div>
+@if (descriptionTemplateRef) {
+  <div class="panel-description text-muted">
+    <ng-template [ngTemplateOutlet]="descriptionTemplateRef"></ng-template>
+  </div>
+}
 <ng-content></ng-content>

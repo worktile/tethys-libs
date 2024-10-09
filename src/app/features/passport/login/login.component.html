@@ -1,11 +1,11 @@
 <app-passport-panel heading="登录">
   <ng-template #description>
-    <ng-container *ngIf="stepper.selected === step1"
-      >通过帐号密码登录团队，或切换为 <a href="javascript:;" (click)="stepper.next()">手机验证码登录</a></ng-container
-    >
-    <ng-container *ngIf="stepper.selected === step2"
-      >通过手机验证码登录团队，或切换为 <a href="javascript:;" (click)="stepper.previous()">帐号密码登录</a></ng-container
-    >
+    @if (stepper.selected === step1) {
+      通过帐号密码登录团队，或切换为 <a href="javascript:;" (click)="stepper.next()">手机验证码登录</a>
+    }
+    @if (stepper.selected === step2) {
+      通过手机验证码登录团队，或切换为 <a href="javascript:;" (click)="stepper.previous()">帐号密码登录</a>
+    }
   </ng-template>
   <thy-stepper #stepper [thyShowStepHeader]="false">
     <thy-step #step1>
@@ -72,8 +72,8 @@
             <ng-template #append>
               <button [disabled]="!!form.controls.mobile.invalid" thyButton="primary" thySize="sm">获取验证码</button>
               <!-- <thy-countdown #countdown>
-                <span class="countdown-progress"
-                  >已发送，<span class="text-primary"> {{ countdown.value }} </span> 秒后重新获取</span
+              <span class="countdown-progress"
+                >已发送，<span class="text-primary"> {{ countdown.value }} </span> 秒后重新获取</span
                 >
               </thy-countdown> -->
             </ng-template>

@@ -13,7 +13,6 @@ import { ThyWidgetItem, WidgetGridsterItem, ThyWidgetVieOutletWithContext, ThyWi
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Observable, Subject, of } from 'rxjs';
 import { ThyViewOutletDirective } from 'ngx-tethys/shared';
-import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'thy-dashboard',
@@ -21,7 +20,7 @@ import { NgFor } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: { class: 'thy-dashboard' },
     standalone: true,
-    imports: [GridsterComponent, NgFor, GridsterItemComponent, ThyViewOutletDirective]
+    imports: [GridsterComponent, GridsterItemComponent, ThyViewOutletDirective]
 })
 export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     /**
@@ -85,7 +84,10 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
         }
     };
 
-    constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
+    constructor(
+        private cdr: ChangeDetectorRef,
+        private ngZone: NgZone
+    ) {}
 
     ngOnInit(): void {
         this.setDraggable(this.thyDraggable);

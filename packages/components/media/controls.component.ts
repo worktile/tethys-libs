@@ -1,4 +1,3 @@
-import { CommonModule, NgIf } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { useHostRenderer } from '@tethys/cdk/dom';
@@ -89,21 +88,20 @@ import { ThyMediaProgressComponent } from './progress.component';
         </thy-dropdown-menu>
 
         <thy-dropdown-menu #playbackRate>
-            <a
-                [class.active]="mediaHtmlElement?.playbackRate === item"
-                *ngFor="let item of playBackRates"
-                thyDropdownMenuItem
-                href="javascript:;"
-                (click)="playBackRateChange(item)"
-            >
-                <span>{{ item }}X</span>
-            </a>
+            @for (item of playBackRates; track $index) {
+                <a
+                    [class.active]="mediaHtmlElement?.playbackRate === item"
+                    thyDropdownMenuItem
+                    href="javascript:;"
+                    (click)="playBackRateChange(item)"
+                >
+                    <span>{{ item }}X</span>
+                </a>
+            }
         </thy-dropdown-menu>
     `,
     standalone: true,
     imports: [
-        NgIf,
-        CommonModule,
         FormsModule,
         ThyIconModule,
         ThyDropdownModule,
