@@ -16,7 +16,15 @@
       <!-- 开启虚拟滚动 -->
       @if (!hasLane()) {
         <!-- 单泳道 -->
-        <cdk-virtual-scroll-viewport autosize [minBufferPx]="500" [maxBufferPx]="1000" thyFlexItem="auto">
+        <cdk-virtual-scroll-viewport
+          entry
+          [minBufferPx]="500"
+          [maxBufferPx]="1000"
+          [cards]="entry().cards!"
+          [defaultCardSize]="defaultCardSize()"
+          (scrolledIndexChange)="scrolledIndexChange($event)"
+          thyFlexItem="auto"
+        >
           <div
             *cdkVirtualFor="let card of entry().cards; let i = index; trackBy: trackByFn"
             #card

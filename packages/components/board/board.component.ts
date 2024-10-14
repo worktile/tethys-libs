@@ -20,7 +20,8 @@ import {
     ThyBoardDropActionEvent,
     ThyBoardDragStartEvent,
     ThyBoardDragPredicateEvent,
-    ThyBoardZone
+    ThyBoardZone,
+    ThyBoardVirtualScrolledIndexChangeEvent
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
@@ -186,10 +187,10 @@ export class ThyBoardComponent implements OnInit {
      */
     thyCardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
-    // /**
-    //  * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
-    //  */
-    // thyVirtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
+    /**
+     * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
+     */
+    thyVirtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
 
     /**
      * 展开收起泳道事件

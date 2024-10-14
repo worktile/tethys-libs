@@ -43,6 +43,7 @@
         [cardDroppableZones]="cardDroppableZones"
         [entryTopTemplateRef]="entryTopTemplateRef()"
         [entryBottomTemplateRef]="entryBottomTemplateRef()"
+        (virtualScrolledIndexChange)="thyVirtualScrolledIndexChange.emit($event)"
       ></thy-board-lane>
     }
   } @else {
@@ -65,6 +66,7 @@
       [cardDroppableZones]="cardDroppableZones"
       [entryTopTemplateRef]="entryTopTemplateRef()"
       [entryBottomTemplateRef]="entryBottomTemplateRef()"
+      (virtualScrolledIndexChange)="thyVirtualScrolledIndexChange.emit($event)"
     ></thy-board-lane>
   }
 </div>
