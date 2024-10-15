@@ -7,6 +7,7 @@ import { ThyProBoardCustomTemplateExampleComponent } from './custom-template/cus
 import { ThyProBoardVirtualScrollExampleComponent } from './virtual-scroll/virtual-scroll.component';
 import { ThyProBoardMultiExampleComponent } from './multi/multi.component';
 import { ThyProBoardDragExampleComponent } from './drag/drag.component';
+import { ThyProBoardScrollLoadExampleComponent } from './scroll-load/scroll-load.component';
 
 export default {
     imports: [ThyProBoardModule, CommonModule],
@@ -16,6 +17,7 @@ export default {
         ThyProBoardSingleExampleComponent,
         ThyProBoardCustomTemplateExampleComponent,
         ThyProBoardVirtualScrollExampleComponent,
+        ThyProBoardScrollLoadExampleComponent,
         ThyProBoardMultiExampleComponent,
         ThyProBoardDragExampleComponent
     ]

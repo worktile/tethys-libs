@@ -30,7 +30,8 @@ import {
     ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane,
-    ThyBoardZone
+    ThyBoardZone,
+    ThyBoardVirtualScrolledIndexChangeEvent
 } from '../entities';
 import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
 import { CdkDrag, CdkDragDrop, CdkDragStart, CdkDropList, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -124,6 +125,8 @@ export class ThyBoardEntryComponent implements OnInit {
     cardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
     cardDragStarted = output<CdkDrag<ThyBoardCard>>();
+
+    virtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
 
     bottom = viewChild<ElementRef>('bottom');
 
@@ -246,7 +249,13 @@ export class ThyBoardEntryComponent implements OnInit {
         );
     }
 
-    scrolledIndexChange(event: number) {}
+    scrolledIndexChange(event: number) {
+        this.virtualScrolledIndexChange.emit({
+            renderedRange: this.currentViewport.getRenderedRange(),
+            entry: this.entry(),
+            lane: this.lane()!
+        });
+    }
 
     cdkDragStarted(event: CdkDragStart) {
         this.isDraggingList = true;

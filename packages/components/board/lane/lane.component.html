@@ -62,6 +62,7 @@
           [cardDropAction]="dropListDropped"
           [topTemplateRef]="entryTopTemplateRef()"
           [bottomTemplateRef]="entryBottomTemplateRef()"
+          (virtualScrolledIndexChange)="virtualScrolledIndexChange.emit($event)"
         ></thy-board-entry>
       } @else {
         <div class="text-muted text-truncate board-lane-collapsed">
@@ -92,6 +93,7 @@
         [cardDropAction]="dropListDropped"
         [topTemplateRef]="entryTopTemplateRef()"
         [bottomTemplateRef]="entryBottomTemplateRef()"
+        (virtualScrolledIndexChange)="virtualScrolledIndexChange.emit($event)"
       >
       </thy-board-entry>
     }
