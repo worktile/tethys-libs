@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.8](https://github.com/tethys-org/libs/compare/v18.0.5...v18.0.8) (2024-10-15)
+
+### Features
+
+- **components:** 支持参数控制是否展示未分组泳道 #TINFR-711 ([#120](https://github.com/tethys-org/libs/issues/120)) ([cf0591e](https://github.com/tethys-org/libs/commit/cf0591efbf16c0bea252ee4e3f38754e47d4dcee)), closes [#TINFR-711](https://github.com/tethys-org/libs/issues/TINFR-711)
+- **components:** board support judging whether the card is draggable #TINFR-673 ([#117](https://github.com/tethys-org/libs/issues/117)) ([c1b8263](https://github.com/tethys-org/libs/commit/c1b82637ef8de99f57061427b16ea76eb96551db)), closes [#TINFR-673](https://github.com/tethys-org/libs/issues/TINFR-673)
+- **components:** board support load data when virtual scroll #PJM-20893 ([429508d](https://github.com/tethys-org/libs/commit/429508ddb8e96f7f3b732e97d763361702d6929d)), closes [#PJM-20893](https://github.com/tethys-org/libs/issues/PJM-20893)
+- **components:** board support top and bottom template when thyVirtualScroll is true #PJM-20894 ([#124](https://github.com/tethys-org/libs/issues/124)) ([13eb297](https://github.com/tethys-org/libs/commit/13eb2971f4db41caef0acb617d3d85e2ff141cfa)), closes [#PJM-20894](https://github.com/tethys-org/libs/issues/PJM-20894)
+- **components:** drop to zone in board #TINFR-672 ([#118](https://github.com/tethys-org/libs/issues/118)) ([580a66e](https://github.com/tethys-org/libs/commit/580a66ec493a8a3f89509a359fe0926d18e5db8f)), closes [#TINFR-672](https://github.com/tethys-org/libs/issues/TINFR-672)
+
 ## [18.0.7](https://github.com/tethys-org/libs/compare/v18.0.5...v18.0.7) (2024-09-23)
 
 ### Features
