@@ -18,9 +18,15 @@ export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
 
     lanes: ThyBoardLane[] = [...lanes];
 
+    bottomHeights: Record<string, { top: number; bottom: number }> = {};
+
     constructor() {}
 
     ngOnInit(): void {
+        entries.forEach((entry) => {
+            this.bottomHeights[entry._id] = { top: 22, bottom: 22 };
+        });
+
         setTimeout(() => {
             this.items = [
                 ...this.items,
@@ -32,5 +38,13 @@ export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
                 }
             ];
         }, 2000);
+    }
+
+    clickBottom(entry: ThyBoardEntry) {
+        this.bottomHeights[entry._id].bottom = this.bottomHeights[entry._id].bottom === 22 ? 100 : 22;
+    }
+
+    clickTop(entry: ThyBoardEntry) {
+        this.bottomHeights[entry._id].top = this.bottomHeights[entry._id].top === 22 ? 100 : 22;
     }
 }

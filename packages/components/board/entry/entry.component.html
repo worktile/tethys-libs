@@ -9,7 +9,9 @@
 >
   <div class="entry-cards" [ngClass]="{ 'entry-cards-dragging': showBackDropWhenDragging() && !isDraggingList }">
     @if (topTemplateRef()) {
-      <ng-template [ngTemplateOutlet]="topTemplateRef()!" [ngTemplateOutletContext]="{ entry: entry(), lane: lane() }"></ng-template>
+      <div #top>
+        <ng-template [ngTemplateOutlet]="topTemplateRef()!" [ngTemplateOutletContext]="{ entry: entry(), lane: lane() }"></ng-template>
+      </div>
     }
 
     @if (virtualScroll()) {
@@ -116,7 +118,9 @@
       }
     }
     @if (bottomTemplateRef()) {
-      <ng-template [ngTemplateOutlet]="bottomTemplateRef()!" [ngTemplateOutletContext]="{ entry: entry(), lane: lane() }"></ng-template>
+      <div #bottom>
+        <ng-template [ngTemplateOutlet]="bottomTemplateRef()!" [ngTemplateOutletContext]="{ entry: entry(), lane: lane() }"></ng-template>
+      </div>
     }
   </div>
 </div>

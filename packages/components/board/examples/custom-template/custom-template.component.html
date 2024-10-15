@@ -1,10 +1,60 @@
+<div class="p-2">单泳道</div>
 <div class="thy-pro-board-basic-example-container">
   <thy-board
     [thyEntries]="entries"
     [thyCards]="items"
     [thyLanes]="lanes"
-    [thyShowLane]="lanes.length > 1"
+    [thyShowLane]="false"
+    [thyVirtualScroll]="true"
     [thyAllLanesExpanded]="false"
+    [thyEntryCollapsible]="true"
+  >
+    <ng-template #header let-entry="">
+      @if (entry) {
+        <span>自定义栏 header【{{ entry.name }} 】</span>
+      } @else {
+        <span>需求</span>
+      }
+    </ng-template>
+
+    <ng-template #card let-item="">
+      <div class="card-container">
+        <div class="card-content-row-title">
+          <span>{{ item.title }}</span>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #entryTop let-entry="entry" let-lane="lane">
+      <div [style.height.px]="bottomHeights[entry._id].top" (click)="clickTop(entry)">
+        栏的顶部《
+        @if (lane) {
+          泳道：{{ lane.name }}；
+        }
+        栏：{{ entry.name }}》
+      </div>
+    </ng-template>
+
+    <ng-template #entryBottom let-entry="entry" let-lane="lane">
+      <div [style.height.px]="bottomHeights[entry._id].bottom" (click)="clickBottom(entry)">
+        栏的底部《
+        @if (lane) {
+          泳道：{{ lane.name }}；
+        }
+        栏：{{ entry.name }}》
+      </div>
+    </ng-template>
+  </thy-board>
+</div>
+
+<div class="p-2 mt-2">多泳道</div>
+<div class="thy-pro-board-basic-example-container">
+  <thy-board
+    [thyEntries]="entries"
+    [thyCards]="items"
+    [thyLanes]="lanes"
+    [thyShowLane]="true"
+    [thyVirtualScroll]="true"
     [thyEntryCollapsible]="true"
   >
     <ng-template #lane let-lane="" let-isExpanded="isExpanded">
@@ -32,11 +82,23 @@
     </ng-template>
 
     <ng-template #entryTop let-entry="entry" let-lane="lane">
-      <div>栏的顶部：泳道：{{ lane.name }}；栏：{{ entry.name }}</div>
+      <div [style.height.px]="bottomHeights[entry._id].top" (click)="clickTop(entry)">
+        栏的顶部《
+        @if (lane) {
+          泳道：{{ lane.name }}；
+        }
+        栏：{{ entry.name }}》
+      </div>
     </ng-template>
 
     <ng-template #entryBottom let-entry="entry" let-lane="lane">
-      <div>栏的底部：泳道：{{ lane.name }}；栏：{{ entry.name }}</div>
+      <div [style.height.px]="bottomHeights[entry._id].bottom" (click)="clickBottom(entry)">
+        栏的底部《
+        @if (lane) {
+          泳道：{{ lane.name }}；
+        }
+        ；栏：{{ entry.name }}》
+      </div>
     </ng-template>
   </thy-board>
 </div>
