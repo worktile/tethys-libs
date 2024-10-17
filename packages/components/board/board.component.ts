@@ -31,6 +31,7 @@ import { ThyBoardService } from './board.service';
 import { CdkDrag, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
 import { SafeAny } from 'ngx-tethys/types';
+import { ThyBoardSkeletonComponent } from './skeleton/skeleton.component';
 
 @Component({
     selector: 'thy-board',
@@ -43,7 +44,8 @@ import { SafeAny } from 'ngx-tethys/types';
         ThyBoardHeaderComponent,
         ThyBoardLaneComponent,
         ThyBoardEntryComponent,
-        ThyBoardBodyScrollableDirective
+        ThyBoardBodyScrollableDirective,
+        ThyBoardSkeletonComponent
     ],
     host: {
         class: 'thy-board-container'

@@ -379,19 +379,31 @@ export class ThyBoardEntryComponent implements OnInit {
         if (payload.position) {
             if (payload.position === 'bottom') {
                 this.currentViewport.scrollTo({ bottom: 0 });
-                if (payload.laneHight - payload.scrollTop > this.entryBodyHeight) {
+                if (
+                    this.entryVirtualScroll.scrollStrategy.entrySpacer() > 0 &&
+                    payload.laneHight - payload.scrollTop > this.entryBodyHeight
+                ) {
                     const offset = -(payload.scrollTop + this.entryBodyHeight - realHeight);
                     const renderedContentTransform = `translateY(${Number(offset)}px)`;
                     this.entryBody.nativeElement.style.transform = renderedContentTransform;
                 }
             } else {
-                if (payload.scrollTop > this.entryVirtualScroll.scrollStrategy.entrySpacer() - this.entryBodyHeight) {
+                if (
+                    payload.scrollTop > 0 &&
+                    payload.scrollTop > this.entryVirtualScroll.scrollStrategy.entrySpacer() - this.entryBodyHeight
+                ) {
                     this.currentViewport.scrollTo({ bottom: 0 });
 
-                    if (payload.laneHight - payload.scrollTop > this.entryBodyHeight) {
+                    if (
+                        payload.scrollTop > 0 &&
+                        payload.scrollTop < this.entryVirtualScroll.scrollStrategy.entrySpacer() &&
+                        payload.laneHight - payload.scrollTop > this.entryBodyHeight
+                    ) {
                         const offset = -(payload.scrollTop + this.entryBodyHeight - realHeight);
                         const renderedContentTransform = `translateY(${Number(offset)}px)`;
                         this.entryBody.nativeElement.style.transform = renderedContentTransform;
+                    } else if (payload.scrollTop === 0) {
+                        this.entryBody.nativeElement.style.transform = '';
                     }
                 } else {
                     if (!!this.entryBody.nativeElement.style.transform) {

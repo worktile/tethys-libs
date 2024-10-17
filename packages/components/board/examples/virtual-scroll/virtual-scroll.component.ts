@@ -38,7 +38,8 @@ export class ThyProBoardVirtualScrollExampleComponent implements OnInit {
                     _id: 'add',
                     title: '项目add',
                     laneIds: ['1'],
-                    entryIds: ['3']
+                    entryIds: ['3'],
+                    height: Math.floor(Math.random() * 100 + 100)
                 }
             ];
         }, 2000);
