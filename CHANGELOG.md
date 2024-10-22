@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.9](https://github.com/tethys-org/libs/compare/v18.0.8...v18.0.9) (2024-10-22)
+
+### Features
+
+- **components:** add fullscreen toggle functionality to video controls #TINFR-822 ([#128](https://github.com/tethys-org/libs/issues/128)) ([29c10e7](https://github.com/tethys-org/libs/commit/29c10e78595d6a78ab109284ea14977841a1d7e2)), closes [#TINFR-822](https://github.com/tethys-org/libs/issues/TINFR-822)
+- **components:** defer lane in board #TINFR-799 ([#127](https://github.com/tethys-org/libs/issues/127)) ([42e6b3e](https://github.com/tethys-org/libs/commit/42e6b3e889399de0a9f12ac04a87777e7f319042)), closes [#TINFR-799](https://github.com/tethys-org/libs/issues/TINFR-799)
+
 ## [18.0.8](https://github.com/tethys-org/libs/compare/v18.0.5...v18.0.8) (2024-10-15)
 
 ### Features
