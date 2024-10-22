@@ -22,7 +22,8 @@ import {
     ThyBoardDragScopeType,
     ThyBoardCard,
     ThyBoardDropActionEvent,
-    ThyBoardZone
+    ThyBoardZone,
+    ThyBoardVirtualScrolledIndexChangeEvent
 } from '../entities';
 import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
@@ -118,6 +119,8 @@ export class ThyBoardLaneComponent implements OnInit {
      * 展开收起泳道事件
      */
     expandLane = output<{ lane: ThyBoardLane; expanded: boolean }>();
+
+    virtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
 
     constructor() {
         effect(() => {

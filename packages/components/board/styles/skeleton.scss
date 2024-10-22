@@ -1,0 +1,14 @@
+.thy-board-skeleton {
+    height: 255px;
+    .thy-skeleton-rectangle {
+        & + .thy-skeleton-rectangle {
+            margin-top: 8px;
+        }
+    }
+    .board-body {
+        .thy-skeleton-rectangle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

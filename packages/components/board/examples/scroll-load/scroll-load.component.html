@@ -10,9 +10,10 @@
     (thyCardDragStart)="thyDragStart($event)"
     [thyCardDropEnterPredicate]="thyDropEnterPredicate"
     [thyCardDropAction]="thyDropAction"
+    (thyVirtualScrolledIndexChange)="thyVirtualScrolledIndexChange($event)"
   >
     <ng-template #card let-item="">
-      <div class="card-container" [style.height.px]="item?.height">
+      <div class="card-container" [style.height.px]="item.height">
         <div class="card-content-row-title">
           <span>{{ item.title }}</span>
         </div>
@@ -33,9 +34,10 @@
     (thyCardDragStart)="thyDragStart($event)"
     [thyCardDropEnterPredicate]="thyDropEnterPredicate"
     [thyCardDropAction]="thyDropAction"
+    (thyVirtualScrolledIndexChange)="thyVirtualScrolledIndexChange($event)"
   >
     <ng-template #card let-item="">
-      <div class="card-container" [style.height.px]="item?.height">
+      <div class="card-container" [style.height.px]="item.height">
         <div class="card-content-row-title">
           <span>{{ item.title }}</span>
         </div>

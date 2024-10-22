@@ -1,6 +1,6 @@
 import { OnInit, Component, Input, ContentChild, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { ThySharedModule } from 'ngx-tethys/shared';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'thy-dashboard-widget-header',
@@ -8,7 +8,7 @@ import { NgClass, NgIf } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: { class: 'thy-dashboard-widget-header' },
     standalone: true,
-    imports: [NgClass, ThySharedModule, NgIf]
+    imports: [NgClass, ThySharedModule]
 })
 export class ThyDashboardWidgetHeaderComponent implements OnInit {
     @Input() thyTitle!: string | TemplateRef<any>;

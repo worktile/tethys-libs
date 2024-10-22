@@ -43,9 +43,9 @@ export interface ThyBoardCard {
 export interface ThyBoardVirtualScrolledIndexChangeEvent {
     renderedRange: ListRange;
     entry: ThyBoardEntry;
-    lane: ThyBoardLane;
-    nextLane: ThyBoardLane;
-    expandedLanes: ThyBoardLane[];
+    lane?: ThyBoardLane;
+    nextLane?: ThyBoardLane;
+    expandedLanes?: ThyBoardLane[];
 }
 
 export interface ThyBoardZone {

@@ -1,5 +1,4 @@
-import { CommonModule, NgIf } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, inject, InjectionToken, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { ThyActionModule } from 'ngx-tethys/action';
@@ -10,6 +9,7 @@ import { ThySliderType } from 'ngx-tethys/slider';
 import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'thy-video-controls',
@@ -60,6 +60,10 @@ import { ThyMediaProgressComponent } from './progress.component';
                     <thy-icon [thyIconName]="mediaHtmlElement?.muted ? 'muted' : 'volume'"></thy-icon>
                 </a>
 
+                <a class="mr-2" thyAction href="javascript:;" (click)="toggleFullscreen()">
+                    <thy-icon [thyIconName]="'arrows-alt'"></thy-icon>
+                </a>
+
                 <a
                     thyAction
                     [thyDropdown]="playbackRate"
@@ -89,21 +93,20 @@ import { ThyMediaProgressComponent } from './progress.component';
         </thy-dropdown-menu>
 
         <thy-dropdown-menu #playbackRate>
-            <a
-                [class.active]="mediaHtmlElement?.playbackRate === item"
-                *ngFor="let item of playBackRates"
-                thyDropdownMenuItem
-                href="javascript:;"
-                (click)="playBackRateChange(item)"
-            >
-                <span>{{ item }}X</span>
-            </a>
+            @for (item of playBackRates; track $index) {
+                <a
+                    [class.active]="mediaHtmlElement?.playbackRate === item"
+                    thyDropdownMenuItem
+                    href="javascript:;"
+                    (click)="playBackRateChange(item)"
+                >
+                    <span>{{ item }}X</span>
+                </a>
+            }
         </thy-dropdown-menu>
     `,
     standalone: true,
     imports: [
-        NgIf,
-        CommonModule,
         FormsModule,
         ThyIconModule,
         ThyDropdownModule,
@@ -151,6 +154,12 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     playBackRates = DEFAULT_PLAYBACK_RATES;
 
     placement = 'topCenter' as any;
+
+    get isFullscreen() {
+        return this.document?.fullscreen && this.document?.fullscreenElement === this.mediaHtmlElement;
+    }
+
+    private document: any = inject(DOCUMENT);
 
     constructor(private cdr: ChangeDetectorRef) {
         super();
@@ -289,6 +298,31 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
             this.mediaHtmlElement.volume = this.mediaHtmlElement.muted ? this.tempVolume : 0;
             this.mediaHtmlElement.muted = !this.mediaHtmlElement.muted;
             this.cdr.markForCheck();
+        }
+    }
+
+    toggleFullscreen() {
+        const mediaElement = this.mediaHtmlElement as any;
+        if (!this.isFullscreen) {
+            if (mediaElement.requestFullscreen) {
+                mediaElement.requestFullscreen();
+            } else if (mediaElement.mozRequestFullScreen) {
+                mediaElement.mozRequestFullScreen();
+            } else if (mediaElement.webkitRequestFullscreen) {
+                mediaElement.webkitRequestFullscreen();
+            } else if (mediaElement.msRequestFullscreen) {
+                mediaElement.msRequestFullscreen();
+            }
+        } else {
+            if (this.document['mozCancelFullScreen']) {
+                this.document.mozCancelFullScreen();
+            } else if (this.document.webkitExitFullscreen) {
+                this.document.webkitExitFullscreen();
+            } else if (this.document.msExitFullscreen) {
+                this.document.msExitFullscreen();
+            } else {
+                this.document?.exitFullscreen();
+            }
         }
     }
 

@@ -37,12 +37,12 @@
   <div class="preview-container">
     预览
     <div class="text-center">
-      <ng-container *ngIf="previewSizes && previewSizes?.length">
-        <ng-container *ngFor="let size of previewSizes">
+      @if (previewSizes && previewSizes?.length) {
+        @for (size of previewSizes; track $index) {
           <div class="preview-image-warp" [ngStyle]="size | thyCropperSizeStyle"></div>
           <div class="preview-image-size">{{ size | thyCropperSizeText }}</div>
-        </ng-container>
-      </ng-container>
+        }
+      }
     </div>
   </div>
 </thy-dialog-body>

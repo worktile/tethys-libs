@@ -6,16 +6,19 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    NgZone,
     OnInit,
     Renderer2,
     TemplateRef,
     ViewChild,
+    afterNextRender,
     booleanAttribute,
     computed,
     effect,
     input,
     numberAttribute,
-    output
+    output,
+    viewChild
 } from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyFlexItem } from 'ngx-tethys/grid';
@@ -27,13 +30,15 @@ import {
     ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane,
-    ThyBoardZone
+    ThyBoardZone,
+    ThyBoardVirtualScrolledIndexChangeEvent
 } from '../entities';
 import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
 import { CdkDrag, CdkDragDrop, CdkDragStart, CdkDropList, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ThyDragDropDirective } from 'ngx-tethys/shared';
-import { Observable, tap } from 'rxjs';
+import { combineLatest, Observable, tap } from 'rxjs';
 import { ThyBoardFuncPipe } from '../board.pipe';
+import { SharedResizeObserver } from '@angular/cdk/observers/private';
 
 @Component({
     selector: 'thy-board-entry',
@@ -121,6 +126,12 @@ export class ThyBoardEntryComponent implements OnInit {
 
     cardDragStarted = output<CdkDrag<ThyBoardCard>>();
 
+    virtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
+
+    bottom = viewChild<ElementRef>('bottom');
+
+    top = viewChild<ElementRef>('top');
+
     public entryBodyHeight = 0;
 
     public entryDroppableZonesHeight = 0;
@@ -146,15 +157,17 @@ export class ThyBoardEntryComponent implements OnInit {
 
     cardDroppableZone = computed(() => {
         const cardDroppableZones = this.cardDroppableZones();
-        const entry = this.entry();
-        const draggingCard = this.draggingCard();
         const hasDroppableZones = this.hasDroppableZones();
         if (hasDroppableZones) {
+            const entry = this.entry();
+            const draggingCard = this.draggingCard();
             if (draggingCard && cardDroppableZones) {
                 return this.hasLane()
-                    ? cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id && zone.laneId === this.lane()?._id)
-                          ?.droppableZones || null
-                    : cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id)?.droppableZones || null;
+                    ? (cardDroppableZones &&
+                          cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id && zone.laneId === this.lane()?._id)
+                              ?.droppableZones) ||
+                          null
+                    : (cardDroppableZones && cardDroppableZones?.find((zone) => zone.entryId === this.entry()._id)?.droppableZones) || null;
             } else {
                 return entry.droppableZones || [];
             }
@@ -179,10 +192,26 @@ export class ThyBoardEntryComponent implements OnInit {
     constructor(
         private renderer: Renderer2,
         public changeDetectorRef: ChangeDetectorRef,
-        private elementRef: ElementRef
+        private elementRef: ElementRef,
+        private sharedResizeObserver: SharedResizeObserver,
+        private ngZone: NgZone
     ) {
         effect(() => {
             this.setBodyHeight();
+        });
+
+        afterNextRender(() => {
+            if (this.hasLane() && (this.bottom() || this.top())) {
+                // 修正虚拟滚动区域高度
+                this.ngZone.runOutsideAngular(() => {
+                    combineLatest([
+                        this.sharedResizeObserver.observe(this.bottom()!.nativeElement, { box: 'border-box' }),
+                        this.sharedResizeObserver.observe(this.top()!.nativeElement, { box: 'border-box' })
+                    ]).subscribe(() => {
+                        this.setBodyHeight();
+                    });
+                });
+            }
         });
     }
 
@@ -192,12 +221,14 @@ export class ThyBoardEntryComponent implements OnInit {
         const virtualScroll = this.virtualScroll();
         const containerHeight = this.container()?.clientHeight;
         const laneHeight = this.laneHeight();
+        const bottom = this.bottom();
+        const top = this.top();
 
         if (this.hasLane()) {
             if (virtualScroll) {
-                const entrySpacer = this.entryVirtualScroll?.scrollStrategy?.entrySpacer();
+                const realHeight = this.getRealHeight();
                 if (this.entryVirtualScroll) {
-                    this.entryBodyHeight = Math.min(containerHeight, entrySpacer);
+                    this.entryBodyHeight = Math.min(containerHeight, realHeight);
                 } else {
                     this.entryBodyHeight = containerHeight;
                 }
@@ -206,10 +237,25 @@ export class ThyBoardEntryComponent implements OnInit {
                 this.entryBodyHeight = containerHeight;
                 this.entryDroppableZonesHeight = Math.min(this.elementRef.nativeElement.parentElement.clientHeight, containerHeight);
             }
+            this.changeDetectorRef.markForCheck();
         }
     }
 
-    scrolledIndexChange(event: number) {}
+    private getRealHeight() {
+        return (
+            this.entryVirtualScroll?.scrollStrategy?.entrySpacer() +
+            (this.bottom()?.nativeElement?.clientHeight || 0) +
+            (this.top()?.nativeElement?.clientHeight || 0)
+        );
+    }
+
+    scrolledIndexChange(event: number) {
+        this.virtualScrolledIndexChange.emit({
+            renderedRange: this.currentViewport.getRenderedRange(),
+            entry: this.entry(),
+            lane: this.lane()!
+        });
+    }
 
     cdkDragStarted(event: CdkDragStart) {
         this.isDraggingList = true;
@@ -328,19 +374,36 @@ export class ThyBoardEntryComponent implements OnInit {
     }
 
     scrollToOffset(payload: { position: 'top' | 'middle' | 'bottom'; scrollTop: number; laneHight: number }) {
-        const realHeight = this.entryVirtualScroll.scrollStrategy.entrySpacer();
+        const realHeight = this.getRealHeight();
 
         if (payload.position) {
             if (payload.position === 'bottom') {
                 this.currentViewport.scrollTo({ bottom: 0 });
+                if (
+                    this.entryVirtualScroll.scrollStrategy.entrySpacer() > 0 &&
+                    payload.laneHight - payload.scrollTop > this.entryBodyHeight
+                ) {
+                    const offset = -(payload.scrollTop + this.entryBodyHeight - realHeight);
+                    const renderedContentTransform = `translateY(${Number(offset)}px)`;
+                    this.entryBody.nativeElement.style.transform = renderedContentTransform;
+                }
             } else {
-                if (payload.scrollTop > this.entryVirtualScroll.scrollStrategy.entrySpacer() - this.entryBodyHeight) {
+                if (
+                    payload.scrollTop > 0 &&
+                    payload.scrollTop > this.entryVirtualScroll.scrollStrategy.entrySpacer() - this.entryBodyHeight
+                ) {
                     this.currentViewport.scrollTo({ bottom: 0 });
 
-                    if (payload.laneHight - payload.scrollTop > this.entryBodyHeight) {
+                    if (
+                        payload.scrollTop > 0 &&
+                        payload.scrollTop < this.entryVirtualScroll.scrollStrategy.entrySpacer() &&
+                        payload.laneHight - payload.scrollTop > this.entryBodyHeight
+                    ) {
                         const offset = -(payload.scrollTop + this.entryBodyHeight - realHeight);
                         const renderedContentTransform = `translateY(${Number(offset)}px)`;
                         this.entryBody.nativeElement.style.transform = renderedContentTransform;
+                    } else if (payload.scrollTop === 0) {
+                        this.entryBody.nativeElement.style.transform = '';
                     }
                 } else {
                     if (!!this.entryBody.nativeElement.style.transform) {

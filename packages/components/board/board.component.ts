@@ -20,7 +20,8 @@ import {
     ThyBoardDropActionEvent,
     ThyBoardDragStartEvent,
     ThyBoardDragPredicateEvent,
-    ThyBoardZone
+    ThyBoardZone,
+    ThyBoardVirtualScrolledIndexChangeEvent
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
@@ -30,6 +31,7 @@ import { ThyBoardService } from './board.service';
 import { CdkDrag, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
 import { SafeAny } from 'ngx-tethys/types';
+import { ThyBoardSkeletonComponent } from './skeleton/skeleton.component';
 
 @Component({
     selector: 'thy-board',
@@ -42,7 +44,8 @@ import { SafeAny } from 'ngx-tethys/types';
         ThyBoardHeaderComponent,
         ThyBoardLaneComponent,
         ThyBoardEntryComponent,
-        ThyBoardBodyScrollableDirective
+        ThyBoardBodyScrollableDirective,
+        ThyBoardSkeletonComponent
     ],
     host: {
         class: 'thy-board-container'
@@ -186,10 +189,10 @@ export class ThyBoardComponent implements OnInit {
      */
     thyCardDropAction = input<(event: ThyBoardDropActionEvent) => Observable<boolean>>();
 
-    // /**
-    //  * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
-    //  */
-    // thyVirtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
+    /**
+     * 开启虚拟滚动后，滚动后触发时间，可用于加载数据
+     */
+    thyVirtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
 
     /**
      * 展开收起泳道事件

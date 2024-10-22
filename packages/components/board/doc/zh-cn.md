@@ -1,7 +1,7 @@
 ---
 title: Board
 subtitle: 看板
-order: 60
+order: 70
 ---
 
 <alert>看板。</alert>

@@ -1,0 +1,28 @@
+@if (hasLane()) {
+  <div class="board-lane-header-container d-flex">
+    <div class="board-lane-header">
+      <div class="d-flex justify-content-between text-secondary flex-grow-1 type-container">
+        <div class="header-box align-items-center">
+          <thy-skeleton-rectangle thyRowWidth="100px" thyRowHeight="20px" thyBorderRadius="4px"></thy-skeleton-rectangle>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<div class="board-lane-body" [class.board-no-lane-body]="!hasLane()">
+  @for (entry of entries(); track entry._id) {
+    <div class="thy-entry-container board-lane-body-entry">
+      <div class="entry-body">
+        <div class="entry-cards">
+          <div class="entry-card">
+            <thy-skeleton-rectangle thyRowWidth="304px" thyRowHeight="115px" thyBorderRadius="4px"></thy-skeleton-rectangle>
+          </div>
+          <div class="entry-card">
+            <thy-skeleton-rectangle thyRowWidth="304px" thyRowHeight="115px" thyBorderRadius="4px"></thy-skeleton-rectangle>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

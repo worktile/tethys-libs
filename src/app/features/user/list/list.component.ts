@@ -13,7 +13,10 @@ import { UserListStore } from './user-list.store';
 export class UserListComponent implements OnInit {
     public searchText: string = '';
 
-    constructor(public userListStore: UserListStore, private dialog: ThyDialog) {}
+    constructor(
+        public userListStore: UserListStore,
+        private dialog: ThyDialog
+    ) {}
 
     ngOnInit(): void {
         this.userListStore.fetchUsers();

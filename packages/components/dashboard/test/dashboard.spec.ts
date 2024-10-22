@@ -33,7 +33,7 @@ export class ThyDashboardBasicTestComponent {
             minSize: { cols: 5, rows: 3 }
         },
         {
-            _id: '63c0d6f08e1cc40c3e41ad30',
+            _id: '63c0d6f08e1cc40c3e41ad31',
             name: '链接',
             type: 'links',
             size: {

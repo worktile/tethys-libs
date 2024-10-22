@@ -11,8 +11,10 @@
     <span class="title-name ml-1">{{ (title$ | async)?.data?.title }}</span>
   </ng-template>
   <ng-template #headerOperation>
-    <ng-container *ngIf="headerRightContentTemplate" [ngTemplateOutlet]="headerRightContentTemplate"></ng-container>
-    <ng-container *ngIf="!headerRightContentTemplate">
+    @if (headerRightContentTemplate) {
+      <ng-container [ngTemplateOutlet]="headerRightContentTemplate"></ng-container>
+    }
+    @if (!headerRightContentTemplate) {
       <thy-actions thySize="xs">
         <a href="javascript:;" thyTooltip="通知" thyAction thyIcon="bell"></a>
         <a href="javascript:;" thyTooltip="帮助" thyAction>
@@ -23,6 +25,6 @@
         </a>
       </thy-actions>
       <!-- <thy-avatar class="current-user" [thyName]="globalStore.user.name" thySize="sm" [thySrc]="globalStore.user.name"> </thy-avatar> -->
-    </ng-container>
+    }
   </ng-template>
 </thy-header>
