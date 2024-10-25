@@ -277,6 +277,41 @@ export const items: ThyBoardCard[] = [
         entryIds: ['1'],
         height: Math.floor(Math.random() * 100 + 100)
     },
+    {
+        _id: '32',
+        title: '项目32',
+        laneIds: ['1'],
+        entryIds: ['1'],
+        height: Math.floor(Math.random() * 100 + 100)
+    },
+    {
+        _id: '33',
+        title: '项目33',
+        laneIds: ['1'],
+        entryIds: ['1'],
+        height: Math.floor(Math.random() * 100 + 100)
+    },
+    {
+        _id: '34',
+        title: '项目34',
+        laneIds: ['1'],
+        entryIds: ['1'],
+        height: Math.floor(Math.random() * 100 + 100)
+    },
+    {
+        _id: '35',
+        title: '项目35',
+        laneIds: ['1'],
+        entryIds: ['1'],
+        height: Math.floor(Math.random() * 100 + 100)
+    },
+    {
+        _id: '36',
+        title: '项目36',
+        laneIds: ['1'],
+        entryIds: ['1'],
+        height: Math.floor(Math.random() * 100 + 100)
+    },
 ];
 
 export const lanes: ThyBoardLane[] = [

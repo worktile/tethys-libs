@@ -1,0 +1,48 @@
+<div class="p-2">单泳道</div>
+<div class="thy-pro-board-basic-example-container">
+  <thy-board
+    [thyEntries]="entries"
+    [thyCards]="items"
+    [thyLanes]="lanes"
+    [thyShowLane]="false"
+    [thyVirtualScroll]="false"
+    [thyAllLanesExpanded]="false"
+    [thyEntryCollapsible]="true"
+    [thySortable]="'all'"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropAction]="thyDropAction"
+  >
+    <ng-template #card let-item="">
+      <div class="card-container">
+        <div class="card-content-row-title">
+          <span>{{ item.title }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </thy-board>
+</div>
+
+<div class="p-2 mt-2">多泳道</div>
+<div class="thy-pro-board-basic-example-container">
+  <thy-board
+    [thyEntries]="entries"
+    [thyCards]="items"
+    [thyLanes]="lanes"
+    [thyShowLane]="true"
+    [thyVirtualScroll]="false"
+    [thyEntryCollapsible]="true"
+    [thySortable]="'all'"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    (thyCardDragStart)="thyDragStart($event)"
+    [thyCardDropAction]="thyDropAction"
+  >
+    <ng-template #card let-item="">
+      <div class="card-container" [style.height.px]="item?.height">
+        <div class="card-content-row-title">
+          <span>{{ item.title }}</span>
+        </div>
+      </div>
+    </ng-template>
+  </thy-board>
+</div>

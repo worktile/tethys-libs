@@ -52,7 +52,11 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
 
     private cardsHeightMap: Record<string, { index: number; height: number }> = {};
 
-    constructor(minBufferPx: number, maxBufferPx: number, public averager = new EntryItemSizeAverager()) {
+    constructor(
+        minBufferPx: number,
+        maxBufferPx: number,
+        public averager = new EntryItemSizeAverager()
+    ) {
         super(minBufferPx, maxBufferPx, averager);
     }
 
@@ -126,6 +130,13 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
         this.cardsHeightMap = { ...cardsHeightMap };
     }
 
+    private getCardHeight(cardElement: Element) {
+        let marginY =
+            parseFloat(window.getComputedStyle(cardElement).marginBottom) + parseFloat(window.getComputedStyle(cardElement).marginTop);
+
+        return cardElement.clientHeight + marginY;
+    }
+
     updateCardsHeight() {
         if (!this['_viewport']) {
             return;
@@ -133,14 +144,14 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
         const viewport: CdkVirtualScrollViewport = this['_viewport'];
 
         let isChanged = false;
-        const childrenNodes: Element[] = Array.from(viewport.elementRef.nativeElement.firstElementChild?.children || []);
+        let childrenNodes: Element[] = Array.from(viewport.elementRef.nativeElement.firstElementChild?.children || []);
         childrenNodes.forEach((child: Element) => {
             const name = child?.getAttribute && child?.getAttribute('name');
             if (name) {
                 const [cardId, cardIndex] = name.split('-');
                 const temp = this.cardsHeightMap[cardId];
-                if (temp?.height !== child.clientHeight) {
-                    const height = child.clientHeight;
+                const height = this.getCardHeight(child);
+                if (temp?.height !== height) {
                     this.cardsHeightMap[cardId] = { index: Number(cardIndex), height: height };
                     isChanged = true;
                 }
@@ -149,6 +160,7 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
         if (isChanged) {
             this.updateTotalContentSize();
         }
+        childrenNodes = [];
     }
 
     detach() {
