@@ -88,19 +88,6 @@
         }
     }
 
-    .thy-entry-sortable-container {
-        .entry-body {
-            .entry-cards {
-                .entry-card {
-                    .cdk-drag-placeholder {
-                        background: variables.$gray-100 !important;
-                        box-shadow: none;
-                    }
-                }
-            }
-        }
-    }
-
     .thy-entry-movable-container {
         .entry-body {
             .entry-cards {
@@ -193,6 +180,19 @@
             .empty-zone-tip {
                 margin: auto;
                 color: variables.$gray-600;
+            }
+        }
+    }
+
+    .thy-entry-sortable-container {
+        .entry-body {
+            .entry-cards {
+                .entry-card {
+                    .cdk-drag-placeholder {
+                        background: variables.$gray-100 !important;
+                        box-shadow: none;
+                    }
+                }
             }
         }
     }
