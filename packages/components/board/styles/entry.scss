@@ -89,17 +89,6 @@
     }
 
     .thy-entry-movable-container {
-        .entry-body {
-            .entry-cards {
-                .entry-card {
-                    .cdk-drag-placeholder {
-                        background: transparent !important;
-                        border-color: transparent;
-                    }
-                }
-            }
-        }
-
         .entry-drop {
             position: absolute;
             top: 1px;
@@ -180,6 +169,17 @@
             .empty-zone-tip {
                 margin: auto;
                 color: variables.$gray-600;
+            }
+        }
+
+        .entry-body {
+            .entry-cards {
+                .entry-card {
+                    .cdk-drag-placeholder {
+                        background: transparent !important;
+                        border-color: transparent;
+                    }
+                }
             }
         }
     }
