@@ -1,5 +1,5 @@
 import { computed, Injectable, Signal, signal, WritableSignal } from '@angular/core';
-import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from './entities';
+import { ThyBoardCard, ThyBoardEntry, ThyBoardLane, ThyBoardSortEvent } from './entities';
 import { EMPTY_OBJECT_ID_STR } from './constants';
 import { helpers } from 'ngx-tethys/util';
 import { produce } from '@tethys/cdk';
@@ -17,6 +17,10 @@ export class ThyBoardService {
     private innerEntryCollapsible: WritableSignal<boolean> = signal(false);
 
     private hasAutoEmptyLane: WritableSignal<boolean> = signal(true);
+
+    private sortCardsInEntry: WritableSignal<(event: ThyBoardSortEvent) => ThyBoardCard[]> = signal(
+        (event: ThyBoardSortEvent) => event.cards
+    );
 
     private emptyLane: WritableSignal<ThyBoardLane> = signal({
         _id: EMPTY_OBJECT_ID_STR,
@@ -121,6 +125,10 @@ export class ThyBoardService {
         this.hasAutoEmptyLane.set(state);
     }
 
+    public setSortCardsInEntry(state: (event: ThyBoardSortEvent) => ThyBoardCard[]) {
+        this.sortCardsInEntry.set(state);
+    }
+
     private buildCardsMap(cards: ThyBoardCard[]): Record<string, ThyBoardCard[]> {
         const cardsMapByEntryId: Record<string, ThyBoardCard[]> = {};
 
@@ -132,14 +140,17 @@ export class ThyBoardService {
         return cardsMapByEntryId;
     }
 
-    private buildEntriesWithCards(cards: ThyBoardCard[], entries: ThyBoardEntry[]) {
+    private buildEntriesWithCards(cards: ThyBoardCard[], lane: ThyBoardLane, entries: ThyBoardEntry[]) {
         const cardsMapByEntryId = this.buildCardsMap(cards);
+        const sortCardsInEntry = this.sortCardsInEntry();
 
         return (entries || []).map((entry) => {
             return {
                 ...entry,
                 expanded: !helpers.isUndefinedOrNull(entry.expanded) ? entry.expanded : true,
-                cards: cardsMapByEntryId[entry._id] || []
+                cards: cardsMapByEntryId[entry._id]
+                    ? sortCardsInEntry({ cards: cardsMapByEntryId[entry._id], lane: lane, entry: entry })
+                    : []
             };
         });
     }
@@ -183,7 +194,7 @@ export class ThyBoardService {
 
             return {
                 ...lane,
-                entries: this.buildEntriesWithCards(lane.cards, entries)
+                entries: this.buildEntriesWithCards(lane.cards, lane, entries)
             };
         });
     }

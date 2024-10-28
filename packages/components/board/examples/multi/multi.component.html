@@ -4,12 +4,13 @@
     [thyCards]="items"
     [thyLanes]="lanes"
     [thyShowLane]="lanes.length > 1"
-    [thyAllLanesExpanded]="false"
+    [thyAllLanesExpanded]="true"
     [thyEntryCollapsible]="true"
     [thyMovable]="'all'"
     (thyCardDragStart)="thyDragStart($event)"
     [thyCardDropEnterPredicate]="thyDropEnterPredicate"
     [thyCardDropAction]="thyDropAction"
+    [thySortCardsInEntry]="thySortCardsInEntry"
   >
     <ng-template #card let-item="">
       <div class="card-container">

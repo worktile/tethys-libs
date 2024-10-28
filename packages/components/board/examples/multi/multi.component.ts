@@ -5,7 +5,8 @@ import {
     ThyBoardDropActionEvent,
     ThyBoardDragPredicateEvent,
     ThyBoardEntry,
-    ThyBoardLane
+    ThyBoardLane,
+    ThyBoardSortEvent
 } from '@tethys/pro/board';
 import { entries, lanes } from '../mock';
 import { items } from './mock';
@@ -55,5 +56,13 @@ export class ThyProBoardMultiExampleComponent implements OnInit {
     thyDropAction = (event: ThyBoardDropActionEvent) => {
         console.log(`拖动到：`, event);
         return of(false).pipe(delay(1000));
+    };
+
+    thySortCardsInEntry = (event: ThyBoardSortEvent) => {
+        if (event.entry._id === '2') {
+            return event.cards.reverse();
+        } else {
+            return event.cards;
+        }
     };
 }
