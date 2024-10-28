@@ -239,6 +239,12 @@ export class ThyBoardComponent implements OnInit {
         public thyBoardService: ThyBoardService,
         private changeDetectorRef: ChangeDetectorRef
     ) {
+        effect(() => {
+            if (this.thyMovable() && this.thySortable()) {
+                throw new Error(`thyMovable and thySortable cannot be set values simultaneously..`);
+            }
+        });
+
         effect(
             () => {
                 this.thyBoardService.setCards(this.thyCards());
