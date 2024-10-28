@@ -21,7 +21,8 @@ import {
     ThyBoardDragStartEvent,
     ThyBoardDragPredicateEvent,
     ThyBoardZone,
-    ThyBoardVirtualScrolledIndexChangeEvent
+    ThyBoardVirtualScrolledIndexChangeEvent,
+    ThyBoardSortEvent
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
@@ -158,6 +159,11 @@ export class ThyBoardComponent implements OnInit {
     thyEntryCollapsible = input(false, { transform: booleanAttribute });
 
     /**
+     * 在构建数据时，对栏中数据进行排序
+     */
+    thySortCardsInEntry = input<(event: ThyBoardSortEvent) => ThyBoardCard[]>((event: ThyBoardSortEvent) => event.cards);
+
+    /**
      * 获取卡片可放置的区域
      * @type
      */
@@ -277,6 +283,13 @@ export class ThyBoardComponent implements OnInit {
         effect(
             () => {
                 this.thyBoardService.setHasAutoEmptyLane(this.thyHasAutoEmptyLane());
+            },
+            { allowSignalWrites: true }
+        );
+
+        effect(
+            () => {
+                this.thyBoardService.setSortCardsInEntry(this.thySortCardsInEntry());
             },
             { allowSignalWrites: true }
         );
