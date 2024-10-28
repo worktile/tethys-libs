@@ -134,8 +134,8 @@ export class ThyBoardLaneComponent implements OnInit {
         if (this.entryComponents?.toArray().length > 0 && this.hasLane() && this.virtualScroll()) {
             let laneHeight = 0;
             this.entryComponents.toArray().forEach((entry, index) => {
-                let entrySpacer = entry.entryVirtualScroll?.scrollStrategy?.entrySpacer();
-                entrySpacer = entrySpacer < entry.entryBodyHeight ? entry.entryBodyHeight : entrySpacer;
+                let entrySpacer = entry.entryComponent()!.entryVirtualScroll?.scrollStrategy?.entrySpacer();
+                entrySpacer = entrySpacer < entry.entryComponent()!.entryBodyHeight ? entry.entryComponent()!.entryBodyHeight : entrySpacer;
                 laneHeight = Math.max(laneHeight, entrySpacer);
             });
             laneHeight = this.lane()?.expanded && this.lane()?.cards?.length === 0 ? emptyLaneHeight : laneHeight;

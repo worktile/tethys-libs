@@ -12,6 +12,8 @@ import { ThyBoardEntryVirtualScroll } from './scroll/entry-virtual-scroll';
 import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 import { ThyBoardFuncPipe } from './board.pipe';
 import { ThyBoardSkeletonComponent } from './skeleton/skeleton.component';
+import { ThyBoardSortableEntryComponent } from './entry/sortable/sortable.component';
+import { ThyBoardMovableEntryComponent } from './entry/movable/movable.component';
 
 const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySharedModule];
 
@@ -23,6 +25,8 @@ const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySha
         ThyBoardBodyScrollableDirective,
         ThyBoardLaneComponent,
         ThyBoardEntryComponent,
+        ThyBoardSortableEntryComponent,
+        ThyBoardMovableEntryComponent,
         ThyBoardHeaderComponent,
         ThyBoardEntryVirtualScroll,
         ThyBoardFuncPipe,

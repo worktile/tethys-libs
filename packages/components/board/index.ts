@@ -10,3 +10,6 @@ export * from './scroll/entry-virtual-scroll';
 export * from './board.service';
 export * from './board.pipe';
 export * from './skeleton/skeleton.component';
+export * from './entry/sortable/sortable.component';
+export * from './entry/movable/movable.component';
+export * from './entry/entry-base';

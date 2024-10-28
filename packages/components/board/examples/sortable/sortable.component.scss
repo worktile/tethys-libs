@@ -1,0 +1,25 @@
+@use 'ngx-tethys/styles/variables.scss' as variables;
+
+.thy-pro-board-basic-example-container {
+    display: block;
+    height: 400px;
+    overflow: auto;
+}
+
+.card-container {
+    position: relative;
+    display: block;
+    padding: 12px 12px 6px 12px;
+    border-radius: 2px;
+    min-height: 150px;
+    background: variables.$white;
+    cursor: pointer;
+    border: solid 1px variables.$gray-200;
+    &:hover {
+        box-shadow: 0 3px 6px 0 rgba(variables.$black, 0.04);
+    }
+
+    .card-content-row-title {
+        margin-bottom: 8px;
+    }
+}
