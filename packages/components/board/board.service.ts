@@ -223,7 +223,8 @@ export class ThyBoardService {
     }
 
     expandLane(event: { lane: ThyBoardLane; expanded: boolean }) {
-        if (event.lane._id === EMPTY_OBJECT_ID_STR) {
+        const isUseDefaultEmpty = event.lane._id === EMPTY_OBJECT_ID_STR && !this.lanes().find((lane) => lane._id === EMPTY_OBJECT_ID_STR);
+        if (isUseDefaultEmpty) {
             this.emptyLane.set({ ...this.emptyLane(), expanded: event.expanded });
         } else {
             const lanes = produce(this.lanes()).update(event.lane._id, { expanded: event.expanded });
