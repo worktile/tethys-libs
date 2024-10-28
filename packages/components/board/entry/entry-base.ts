@@ -104,8 +104,8 @@ export abstract class ThyBoardEntryBase {
                 // 修正虚拟滚动区域高度
                 this.ngZone.runOutsideAngular(() => {
                     combineLatest([
-                        this.sharedResizeObserver.observe(this.bottom()!.nativeElement, { box: 'border-box' }),
-                        this.sharedResizeObserver.observe(this.top()!.nativeElement, { box: 'border-box' })
+                        this.sharedResizeObserver.observe(this.bottom()?.nativeElement, { box: 'border-box' }),
+                        this.sharedResizeObserver.observe(this.top()?.nativeElement, { box: 'border-box' })
                     ]).subscribe(() => {
                         this.setBodyHeight();
                     });
