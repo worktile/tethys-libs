@@ -102,15 +102,15 @@ export class ThyBoardService {
     constructor() {}
 
     public setCards(cards: ThyBoardCard[]) {
-        this.cards.set([...cards]);
+        this.cards.set([...(cards || [])]);
     }
 
     public setEntities(entries: ThyBoardEntry[]) {
-        this.entries.set([...entries]);
+        this.entries.set([...(entries || [])]);
     }
 
     public setLanes(lanes: ThyBoardLane[]) {
-        this.lanes.set([...lanes]);
+        this.lanes.set([...(lanes || [])]);
     }
 
     public setAllLanesExpanded(state: boolean) {
