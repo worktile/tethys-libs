@@ -16,7 +16,7 @@ import { SafeAny } from 'ngx-tethys/types';
 import { ThyBoardCard, ThyBoardDragContainer } from '../entities';
 import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
 import { CdkDrag, CdkDragDrop, CdkDragStart, CdkDropList, DropListRef, transferArrayItem } from '@angular/cdk/drag-drop';
-import { combineLatest, tap } from 'rxjs';
+import { combineLatest, Observable, tap } from 'rxjs';
 import { SharedResizeObserver } from '@angular/cdk/observers/private';
 import { ThyBoardEntryAbstract } from '../entities';
 
@@ -101,15 +101,21 @@ export abstract class ThyBoardEntryBase {
 
         afterNextRender(() => {
             if (this.boardEntry.hasLane() && (this.bottom() || this.top())) {
-                // 修正虚拟滚动区域高度
-                this.ngZone.runOutsideAngular(() => {
-                    combineLatest([
-                        this.sharedResizeObserver.observe(this.bottom()?.nativeElement, { box: 'border-box' }),
-                        this.sharedResizeObserver.observe(this.top()?.nativeElement, { box: 'border-box' })
-                    ]).subscribe(() => {
-                        this.setBodyHeight();
+                const elementsObserve: Observable<ResizeObserverEntry[]>[] = [];
+                if (this.top()) {
+                    elementsObserve.push(this.sharedResizeObserver.observe(this.top()?.nativeElement, { box: 'border-box' }));
+                }
+                if (this.bottom()) {
+                    elementsObserve.push(this.sharedResizeObserver.observe(this.bottom()?.nativeElement, { box: 'border-box' }));
+                }
+                if (elementsObserve.length > 0) {
+                    // 修正虚拟滚动区域高度
+                    this.ngZone.runOutsideAngular(() => {
+                        combineLatest(elementsObserve).subscribe(() => {
+                            this.setBodyHeight();
+                        });
                     });
-                });
+                }
             }
         });
     }
