@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.10](https://github.com/tethys-org/libs/compare/v18.0.8...v18.0.10) (2024-10-29)
+
+### Bug Fixes
+
+- **components:** expand empty lane when lanes has empty #PJM-21018 ([fe6dc3f](https://github.com/tethys-org/libs/commit/fe6dc3f43b76a2a06d7f333ff93e6f3b137a5971)), closes [#PJM-21018](https://github.com/tethys-org/libs/issues/PJM-21018)
+- **components:** fix board dragging style ([#122](https://github.com/tethys-org/libs/issues/122)) ([73c4283](https://github.com/tethys-org/libs/commit/73c4283c83da0e60531a9a5109b577e0b516acfa))
+- **components:** fix error when scroll in board ([#134](https://github.com/tethys-org/libs/issues/134)) ([be52cb9](https://github.com/tethys-org/libs/commit/be52cb9a15c8ae13d10db2f54bba2d833876e860))
+
+### Features
+
+- **components:** add fullscreen toggle functionality to video controls #TINFR-822 ([#128](https://github.com/tethys-org/libs/issues/128)) ([29c10e7](https://github.com/tethys-org/libs/commit/29c10e78595d6a78ab109284ea14977841a1d7e2)), closes [#TINFR-822](https://github.com/tethys-org/libs/issues/TINFR-822)
+- **components:** add ThyBoardSortEvent #TINFR-865 ([188580d](https://github.com/tethys-org/libs/commit/188580db20cddfe99c1770f277ed98b02374dfaa)), closes [#TINFR-865](https://github.com/tethys-org/libs/issues/TINFR-865)
+- **components:** board support sortable #TINFR-621 ([#130](https://github.com/tethys-org/libs/issues/130)) ([616c8e0](https://github.com/tethys-org/libs/commit/616c8e072bd2e020c9032cd2f37f5b40dcc846b1)), closes [#TINFR-621](https://github.com/tethys-org/libs/issues/TINFR-621)
+- **components:** defer lane in board #TINFR-799 ([#127](https://github.com/tethys-org/libs/issues/127)) ([42e6b3e](https://github.com/tethys-org/libs/commit/42e6b3e889399de0a9f12ac04a87777e7f319042)), closes [#TINFR-799](https://github.com/tethys-org/libs/issues/TINFR-799)
+- **components:** support sort cards in entry #TINFR-865 ([#131](https://github.com/tethys-org/libs/issues/131)) ([549cafa](https://github.com/tethys-org/libs/commit/549cafa4545f23ef4b36f9dc051872b013a4c8d7)), closes [#TINFR-865](https://github.com/tethys-org/libs/issues/TINFR-865)
+
 ## [18.0.9](https://github.com/tethys-org/libs/compare/v18.0.8...v18.0.9) (2024-10-22)
 
 ### Features
