@@ -109,7 +109,7 @@ export class ThyBoardBodyScrollableDirective extends CdkScrollable implements Af
 
                 const position = this.laneIsInViewport(preLanesTotalSize, laneSpacerSize);
                 if (position) {
-                    (laneComponent.entryComponents || []).forEach((entry) => {
+                    (laneComponent.entryComponents() || []).forEach((entry) => {
                         entry.scrollToOffset(position);
                     });
                 }

@@ -2,14 +2,13 @@ import {
     ChangeDetectionStrategy,
     Component,
     OnInit,
-    QueryList,
     TemplateRef,
-    ViewChildren,
     booleanAttribute,
     effect,
     input,
     numberAttribute,
-    output
+    output,
+    viewChildren
 } from '@angular/core';
 import { ThyBoardEntryComponent } from '../entry/entry.component';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
@@ -42,7 +41,7 @@ const emptyLaneHeight = 200;
     }
 })
 export class ThyBoardLaneComponent implements OnInit {
-    @ViewChildren(ThyBoardEntryComponent) entryComponents!: QueryList<ThyBoardEntryComponent>;
+    entryComponents = viewChildren(ThyBoardEntryComponent);
 
     public isBatchOperation = false;
 
@@ -131,9 +130,9 @@ export class ThyBoardLaneComponent implements OnInit {
     ngOnInit() {}
 
     private setLaneHeight() {
-        if (this.entryComponents?.toArray().length > 0 && this.hasLane() && this.virtualScroll()) {
+        if (this.entryComponents()?.length > 0 && this.hasLane() && this.virtualScroll()) {
             let laneHeight = 0;
-            this.entryComponents.toArray().forEach((entry, index) => {
+            this.entryComponents().forEach((entry, index) => {
                 let entrySpacer = entry.entryComponent()!.entryVirtualScroll?.scrollStrategy?.entrySpacer();
                 entrySpacer = entrySpacer < entry.entryComponent()!.entryBodyHeight ? entry.entryComponent()!.entryBodyHeight : entrySpacer;
                 laneHeight = Math.max(laneHeight, entrySpacer);
