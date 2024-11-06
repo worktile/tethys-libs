@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.12](https://github.com/tethys-org/libs/compare/v18.0.10...v18.0.12) (2024-11-06)
+
+
+### Bug Fixes
+
+* **components:** calculate lane height when change bottom or top template ([77c86e8](https://github.com/tethys-org/libs/commit/77c86e85165a7bdb3d00d890e11c89f5889ab5c5))
+* **components:** fix laneHeight when expand lane #TINFR-895 ([283fe40](https://github.com/tethys-org/libs/commit/283fe4061f60c71b723cb666925dfbcafdd45e8b)), closes [#TINFR-895](https://github.com/tethys-org/libs/issues/TINFR-895)
+* **components:** fix setAverageItemSize when cards is [] ([480e4ee](https://github.com/tethys-org/libs/commit/480e4ee401cc2d813708925bbf88986a7b3bd095))
+* **components:** return isExpanded when use laneTemplateRef ([fa28253](https://github.com/tethys-org/libs/commit/fa282534817d0531718fccbb8238c40161db0ba6))
+
+
+
+
+
 ## [18.0.11](https://github.com/tethys-org/libs/compare/v18.0.10...v18.0.11) (2024-11-04)
 
 ### Bug Fixes
