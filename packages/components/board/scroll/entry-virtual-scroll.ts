@@ -30,11 +30,11 @@ export class EntryItemSizeAverager extends ItemSizeAverager {
     }
 
     setAverageItemSize(value: number) {
-        return (this.averageItemSize = value);
+        return (this.averageItemSize = value || this.defaultItemSize);
     }
 
     getAverageItemSize(): number {
-        return this.averageItemSize;
+        return this.averageItemSize || this.defaultItemSize;
     }
 
     reset() {
@@ -55,7 +55,7 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
     constructor(
         minBufferPx: number,
         maxBufferPx: number,
-        public averager = new EntryItemSizeAverager()
+        public averager = new EntryItemSizeAverager(112)
     ) {
         super(minBufferPx, maxBufferPx, averager);
     }

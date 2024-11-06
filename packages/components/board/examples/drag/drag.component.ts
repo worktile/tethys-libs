@@ -8,7 +8,7 @@ import {
     ThyBoardLane
 } from '@tethys/pro/board';
 import { entries, items, lanes } from '../mock';
-import { delay, map, of } from 'rxjs';
+import { delay, map, of, tap } from 'rxjs';
 
 interface CardInfo extends ThyBoardCard {
     title: string;
@@ -51,7 +51,7 @@ export class ThyProBoardDragExampleComponent implements OnInit {
     }
 
     thyCardDraggablePredicate = (event: ThyBoardDragPredicateEvent) => {
-        console.log(`判断是否可拖动：`, event);
+        // console.log(`判断是否可拖动：`, event);
         return event.card._id !== '0';
     };
 
@@ -60,13 +60,40 @@ export class ThyProBoardDragExampleComponent implements OnInit {
     }
 
     thyDropEnterPredicate = (event: ThyBoardDragPredicateEvent) => {
-        console.log(`判断是否可拖动到：`, event);
+        // console.log(`判断是否可拖动到：`, event);
         return true;
     };
 
     thyDropAction = (event: ThyBoardDropActionEvent) => {
         console.log(`拖动到：`, event);
-        return of(false).pipe(delay(1000));
+
+        return of(true).pipe(
+            tap((value) => {
+                if (value) {
+                    this.items = this.items.map((item) => {
+                        if (item._id === event.card._id) {
+                            const laneIds = item.laneIds.filter((id) => id !== event.previousContainer.lane?._id);
+                            if (event.container.lane?._id) {
+                                laneIds.push(event.container.lane?._id);
+                            }
+
+                            const entryIds = item.entryIds.filter((id) => id !== event.previousContainer.entry?._id);
+                            if (event.container.entry?._id) {
+                                entryIds.push(event.container.entry?._id);
+                            }
+                            return {
+                                ...item,
+                                laneIds: laneIds,
+                                entryIds: entryIds
+                            };
+                        } else {
+                            return item;
+                        }
+                    });
+                }
+            }),
+            delay(1000)
+        );
     };
 
     thyCardDroppableZonesAction = (event: ThyBoardDragPredicateEvent) => {
