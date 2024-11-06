@@ -26,7 +26,7 @@
     </ng-template>
 
     <ng-template #entryTop let-entry="entry" let-lane="lane">
-      <div [style.height.px]="bottomHeights[entry._id].top" (click)="clickTop(entry)">
+      <div [style.height.px]="singleBottomHeights[entry._id].top" (click)="clickTop(entry)">
         栏的顶部《
         @if (lane) {
           泳道：{{ lane.name }}；
@@ -36,7 +36,7 @@
     </ng-template>
 
     <ng-template #entryBottom let-entry="entry" let-lane="lane">
-      <div [style.height.px]="bottomHeights[entry._id].bottom" (click)="clickBottom(entry)">
+      <div [style.height.px]="singleBottomHeights[entry._id].bottom" (click)="clickBottom(entry)">
         栏的底部《
         @if (lane) {
           泳道：{{ lane.name }}；
@@ -82,7 +82,7 @@
     </ng-template>
 
     <ng-template #entryTop let-entry="entry" let-lane="lane">
-      <div [style.height.px]="bottomHeights[entry._id].top" (click)="clickTop(entry)">
+      <div [style.height.px]="hasLanesBottomHeights[lane._id + entry._id].top" (click)="clickTop(entry, lane)">
         栏的顶部《
         @if (lane) {
           泳道：{{ lane.name }}；
@@ -92,7 +92,7 @@
     </ng-template>
 
     <ng-template #entryBottom let-entry="entry" let-lane="lane">
-      <div [style.height.px]="bottomHeights[entry._id].bottom" (click)="clickBottom(entry)">
+      <div [style.height.px]="hasLanesBottomHeights[lane._id + entry._id].bottom" (click)="clickBottom(entry, lane)">
         栏的底部《
         @if (lane) {
           泳道：{{ lane.name }}；
