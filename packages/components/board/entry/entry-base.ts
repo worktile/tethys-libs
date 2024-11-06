@@ -10,7 +10,9 @@ import {
     effect,
     viewChild,
     viewChildren,
-    inject
+    inject,
+    WritableSignal,
+    signal
 } from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyBoardCard, ThyBoardDragContainer } from '../entities';
@@ -52,10 +54,15 @@ export abstract class ThyBoardEntryBase {
 
     private preCdkDropLists: CdkDropList[] = [];
 
+    public entryRealHeight: WritableSignal<number> = signal(0);
+
     constructor(public boardEntry: ThyBoardEntryAbstract) {
-        effect(() => {
-            this.setBodyHeight();
-        });
+        effect(
+            () => {
+                this.setBodyHeight();
+            },
+            { allowSignalWrites: true }
+        );
 
         effect(() => {
             if (this.boardEntry.sortable() || this.boardEntry.movable()) {
@@ -128,6 +135,7 @@ export abstract class ThyBoardEntryBase {
         if (this.boardEntry.hasLane()) {
             if (virtualScroll) {
                 const realHeight = this._getRealHeight();
+                this.entryRealHeight.set(realHeight);
                 if (this.entryVirtualScroll) {
                     this.entryBodyHeight = Math.min(containerHeight, realHeight);
                 } else {
@@ -236,24 +244,18 @@ export abstract class ThyBoardEntryBase {
         if (payload.position) {
             if (payload.position === 'bottom') {
                 this.currentViewport.scrollTo({ bottom: 0 });
-                if (
-                    this.entryVirtualScroll.scrollStrategy.entrySpacer() > 0 &&
-                    payload.laneHight - payload.scrollTop > this.entryBodyHeight
-                ) {
+                if (realHeight > 0 && payload.laneHight - payload.scrollTop > this.entryBodyHeight) {
                     const offset = -(payload.scrollTop + this.entryBodyHeight - realHeight);
                     const renderedContentTransform = `translateY(${Number(offset)}px)`;
                     this.entryBody.nativeElement.style.transform = renderedContentTransform;
                 }
             } else {
-                if (
-                    payload.scrollTop > 0 &&
-                    payload.scrollTop > this.entryVirtualScroll.scrollStrategy.entrySpacer() - this.entryBodyHeight
-                ) {
+                if (payload.scrollTop > 0 && payload.scrollTop > realHeight - this.entryBodyHeight) {
                     this.currentViewport.scrollTo({ bottom: 0 });
 
                     if (
                         payload.scrollTop > 0 &&
-                        payload.scrollTop < this.entryVirtualScroll.scrollStrategy.entrySpacer() &&
+                        payload.scrollTop < realHeight &&
                         payload.laneHight - payload.scrollTop > this.entryBodyHeight
                     ) {
                         const offset = -(payload.scrollTop + this.entryBodyHeight - realHeight);

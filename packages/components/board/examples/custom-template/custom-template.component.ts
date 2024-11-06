@@ -18,13 +18,21 @@ export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
 
     lanes: ThyBoardLane[] = [...lanes];
 
-    bottomHeights: Record<string, { top: number; bottom: number }> = {};
+    singleBottomHeights: Record<string, { top: number; bottom: number }> = {};
+
+    hasLanesBottomHeights: Record<string, { top: number; bottom: number }> = {};
 
     constructor() {}
 
     ngOnInit(): void {
+        lanes.forEach((lane) => {
+            entries.forEach((entry) => {
+                this.hasLanesBottomHeights[lane._id + entry._id] = { top: 22, bottom: 22 };
+            });
+        });
+
         entries.forEach((entry) => {
-            this.bottomHeights[entry._id] = { top: 22, bottom: 22 };
+            this.singleBottomHeights[entry._id] = { top: 22, bottom: 22 };
         });
 
         setTimeout(() => {
@@ -40,11 +48,19 @@ export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
         }, 2000);
     }
 
-    clickBottom(entry: ThyBoardEntry) {
-        this.bottomHeights[entry._id].bottom = this.bottomHeights[entry._id].bottom === 22 ? 100 : 22;
+    clickBottom(entry: ThyBoardEntry, lane?: ThyBoardLane) {
+        if (lane) {
+            this.hasLanesBottomHeights[lane._id + entry._id].bottom = this.hasLanesBottomHeights[lane._id + entry._id].bottom === 22 ? 100 : 22;
+        } else {
+            this.singleBottomHeights[entry._id].bottom = this.singleBottomHeights[entry._id].bottom === 22 ? 100 : 22;
+        }
     }
 
-    clickTop(entry: ThyBoardEntry) {
-        this.bottomHeights[entry._id].top = this.bottomHeights[entry._id].top === 22 ? 100 : 22;
+    clickTop(entry: ThyBoardEntry, lane?: ThyBoardLane) {
+        if (lane) {
+            this.hasLanesBottomHeights[lane._id + entry._id].top = this.hasLanesBottomHeights[lane._id + entry._id].top === 22 ? 100 : 22;
+        } else {
+            this.singleBottomHeights[entry._id].top = this.singleBottomHeights[entry._id].top === 22 ? 100 : 22;
+        }
     }
 }
