@@ -18,9 +18,10 @@ import { SafeAny } from 'ngx-tethys/types';
 import { ThyBoardCard, ThyBoardDragContainer } from '../entities';
 import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
 import { CdkDrag, CdkDragDrop, CdkDragStart, CdkDropList, DropListRef, transferArrayItem } from '@angular/cdk/drag-drop';
-import { combineLatest, Observable, tap } from 'rxjs';
+import { combineLatest, debounceTime, Observable, tap } from 'rxjs';
 import { SharedResizeObserver } from '@angular/cdk/observers/private';
 import { ThyBoardEntryAbstract } from '../entities';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive()
 export abstract class ThyBoardEntryBase {
@@ -55,6 +56,8 @@ export abstract class ThyBoardEntryBase {
     private preCdkDropLists: CdkDropList[] = [];
 
     public entryRealHeight: WritableSignal<number> = signal(0);
+
+    private takeUntilDestroyed = takeUntilDestroyed();
 
     constructor(public boardEntry: ThyBoardEntryAbstract) {
         effect(
@@ -107,8 +110,10 @@ export abstract class ThyBoardEntryBase {
         });
 
         afterNextRender(() => {
-            if (this.boardEntry.hasLane() && (this.bottom() || this.top())) {
-                const elementsObserve: Observable<ResizeObserverEntry[]>[] = [];
+            if (this.boardEntry.virtualScroll() && this.boardEntry.hasLane()) {
+                const elementsObserve: Observable<ResizeObserverEntry[]>[] = [
+                    this.sharedResizeObserver.observe(this.boardEntry.container(), { box: 'border-box' }).pipe(debounceTime(100))
+                ];
                 if (this.top()) {
                     elementsObserve.push(this.sharedResizeObserver.observe(this.top()?.nativeElement, { box: 'border-box' }));
                 }
@@ -118,9 +123,11 @@ export abstract class ThyBoardEntryBase {
                 if (elementsObserve.length > 0) {
                     // 修正虚拟滚动区域高度
                     this.ngZone.runOutsideAngular(() => {
-                        combineLatest(elementsObserve).subscribe(() => {
-                            this.setBodyHeight();
-                        });
+                        combineLatest(elementsObserve)
+                            .pipe(this.takeUntilDestroyed)
+                            .subscribe(() => {
+                                this.setBodyHeight();
+                            });
                     });
                 }
             }
