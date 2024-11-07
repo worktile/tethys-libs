@@ -9,8 +9,11 @@
 >
   <div class="entry-cards" [ngClass]="{ 'entry-cards-dragging': showBackDropWhenDragging() && !isDraggingList }">
     @if (boardEntry.topTemplateRef()) {
-      <div #top>
-        <ng-template [ngTemplateOutlet]="boardEntry.topTemplateRef()!" [ngTemplateOutletContext]="{ entry: boardEntry.entry(), lane: boardEntry.lane() }"></ng-template>
+      <div #top class="entry-top">
+        <ng-template
+          [ngTemplateOutlet]="boardEntry.topTemplateRef()!"
+          [ngTemplateOutletContext]="{ entry: boardEntry.entry(), lane: boardEntry.lane() }"
+        ></ng-template>
       </div>
     }
 
@@ -35,14 +38,26 @@
             cdkDropList
             [cdkDropListAutoScrollStep]="5"
             thyDragDrop
-            [cdkDropListData]="{ entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards, changeDetectorRef: changeDetectorRef }"
+            [cdkDropListData]="{
+              entry: boardEntry.entry(),
+              lane: boardEntry.lane(),
+              cards: boardEntry.entry().cards,
+              changeDetectorRef: changeDetectorRef
+            }"
             (cdkDropListDropped)="drop($event)"
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
             <div
               cdkDrag
               [cdkDragData]="card"
-              [cdkDragDisabled]="!(card | thyBoardFunc: boardEntry.cardDraggablePredicate() : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards })"
+              [cdkDragDisabled]="
+                !(
+                  card
+                  | thyBoardFunc
+                    : boardEntry.cardDraggablePredicate()
+                    : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards }
+                )
+              "
               (cdkDragStarted)="cdkDragStarted($event)"
             >
               <ng-template
@@ -72,14 +87,26 @@
             cdkDropList
             [cdkDropListAutoScrollStep]="5"
             thyDragDrop
-            [cdkDropListData]="{ entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards, changeDetectorRef: changeDetectorRef }"
+            [cdkDropListData]="{
+              entry: boardEntry.entry(),
+              lane: boardEntry.lane(),
+              cards: boardEntry.entry().cards,
+              changeDetectorRef: changeDetectorRef
+            }"
             (cdkDropListDropped)="drop($event)"
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
             <div
               cdkDrag
               [cdkDragData]="card"
-              [cdkDragDisabled]="!(card | thyBoardFunc: boardEntry.cardDraggablePredicate() : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards })"
+              [cdkDragDisabled]="
+                !(
+                  card
+                  | thyBoardFunc
+                    : boardEntry.cardDraggablePredicate()
+                    : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards }
+                )
+              "
               (cdkDragStarted)="cdkDragStarted($event)"
             >
               <ng-template
@@ -99,14 +126,26 @@
           cdkDropList
           [cdkDropListAutoScrollStep]="5"
           thyDragDrop
-          [cdkDropListData]="{ entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards, changeDetectorRef: changeDetectorRef }"
+          [cdkDropListData]="{
+            entry: boardEntry.entry(),
+            lane: boardEntry.lane(),
+            cards: boardEntry.entry().cards,
+            changeDetectorRef: changeDetectorRef
+          }"
           (cdkDropListDropped)="drop($event)"
           [cdkDropListEnterPredicate]="dropListEnterPredicate"
         >
           <div
             cdkDrag
             [cdkDragData]="card"
-            [cdkDragDisabled]="!(card | thyBoardFunc: boardEntry.cardDraggablePredicate() : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards })"
+            [cdkDragDisabled]="
+              !(
+                card
+                | thyBoardFunc
+                  : boardEntry.cardDraggablePredicate()
+                  : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards }
+              )
+            "
             (cdkDragStarted)="cdkDragStarted($event)"
           >
             <ng-template
@@ -118,8 +157,11 @@
       }
     }
     @if (boardEntry.bottomTemplateRef()) {
-      <div #bottom>
-        <ng-template [ngTemplateOutlet]="boardEntry.bottomTemplateRef()!" [ngTemplateOutletContext]="{ entry: boardEntry.entry(), lane: boardEntry.lane() }"></ng-template>
+      <div #bottom class="entry-bottom">
+        <ng-template
+          [ngTemplateOutlet]="boardEntry.bottomTemplateRef()!"
+          [ngTemplateOutletContext]="{ entry: boardEntry.entry(), lane: boardEntry.lane() }"
+        ></ng-template>
       </div>
     }
   </div>
@@ -132,7 +174,15 @@
     [class.entry-dragging]="showBackDropWhenDragging() && !isDraggingList"
     [class.d-none]="showBackDropWhenDragging() && isDraggingList"
     [ngStyle]="{
-      height: entryDroppableZonesHeight ? entryDroppableZonesHeight + 'px' : '100%'
+      height:
+        showBackDropWhenDragging() &&
+        !isDraggingList &&
+        boardEntry.virtualScroll() &&
+        boardEntry.hasLane() &&
+        entryDroppableZonesHeight &&
+        entryDroppableZonesHeight === boardEntry.container().clientHeight
+          ? entryDroppableZonesHeight + 'px'
+          : '100%'
     }"
   >
     @for (zone of cardDroppableZone(); track zone._id) {
@@ -142,7 +192,13 @@
         cdkDropList
         [cdkDropListAutoScrollStep]="5"
         thyDragDrop
-        [cdkDropListData]="{ entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards, changeDetectorRef: changeDetectorRef, zone: zone }"
+        [cdkDropListData]="{
+          entry: boardEntry.entry(),
+          lane: boardEntry.lane(),
+          cards: boardEntry.entry().cards,
+          changeDetectorRef: changeDetectorRef,
+          zone: zone
+        }"
         (cdkDropListDropped)="drop($event)"
         [cdkDropListEnterPredicate]="dropListEnterPredicate"
       >
@@ -164,7 +220,12 @@
     cdkDropList
     [cdkDropListAutoScrollStep]="5"
     thyDragDrop
-    [cdkDropListData]="{ entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards, changeDetectorRef: changeDetectorRef }"
+    [cdkDropListData]="{
+      entry: boardEntry.entry(),
+      lane: boardEntry.lane(),
+      cards: boardEntry.entry().cards,
+      changeDetectorRef: changeDetectorRef
+    }"
     (cdkDropListDropped)="drop($event)"
     [cdkDropListEnterPredicate]="dropListEnterPredicate"
   ></div>

@@ -89,6 +89,8 @@
     }
 
     .thy-entry-movable-container {
+        display: block;
+        height: inherit;
         .entry-drop {
             position: absolute;
             top: 1px;
@@ -185,6 +187,8 @@
     }
 
     .thy-entry-sortable-container {
+        display: block;
+        height: inherit;
         .entry-body {
             .entry-cards {
                 .entry-card {
