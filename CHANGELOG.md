@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.14](https://github.com/tethys-org/libs/compare/v18.0.12...v18.0.14) (2024-11-08)
+
+
+### Bug Fixes
+
+* **components:** set height of drag-drop-zone ([d101034](https://github.com/tethys-org/libs/commit/d101034b0af5c83ba523d3cd32052033e76eeea3))
+
+
+### Features
+
+* **components:** calculate lane height when resize container #TINFR-912 ([24dc3f7](https://github.com/tethys-org/libs/commit/24dc3f72185243fd598c5b004c09c38fd28f534f)), closes [#TINFR-912](https://github.com/tethys-org/libs/issues/TINFR-912)
+
+
+
+
+
 ## [18.0.12](https://github.com/tethys-org/libs/compare/v18.0.10...v18.0.12) (2024-11-06)
 
 
