@@ -8,18 +8,23 @@
 
     &.board-lane-body-entry {
         width: 320px;
-        border-right: 1px solid variables.$gray-200;
+        border-left: 1px solid variables.$gray-200;
+        border-bottom: 1px solid variables.$gray-200;
 
         &:first-child {
             margin-left: 0px;
         }
+        &:last-child {
+            border-right: 1px solid variables.$gray-200;
+        }
+
         &.board-lane-body-entry-is-empty {
             min-height: 200px;
         }
         &.board-lane-body-entry-is-collapsed {
             height: 64px;
             line-height: 64px;
-            border-right: none;
+            border-left: none;
         }
     }
 
@@ -33,6 +38,10 @@
         }
         .entry-collapsed {
             display: inline-block;
+        }
+
+        & + .board-lane-body-entry {
+            border-left: none;
         }
     }
 
@@ -102,7 +111,6 @@
             padding-top: 10px;
             padding-left: 20px;
             border: dashed 1px variables.$gray-400;
-            background: variables.$gray-80;
             z-index: 2;
             &.entry-dragging {
                 position: sticky;
@@ -138,11 +146,9 @@
             .entry-drop-zone {
                 flex: 1;
                 height: 100%;
-
                 padding-top: 10px;
                 padding-left: 20px;
                 border: dashed 1px variables.$gray-400;
-                background: variables.$gray-80;
                 z-index: 2;
                 margin-top: -1px;
                 &:first-child {
@@ -195,6 +201,94 @@
                     .cdk-drag-placeholder {
                         background: variables.$gray-100 !important;
                         box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &.thy-entry-exceed-wip-limit {
+        background: rgba($color: board.$thy-board-wip-limit-color, $alpha: 0.05);
+        border: board.$thy-board-border-wip-limit;
+        border-top: none;
+
+        &:first-child {
+            border-top: none;
+        }
+
+        & + .board-lane-body-entry {
+            border-left: none;
+        }
+
+        &.board-lane-body-entry-is-collapsed {
+            border-right: none;
+        }
+
+        .thy-entry-movable-container {
+            .entry-drop {
+                border: dashed 1px variables.$gray-400;
+
+                &.cdk-drop-list-dragging {
+                    border-color: variables.$primary;
+                    background: variables.$gray-80;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        top: 0px;
+                        right: 0px;
+                        bottom: 0px;
+                        left: 0px;
+                        background: rgba(variables.$primary, 0.1);
+                    }
+
+                    .dragging-text-color {
+                        color: variables.$primary !important;
+                    }
+                }
+            }
+
+            .entry-drop-zones {
+                .entry-drop-zone {
+                    border: dashed 1px rgba($color: board.$thy-board-wip-limit-color, $alpha: 0.3);
+
+                    &.cdk-drop-list-dragging {
+                        border-color: variables.$primary;
+                        background: variables.$gray-80;
+                        position: relative;
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            bottom: 0px;
+                            left: 0px;
+                            background: rgba(variables.$primary, 0.1);
+                        }
+
+                        .dragging-text-color {
+                            color: variables.$primary !important;
+                        }
+                    }
+                }
+            }
+
+            .empty-zone {
+                background: variables.$gray-100;
+                .empty-zone-tip {
+                    color: variables.$gray-600;
+                }
+            }
+        }
+
+        .thy-entry-sortable-container {
+            .entry-body {
+                .entry-cards {
+                    .entry-card {
+                        &.cdk-drag-placeholder {
+                            background: rgba($color: board.$thy-board-wip-limit-color, $alpha: 0.12) !important;
+                        }
                     }
                 }
             }
