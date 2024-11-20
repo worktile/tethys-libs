@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { ThyBoardCard, ThyBoardEntry, ThyBoardLane, ThyBoardZone } from './board.entity';
 
 export interface ThyBoardDragContainer {
@@ -7,7 +8,11 @@ export interface ThyBoardDragContainer {
 
     cards?: ThyBoardCard[];
 
+    card?: ThyBoardCard;
+
     zone?: ThyBoardZone;
+
+    changeDetectorRef?: ChangeDetectorRef;
 }
 
 export interface ThyBoardDragStartEvent {
