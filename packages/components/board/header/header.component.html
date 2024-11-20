@@ -16,9 +16,12 @@
   }
   @for (entry of entries(); track entry._id) {
     @if (entry.expanded) {
-      <div class="entry justify-content-between">
+      <div class="entry justify-content-between" [ngClass]="{ 'entry-split': entry.split }">
         @if (headerTemplateRef()) {
-          <ng-template [ngTemplateOutlet]="headerTemplateRef()!" [ngTemplateOutletContext]="{ entry: entry, $implicit: entry }"></ng-template>
+          <ng-template
+            [ngTemplateOutlet]="headerTemplateRef()!"
+            [ngTemplateOutletContext]="{ entry: entry, $implicit: entry }"
+          ></ng-template>
         } @else {
           <div class="text-truncate">
             <span thyFlexibleText [thyTooltipContent]="entry.name"> {{ entry.name }}</span>

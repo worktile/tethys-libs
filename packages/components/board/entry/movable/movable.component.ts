@@ -44,14 +44,10 @@ export class ThyBoardMovableEntryComponent extends ThyBoardEntryBase {
 
     public showBackDropWhenDragging = computed(() => {
         const movable = this.boardEntry.movable();
-        const sortable = this.boardEntry.sortable();
         const draggingCard = this.boardEntry.draggingCard();
         if (draggingCard) {
             if (movable) {
                 return this.checkCardDroppable(draggingCard, { entry: this.boardEntry.entry(), lane: this.boardEntry.lane() });
-            }
-            if (sortable) {
-                return false;
             }
         } else {
             this.isDraggingList = false;

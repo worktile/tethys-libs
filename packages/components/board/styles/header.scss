@@ -29,6 +29,9 @@
                     display: inherit;
                 }
             }
+            &.entry-split {
+                width: 640px;
+            }
         }
 
         .entry-collapsed {

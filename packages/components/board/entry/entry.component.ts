@@ -6,7 +6,7 @@ import {
     input,
     numberAttribute,
     output,
-    viewChild
+    viewChildren
 } from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
 
@@ -18,7 +18,8 @@ import {
     ThyBoardEntry,
     ThyBoardLane,
     ThyBoardZone,
-    ThyBoardVirtualScrolledIndexChangeEvent
+    ThyBoardVirtualScrolledIndexChangeEvent,
+    ThyBoardEntryStatus
 } from '../entities';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { Observable } from 'rxjs';
@@ -42,11 +43,12 @@ import { ThyBoardMovableEntryComponent } from './movable/movable.component';
     imports: [ThyBoardSortableEntryComponent, ThyBoardMovableEntryComponent],
     host: {
         class: 'thy-entry-container board-lane-body-entry',
-        '[class.thy-entry-collapsed]': '!entry()?.expanded'
+        '[class.thy-entry-collapsed]': '!entry()?.expanded',
+        '[class.thy-entry-split]': 'entry().split'
     }
 })
 export class ThyBoardEntryComponent {
-    entryComponent = viewChild(ThyBoardEntryBase);
+    entryComponent = viewChildren(ThyBoardEntryBase);
 
     entry = input.required<ThyBoardEntry>();
 
@@ -107,7 +109,11 @@ export class ThyBoardEntryComponent {
 
     virtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
 
+    boardEntryStatus = ThyBoardEntryStatus;
+
     scrollToOffset(payload: { position: 'top' | 'middle' | 'bottom'; scrollTop: number; laneHight: number }) {
-        this.entryComponent()?.scrollToOffset(payload);
+        this.entryComponent().forEach((entryComponent) => {
+            entryComponent.scrollToOffset(payload);
+        });
     }
 }
