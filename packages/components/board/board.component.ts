@@ -26,13 +26,14 @@ import {
 } from './entities';
 import { ThyBoardHeaderComponent } from './header/header.component';
 import { ThyBoardLaneComponent } from './lane/lane.component';
-import { ThyBoardEntryComponent } from './entry/entry.component';
 import { ThyBoardBodyScrollableDirective } from './scroll/board-body-scroll';
 import { ThyBoardService } from './board.service';
-import { CdkDrag, CdkDropListGroup, DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDropListGroup, DragDropModule, DragDropRegistry } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
 import { SafeAny } from 'ngx-tethys/types';
 import { ThyBoardSkeletonComponent } from './skeleton/skeleton.component';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { ThyDragDropRegistry } from './scroll/drag-drop-registry';
 
 @Component({
     selector: 'thy-board',
@@ -44,14 +45,20 @@ import { ThyBoardSkeletonComponent } from './skeleton/skeleton.component';
         DragDropModule,
         ThyBoardHeaderComponent,
         ThyBoardLaneComponent,
-        ThyBoardEntryComponent,
         ThyBoardBodyScrollableDirective,
         ThyBoardSkeletonComponent
     ],
+    hostDirectives: [CdkScrollable],
     host: {
-        class: 'thy-board-container'
+        class: 'thy-board'
     },
-    providers: [ThyBoardService]
+    providers: [
+        ThyBoardService,
+        {
+            provide: DragDropRegistry,
+            useClass: ThyDragDropRegistry
+        }
+    ]
 })
 export class ThyBoardComponent implements OnInit {
     /**

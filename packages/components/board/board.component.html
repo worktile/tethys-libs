@@ -1,77 +1,79 @@
-<thy-board-header
-  [hasLane]="thyShowLane()"
-  [entries]="thyBoardService.entriesWithCards()"
-  [headerTemplateRef]="headerTemplateRef()"
-  [allLanesExpanded]="thyBoardService.allLanesExpanded()"
-  [entryCollapsible]="thyBoardService.entryCollapsible()"
-  [hasCollapsedEntry]="thyBoardService.hasCollapsedEntry()"
-  [container]="elementRef"
-  (expandAllLanes)="expandAllLanes($event)"
-  (expandEntry)="expandEntry($event)"
->
-</thy-board-header>
-<div
-  class="board-body"
-  cdkDropListGroup
-  [cdkDropListGroupDisabled]="!thySortable() && !thyMovable()"
-  [thyBoardBodyScrollable]="!thyShowLane() || !thyVirtualScroll()"
-  [thyLanes]="thyBoardService.lanesWithEntriesAndCards()"
-  #boardScrollElement
-  [class.board-single-swimlane]="!thyShowLane()"
->
-  @if (thyShowLane()) {
-    @for (lane of thyBoardService.lanesWithEntriesAndCards(); track lane._id) {
-      @defer (on viewport) {
-        <thy-board-lane
-          [lane]="lane"
-          [entries]="thyBoardService.entriesWithCards()"
-          [hasLane]="thyShowLane()"
-          [virtualScroll]="thyVirtualScroll()"
-          [laneTemplateRef]="laneTemplateRef()"
-          [cardTemplateRef]="cardTemplateRef()"
-          [allLanesExpanded]="thyBoardService.allLanesExpanded()"
-          [laneCollapsible]="thyBoardService.laneCollapsible()"
-          [container]="boardScrollElement"
-          [defaultCardSize]="thyDefaultCardSize()"
-          [movable]="thyMovable()"
-          [sortable]="thySortable()"
-          (expandLane)="expandLane($event)"
-          [cardDraggablePredicate]="thyCardDraggablePredicate()"
-          [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
-          (cardDragStarted)="dragCardStarted($event)"
-          [cardDropAction]="dropListDropped"
-          [draggingCard]="draggingCard"
-          [hasDroppableZones]="!!thyCardDroppableZonesAction()"
-          [cardDroppableZones]="cardDroppableZones"
-          [entryTopTemplateRef]="entryTopTemplateRef()"
-          [entryBottomTemplateRef]="entryBottomTemplateRef()"
-          (virtualScrolledIndexChange)="thyVirtualScrolledIndexChange.emit($event)"
-        ></thy-board-lane>
-      } @placeholder {
-        <thy-board-skeleton [hasLane]="thyShowLane()" [entries]="thyEntries()"></thy-board-skeleton>
+<div class="thy-board-container">
+  <thy-board-header
+    [hasLane]="thyShowLane()"
+    [entries]="thyBoardService.entriesWithCards()"
+    [headerTemplateRef]="headerTemplateRef()"
+    [allLanesExpanded]="thyBoardService.allLanesExpanded()"
+    [entryCollapsible]="thyBoardService.entryCollapsible()"
+    [hasCollapsedEntry]="thyBoardService.hasCollapsedEntry()"
+    [container]="elementRef"
+    (expandAllLanes)="expandAllLanes($event)"
+    (expandEntry)="expandEntry($event)"
+  >
+  </thy-board-header>
+  <div
+    class="board-body"
+    cdkDropListGroup
+    [cdkDropListGroupDisabled]="!thySortable() && !thyMovable()"
+    [thyBoardBodyScrollable]="!thyShowLane() || !thyVirtualScroll()"
+    [thyLanes]="thyBoardService.lanesWithEntriesAndCards()"
+    #boardScrollElement
+    [class.board-single-swimlane]="!thyShowLane()"
+  >
+    @if (thyShowLane()) {
+      @for (lane of thyBoardService.lanesWithEntriesAndCards(); track lane._id) {
+        @defer (on viewport) {
+          <thy-board-lane
+            [lane]="lane"
+            [entries]="thyBoardService.entriesWithCards()"
+            [hasLane]="thyShowLane()"
+            [virtualScroll]="thyVirtualScroll()"
+            [laneTemplateRef]="laneTemplateRef()"
+            [cardTemplateRef]="cardTemplateRef()"
+            [allLanesExpanded]="thyBoardService.allLanesExpanded()"
+            [laneCollapsible]="thyBoardService.laneCollapsible()"
+            [container]="boardScrollElement"
+            [defaultCardSize]="thyDefaultCardSize()"
+            [movable]="thyMovable()"
+            [sortable]="thySortable()"
+            (expandLane)="expandLane($event)"
+            [cardDraggablePredicate]="thyCardDraggablePredicate()"
+            [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
+            (cardDragStarted)="dragCardStarted($event)"
+            [cardDropAction]="dropListDropped"
+            [draggingCard]="draggingCard"
+            [hasDroppableZones]="!!thyCardDroppableZonesAction()"
+            [cardDroppableZones]="cardDroppableZones"
+            [entryTopTemplateRef]="entryTopTemplateRef()"
+            [entryBottomTemplateRef]="entryBottomTemplateRef()"
+            (virtualScrolledIndexChange)="thyVirtualScrolledIndexChange.emit($event)"
+          ></thy-board-lane>
+        } @placeholder {
+          <thy-board-skeleton [hasLane]="thyShowLane()" [entries]="thyEntries()"></thy-board-skeleton>
+        }
       }
+    } @else {
+      <thy-board-lane
+        [entries]="thyBoardService.entriesWithCards()"
+        [hasLane]="thyShowLane()"
+        [virtualScroll]="thyVirtualScroll()"
+        [laneTemplateRef]="laneTemplateRef()"
+        [cardTemplateRef]="cardTemplateRef()"
+        [container]="boardScrollElement"
+        [defaultCardSize]="thyDefaultCardSize()"
+        [movable]="thyMovable()"
+        [sortable]="thySortable()"
+        [cardDraggablePredicate]="thyCardDraggablePredicate()"
+        [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
+        (cardDragStarted)="dragCardStarted($event)"
+        [cardDropAction]="dropListDropped"
+        [draggingCard]="draggingCard"
+        [hasDroppableZones]="!!thyCardDroppableZonesAction()"
+        [cardDroppableZones]="cardDroppableZones"
+        [entryTopTemplateRef]="entryTopTemplateRef()"
+        [entryBottomTemplateRef]="entryBottomTemplateRef()"
+        (virtualScrolledIndexChange)="thyVirtualScrolledIndexChange.emit($event)"
+      ></thy-board-lane>
     }
-  } @else {
-    <thy-board-lane
-      [entries]="thyBoardService.entriesWithCards()"
-      [hasLane]="thyShowLane()"
-      [virtualScroll]="thyVirtualScroll()"
-      [laneTemplateRef]="laneTemplateRef()"
-      [cardTemplateRef]="cardTemplateRef()"
-      [container]="boardScrollElement"
-      [defaultCardSize]="thyDefaultCardSize()"
-      [movable]="thyMovable()"
-      [sortable]="thySortable()"
-      [cardDraggablePredicate]="thyCardDraggablePredicate()"
-      [cardDropEnterPredicate]="thyCardDropEnterPredicate()"
-      (cardDragStarted)="dragCardStarted($event)"
-      [cardDropAction]="dropListDropped"
-      [draggingCard]="draggingCard"
-      [hasDroppableZones]="!!thyCardDroppableZonesAction()"
-      [cardDroppableZones]="cardDroppableZones"
-      [entryTopTemplateRef]="entryTopTemplateRef()"
-      [entryBottomTemplateRef]="entryBottomTemplateRef()"
-      (virtualScrolledIndexChange)="thyVirtualScrolledIndexChange.emit($event)"
-    ></thy-board-lane>
-  }
+  </div>
 </div>
