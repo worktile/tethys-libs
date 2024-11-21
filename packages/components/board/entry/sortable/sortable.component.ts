@@ -5,11 +5,13 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ThyFlexItem } from 'ngx-tethys/grid';
 
 import { ThyBoardEntryVirtualScroll } from '../../scroll/entry-virtual-scroll';
-import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ThyDragDropDirective } from 'ngx-tethys/shared';
 import { ThyBoardFuncPipe } from '../../board.pipe';
 import { ThyBoardEntryBase } from '../entry-base';
 import { THY_BOARD_ENTRY, ThyBoardCard, ThyBoardDragContainer, ThyBoardDragScopeType, ThyBoardEntryAbstract } from '../../entities';
+import { SafeAny } from 'ngx-tethys/types';
+import { tap } from 'rxjs';
 
 @Component({
     selector: 'thy-board-sortable-entry',
@@ -61,5 +63,45 @@ export class ThyBoardSortableEntryComponent extends ThyBoardEntryBase {
             }
         }
         return false;
+    }
+
+    drop(event: CdkDragDrop<ThyBoardDragContainer | SafeAny>) {
+        const currentPreOrAfterCard = event.container.data.card;
+        const currentPreOrAfterCardIndex =
+            (event.container.data.cards || []).findIndex((card: ThyBoardCard) => {
+                return card._id === currentPreOrAfterCard?._id;
+            }) || 0;
+        const currentIndex = event.currentIndex ? currentPreOrAfterCardIndex + 1 : currentPreOrAfterCardIndex;
+
+        const previousIndex = (event.previousContainer.data?.cards || []).findIndex(
+            (card: ThyBoardCard) => card._id === event.item.data._id
+        );
+
+        transferArrayItem(event.previousContainer.data?.cards!, event.container.data?.cards!, previousIndex, currentIndex);
+        const cardDropAction = this.boardEntry.cardDropAction();
+        if (cardDropAction) {
+            cardDropAction({
+                card: event.item.data,
+                previousContainer: event.previousContainer.data!,
+                previousIndex: previousIndex,
+                container: event.container.data!,
+                currentIndex: currentIndex
+            })
+                .pipe(
+                    tap((result: boolean) => {
+                        if (!result) {
+                            transferArrayItem(
+                                event.container.data?.cards!,
+                                event.previousContainer.data?.cards!,
+                                currentIndex,
+                                previousIndex
+                            );
+                            event.previousContainer.data.changeDetectorRef.markForCheck();
+                            this.changeDetectorRef.markForCheck();
+                        }
+                    })
+                )
+                .subscribe();
+        }
     }
 }

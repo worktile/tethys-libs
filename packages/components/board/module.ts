@@ -14,6 +14,7 @@ import { ThyBoardFuncPipe } from './board.pipe';
 import { ThyBoardSkeletonComponent } from './skeleton/skeleton.component';
 import { ThyBoardSortableEntryComponent } from './entry/sortable/sortable.component';
 import { ThyBoardMovableEntryComponent } from './entry/movable/movable.component';
+import { CdkScrollableModule } from '@angular/cdk/scrolling';
 
 const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySharedModule];
 
@@ -21,6 +22,7 @@ const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySha
     imports: [
         ...TETHYS_MODULES,
         CommonModule,
+        CdkScrollableModule,
         ThyBoardComponent,
         ThyBoardBodyScrollableDirective,
         ThyBoardLaneComponent,
