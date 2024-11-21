@@ -6,22 +6,9 @@
   }"
   [ngClass]="{ 'entry-collapsed': !boardEntry.entry().expanded }"
 >
-  <div
-    class="entry-cards"
-    cdkDropList
-    [cdkDropListAutoScrollStep]="5"
-    thyDragDrop
-    [cdkDropListData]="{
-      entry: boardEntry.entry(),
-      lane: boardEntry.lane(),
-      cards: boardEntry.entry().cards,
-      changeDetectorRef: changeDetectorRef
-    }"
-    (cdkDropListDropped)="drop($event)"
-    [cdkDropListEnterPredicate]="dropListEnterPredicate"
-  >
+  <div class="entry-cards">
     @if (boardEntry.topTemplateRef()) {
-      <div #top>
+      <div #top class="entry-top">
         <ng-template
           [ngTemplateOutlet]="boardEntry!.topTemplateRef()!"
           [ngTemplateOutletContext]="{ entry: boardEntry.entry(), lane: boardEntry.lane() }"
@@ -41,26 +28,39 @@
         [ngClass]="{ 'entry-viewport flex-shrink-0': boardEntry.hasLane() }"
       >
         <div
+          cdkDropList
+          [cdkDropListAutoScrollStep]="5"
+          thyDragDrop
+          [cdkDropListData]="{
+            entry: boardEntry.entry(),
+            lane: boardEntry.lane(),
+            cards: boardEntry.entry().cards,
+            changeDetectorRef: changeDetectorRef,
+            card: card
+          }"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListEnterPredicate]="dropListEnterPredicate"
           *cdkVirtualFor="let card of boardEntry.entry().cards; let i = index; trackBy: trackByFn"
           #card
           [attr.name]="card._id + '-' + i"
           class="entry-card"
-          cdkDrag
-          [cdkDragData]="card"
-          [cdkDragDisabled]="
-            !(
-              card
-              | thyBoardFunc
-                : boardEntry.cardDraggablePredicate()
-                : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards }
-            )
-          "
-          (cdkDragStarted)="cdkDragStarted($event)"
-          (cdkDragReleased)="dragReleased()"
         >
-          <div>
+          <div
+            cdkDrag
+            [cdkDragRootElement]="'.entry-card'"
+            [cdkDragData]="card"
+            [cdkDragDisabled]="
+              !(
+                card
+                | thyBoardFunc
+                  : boardEntry.cardDraggablePredicate()
+                  : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards }
+              )
+            "
+            (cdkDragStarted)="cdkDragStarted($event)"
+          >
             <ng-template
-              [ngTemplateOutlet]="boardEntry!.cardTemplateRef()!"
+              [ngTemplateOutlet]="boardEntry.cardTemplateRef()!"
               [ngTemplateOutletContext]="{ entry: boardEntry.entry(), $implicit: card }"
             ></ng-template>
           </div>
@@ -69,21 +69,34 @@
     } @else {
       @for (card of boardEntry.entry().cards; track card._id) {
         <div
+          cdkDropList
+          [cdkDropListAutoScrollStep]="5"
+          thyDragDrop
+          [cdkDropListData]="{
+            entry: boardEntry.entry(),
+            lane: boardEntry.lane(),
+            cards: boardEntry.entry().cards,
+            changeDetectorRef: changeDetectorRef,
+            card: card
+          }"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListEnterPredicate]="dropListEnterPredicate"
           class="entry-card"
-          cdkDrag
-          [cdkDragData]="card"
-          [cdkDragDisabled]="
-            !(
-              card
-              | thyBoardFunc
-                : boardEntry.cardDraggablePredicate()
-                : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards }
-            )
-          "
-          (cdkDragStarted)="cdkDragStarted($event)"
-          (cdkDragReleased)="dragReleased()"
         >
-          <div>
+          <div
+            cdkDrag
+            [cdkDragRootElement]="'.entry-card'"
+            [cdkDragData]="card"
+            [cdkDragDisabled]="
+              !(
+                card
+                | thyBoardFunc
+                  : boardEntry.cardDraggablePredicate()
+                  : { entry: boardEntry.entry(), lane: boardEntry.lane(), cards: boardEntry.entry().cards }
+              )
+            "
+            (cdkDragStarted)="cdkDragStarted($event)"
+          >
             <ng-template
               [ngTemplateOutlet]="boardEntry!.cardTemplateRef()!"
               [ngTemplateOutletContext]="{ entry: boardEntry.entry(), $implicit: card }"
@@ -92,9 +105,8 @@
         </div>
       }
     }
-
     @if (boardEntry.bottomTemplateRef()) {
-      <div #bottom>
+      <div #bottom class="entry-bottom">
         <ng-template
           [ngTemplateOutlet]="boardEntry.bottomTemplateRef()!"
           [ngTemplateOutletContext]="{ entry: boardEntry.entry(), lane: boardEntry.lane() }"
