@@ -10,8 +10,8 @@ import { ThyDragDropDirective } from 'ngx-tethys/shared';
 import { ThyBoardFuncPipe } from '../../board.pipe';
 import { ThyBoardEntryBase } from '../entry-base';
 import { THY_BOARD_ENTRY, ThyBoardCard, ThyBoardDragContainer, ThyBoardDragScopeType, ThyBoardEntryAbstract } from '../../entities';
-import { tap } from 'rxjs';
 import { SafeAny } from 'ngx-tethys/types';
+import { tap } from 'rxjs';
 
 @Component({
     selector: 'thy-board-sortable-entry',
@@ -71,7 +71,7 @@ export class ThyBoardSortableEntryComponent extends ThyBoardEntryBase {
             (event.container.data.cards || []).findIndex((card: ThyBoardCard) => {
                 return card._id === currentPreOrAfterCard?._id;
             }) || 0;
-        const currentIndex = event.currentIndex ? currentPreOrAfterCardIndex : currentPreOrAfterCardIndex + 1;
+        const currentIndex = event.currentIndex ? currentPreOrAfterCardIndex + 1 : currentPreOrAfterCardIndex;
 
         const previousIndex = (event.previousContainer.data?.cards || []).findIndex(
             (card: ThyBoardCard) => card._id === event.item.data._id

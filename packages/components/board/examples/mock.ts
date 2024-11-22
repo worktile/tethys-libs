@@ -5,6 +5,7 @@ export const entries: ThyBoardEntry[] = [
         _id: '1',
         name: '未开始',
         split: true,
+        wipLimit: 6,
         droppableZones: [
             {
                 _id: '1',
@@ -19,6 +20,7 @@ export const entries: ThyBoardEntry[] = [
     {
         _id: '2',
         name: '进行中',
+        wipLimit: 1,
         droppableZones: [
             {
                 _id: '3',

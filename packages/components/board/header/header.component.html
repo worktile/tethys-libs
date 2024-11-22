@@ -16,7 +16,10 @@
   }
   @for (entry of entries(); track entry._id) {
     @if (entry.expanded) {
-      <div class="entry justify-content-between" [ngClass]="{ 'entry-split': entry.split }">
+      <div
+        class="entry justify-content-between"
+        [ngClass]="{ 'entry-split': entry.split, 'entry-exceed-wip-limit': entry.wipLimit && (entry.cards?.length || 0) > entry.wipLimit }"
+      >
         @if (headerTemplateRef()) {
           <ng-template
             [ngTemplateOutlet]="headerTemplateRef()!"
@@ -27,8 +30,18 @@
             <span thyFlexibleText [thyTooltipContent]="entry.name"> {{ entry.name }}</span>
           </div>
           <div class="flex-fill">
-            <span class="mx-1">·</span>
-            <span>{{ entry.cards?.length || 0 }}</span>
+            @if (entry.wipLimit) {
+              <span [thyTooltip]="'共 ' + (entry.cards?.length || 0) + ' 个 / 在制品限制 ' + entry.wipLimit + ' 个'">
+                <span class="mx-1">·</span>
+                <span [class.text-danger]="(entry.cards?.length || 0) > entry.wipLimit">{{ entry.cards?.length || 0 }}</span>
+                / {{ entry.wipLimit }}
+              </span>
+            } @else {
+              <span [thyTooltip]="'共 ' + (entry.cards?.length || 0) + ' 个'">
+                <span class="mx-1">·</span>
+                <span>{{ entry.cards?.length || 0 }}</span>
+              </span>
+            }
           </div>
         }
         @if (entryCollapsible()) {
@@ -44,7 +57,7 @@
         }
       </div>
     } @else {
-      <div class="entry-collapsed">
+      <div class="entry-collapsed" [class.entry-exceed-wip-limit]="entry.wipLimit && (entry.cards?.length || 0) > entry.wipLimit">
         <div class="entry-collapsed-content" #collapsedHeader [ngStyle]="{ height: containerClientHeight() + 'px' }">
           @if (headerTemplateRef()) {
             <ng-template
@@ -56,7 +69,7 @@
             <span class="mx-auto">·</span>
             @let count = entry.cards?.length || 0;
             @if (entry.wipLimit) {
-              <div class="count" [thyTooltip]="'共 ' + count + ' 个工 / 在制品限制 ' + entry.wipLimit + ' 个'">
+              <div class="count" [thyTooltip]="'共 ' + count + ' 个 / 在制品限制 ' + entry.wipLimit + ' 个'">
                 <span class="count-num">
                   <span [ngClass]="{ 'count--wip-limit': count > entry.wipLimit }">{{ count }}</span>
                   /
@@ -83,3 +96,4 @@
     }
   }
 </div>
+<div class="entry-header-empty-zone"></div>

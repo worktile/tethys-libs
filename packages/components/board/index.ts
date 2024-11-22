@@ -14,3 +14,4 @@ export * from './entry/sortable/sortable.component';
 export * from './entry/movable/movable.component';
 export * from './entry/entry-base';
 export * from './entry/entry-drag-drop';
+export * from './scroll/drag-drop-registry';

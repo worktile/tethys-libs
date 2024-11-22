@@ -1,7 +1,10 @@
 @if (movable()) {
   @if (entry().split) {
     <thy-board-movable-entry [status]="boardEntryStatus.doing"></thy-board-movable-entry>
-    <div class="entry-split-line"></div>
+    @if (!lane() || lane()!.expanded) {
+      <div class="entry-split-line"></div>
+    }
+
     <thy-board-movable-entry [status]="boardEntryStatus.done"></thy-board-movable-entry>
   } @else {
     <thy-board-movable-entry></thy-board-movable-entry>
@@ -9,7 +12,10 @@
 } @else {
   @if (entry().split) {
     <thy-board-sortable-entry [status]="boardEntryStatus.doing"></thy-board-sortable-entry>
-    <div class="entry-split-line"></div>
+    @if (!lane() || lane()!.expanded) {
+      <div class="entry-split-line"></div>
+    }
+
     <thy-board-sortable-entry [status]="boardEntryStatus.done"></thy-board-sortable-entry>
   } @else {
     <thy-board-sortable-entry></thy-board-sortable-entry>

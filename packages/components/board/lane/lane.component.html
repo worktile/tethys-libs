@@ -39,37 +39,29 @@
 >
   @if (hasLane()) {
     @for (entry of lane()?.entries; track entry._id) {
-      @if (lane()?.expanded) {
-        <thy-board-entry
-          [class.board-lane-body-entry-is-empty]="lane()?.expanded && lane()?.cards?.length === 0"
-          [class.board-lane-body-entry-is-collapsed]="!lane()?.expanded"
-          [hasLane]="hasLane()"
-          [virtualScroll]="virtualScroll()"
-          [entry]="entry"
-          [lane]="lane()"
-          [laneHeight]="laneHeight"
-          [cardTemplateRef]="cardTemplateRef()"
-          [container]="container()"
-          [defaultCardSize]="defaultCardSize()"
-          [draggingCard]="draggingCard()"
-          [hasDroppableZones]="hasDroppableZones()"
-          [cardDroppableZones]="cardDroppableZones()"
-          [movable]="movable()"
-          [sortable]="sortable()"
-          (cardDragStarted)="cardDragStarted.emit($event)"
-          [cardDraggablePredicate]="cardDraggablePredicate()"
-          [cardDropEnterPredicate]="cardDropEnterPredicate()"
-          [cardDropAction]="dropListDropped"
-          [topTemplateRef]="entryTopTemplateRef()"
-          [bottomTemplateRef]="entryBottomTemplateRef()"
-          (virtualScrolledIndexChange)="virtualScrolledIndexChange.emit($event)"
-        ></thy-board-entry>
-      } @else {
-        <div class="text-muted text-truncate board-lane-collapsed">
-          <span class="text-secondary mr-1">{{ entry.cards!.length }}</span
-          >个{{ entry.name }}
-        </div>
-      }
+      <thy-board-entry
+        [hasLane]="hasLane()"
+        [virtualScroll]="virtualScroll()"
+        [entry]="entry"
+        [lane]="lane()"
+        [entries]="entries()"
+        [laneHeight]="laneHeight"
+        [cardTemplateRef]="cardTemplateRef()"
+        [container]="container()"
+        [defaultCardSize]="defaultCardSize()"
+        [draggingCard]="draggingCard()"
+        [hasDroppableZones]="hasDroppableZones()"
+        [cardDroppableZones]="cardDroppableZones()"
+        [movable]="movable()"
+        [sortable]="sortable()"
+        (cardDragStarted)="cardDragStarted.emit($event)"
+        [cardDraggablePredicate]="cardDraggablePredicate()"
+        [cardDropEnterPredicate]="cardDropEnterPredicate()"
+        [cardDropAction]="dropListDropped"
+        [topTemplateRef]="entryTopTemplateRef()"
+        [bottomTemplateRef]="entryBottomTemplateRef()"
+        (virtualScrolledIndexChange)="virtualScrolledIndexChange.emit($event)"
+      ></thy-board-entry>
     }
   } @else {
     @for (entry of entries(); track entry._id) {
@@ -78,6 +70,7 @@
         [virtualScroll]="virtualScroll()"
         [entry]="entry"
         [lane]="lane()"
+        [entries]="entries()"
         [laneHeight]="laneHeight"
         [cardTemplateRef]="cardTemplateRef()"
         [container]="container()"

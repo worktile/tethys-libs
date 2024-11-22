@@ -3,14 +3,14 @@
 
 .thy-board-lane-container {
     display: flex;
-    border-bottom: solid 1px variables.$gray-200;
 
     .board-lane-header-container {
         padding: 20px;
         width: 320px;
         flex-shrink: 0;
+        border-bottom: solid 1px variables.$gray-200;
         &.board-lane-header-expanded {
-            border-right: solid 1px variables.$gray-200;
+            border-left: solid 1px variables.$gray-200;
         }
 
         .board-lane-header {
