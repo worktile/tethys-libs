@@ -123,8 +123,6 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
         (cards || []).forEach((card, index) => {
             if (this.cardsHeightMap[card._id]) {
                 cardsHeightMap[card._id] = { ...this.cardsHeightMap[card._id], index: index };
-            } else {
-                cardsHeightMap[card._id] = { height: this.averager.defaultItemSize, index: index };
             }
         });
         this.cardsHeightMap = { ...cardsHeightMap };
@@ -151,7 +149,7 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
                 const [cardId, cardIndex] = name.split('-');
                 const temp = this.cardsHeightMap[cardId];
                 const height = this.getCardHeight(child);
-                if (temp?.height !== height) {
+                if (!temp?.height || temp?.height !== height) {
                     this.cardsHeightMap[cardId] = { index: Number(cardIndex), height: height };
                     isChanged = true;
                 }
