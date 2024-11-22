@@ -1,5 +1,5 @@
 import { ChangeDetectorRef } from '@angular/core';
-import { ThyBoardCard, ThyBoardEntry, ThyBoardLane, ThyBoardZone } from './board.entity';
+import { ThyBoardCard, ThyBoardEntry, ThyBoardEntryStatus, ThyBoardLane, ThyBoardZone } from './board.entity';
 
 export interface ThyBoardDragContainer {
     entry: ThyBoardEntry;
@@ -9,6 +9,8 @@ export interface ThyBoardDragContainer {
     cards?: ThyBoardCard[];
 
     card?: ThyBoardCard;
+
+    status?: ThyBoardEntryStatus;
 
     zone?: ThyBoardZone;
 

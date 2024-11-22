@@ -1,9 +1,10 @@
-import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
+import { ThyBoardCard, ThyBoardEntry, ThyBoardEntryStatus, ThyBoardLane } from '@tethys/pro/board';
 
 export const entries: ThyBoardEntry[] = [
     {
         _id: '1',
         name: '未开始',
+        split: true,
         wipLimit: 6,
         droppableZones: [
             {
@@ -67,6 +68,7 @@ export const items: ThyBoardCard[] = [
         title: '项目1',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -74,6 +76,7 @@ export const items: ThyBoardCard[] = [
         title: '项目2',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -88,6 +91,7 @@ export const items: ThyBoardCard[] = [
         title: '项目4',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -95,6 +99,7 @@ export const items: ThyBoardCard[] = [
         title: '项目5',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -102,6 +107,7 @@ export const items: ThyBoardCard[] = [
         title: '项目6',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -109,6 +115,7 @@ export const items: ThyBoardCard[] = [
         title: '项目7',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -116,6 +123,7 @@ export const items: ThyBoardCard[] = [
         title: '项目8',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -130,6 +138,7 @@ export const items: ThyBoardCard[] = [
         title: '项目10',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -137,6 +146,7 @@ export const items: ThyBoardCard[] = [
         title: '项目11',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -144,6 +154,7 @@ export const items: ThyBoardCard[] = [
         title: '项目12',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -151,6 +162,7 @@ export const items: ThyBoardCard[] = [
         title: '项目13',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -158,6 +170,7 @@ export const items: ThyBoardCard[] = [
         title: '项目14',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -172,6 +185,7 @@ export const items: ThyBoardCard[] = [
         title: '项目16',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -179,6 +193,7 @@ export const items: ThyBoardCard[] = [
         title: '项目17',
         laneIds: ['4'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -186,6 +201,7 @@ export const items: ThyBoardCard[] = [
         title: '项目18',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -200,6 +216,7 @@ export const items: ThyBoardCard[] = [
         title: '项目20',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -207,6 +224,7 @@ export const items: ThyBoardCard[] = [
         title: '项目21',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -214,6 +232,7 @@ export const items: ThyBoardCard[] = [
         title: '项目22',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -221,6 +240,7 @@ export const items: ThyBoardCard[] = [
         title: '项目23',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -228,6 +248,7 @@ export const items: ThyBoardCard[] = [
         title: '项目24',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -235,6 +256,7 @@ export const items: ThyBoardCard[] = [
         title: '项目25',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -242,6 +264,7 @@ export const items: ThyBoardCard[] = [
         title: '项目26',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.done,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -249,6 +272,7 @@ export const items: ThyBoardCard[] = [
         title: '项目27',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -256,6 +280,7 @@ export const items: ThyBoardCard[] = [
         title: '项目28',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -263,6 +288,7 @@ export const items: ThyBoardCard[] = [
         title: '项目29',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -270,6 +296,7 @@ export const items: ThyBoardCard[] = [
         title: '项目30',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -277,6 +304,7 @@ export const items: ThyBoardCard[] = [
         title: '项目31',
         laneIds: [''],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -284,6 +312,7 @@ export const items: ThyBoardCard[] = [
         title: '项目32',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -291,6 +320,7 @@ export const items: ThyBoardCard[] = [
         title: '项目33',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -298,6 +328,7 @@ export const items: ThyBoardCard[] = [
         title: '项目34',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -305,6 +336,7 @@ export const items: ThyBoardCard[] = [
         title: '项目35',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
     {
@@ -312,6 +344,7 @@ export const items: ThyBoardCard[] = [
         title: '项目36',
         laneIds: ['1'],
         entryIds: ['1'],
+        status: ThyBoardEntryStatus.doing,
         height: Math.floor(Math.random() * 100 + 100)
     },
 ];

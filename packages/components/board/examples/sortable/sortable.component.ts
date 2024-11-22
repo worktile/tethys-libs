@@ -47,7 +47,8 @@ export class ThyProBoardSortableExampleComponent implements OnInit {
 
     thyDropEnterPredicate = (event: ThyBoardDragPredicateEvent) => {
         // console.log(`判断是否可拖动到：`, event);
-        return event.container.entry._id !== '2';
+        // return event.container.entry._id !== '2';
+        return true;
     };
 
     thyDropAction = (event: ThyBoardDropActionEvent) => {

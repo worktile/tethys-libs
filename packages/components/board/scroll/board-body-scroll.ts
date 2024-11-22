@@ -1,10 +1,9 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { AfterViewInit, booleanAttribute, ContentChild, ContentChildren, Directive, Input, input, QueryList } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ContentChildren, Directive, Input, input, QueryList } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { animationFrameScheduler, asapScheduler, auditTime } from 'rxjs';
 import { ThyBoardLaneComponent } from '../lane/lane.component';
 import { ThyBoardLane } from '../entities';
-import { ThyBoardSkeletonComponent } from '../skeleton/skeleton.component';
 
 const SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? animationFrameScheduler : asapScheduler;
 

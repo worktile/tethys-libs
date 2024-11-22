@@ -18,7 +18,7 @@
     @if (entry.expanded) {
       <div
         class="entry justify-content-between"
-        [class.entry-exceed-wip-limit]="entry.wipLimit && (entry.cards?.length || 0) > entry.wipLimit"
+        [ngClass]="{ 'entry-split': entry.split, 'entry-exceed-wip-limit': entry.wipLimit && (entry.cards?.length || 0) > entry.wipLimit }"
       >
         @if (headerTemplateRef()) {
           <ng-template

@@ -37,6 +37,9 @@
             &:last-child {
                 border-right: solid 1px variables.$gray-200;
             }
+            &.entry-split {
+                width: 640px;
+            }
         }
 
         .entry-collapsed {
@@ -81,7 +84,7 @@
                 border-left: none;
             }
 
-            & + .entry-collapsed .entry-collapsed-content  {
+            & + .entry-collapsed .entry-collapsed-content {
                 border-left: none;
             }
         }
