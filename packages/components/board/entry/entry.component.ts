@@ -3,9 +3,11 @@ import {
     Component,
     TemplateRef,
     booleanAttribute,
+    effect,
     input,
     numberAttribute,
     output,
+    untracked,
     viewChild
 } from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
@@ -27,6 +29,7 @@ import { THY_BOARD_ENTRY } from '../entities';
 import { ThyBoardEntryBase } from './entry-base';
 import { ThyBoardSortableEntryComponent } from './sortable/sortable.component';
 import { ThyBoardMovableEntryComponent } from './movable/movable.component';
+import { helpers } from 'ngx-tethys/util';
 
 @Component({
     selector: 'thy-board-entry',
@@ -42,13 +45,18 @@ import { ThyBoardMovableEntryComponent } from './movable/movable.component';
     imports: [ThyBoardSortableEntryComponent, ThyBoardMovableEntryComponent],
     host: {
         class: 'thy-entry-container board-lane-body-entry',
-        '[class.thy-entry-collapsed]': '!entry()?.expanded'
+        '[class.thy-entry-collapsed]': '!entry()?.expanded',
+        '[class.board-lane-body-entry-is-empty]': 'lane() && lane()!.expanded && lane()!.cards?.length === 0',
+        '[class.board-lane-body-entry-is-collapsed]': 'lane() && !lane()!.expanded',
+        '[class.thy-entry-exceed-wip-limit]': 'entryIsExceedWipLimit'
     }
 })
 export class ThyBoardEntryComponent {
     entryComponent = viewChild(ThyBoardEntryBase);
 
     entry = input.required<ThyBoardEntry>();
+
+    entries = input.required<ThyBoardEntry[]>();
 
     hasLane = input(false, { transform: booleanAttribute });
 
@@ -106,6 +114,20 @@ export class ThyBoardEntryComponent {
     cardDragStarted = output<CdkDrag<ThyBoardCard>>();
 
     virtualScrolledIndexChange = output<ThyBoardVirtualScrolledIndexChangeEvent>();
+
+    entryIsExceedWipLimit = false;
+
+    constructor() {
+        effect(() => {
+            const entriesMapById = helpers.keyBy(this.entries() || [], '_id');
+            untracked(() => {
+                if (this.entry()) {
+                    const entry = entriesMapById[this.entry()._id];
+                    this.entryIsExceedWipLimit = !!entry.wipLimit && (entry.cards?.length || 0) > entry.wipLimit!;
+                }
+            });
+        });
+    }
 
     scrollToOffset(payload: { position: 'top' | 'middle' | 'bottom'; scrollTop: number; laneHight: number }) {
         this.entryComponent()?.scrollToOffset(payload);
