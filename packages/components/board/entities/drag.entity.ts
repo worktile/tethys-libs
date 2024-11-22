@@ -14,7 +14,7 @@ export interface ThyBoardDragContainer {
 
     zone?: ThyBoardZone;
 
-    changeDetectorRef?: ChangeDetectorRef
+    changeDetectorRef?: ChangeDetectorRef;
 }
 
 export interface ThyBoardDragStartEvent {
