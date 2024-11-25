@@ -1,5 +1,5 @@
 module.exports = {
-    allowBranch: ['master', 'release-*'],
+    allowBranch: ['master', 'release-*', 'release-auto-*'],
     bumpFiles: [
         'package.json',
         './packages/auth/package.json',
@@ -10,7 +10,8 @@ module.exports = {
         }
     ],
     skip: {
-        changelog: true
+        changelog: true,
+        confirm: true
     },
     commitAll: true,
     hooks: {
