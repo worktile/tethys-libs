@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.15](https://github.com/tethys-org/libs/compare/v18.0.14...v18.0.15) (2024-11-25)
+
+
+### Bug Fixes
+
+* **components:** fix scroll error when sortable and virtual-scroll ([b35f5bf](https://github.com/tethys-org/libs/commit/b35f5bfec5c72727a02ee723c473d6f1dbde1c6b))
+
+
+### Features
+
+* **components:** automatic scrolling when approaching the boundary when drag card #TINFR-723 ([fd0927c](https://github.com/tethys-org/libs/commit/fd0927c026b8d50a1a02ce1f00b0ea5e8ab61536)), closes [#TINFR-723](https://github.com/tethys-org/libs/issues/TINFR-723)
+* **components:** board support wip #TINFR-866 ([2cd4ad1](https://github.com/tethys-org/libs/commit/2cd4ad1a4e535d013d6f623d7b1703386d6246e3)), closes [#TINFR-866](https://github.com/tethys-org/libs/issues/TINFR-866)
+* **components:** entry support split #TINFR-867 ([#146](https://github.com/tethys-org/libs/issues/146)) ([f5ada30](https://github.com/tethys-org/libs/commit/f5ada3094d4fd0aeec2e59df9f0fa1b545006388)), closes [#TINFR-867](https://github.com/tethys-org/libs/issues/TINFR-867) [#TINFR-867](https://github.com/tethys-org/libs/issues/TINFR-867)
+
+
+
+
+
 ## [18.0.14](https://github.com/tethys-org/libs/compare/v18.0.12...v18.0.14) (2024-11-08)
 
 
