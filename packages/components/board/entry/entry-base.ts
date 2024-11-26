@@ -152,7 +152,8 @@ export abstract class ThyBoardEntryBase extends ThyBoardEntryDragDrop {
         this.boardEntry.virtualScrolledIndexChange.emit({
             renderedRange: this.currentViewport()!.getRenderedRange(),
             entry: this.boardEntry.entry(),
-            lane: this.boardEntry.lane()!
+            lane: this.boardEntry.lane()!,
+            status: this.status()
         });
     }
 

@@ -56,6 +56,7 @@ export interface ThyBoardVirtualScrolledIndexChangeEvent {
     renderedRange: ListRange;
     entry: ThyBoardEntry;
     lane?: ThyBoardLane;
+    status?: ThyBoardEntryStatus;
     nextLane?: ThyBoardLane;
     expandedLanes?: ThyBoardLane[];
 }
