@@ -222,11 +222,14 @@
         height: inherit;
         .entry-body {
             .entry-cards {
-                .entry-card {
-                    .cdk-drag-placeholder {
-                        background: variables.$gray-100 !important;
-                        box-shadow: none;
+                .cdk-drag {
+                    &:not(:last-child) {
+                        margin-bottom: 8px;
                     }
+                }
+                .cdk-drag-placeholder {
+                    background: variables.$gray-100 !important;
+                    box-shadow: none;
                 }
             }
         }
@@ -310,10 +313,8 @@
         .thy-entry-sortable-container {
             .entry-body {
                 .entry-cards {
-                    .entry-card {
-                        &.cdk-drag-placeholder {
-                            background: rgba($color: board.$thy-board-wip-limit-color, $alpha: 0.12) !important;
-                        }
+                    .cdk-drag-placeholder {
+                        background: rgba($color: board.$thy-board-wip-limit-color, $alpha: 0.12) !important;
                     }
                 }
             }
