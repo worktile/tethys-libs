@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.16](https://github.com/tethys-org/libs/compare/v18.0.15...v18.0.16) (2024-11-28)
+
+
+### Bug Fixes
+
+* **components:** droppable in other entry when sortable is true #TINFR-1076 ([#152](https://github.com/tethys-org/libs/issues/152)) ([83636e3](https://github.com/tethys-org/libs/commit/83636e3c73353096b529fd0d5f1d957cb419a392)), closes [#TINFR-1076](https://github.com/tethys-org/libs/issues/TINFR-1076)
+* **components:** fix bottomTemplate position and droppable when entry is empty #TINFR-1083 ([d2f6745](https://github.com/tethys-org/libs/commit/d2f674559f5e99caf75816930995e1118c0f5582)), closes [#TINFR-1083](https://github.com/tethys-org/libs/issues/TINFR-1083)
+
+
+### Features
+
+* **components:** return status of entry when scroll #TINFR-1062 ([#151](https://github.com/tethys-org/libs/issues/151)) ([051b833](https://github.com/tethys-org/libs/commit/051b83374ce1700d8acb5c65c4cdfa1a85ac3787)), closes [#TINFR-1062](https://github.com/tethys-org/libs/issues/TINFR-1062)
+
+
+
+
+
 ## [18.0.15](https://github.com/tethys-org/libs/compare/v18.0.14...v18.0.15) (2024-11-25)
 
 
