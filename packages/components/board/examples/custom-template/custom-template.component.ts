@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ThyBoardCard, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
+import { ThyBoardCard, ThyBoardDragPredicateEvent, ThyBoardDropActionEvent, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
 import { entries, items, lanes } from '../mock';
+import { delay, of } from 'rxjs';
 
 interface CardInfo extends ThyBoardCard {
     title: string;
@@ -63,4 +64,15 @@ export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
             this.singleBottomHeights[entry._id].top = this.singleBottomHeights[entry._id].top === 22 ? 100 : 22;
         }
     }
+
+    thyDropEnterPredicate = (event: ThyBoardDragPredicateEvent) => {
+        // console.log(`判断是否可拖动到：`, event);
+        // return event.container.entry._id !== '2';
+        return true;
+    };
+
+    thyDropAction = (event: ThyBoardDropActionEvent) => {
+        console.log(`拖动到：`, event);
+        return of(false).pipe(delay(1000));
+    };
 }

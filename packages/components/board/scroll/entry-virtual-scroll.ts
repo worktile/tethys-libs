@@ -133,6 +133,10 @@ export class ThyBoardEntryVirtualScrollStrategy extends AutoSizeVirtualScrollStr
     private getCardHeight(cardElement: Element) {
         let marginY =
             parseFloat(window.getComputedStyle(cardElement).marginBottom) + parseFloat(window.getComputedStyle(cardElement).marginTop);
+        if (cardElement.firstChild) {
+            const childStyle = window.getComputedStyle(cardElement.firstElementChild!) || { marginBottom: '0', marginTop: '0' };
+            marginY = marginY + parseFloat(childStyle.marginBottom) + parseFloat(childStyle.marginTop);
+        }
 
         return cardElement.clientHeight + marginY;
     }

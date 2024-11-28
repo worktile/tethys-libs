@@ -17,7 +17,7 @@
           }
         </div>
       }
-      @if (boardEntry.topTemplateRef()) {
+      @if (boardEntry.topTemplateRef() && !boardEntry.draggingCard()) {
         <div #top class="entry-top">
           <ng-template
             [ngTemplateOutlet]="boardEntry!.topTemplateRef()!"
@@ -33,8 +33,7 @@
           [cards]="cards()!"
           [defaultCardSize]="boardEntry.defaultCardSize()"
           (scrolledIndexChange)="scrolledIndexChange($event)"
-          thyFlexItem="auto"
-          [ngClass]="{ 'entry-viewport flex-shrink-0': boardEntry.hasLane() }"
+          [ngClass]="{ 'entry-viewport': boardEntry.hasLane(), 'flex-fill': cards()!.length > 0 }"
         >
           <div
             cdkDropList
@@ -53,9 +52,10 @@
             *cdkVirtualFor="let card of cards(); let i = index; trackBy: trackByFn; last as isLast"
             #card
             [attr.name]="card._id + '-' + i"
-            class="entry-card"
+            class="entry-card-list"
           >
             <div
+              class="entry-card"
               cdkDrag
               [cdkDragData]="card"
               [cdkDragDisabled]="
@@ -91,9 +91,10 @@
             }"
             (cdkDropListDropped)="drop($event)"
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
-            class="entry-card"
+            class="entry-card-list"
           >
             <div
+              class="entry-card"
               cdkDrag
               [cdkDragData]="card"
               [cdkDragDisabled]="
@@ -114,7 +115,26 @@
           </div>
         }
       }
-      @if (boardEntry.bottomTemplateRef()) {
+
+      @if (cards()?.length === 0 && boardEntry.draggingCard()) {
+        <div
+          cdkDropList
+          [cdkDropListAutoScrollStep]="5"
+          thyDragDrop
+          [cdkDropListData]="{
+            entry: boardEntry.entry(),
+            lane: boardEntry.lane(),
+            cards: cards(),
+            status: status(),
+            changeDetectorRef: changeDetectorRef
+          }"
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListEnterPredicate]="dropListEnterPredicate"
+          class="entry-card-list entry-empty"
+        ></div>
+      }
+
+      @if (boardEntry.bottomTemplateRef() && !boardEntry.draggingCard()) {
         <div #bottom class="entry-bottom">
           <ng-template
             [ngTemplateOutlet]="boardEntry.bottomTemplateRef()!"
