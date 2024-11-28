@@ -43,7 +43,7 @@
             *cdkVirtualFor="let card of cards(); let i = index; trackBy: trackByFn; last as isLast"
             #card
             [attr.name]="card._id + '-' + i"
-            class="entry-card"
+            class="entry-card-list"
             cdkDropList
             [cdkDropListAutoScrollStep]="5"
             thyDragDrop
@@ -58,6 +58,7 @@
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
             <div
+            class="entry-card"
               cdkDrag
               [cdkDragData]="card"
               [cdkDragDisabled]="
@@ -82,7 +83,7 @@
 
         @for (card of cards(); track card._id) {
           <div
-            class="entry-card"
+            class="entry-card-list"
             cdkDropList
             [cdkDropListAutoScrollStep]="5"
             thyDragDrop
@@ -97,6 +98,7 @@
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
             <div
+            class="entry-card"
               cdkDrag
               [cdkDragData]="card"
               [cdkDragDisabled]="

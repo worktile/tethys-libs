@@ -8,6 +8,9 @@
     [thyVirtualScroll]="true"
     [thyAllLanesExpanded]="false"
     [thyEntryCollapsible]="true"
+    [thySortable]="'all'"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDropAction]="thyDropAction"
   >
     <ng-template #header let-entry="">
       @if (entry) {
@@ -56,6 +59,9 @@
     [thyShowLane]="true"
     [thyVirtualScroll]="true"
     [thyEntryCollapsible]="true"
+    [thySortable]="'all'"
+    [thyCardDropEnterPredicate]="thyDropEnterPredicate"
+    [thyCardDropAction]="thyDropAction"
   >
     <ng-template #lane let-lane="" let-isExpanded="isExpanded">
       @if (isExpanded) {

@@ -113,11 +113,14 @@
         }
     }
 
-    .entry-card {
-        margin: 8px 8px 0 8px;
-        flex-shrink: 0;
+    .entry-card-list {
+        .entry-card {
+            margin: 8px 8px 0 8px;
+        }
         &:last-child {
-            margin-bottom: 8px;
+            .entry-card {
+                margin-bottom: 8px;
+            }
         }
     }
 
@@ -222,6 +225,23 @@
         height: inherit;
         .entry-body {
             .entry-cards {
+                .entry-empty {
+                    height: 100%;
+                }
+                //#region 当 entry 只有一个卡片时，拖起卡片后，drop-list 撑满以便可再次放下
+                .cdk-drop-list-dragging {
+                    flex: 1;
+                    & + .cdk-drop-list {
+                        flex: none;
+                    }
+                }
+
+                .cdk-drop-list {
+                    & + .cdk-drop-list-dragging {
+                        flex: none;
+                    }
+                }
+                //#endregion
                 .cdk-drag {
                     &:not(:last-child) {
                         margin-bottom: 8px;

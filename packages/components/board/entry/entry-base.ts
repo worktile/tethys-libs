@@ -105,9 +105,12 @@ export abstract class ThyBoardEntryBase extends ThyBoardEntryDragDrop {
         const virtualScroll = this.boardEntry.virtualScroll();
         const containerHeight = this.boardEntry.container()?.clientHeight;
         const laneHeight = this.boardEntry.laneHeight();
+        const draggingCard = this.boardEntry.draggingCard();
 
-        if (this.boardEntry.hasLane()) {
-            if (virtualScroll) {
+        if (virtualScroll) {
+            if (draggingCard) {
+                this.entryBodyHeight = Math.min(laneHeight, containerHeight);
+            } else {
                 const realHeight = this._getRealHeight();
                 this.entryRealHeight.set(realHeight);
                 if (this.entryVirtualScroll()) {
@@ -116,12 +119,12 @@ export abstract class ThyBoardEntryBase extends ThyBoardEntryDragDrop {
                     this.entryBodyHeight = containerHeight;
                 }
                 this.entryDroppableZonesHeight = Math.min(laneHeight, containerHeight);
-            } else {
-                this.entryBodyHeight = containerHeight;
-                this.entryDroppableZonesHeight = Math.min(this.elementRef.nativeElement.parentElement.clientHeight, containerHeight);
             }
-            this.changeDetectorRef.markForCheck();
+        } else {
+            this.entryBodyHeight = containerHeight;
+            this.entryDroppableZonesHeight = Math.min(this.elementRef.nativeElement.parentElement.clientHeight, containerHeight);
         }
+        this.changeDetectorRef.markForCheck();
     }
 
     private getCardStatus(card: ThyBoardCard): ThyBoardEntryStatus {
