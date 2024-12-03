@@ -1,0 +1,28 @@
+<div class="card-add-btn py-1 ml-2 mb-1" [class.d-none]="isAdded">
+  <a
+    href="javascript:;"
+    class="link-has-icon link-muted add-btn d-flex align-items-center"
+    [class.d-none]="isAdded"
+    #addWorkItem
+    (click)="goAddStep()"
+    >新建工作项</a
+  >
+</div>
+<div class="card-add-creating" *ngIf="isAdded">
+  <textarea
+    class="form-control"
+    (thyEnter)="create($event)"
+    #workItemTitleInput
+    name="workItemTitle"
+    [(ngModel)]="title"
+    [thyAutofocus]="true"
+    [maxlength]="titleMaxLength"
+  ></textarea>
+
+  <div class="d-flex mt-2">
+    <div class="flex-grow-1 btn-pair-sm">
+      <button thyButton="primary" thySize="sm" [thyLoading]="saving" (click)="create($event)">确定</button>
+      <a thyButton="link-secondary" thySize="sm" (click)="cancel()">取消</a>
+    </div>
+  </div>
+</div>

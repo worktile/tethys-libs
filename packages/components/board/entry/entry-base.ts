@@ -77,7 +77,7 @@ export abstract class ThyBoardEntryBase extends ThyBoardEntryDragDrop {
         );
 
         afterNextRender(() => {
-            if (this.boardEntry.virtualScroll() && this.boardEntry.hasLane()) {
+            if (this.boardEntry.virtualScroll()) {
                 const elementsObserve: Observable<ResizeObserverEntry[]>[] = [
                     this.sharedResizeObserver.observe(this.boardEntry.container(), { box: 'border-box' }).pipe(debounceTime(100))
                 ];

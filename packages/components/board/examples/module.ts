@@ -8,14 +8,20 @@ import { ThyProBoardVirtualScrollExampleComponent } from './virtual-scroll/virtu
 import { ThyProBoardMultiExampleComponent } from './multi/multi.component';
 import { ThyProBoardDragExampleComponent } from './drag/drag.component';
 import { ThyProBoardScrollLoadExampleComponent } from './scroll-load/scroll-load.component';
+import { ThyIconModule } from 'ngx-tethys/icon';
+import { ThySharedModule } from 'ngx-tethys/shared';
+import { ThyButtonModule } from 'ngx-tethys/button';
+import { ThyBoardCustomTemplateAddComponent } from './custom-template/add/add.component';
+import { FormsModule } from '@angular/forms';
 
 export default {
-    imports: [ThyProBoardModule, CommonModule],
+    imports: [ThyProBoardModule, CommonModule, FormsModule, ThyIconModule, ThySharedModule, ThyButtonModule],
     declarations: [
         ThyProBoardBasicExampleComponent,
         ThyBoardBasicCardComponent,
         ThyProBoardSingleExampleComponent,
         ThyProBoardCustomTemplateExampleComponent,
+        ThyBoardCustomTemplateAddComponent,
         ThyProBoardVirtualScrollExampleComponent,
         ThyProBoardScrollLoadExampleComponent,
         ThyProBoardMultiExampleComponent,

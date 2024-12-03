@@ -29,23 +29,11 @@
     </ng-template>
 
     <ng-template #entryTop let-entry="entry" let-lane="lane">
-      <div [style.height.px]="singleBottomHeights[entry._id].top" (click)="clickTop(entry)">
-        栏的顶部《
-        @if (lane) {
-          泳道：{{ lane.name }}；
-        }
-        栏：{{ entry.name }}》
-      </div>
+      <thy-board-custom-template-add></thy-board-custom-template-add>
     </ng-template>
 
     <ng-template #entryBottom let-entry="entry" let-lane="lane">
-      <div [style.height.px]="singleBottomHeights[entry._id].bottom" (click)="clickBottom(entry)">
-        栏的底部《
-        @if (lane) {
-          泳道：{{ lane.name }}；
-        }
-        栏：{{ entry.name }}》
-      </div>
+      <thy-board-custom-template-add></thy-board-custom-template-add>
     </ng-template>
   </thy-board>
 </div>
@@ -88,23 +76,11 @@
     </ng-template>
 
     <ng-template #entryTop let-entry="entry" let-lane="lane">
-      <div [style.height.px]="hasLanesBottomHeights[lane._id + entry._id].top" (click)="clickTop(entry, lane)">
-        栏的顶部《
-        @if (lane) {
-          泳道：{{ lane.name }}；
-        }
-        栏：{{ entry.name }}》
-      </div>
+      <thy-board-custom-template-add></thy-board-custom-template-add>
     </ng-template>
 
     <ng-template #entryBottom let-entry="entry" let-lane="lane">
-      <div [style.height.px]="hasLanesBottomHeights[lane._id + entry._id].bottom" (click)="clickBottom(entry, lane)">
-        栏的底部《
-        @if (lane) {
-          泳道：{{ lane.name }}；
-        }
-        ；栏：{{ entry.name }}》
-      </div>
+      <thy-board-custom-template-add></thy-board-custom-template-add>
     </ng-template>
   </thy-board>
 </div>
