@@ -66,9 +66,12 @@ export class ThyBoardSortableEntryComponent extends ThyBoardEntryBase {
     }
 
     drop(event: CdkDragDrop<ThyBoardDragContainer | SafeAny>) {
+        const droppedList = event.container.data?.cards.filter((card: ThyBoardCard) => {
+            return card._id !== event.item.data._id;
+        });
         const currentPreOrAfterCard = event.container.data.card;
         const currentPreOrAfterCardIndex =
-            (event.container.data.cards || []).findIndex((card: ThyBoardCard) => {
+            (droppedList || []).findIndex((card: ThyBoardCard) => {
                 return card._id === currentPreOrAfterCard?._id;
             }) || 0;
         const currentIndex = event.currentIndex ? currentPreOrAfterCardIndex + 1 : currentPreOrAfterCardIndex;
