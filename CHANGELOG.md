@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.17](https://github.com/tethys-org/libs/compare/v18.0.16...v18.0.17) (2024-12-04)
+
+
+### Bug Fixes
+
+* **components:** fix position error when sortable in same entry #PJM-21290 ([#156](https://github.com/tethys-org/libs/issues/156)) ([5080683](https://github.com/tethys-org/libs/commit/50806837131d81a7e4cc61808a16dd299262b72d)), closes [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290) [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290) [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290)
+* **components:** set height after bottom changed #PJM-21216 ([#155](https://github.com/tethys-org/libs/issues/155)) ([4c50678](https://github.com/tethys-org/libs/commit/4c506787227850cbac1bcad20d315d8adb1f788b)), closes [#PJM-21216](https://github.com/tethys-org/libs/issues/PJM-21216)
+
+
+
+
+
 ## [18.0.16](https://github.com/tethys-org/libs/compare/v18.0.15...v18.0.16) (2024-11-28)
 
 
