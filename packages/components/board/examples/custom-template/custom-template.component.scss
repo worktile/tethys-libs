@@ -23,3 +23,25 @@
         margin-bottom: 8px;
     }
 }
+
+.card-add-container {
+    display: block;
+    line-height: 1;
+    background: variables.$gray-80;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    margin: 0 auto;
+
+    &--creating {
+        width: calc(100% - 16px);
+        position: relative;
+        position: relative;
+        display: block;
+        padding: 12px 12px 6px 12px;
+        border-radius: 2px;
+        background: variables.$white;
+        cursor: pointer;
+        border: solid 1px variables.$gray-200;
+    }
+}
