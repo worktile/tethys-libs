@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
-import { GlobalConfig } from 'rxjs';
+import { ThySiteSettings } from './global.entity';
 
-export const THY_SITE_SETTINGS = new InjectionToken<GlobalConfig>('thy-site-settings');
+export const THY_SITE_SETTINGS = new InjectionToken<ThySiteSettings>('thy-site-settings');
 
 export const THY_SITE_SETTINGS_PROVIDER = {
     provide: THY_SITE_SETTINGS,

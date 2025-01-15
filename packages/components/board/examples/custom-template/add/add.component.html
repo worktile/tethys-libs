@@ -8,21 +8,22 @@
     >新建工作项</a
   >
 </div>
-<div class="card-add-creating" *ngIf="isAdded">
-  <textarea
-    class="form-control"
-    (thyEnter)="create($event)"
-    #workItemTitleInput
-    name="workItemTitle"
-    [(ngModel)]="title"
-    [thyAutofocus]="true"
-    [maxlength]="titleMaxLength"
-  ></textarea>
-
-  <div class="d-flex mt-2">
-    <div class="flex-grow-1 btn-pair-sm">
-      <button thyButton="primary" thySize="sm" [thyLoading]="saving" (click)="create($event)">确定</button>
-      <a thyButton="link-secondary" thySize="sm" (click)="cancel()">取消</a>
+@if (isAdded) {
+  <div class="card-add-creating">
+    <textarea
+      class="form-control"
+      (thyEnter)="create($event)"
+      #workItemTitleInput
+      name="workItemTitle"
+      [(ngModel)]="title"
+      [thyAutofocus]="true"
+      [maxlength]="titleMaxLength"
+    ></textarea>
+    <div class="d-flex mt-2">
+      <div class="flex-grow-1 btn-pair-sm">
+        <button thyButton="primary" thySize="sm" [thyLoading]="saving" (click)="create($event)">确定</button>
+        <a thyButton="link-secondary" thySize="sm" (click)="cancel()">取消</a>
+      </div>
     </div>
   </div>
-</div>
+}

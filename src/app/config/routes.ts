@@ -3,6 +3,7 @@ import { ThyAuthJWTGuard } from '@tethys/auth';
 import { WorkplaceComponent } from '../features/dashboard/workplace/workplace.component';
 import { UserListComponent } from '../features/user/list/list.component';
 import { BasicLayoutComponent } from '../layout/basic/basic.component';
+import { InsightComponent } from '../features/dashboard/insight/insight.component';
 
 export const ROUTES: Routes = [
     {
@@ -38,7 +39,7 @@ export const ROUTES: Routes = [
                         data: {
                             title: '统计报表'
                         },
-                        component: WorkplaceComponent
+                        component: InsightComponent
                     }
                 ]
                 // loadChildren: () => import('../features/dashboard/dashboard.module').then((m) => m.DashboardModule)

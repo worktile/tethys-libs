@@ -36,7 +36,7 @@
             placement: 'rightTop',
             origin: menuGroupElement,
             panelClass: 'thy-menu-grop-popover',
-            initialState: { menu: this.menu }
+            initialState: { menu: menu }
           }"
         >
           <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menu, path: menu.path }"> </ng-template>

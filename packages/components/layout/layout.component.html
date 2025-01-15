@@ -12,15 +12,10 @@
 </thy-sidebar>
 <thy-layout>
   <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate" (collapsedChange)="collapsedChange($event)"></thy-pro-header>
-  <thy-layout>
-    <thy-header thySize="sm" thyTitle="二级标题" thyDivided="true"></thy-header>
-    <thy-content>
-      <router-outlet></router-outlet>
-    </thy-content>
-    <thy-sidebar-footer>
-      @if (footerTemplate) {
-        <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
-      }
-    </thy-sidebar-footer>
-  </thy-layout>
+  <router-outlet></router-outlet>
+  <thy-sidebar-footer>
+    @if (footerTemplate) {
+      <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
+    }
+  </thy-sidebar-footer>
 </thy-layout>
