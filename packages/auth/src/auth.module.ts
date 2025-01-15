@@ -1,5 +1,5 @@
 import { HttpRequest } from '@angular/common/http';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule, makeEnvironmentProviders } from '@angular/core';
 import { SafeAny } from './types';
 import { THY_AUTH_CONFIG, ThyAuthConfig } from './auth.config';
 import { ThyAuthService } from './auth.service';
@@ -10,6 +10,18 @@ import { ThyAuthJWTGuard } from './guard/jwt.guard';
 
 export function thyNoOpInterceptorFilter(_request: HttpRequest<SafeAny>): boolean {
     return true;
+}
+
+export function provideAuth(authOptions?: ThyAuthConfig) {
+    const provides = [
+        { provide: THY_AUTH_CONFIG, useValue: authOptions },
+        { provide: THY_AUTH_FALLBACK_TOKEN, useValue: ThyAuthJWTToken },
+        { provide: ThyTokenStorage, useClass: ThyTokenLocalStorage },
+        ThyAuthService,
+        ThyTokenService,
+        ThyAuthJWTGuard
+    ];
+    return makeEnvironmentProviders(provides);
 }
 
 @NgModule({

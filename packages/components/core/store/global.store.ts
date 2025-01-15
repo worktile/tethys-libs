@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Action, Store } from '@tethys/store';
 import { Route, Routes, ThyGlobalInfo, ThySiteSettings } from '../global.entity';
-import { THY_SITE_SETTINGS } from '../settins.config';
+import { THY_SITE_SETTINGS } from '../settings.config';
 
 @Injectable({
     providedIn: 'root'
@@ -13,17 +13,17 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
 
     @Action()
     initializeMenus(menus: Routes) {
-        this.setState({ menus });
+        this.update({ menus });
     }
 
     @Action()
     pureUpdateActiveMenu(menu: Route) {
-        this.setState({ activeMenu: menu });
+        this.update({ activeMenu: menu });
     }
 
     @Action()
     pureUpdateSettings(config: Partial<ThySiteSettings>) {
-        this.setState({
+        this.update({
             config: {
                 ...this.snapshot.config,
                 ...config

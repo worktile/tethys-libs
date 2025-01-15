@@ -7,7 +7,7 @@ import { UserListStore } from './list/user-list.store';
 import { UserAddComponent } from './add/add.component';
 
 @NgModule({
-    declarations: [UserListComponent, UserAddComponent],
+    declarations: [UserAddComponent],
     imports: [CommonModule, UserRoutingModule, SharedModule],
     providers: [UserListStore]
 })
