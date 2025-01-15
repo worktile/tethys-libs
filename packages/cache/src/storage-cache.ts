@@ -1,7 +1,8 @@
+import { effect, signal, WritableSignal } from '@angular/core';
 import { isNumber, isString } from '@tethys/cdk/is';
 
 const NUMBER_PREFIX = '____n____';
-const SupportedStorage = window && window.localStorage;
+const supportedStorage = window && window.localStorage;
 const storageSource = window.localStorage || window.sessionStorage;
 
 const cache = {
@@ -19,7 +20,7 @@ const cache = {
      */
     set<TValue = string>(key: string, value: TValue) {
         let itemValue = isString(value) ? value : isNumber(value) ? `${NUMBER_PREFIX}${value}` : JSON.stringify(value);
-        if (SupportedStorage) {
+        if (supportedStorage) {
             storageSource.setItem(key, itemValue as string);
         }
     },
@@ -36,7 +37,7 @@ const cache = {
      * @param key string
      */
     get<TValue = string>(key: string): TValue | undefined {
-        if (SupportedStorage) {
+        if (supportedStorage) {
             let value = storageSource.getItem(key);
             if (value) {
                 try {
@@ -61,15 +62,26 @@ const cache = {
      * @param key cache key
      */
     remove(key: string) {
-        if (SupportedStorage) {
+        if (supportedStorage) {
             storageSource.removeItem(key);
         }
+    },
+    /**
+     * get signal value from storage, and save storage value when changed
+     */
+    signal<TValue = string>(key: string, options: { defaultValue?: TValue } = {}): WritableSignal<TValue> {
+        const value = this.get(key) as TValue;
+        const signalValue = signal<TValue>(value ?? (options.defaultValue as TValue));
+        effect(() => {
+            this.set(key, signalValue());
+        });
+        return signalValue;
     },
     /**
      * clear all storage
      */
     clear() {
-        if (SupportedStorage) {
+        if (supportedStorage) {
             storageSource.clear();
         }
     }
