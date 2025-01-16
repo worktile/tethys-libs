@@ -3,37 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.18](https://github.com/tethys-org/libs/compare/v18.0.17...v18.0.18) (2025-01-16)
+
+### Features
+
+- **cache:** add signal to cache ([110d8b2](https://github.com/tethys-org/libs/commit/110d8b26f8a55fd9bc8a8fbdea27d0a2273704e7))
+
 ## [18.0.17](https://github.com/tethys-org/libs/compare/v18.0.16...v18.0.17) (2024-12-04)
 
 **Note:** Version bump only for package @tethys/cache
-
-
-
-
 
 ## [18.0.16](https://github.com/tethys-org/libs/compare/v18.0.15...v18.0.16) (2024-11-28)
 
 **Note:** Version bump only for package @tethys/cache
 
-
-
-
-
 ## [18.0.14](https://github.com/tethys-org/libs/compare/v18.0.12...v18.0.14) (2024-11-08)
 
 **Note:** Version bump only for package @tethys/cache
 
-
-
-
-
 ## [18.0.12](https://github.com/tethys-org/libs/compare/v18.0.10...v18.0.12) (2024-11-06)
 
 **Note:** Version bump only for package @tethys/cache
-
-
-
-
 
 ## [18.0.10](https://github.com/tethys-org/libs/compare/v18.0.8...v18.0.10) (2024-10-29)
 

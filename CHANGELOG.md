@@ -3,83 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [18.0.17](https://github.com/tethys-org/libs/compare/v18.0.16...v18.0.17) (2024-12-04)
+## [18.0.18](https://github.com/tethys-org/libs/compare/v18.0.17...v18.0.18) (2025-01-16)
 
+### Features
+
+- **auth:** add provideAuth and some examples ([6f21c9d](https://github.com/tethys-org/libs/commit/6f21c9de325b7c90bf4a02820dcd730a550fef85))
+- **cache:** add signal to cache ([110d8b2](https://github.com/tethys-org/libs/commit/110d8b26f8a55fd9bc8a8fbdea27d0a2273704e7))
+
+## [18.0.17](https://github.com/tethys-org/libs/compare/v18.0.16...v18.0.17) (2024-12-04)
 
 ### Bug Fixes
 
-* **components:** fix position error when sortable in same entry #PJM-21290 ([#156](https://github.com/tethys-org/libs/issues/156)) ([5080683](https://github.com/tethys-org/libs/commit/50806837131d81a7e4cc61808a16dd299262b72d)), closes [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290) [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290) [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290)
-* **components:** set height after bottom changed #PJM-21216 ([#155](https://github.com/tethys-org/libs/issues/155)) ([4c50678](https://github.com/tethys-org/libs/commit/4c506787227850cbac1bcad20d315d8adb1f788b)), closes [#PJM-21216](https://github.com/tethys-org/libs/issues/PJM-21216)
-
-
-
-
+- **components:** fix position error when sortable in same entry #PJM-21290 ([#156](https://github.com/tethys-org/libs/issues/156)) ([5080683](https://github.com/tethys-org/libs/commit/50806837131d81a7e4cc61808a16dd299262b72d)), closes [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290) [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290) [#PJM-21290](https://github.com/tethys-org/libs/issues/PJM-21290)
+- **components:** set height after bottom changed #PJM-21216 ([#155](https://github.com/tethys-org/libs/issues/155)) ([4c50678](https://github.com/tethys-org/libs/commit/4c506787227850cbac1bcad20d315d8adb1f788b)), closes [#PJM-21216](https://github.com/tethys-org/libs/issues/PJM-21216)
 
 ## [18.0.16](https://github.com/tethys-org/libs/compare/v18.0.15...v18.0.16) (2024-11-28)
 
-
 ### Bug Fixes
 
-* **components:** droppable in other entry when sortable is true #TINFR-1076 ([#152](https://github.com/tethys-org/libs/issues/152)) ([83636e3](https://github.com/tethys-org/libs/commit/83636e3c73353096b529fd0d5f1d957cb419a392)), closes [#TINFR-1076](https://github.com/tethys-org/libs/issues/TINFR-1076)
-* **components:** fix bottomTemplate position and droppable when entry is empty #TINFR-1083 ([d2f6745](https://github.com/tethys-org/libs/commit/d2f674559f5e99caf75816930995e1118c0f5582)), closes [#TINFR-1083](https://github.com/tethys-org/libs/issues/TINFR-1083)
-
+- **components:** droppable in other entry when sortable is true #TINFR-1076 ([#152](https://github.com/tethys-org/libs/issues/152)) ([83636e3](https://github.com/tethys-org/libs/commit/83636e3c73353096b529fd0d5f1d957cb419a392)), closes [#TINFR-1076](https://github.com/tethys-org/libs/issues/TINFR-1076)
+- **components:** fix bottomTemplate position and droppable when entry is empty #TINFR-1083 ([d2f6745](https://github.com/tethys-org/libs/commit/d2f674559f5e99caf75816930995e1118c0f5582)), closes [#TINFR-1083](https://github.com/tethys-org/libs/issues/TINFR-1083)
 
 ### Features
 
-* **components:** return status of entry when scroll #TINFR-1062 ([#151](https://github.com/tethys-org/libs/issues/151)) ([051b833](https://github.com/tethys-org/libs/commit/051b83374ce1700d8acb5c65c4cdfa1a85ac3787)), closes [#TINFR-1062](https://github.com/tethys-org/libs/issues/TINFR-1062)
-
-
-
-
+- **components:** return status of entry when scroll #TINFR-1062 ([#151](https://github.com/tethys-org/libs/issues/151)) ([051b833](https://github.com/tethys-org/libs/commit/051b83374ce1700d8acb5c65c4cdfa1a85ac3787)), closes [#TINFR-1062](https://github.com/tethys-org/libs/issues/TINFR-1062)
 
 ## [18.0.15](https://github.com/tethys-org/libs/compare/v18.0.14...v18.0.15) (2024-11-25)
 
-
 ### Bug Fixes
 
-* **components:** fix scroll error when sortable and virtual-scroll ([b35f5bf](https://github.com/tethys-org/libs/commit/b35f5bfec5c72727a02ee723c473d6f1dbde1c6b))
-
+- **components:** fix scroll error when sortable and virtual-scroll ([b35f5bf](https://github.com/tethys-org/libs/commit/b35f5bfec5c72727a02ee723c473d6f1dbde1c6b))
 
 ### Features
 
-* add workflow action about auto publish #TINFR-632 ([3425136](https://github.com/tethys-org/libs/commit/3425136e1233c335dd65414d1ee6937c39bad584)), closes [#TINFR-632](https://github.com/tethys-org/libs/issues/TINFR-632)
-* **components:** automatic scrolling when approaching the boundary when drag card #TINFR-723 ([fd0927c](https://github.com/tethys-org/libs/commit/fd0927c026b8d50a1a02ce1f00b0ea5e8ab61536)), closes [#TINFR-723](https://github.com/tethys-org/libs/issues/TINFR-723)
-* **components:** board support wip #TINFR-866 ([2cd4ad1](https://github.com/tethys-org/libs/commit/2cd4ad1a4e535d013d6f623d7b1703386d6246e3)), closes [#TINFR-866](https://github.com/tethys-org/libs/issues/TINFR-866)
-* **components:** entry support split #TINFR-867 ([#146](https://github.com/tethys-org/libs/issues/146)) ([f5ada30](https://github.com/tethys-org/libs/commit/f5ada3094d4fd0aeec2e59df9f0fa1b545006388)), closes [#TINFR-867](https://github.com/tethys-org/libs/issues/TINFR-867) [#TINFR-867](https://github.com/tethys-org/libs/issues/TINFR-867)
-
-
-
-
+- add workflow action about auto publish #TINFR-632 ([3425136](https://github.com/tethys-org/libs/commit/3425136e1233c335dd65414d1ee6937c39bad584)), closes [#TINFR-632](https://github.com/tethys-org/libs/issues/TINFR-632)
+- **components:** automatic scrolling when approaching the boundary when drag card #TINFR-723 ([fd0927c](https://github.com/tethys-org/libs/commit/fd0927c026b8d50a1a02ce1f00b0ea5e8ab61536)), closes [#TINFR-723](https://github.com/tethys-org/libs/issues/TINFR-723)
+- **components:** board support wip #TINFR-866 ([2cd4ad1](https://github.com/tethys-org/libs/commit/2cd4ad1a4e535d013d6f623d7b1703386d6246e3)), closes [#TINFR-866](https://github.com/tethys-org/libs/issues/TINFR-866)
+- **components:** entry support split #TINFR-867 ([#146](https://github.com/tethys-org/libs/issues/146)) ([f5ada30](https://github.com/tethys-org/libs/commit/f5ada3094d4fd0aeec2e59df9f0fa1b545006388)), closes [#TINFR-867](https://github.com/tethys-org/libs/issues/TINFR-867) [#TINFR-867](https://github.com/tethys-org/libs/issues/TINFR-867)
 
 ## [18.0.14](https://github.com/tethys-org/libs/compare/v18.0.12...v18.0.14) (2024-11-08)
 
-
 ### Bug Fixes
 
-* **components:** set height of drag-drop-zone ([d101034](https://github.com/tethys-org/libs/commit/d101034b0af5c83ba523d3cd32052033e76eeea3))
-
+- **components:** set height of drag-drop-zone ([d101034](https://github.com/tethys-org/libs/commit/d101034b0af5c83ba523d3cd32052033e76eeea3))
 
 ### Features
 
-* **components:** calculate lane height when resize container #TINFR-912 ([24dc3f7](https://github.com/tethys-org/libs/commit/24dc3f72185243fd598c5b004c09c38fd28f534f)), closes [#TINFR-912](https://github.com/tethys-org/libs/issues/TINFR-912)
-
-
-
-
+- **components:** calculate lane height when resize container #TINFR-912 ([24dc3f7](https://github.com/tethys-org/libs/commit/24dc3f72185243fd598c5b004c09c38fd28f534f)), closes [#TINFR-912](https://github.com/tethys-org/libs/issues/TINFR-912)
 
 ## [18.0.12](https://github.com/tethys-org/libs/compare/v18.0.10...v18.0.12) (2024-11-06)
 
-
 ### Bug Fixes
 
-* **components:** calculate lane height when change bottom or top template ([77c86e8](https://github.com/tethys-org/libs/commit/77c86e85165a7bdb3d00d890e11c89f5889ab5c5))
-* **components:** fix laneHeight when expand lane #TINFR-895 ([283fe40](https://github.com/tethys-org/libs/commit/283fe4061f60c71b723cb666925dfbcafdd45e8b)), closes [#TINFR-895](https://github.com/tethys-org/libs/issues/TINFR-895)
-* **components:** fix setAverageItemSize when cards is [] ([480e4ee](https://github.com/tethys-org/libs/commit/480e4ee401cc2d813708925bbf88986a7b3bd095))
-* **components:** return isExpanded when use laneTemplateRef ([fa28253](https://github.com/tethys-org/libs/commit/fa282534817d0531718fccbb8238c40161db0ba6))
-
-
-
-
+- **components:** calculate lane height when change bottom or top template ([77c86e8](https://github.com/tethys-org/libs/commit/77c86e85165a7bdb3d00d890e11c89f5889ab5c5))
+- **components:** fix laneHeight when expand lane #TINFR-895 ([283fe40](https://github.com/tethys-org/libs/commit/283fe4061f60c71b723cb666925dfbcafdd45e8b)), closes [#TINFR-895](https://github.com/tethys-org/libs/issues/TINFR-895)
+- **components:** fix setAverageItemSize when cards is [] ([480e4ee](https://github.com/tethys-org/libs/commit/480e4ee401cc2d813708925bbf88986a7b3bd095))
+- **components:** return isExpanded when use laneTemplateRef ([fa28253](https://github.com/tethys-org/libs/commit/fa282534817d0531718fccbb8238c40161db0ba6))
 
 ## [18.0.11](https://github.com/tethys-org/libs/compare/v18.0.10...v18.0.11) (2024-11-04)
 
