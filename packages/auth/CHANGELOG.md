@@ -3,37 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.18](https://github.com/tethys-org/libs/compare/v18.0.17...v18.0.18) (2025-01-16)
+
+### Features
+
+- **auth:** add provideAuth and some examples ([6f21c9d](https://github.com/tethys-org/libs/commit/6f21c9de325b7c90bf4a02820dcd730a550fef85))
+
 ## [18.0.17](https://github.com/tethys-org/libs/compare/v18.0.16...v18.0.17) (2024-12-04)
 
 **Note:** Version bump only for package @tethys/auth
-
-
-
-
 
 ## [18.0.16](https://github.com/tethys-org/libs/compare/v18.0.15...v18.0.16) (2024-11-28)
 
 **Note:** Version bump only for package @tethys/auth
 
-
-
-
-
 ## [18.0.14](https://github.com/tethys-org/libs/compare/v18.0.12...v18.0.14) (2024-11-08)
 
 **Note:** Version bump only for package @tethys/auth
 
-
-
-
-
 ## [18.0.12](https://github.com/tethys-org/libs/compare/v18.0.10...v18.0.12) (2024-11-06)
 
 **Note:** Version bump only for package @tethys/auth
-
-
-
-
 
 ## [18.0.10](https://github.com/tethys-org/libs/compare/v18.0.8...v18.0.10) (2024-10-29)
 
