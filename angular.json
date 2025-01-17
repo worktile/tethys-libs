@@ -123,6 +123,86 @@
       }
     },
     "tethys": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "tethys",
+      "sourceRoot": "tethys/src",
+      "prefix": "tethys",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/tethys",
+            "index": "tethys/src/index.html",
+            "main": "tethys/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "tethys/tsconfig.app.json",
+            "assets": ["tethys/src/favicon.ico", "tethys/src/assets"],
+            "styles": ["tethys/src/styles.scss"],
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true,
+            "allowedCommonJsDependencies": ["docsearch.js"]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "tethys/src/environments/environment.ts",
+                  "with": "tethys/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "tethys:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "tethys:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "tethys:build"
+          }
+        }
+      }
+    },
+    "lib": {
       "sourceRoot": "packages/components",
       "root": "packages/components",
       "projectType": "library",

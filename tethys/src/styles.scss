@@ -1,6 +1,6 @@
 @use '@docgeni/template/styles/index.scss' as docgeni;
 @use 'ngx-tethys/styles/index.scss' as tethys;
-@use '../../../packages/components/styles/index.scss' as tethys-pro;
+@use '../../packages/components/styles/index.scss' as tethys-pro;
 
 .dg-navbar {
     .navbar-brand {
