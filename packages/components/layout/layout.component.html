@@ -11,7 +11,7 @@
   </thy-pro-sidebar>
 </thy-sidebar>
 <thy-layout>
-  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate" (collapsedChange)="collapsedChange($event)"></thy-pro-header>
+  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate" [(isCollapsed)]="isCollapsed"></thy-pro-header>
   <router-outlet></router-outlet>
   <thy-sidebar-footer>
     @if (footerTemplate) {

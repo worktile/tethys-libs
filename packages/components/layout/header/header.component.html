@@ -4,8 +4,8 @@
       class="ml-n2"
       thyAction
       href="javascript:;"
-      [thyTooltip]="isCollapsed ? '展开' : '收起'"
-      [thyIcon]="isCollapsed ? 'float-left' : 'float-right'"
+      [thyTooltip]="isCollapsed() ? '展开' : '收起'"
+      [thyIcon]="isCollapsed() ? 'float-left' : 'float-right'"
       (click)="changeCollapse()"
     ></a>
     <span class="title-name ml-1">{{ activeMenu()?.title }}</span>

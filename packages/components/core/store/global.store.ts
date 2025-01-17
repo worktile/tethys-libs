@@ -1,9 +1,10 @@
 import { inject, Inject, Injectable } from '@angular/core';
 import { Action, Store } from '@tethys/store';
-import { Route, Routes, ThyGlobalInfo, ThySiteSettings } from '../global.entity';
+import { ThyGlobalInfo, ThySiteSettings } from '../global.entity';
 import { THY_SITE_SETTINGS } from '../settings.config';
 import { THY_MENU_LOAD_STRATEGY, ThyMenuRoute } from '../menu';
 import { ThyMenuLoadDefaultStrategy } from '../menu-load-default-strategy';
+import { Route } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
