@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Route, Router, Routes, RouterOutlet } from '@angular/router';
-import { ThyGlobalStore } from '@tethys/pro/core';
-import { filterEmptyRoutePath } from './utils';
+import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
+import { cache } from '@tethys/cache';
 
 @Component({
     selector: 'thy-pro-layout',
@@ -31,7 +31,7 @@ export class ThyProLayoutComponent implements OnInit {
     /**
      * 菜单数据
      */
-    @Input() set thyMenus(value: Routes) {
+    @Input() set thyMenus(value: ThyMenuRoute[]) {
         this.menus = value;
     }
 
@@ -65,22 +65,20 @@ export class ThyProLayoutComponent implements OnInit {
      */
     @ContentChild('footer') public footerTemplate!: TemplateRef<any>;
 
-    public menus!: Routes;
+    public menus!: ThyMenuRoute[];
 
-    public isCollapsed: boolean = false;
+    public isCollapsed = cache.signal('menu-is-collapsed', {
+        defaultValue: false
+    });
 
     constructor(
         public globalStore: ThyGlobalStore,
         private router: Router,
         public route: ActivatedRoute
     ) {
-        const routes = this.router.config[1] as Route;
-        const filterRoutes = filterEmptyRoutePath(routes);
-        if (routes.children?.length) {
-            this.globalStore.initializeMenus(filterRoutes);
-        }
-        // 获取路由信息，初始化到 ThyGlobalStore 的 activeMenu
-        this.globalStore.pureUpdateActiveMenu(this.route.firstChild?.firstChild?.routeConfig as Route);
+        this.globalStore.initialize();
+        const activeRoute = this.route.firstChild?.firstChild?.routeConfig;
+        this.globalStore.pureUpdateActiveMenuByRoute(activeRoute);
     }
 
     ngOnInit(): void {
@@ -88,6 +86,6 @@ export class ThyProLayoutComponent implements OnInit {
     }
 
     collapsedChange(isCollapsed: boolean) {
-        this.isCollapsed = isCollapsed;
+        this.isCollapsed.set(isCollapsed);
     }
 }

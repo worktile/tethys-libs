@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
-import { takeUntil, Observable } from 'rxjs';
-import { Route, ThyGlobalStore } from '@tethys/pro/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, model } from '@angular/core';
+import { ThyGlobalStore } from '@tethys/pro/core';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
@@ -18,23 +16,18 @@ import { ThyLayoutModule } from 'ngx-tethys/layout';
     standalone: true,
     imports: [ThyLayoutModule, ThyActionModule, ThyTooltipModule, NgTemplateOutlet, ThyIcon, AsyncPipe]
 })
-export class ThyProHeaderComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
+export class ThyProHeaderComponent implements OnInit {
     @Input() public headerRightContentTemplate!: TemplateRef<HTMLElement>;
 
-    @Output() collapsedChange: EventEmitter<boolean> = new EventEmitter();
+    public isCollapsed = model<boolean>();
 
-    public title$!: Observable<Route | undefined>;
+    activeMenu = this.globalStore.select((state) => state.activeMenu);
 
-    public isCollapsed: boolean = false;
+    constructor(public globalStore: ThyGlobalStore) {}
 
-    constructor(public globalStore: ThyGlobalStore) {
-        super();
-        this.title$ = this.globalStore.select$((state) => state.activeMenu);
-    }
     ngOnInit(): void {}
 
     changeCollapse() {
-        this.isCollapsed = !this.isCollapsed;
-        this.collapsedChange.emit(this.isCollapsed);
+        this.isCollapsed.set(!this.isCollapsed());
     }
 }

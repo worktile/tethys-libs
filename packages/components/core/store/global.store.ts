@@ -1,23 +1,50 @@
-import { Inject, Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
 import { Action, Store } from '@tethys/store';
-import { Route, Routes, ThyGlobalInfo, ThySiteSettings } from '../global.entity';
+import { ThyGlobalInfo, ThySiteSettings } from '../global.entity';
 import { THY_SITE_SETTINGS } from '../settings.config';
+import { THY_MENU_LOAD_STRATEGY, ThyMenuRoute } from '../menu';
+import { ThyMenuLoadDefaultStrategy } from '../menu-load-default-strategy';
+import { Route } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ThyGlobalStore extends Store<ThyGlobalInfo> {
-    constructor(@Inject(THY_SITE_SETTINGS) public config: ThySiteSettings) {
+    private menuLoadStrategy = inject(THY_MENU_LOAD_STRATEGY, { optional: true });
+    private menuDefaultLoadStrategy = inject(ThyMenuLoadDefaultStrategy);
+
+    private get loadStrategy() {
+        return this.menuLoadStrategy || this.menuDefaultLoadStrategy;
+    }
+
+    public config: ThySiteSettings = inject(THY_SITE_SETTINGS);
+
+    constructor() {
         super({});
     }
 
     @Action()
-    initializeMenus(menus: Routes) {
+    initialize() {
+        this.loadStrategy.load().subscribe((menus) => {
+            this.initializeMenus(menus);
+        });
+    }
+
+    @Action()
+    initializeMenus(menus: ThyMenuRoute[]) {
         this.update({ menus });
     }
 
     @Action()
-    pureUpdateActiveMenu(menu: Route) {
+    pureUpdateActiveMenuByRoute(route: Route | undefined | null) {
+        if (route) {
+            const menu = this.loadStrategy.getMenuByRoute(route);
+            this.update({ activeMenu: menu });
+        }
+    }
+
+    @Action()
+    pureUpdateActiveMenu(menu: ThyMenuRoute) {
         this.update({ activeMenu: menu });
     }
 
