@@ -10,7 +10,7 @@
     "install": "lerna bootstrap",
     "change": "lerna changed",
     "diff": "lerna diff",
-    "test": "ng test tethys",
+    "test": "ng test lib",
     "test:node": "ts-node ./node_modules/jasmine/bin/jasmine --config=jasmine.json",
     "report-coverage": "cat ./coverage/tethys/lcov.info | coveralls",
     "build": "npm-run-all build:libs sync-styles",

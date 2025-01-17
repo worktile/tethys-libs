@@ -201,6 +201,32 @@
           }
         }
       }
+    },
+    "lib": {
+      "sourceRoot": "packages/components",
+      "root": "packages/components",
+      "projectType": "library",
+      "prefix": "",
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "fix": true,
+            "lintFilePatterns": ["packages/**/*.ts", "packages/**/*.html"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "packages/test.ts",
+            "karmaConfig": "packages/karma.conf.js",
+            "polyfills": "packages/polyfills.ts",
+            "tsConfig": "packages/tsconfig.spec.json",
+            "codeCoverage": true,
+            "codeCoverageExclude": []
+          }
+        }
+      }
     }
   }
 }
