@@ -8,7 +8,7 @@
       [thyIcon]="isCollapsed ? 'float-left' : 'float-right'"
       (click)="changeCollapse()"
     ></a>
-    <span class="title-name ml-1">{{ (title$ | async)?.data?.title }}</span>
+    <span class="title-name ml-1">{{ activeMenu()?.title }}</span>
   </ng-template>
   <ng-template #headerOperation>
     @if (headerRightContentTemplate) {

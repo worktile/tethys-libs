@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, QueryList, TemplateRef, ViewChildren } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
-import { Route, ThyGlobalStore } from '@tethys/pro/core';
-import { menusMap } from '../utils';
+import { Route, ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
 import { ThyPopoverConfig, ThyPopoverDirective, ThyPopoverModule } from 'ngx-tethys/popover';
 import { RouterLinkActive, RouterLink } from '@angular/router';
@@ -48,6 +47,8 @@ export class ThyProSidebarComponent implements OnInit {
 
     @ViewChildren(ThyPopoverDirective) menuPopovers!: QueryList<ThyPopoverDirective>;
 
+    activeMenu = this.globalStore.select((state) => state.activeMenu);
+
     constructor(public globalStore: ThyGlobalStore) {}
 
     ngOnInit(): void {
@@ -60,18 +61,13 @@ export class ThyProSidebarComponent implements OnInit {
         }
     }
 
-    initCurrentMenuGroup() {
-        // 初始化的时候，根据 ThyGlobalStore 的 activeMenu 获取 menuGroup 的路由，设置高亮状态
-        const activeRoute = this.globalStore.snapshot.activeMenu;
-        this.getCurrentRootMenuGroup(activeRoute as Route);
-    }
+    initCurrentMenuGroup() {}
 
-    setActiveMenu(menuGroup: ThyProLayoutMenu, activeLinkMenu: Route) {
+    setActiveMenu(menuGroup: ThyProLayoutMenu, activeLinkMenu: ThyMenuRoute) {
         this.menuPopovers?.forEach((item) => {
             item.popoverOpened && item.hide();
         });
         this.changeMenuGroupCollapsed(menuGroup, false);
-        this.getCurrentRootMenuGroup(activeLinkMenu);
         this.globalStore.pureUpdateActiveMenu(activeLinkMenu);
     }
 
@@ -81,10 +77,5 @@ export class ThyProSidebarComponent implements OnInit {
 
     changeMenuGroupCollapsed(menuGroup: ThyProLayoutMenu, isCollapsed: boolean) {
         menuGroup.isCollapsed = isCollapsed;
-    }
-
-    getCurrentRootMenuGroup(activeRoute: Route) {
-        const activeRouteWidthParent = menusMap.get(activeRoute?.path as string) as Route & { rootMenu: Route };
-        this.currentRootMenuGroup = activeRouteWidthParent?.rootMenu;
     }
 }

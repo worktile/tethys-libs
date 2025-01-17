@@ -1,9 +1,9 @@
-<thy-sidebar [thyCollapsible]="true" [thyCollapsed]="isCollapsed" [thyCollapsedWidth]="61" [thyTrigger]="null">
+<thy-sidebar [thyCollapsible]="true" [thyCollapsed]="isCollapsed()" [thyCollapsedWidth]="61" [thyTrigger]="null">
   <thy-pro-sidebar
     [menus]="menus"
     [logo]="thyLogo"
     [title]="thyTitle"
-    [isCollapsed]="isCollapsed"
+    [isCollapsed]="isCollapsed()"
     [headerTemplate]="menuHeaderTemplate"
     [menuTemplate]="menuTemplate"
     [footerTemplate]="menuFooterTemplate"

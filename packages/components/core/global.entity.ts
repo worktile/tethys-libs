@@ -1,4 +1,5 @@
 import { Route as AngularRoute } from '@angular/router';
+import { ThyMenuRoute } from './menu';
 
 export interface Route extends AngularRoute {
     children?: Routes;
@@ -28,6 +29,6 @@ export interface ThySiteSettings {
 
 export interface ThyGlobalInfo {
     config: ThySiteSettings;
-    menus: Routes;
-    activeMenu?: Route;
+    menus: ThyMenuRoute[];
+    activeMenu?: ThyMenuRoute;
 }

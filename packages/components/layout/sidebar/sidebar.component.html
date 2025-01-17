@@ -4,8 +4,7 @@
       [ngTemplateOutlet]="headerTemplate"
       [ngTemplateOutletContext]="{ value: { logo: this.logo, title: this.title } }"
     ></ng-container>
-  }
-  @if (!headerTemplate) {
+  } @else {
     <img class="header-logo" [src]="logo" />
     @if (!sidebarCollapsed) {
       <span class="header-title text-truncate">{{ title }}</span>
@@ -15,22 +14,21 @@
 <thy-sidebar-content>
   @if (menuTemplate) {
     <ng-container [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ menus }"> </ng-container>
-  }
-  @if (!menuTemplate) {
+  } @else {
     <thy-menu [thyCollapsed]="sidebarCollapsed" thyTheme="dark">
       @for (menu of menus; track $index) {
         <thy-menu-group
           [thyShowIcon]="true"
           [thyCollapsed]="menu.isCollapsed || false"
           [thyCollapsible]="true"
-          [thyIcon]="menu.data?.icon!"
-          [thyTitle]="menu.data?.title!"
+          [thyIcon]="menu?.icon!"
+          [thyTitle]="menu?.title!"
           [thyPopover]="collapsedMenuList"
           [thyTrigger]="'hover'"
           [thyDisabled]="!sidebarCollapsed"
           (thyCollapsedChange)="menuGroupCollapsedChange($event, menu)"
           class="thy-pro-sidebar-menu-group"
-          [class.active]="sidebarCollapsed && currentRootMenuGroup === menu"
+          [class.active]="sidebarCollapsed && activeMenu()?.parent === menu"
           (mouseenter)="getMenuGroupElement($event)"
           [thyConfig]="{
             placement: 'rightTop',
@@ -50,7 +48,7 @@
   @for (menuItem of menu.children; track $index) {
     @if (!menuItem.children?.length) {
       <a thyMenuItem class="ml-2" [routerLink]="[path, menuItem?.path]" (click)="setActiveMenu(menu, menuItem)" routerLinkActive="active">
-        <span thyMenuItemName> {{ menuItem.data?.title }} </span>
+        <span thyMenuItemName> {{ menuItem?.title }} </span>
       </a>
     }
     @if (menuItem.children?.length) {
@@ -61,7 +59,7 @@
 </ng-template>
 
 <ng-template #submenuGroup let-menuItem let-path="path">
-  <thy-menu-group class="px-2 thy-pro-sidebar-submenu" [thyCollapsed]="false" [thyCollapsible]="true" [thyTitle]="menuItem?.data.title!">
+  <thy-menu-group class="px-2 thy-pro-sidebar-submenu" [thyCollapsed]="false" [thyCollapsible]="true" [thyTitle]="menuItem?.title!">
     <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menuItem, path: path }"> </ng-template>
   </thy-menu-group>
 </ng-template>

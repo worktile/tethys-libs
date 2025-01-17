@@ -23,14 +23,14 @@ export class ThyProHeaderComponent extends mixinUnsubscribe(MixinBase) implement
 
     @Output() collapsedChange: EventEmitter<boolean> = new EventEmitter();
 
-    public title$!: Observable<Route | undefined>;
-
     public isCollapsed: boolean = false;
+
+    activeMenu = this.globalStore.select((state) => state.activeMenu);
 
     constructor(public globalStore: ThyGlobalStore) {
         super();
-        this.title$ = this.globalStore.select$((state) => state.activeMenu);
     }
+
     ngOnInit(): void {}
 
     changeCollapse() {
