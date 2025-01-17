@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.1.0](https://github.com/tethys-org/libs/compare/v18.0.18...v18.1.0) (2025-01-17)
+
+### Features
+
+- add ThyMenuLoadStrategy and ThyMenuLoadDefaultStrategy generate menus by route config #TINFR-1417 ([#162](https://github.com/tethys-org/libs/issues/162)) ([192976f](https://github.com/tethys-org/libs/commit/192976f3b73ac49f85a3aba9e3319b117fba595d)), closes [#TINFR-1417](https://github.com/tethys-org/libs/issues/TINFR-1417)
+- **components:** support i18n #TINFR-1385 ([#161](https://github.com/tethys-org/libs/issues/161)) ([d18556e](https://github.com/tethys-org/libs/commit/d18556ed03d01932013c36d31744fcd10633c765)), closes [#TINFR-1385](https://github.com/tethys-org/libs/issues/TINFR-1385)
+
 ## [18.0.18](https://github.com/tethys-org/libs/compare/v18.0.17...v18.0.18) (2025-01-16)
 
 ### Features
