@@ -4,6 +4,7 @@
 module.exports = {
     mode: 'full',
     title: 'TETHYS PRO',
+    siteProjectName: 'tethys',
     description: '',
     docsDir: 'docs',
     repoUrl: 'git+https://github.com/worktile/tethys-libs.git',
@@ -18,6 +19,16 @@ module.exports = {
         }
     ],
     defaultLocale: 'zh-cn',
+    locales: [
+        {
+            key: 'zh-cn',
+            name: '中文'
+        },
+        {
+            key: 'en-us',
+            name: 'English'
+        }
+    ],
     libs: [
         {
             name: 'tethys',
