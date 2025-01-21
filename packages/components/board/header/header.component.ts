@@ -17,18 +17,21 @@ import { ThyBoardEntry } from '../entities';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ThyAction } from 'ngx-tethys/action';
 import { SafeAny } from 'ngx-tethys/types';
+import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-board-header',
     templateUrl: 'header.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [ThyFlexibleText, ThyIcon, ThyTooltipDirective, NgTemplateOutlet, ThyAction, NgClass, NgStyle],
+    imports: [ThyFlexibleText, ThyIcon, ThyTooltipDirective, NgTemplateOutlet, ThyAction, NgClass, NgStyle, ThyI18nPipe],
     host: {
         class: 'thy-board-header'
     }
 })
 export class ThyBoardHeaderComponent implements OnInit {
+    locale = injectLocale();
+
     entries = input.required<ThyBoardEntry[]>();
 
     hasLane = input(false, { transform: booleanAttribute });

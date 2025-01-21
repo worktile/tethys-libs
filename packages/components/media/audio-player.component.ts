@@ -3,7 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ThyAudioControlsComponent } from './audio-controls.component';
 import { ThyVideoControlsComponent } from './controls.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
-import { ThyMediaProgressComponent } from './progress.component';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-audio-player',
@@ -33,7 +33,7 @@ import { ThyMediaProgressComponent } from './progress.component';
         </div>
     `,
     standalone: true,
-    imports: [ThyMediaProgressComponent, ThyAudioControlsComponent]
+    imports: [ThyAudioControlsComponent]
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit {
     @HostBinding('class') class = 'thy-audio-player thy-media-player';
@@ -41,6 +41,8 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     @ViewChild('audioElement') audioElement!: ElementRef<HTMLAudioElement>;
 
     @ViewChild('controls') controls!: ThyVideoControlsComponent;
+
+    locale = injectLocale();
 
     /**
      * 媒体资源的url
@@ -67,8 +69,8 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     }
 
     public errorTips = {
-        formatError: '该音频暂不支持预览，请升级浏览器版本或下载查看',
-        networkError: '当前网络异常，请刷新后重试'
+        formatError: this.locale().audioFormatError,
+        networkError: this.locale().networkError
     };
 
     public fileName!: string;

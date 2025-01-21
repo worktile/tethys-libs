@@ -3,9 +3,12 @@ import { ThyBoardCard, ThyBoardEntry, ThyBoardLane, ThyBoardSortEvent } from './
 import { EMPTY_OBJECT_ID_STR } from './constants';
 import { helpers } from 'ngx-tethys/util';
 import { produce } from '@tethys/cdk';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Injectable()
 export class ThyBoardService {
+    private locale = injectLocale();
+
     private cards: WritableSignal<ThyBoardCard[]> = signal([]);
 
     private entries: WritableSignal<ThyBoardEntry[]> = signal([]);
@@ -24,7 +27,7 @@ export class ThyBoardService {
 
     private emptyLane: WritableSignal<ThyBoardLane> = signal({
         _id: EMPTY_OBJECT_ID_STR,
-        name: '未分组',
+        name: this.locale().emptyGroup,
         cards: []
     });
 
@@ -33,7 +36,7 @@ export class ThyBoardService {
         const emptyLane = this.emptyLane();
         return {
             _id: EMPTY_OBJECT_ID_STR,
-            name: '未分组',
+            name: this.locale().emptyGroup,
             cards: [],
             expanded: helpers.isUndefinedOrNull(emptyLane.expanded) ? allLanesExpanded : emptyLane.expanded
         };

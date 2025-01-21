@@ -12,9 +12,9 @@
       @if (boardEntry.entry().split && status()) {
         <div class="entry-split-title" #entrySplitTitle>
           @if (status() === boardEntryStatus.doing) {
-            进行中
+            {{ locale().inProgress }}
           } @else {
-            已完成
+            {{ locale().completed }}
           }
         </div>
       }
@@ -58,7 +58,7 @@
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
             <div
-            class="entry-card"
+              class="entry-card"
               cdkDrag
               [cdkDragData]="card"
               [cdkDragDisabled]="
@@ -98,7 +98,7 @@
             [cdkDropListEnterPredicate]="dropListEnterPredicate"
           >
             <div
-            class="entry-card"
+              class="entry-card"
               cdkDrag
               [cdkDragData]="card"
               [cdkDragDisabled]="
@@ -170,7 +170,7 @@
         </div>
       } @empty {
         <div class="empty-zone">
-          <div class="empty-zone-tip">不能到达此列</div>
+          <div class="empty-zone-tip">{{ locale().forbidDropInEntry }}</div>
         </div>
       }
     </div>
@@ -198,7 +198,7 @@
   @if (!boardEntry.entry().split || (boardEntry.entry().split && status() === boardEntryStatus.doing)) {
     <div class="text-muted text-truncate board-lane-collapsed">
       <span class="text-secondary mr-1">{{ boardEntry.entry().cards!.length }}</span
-      >个{{ boardEntry.entry().name }}
+      >{{ locale().count }}{{ boardEntry.entry().name }}
     </div>
   }
 }

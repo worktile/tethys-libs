@@ -17,7 +17,7 @@ export const enUsLocale: ThyI18nLocaleConfig = {
         emptyGroup: 'Ungrouped',
 
         getSMSCode: 'Get SMS verification code',
-        sended: 'Sent',
+        sended: 'Sent, retrieve again in <span class="text-primary">{{ seconds }}</span> seconds',
 
         imageErrorMessage: 'Image loading error',
         upload: 'Upload',
@@ -34,7 +34,7 @@ export const enUsLocale: ThyI18nLocaleConfig = {
         setting: 'Settings',
         secondaryTitle: 'Secondary title',
 
-        speed: 'Playback speed',
+        speed: 'speed',
         audioFormatError: 'This audio is not supported for preview. Please upgrade your browser version or download to view.',
         networkError: 'The current network is abnormal. Please refresh and try again.',
         videoFormatError: 'This video is not supported for preview. Please upgrade your browser version or download to view.'

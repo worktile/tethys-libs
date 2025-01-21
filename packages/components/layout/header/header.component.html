@@ -4,7 +4,7 @@
       class="ml-n2"
       thyAction
       href="javascript:;"
-      [thyTooltip]="isCollapsed() ? '展开' : '收起'"
+      [thyTooltip]="isCollapsed() ? locale().expand : locale().foldUp"
       [thyIcon]="isCollapsed() ? 'float-left' : 'float-right'"
       (click)="changeCollapse()"
     ></a>
@@ -16,11 +16,11 @@
     }
     @if (!headerRightContentTemplate) {
       <thy-actions thySize="xs">
-        <a href="javascript:;" thyTooltip="通知" thyAction thyIcon="bell"></a>
-        <a href="javascript:;" thyTooltip="帮助" thyAction>
+        <a href="javascript:;" [thyTooltip]="locale().notify" thyAction thyIcon="bell"></a>
+        <a href="javascript:;" [thyTooltip]="locale().help" thyAction>
           <thy-icon thyIconName="question-circle"></thy-icon>
         </a>
-        <a href="javascript:;" thyTooltip="设置" thyAction>
+        <a href="javascript:;" [thyTooltip]="locale().setting" thyAction>
           <thy-icon thyIconName="settings"></thy-icon>
         </a>
       </thy-actions>

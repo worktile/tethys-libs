@@ -4,8 +4,9 @@ import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThyFlexibleTextModule } from 'ngx-tethys/flexible-text';
 import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyVideoControlsComponent } from './controls.component';
-import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
+import { ThyTimeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-audio-controls',
@@ -62,7 +63,7 @@ import { ThyMediaProgressComponent } from './progress.component';
                         class="controls-playback-rate"
                         thyPanelClass="playback-rate-dropdown-panel"
                         href="javascript:;"
-                        >倍速</a
+                        >{{ locale().speed }}</a
                     >
 
                     <div class="duration-time">
@@ -86,17 +87,11 @@ import { ThyMediaProgressComponent } from './progress.component';
         </thy-dropdown-menu>
     `,
     standalone: true,
-    imports: [
-        ThyIconModule,
-        ThyFlexibleTextModule,
-        ThyDropdownModule,
-        ThyActionModule,
-        ThyMediaProgressComponent,
-        ThyTimeFormatPipe,
-        ThyVolumeFormatPipe
-    ]
+    imports: [ThyIconModule, ThyFlexibleTextModule, ThyDropdownModule, ThyActionModule, ThyMediaProgressComponent, ThyTimeFormatPipe]
 })
 export class ThyAudioControlsComponent extends ThyVideoControlsComponent implements OnInit {
+    locale = injectLocale();
+
     @Input('thyFileName') fileName!: string;
 
     @Input('thyFileSize') fileSize!: number;
