@@ -10,6 +10,7 @@ import { ThyDragDropDirective } from 'ngx-tethys/shared';
 import { ThyBoardFuncPipe } from '../../board.pipe';
 import { ThyBoardEntryBase } from '../entry-base';
 import { THY_BOARD_ENTRY, ThyBoardCard, ThyBoardDragContainer, ThyBoardDragScopeType, ThyBoardEntryAbstract } from '../../entities';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-board-movable-entry',
@@ -40,6 +41,8 @@ import { THY_BOARD_ENTRY, ThyBoardCard, ThyBoardDragContainer, ThyBoardDragScope
     }
 })
 export class ThyBoardMovableEntryComponent extends ThyBoardEntryBase {
+    locale = injectLocale();
+
     public isDraggingList = false;
 
     public showBackDropWhenDragging = computed(() => {

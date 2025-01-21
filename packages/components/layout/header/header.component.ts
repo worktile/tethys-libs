@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, TemplateRef, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, model } from '@angular/core';
 import { ThyGlobalStore } from '@tethys/pro/core';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-pro-header',
@@ -17,6 +18,8 @@ import { ThyLayoutModule } from 'ngx-tethys/layout';
     imports: [ThyLayoutModule, ThyActionModule, ThyTooltipModule, NgTemplateOutlet, ThyIcon, AsyncPipe]
 })
 export class ThyProHeaderComponent implements OnInit {
+    locale = injectLocale();
+
     @Input() public headerRightContentTemplate!: TemplateRef<HTMLElement>;
 
     public isCollapsed = model<boolean>();

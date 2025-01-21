@@ -11,9 +11,9 @@
       @if (boardEntry.entry().split && status()) {
         <div class="entry-split-title" #entrySplitTitle>
           @if (status() === boardEntryStatus.doing) {
-            进行中
+            {{ locale().inProgress }}
           } @else {
-            已完成
+            {{ locale().completed }}
           }
         </div>
       }
@@ -148,7 +148,7 @@
   @if (!boardEntry.entry().split || (boardEntry.entry().split && status() === boardEntryStatus.doing)) {
     <div class="text-muted text-truncate board-lane-collapsed">
       <span class="text-secondary mr-1">{{ boardEntry.entry().cards!.length }}</span
-      >个{{ boardEntry.entry().name }}
+      >{{ locale().count }}{{ boardEntry.entry().name }}
     </div>
   }
 }

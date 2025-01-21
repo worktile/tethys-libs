@@ -2,7 +2,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
 import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { ThyFlexItem } from 'ngx-tethys/grid';
 
 import { ThyBoardEntryVirtualScroll } from '../../scroll/entry-virtual-scroll';
 import { CdkDrag, CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -12,6 +11,7 @@ import { ThyBoardEntryBase } from '../entry-base';
 import { THY_BOARD_ENTRY, ThyBoardCard, ThyBoardDragContainer, ThyBoardDragScopeType, ThyBoardEntryAbstract } from '../../entities';
 import { SafeAny } from 'ngx-tethys/types';
 import { tap } from 'rxjs';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-board-sortable-entry',
@@ -31,7 +31,6 @@ import { tap } from 'rxjs';
         ScrollingModule,
         DragDropModule,
         ExperimentalScrollingModule,
-        ThyFlexItem,
         ThyBoardEntryVirtualScroll,
         ThyDragDropDirective,
         ThyBoardFuncPipe
@@ -42,6 +41,8 @@ import { tap } from 'rxjs';
     }
 })
 export class ThyBoardSortableEntryComponent extends ThyBoardEntryBase {
+    locale = injectLocale();
+
     constructor(@Inject(THY_BOARD_ENTRY) public boardEntry: ThyBoardEntryAbstract) {
         super(boardEntry);
     }

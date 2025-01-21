@@ -1,4 +1,4 @@
-<thy-dialog-header [thyTitle]="'上传' + title"></thy-dialog-header>
+<thy-dialog-header [thyTitle]="locale().upload + title"></thy-dialog-header>
 <thy-dialog-body class="cropper-dialog-body">
   <div class="cropper-content-container">
     <thy-image-cropper
@@ -29,13 +29,13 @@
         [thyAcceptType]="uploadAcceptType"
         (thyOnFileSelect)="selectImage($event)"
       >
-        <a href="javascript:;" class="link-has-icon pl-0"><thy-icon thyIconName="upload" class="mr-1"></thy-icon>重新上传</a>
+        <a href="javascript:;" class="link-has-icon pl-0"><thy-icon thyIconName="upload" class="mr-1"></thy-icon>{{ locale().reupload }}</a>
       </thy-file-select>
       <span class="text-desc">{{ uploadTips }}</span>
     </div>
   </div>
   <div class="preview-container">
-    预览
+    {{ locale().preview }}
     <div class="text-center">
       @if (previewSizes && previewSizes?.length) {
         @for (size of previewSizes; track $index) {
@@ -48,6 +48,6 @@
 </thy-dialog-body>
 
 <thy-dialog-footer thyShowBorderTop="true" [thyAlign]="'right'">
-  <button class="cancel" thyButton="link-secondary" (click)="close()">取消</button>
-  <button thyButton="primary" [thyLoading]="saving" thyLoadingText="上传中" (click)="save()">确定</button>
+  <button class="cancel" thyButton="link-secondary" (click)="close()">{{ locale().cancel }}</button>
+  <button thyButton="primary" [thyLoading]="saving" [thyLoadingText]="locale().uploading" (click)="save()">{{ locale().ok }}</button>
 </thy-dialog-footer>

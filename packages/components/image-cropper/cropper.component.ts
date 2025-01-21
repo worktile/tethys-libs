@@ -5,6 +5,7 @@ import { InputNumber } from 'ngx-tethys/core';
 import { ThyCropperOptions, ThyCropperShape, ThyCropperViewMode, thyCropDataChangeEvent } from './cropper.entity';
 
 import { ThyLoadingModule } from 'ngx-tethys/loading';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-image-cropper',
@@ -20,6 +21,8 @@ export class ThyImageCropperComponent implements OnInit {
     @HostBinding('class.thy-image-cropper') cropperClass = true;
 
     @ViewChild('image', { static: true }) image!: ElementRef;
+
+    locale = injectLocale();
 
     /**
      * 图片资源
@@ -41,7 +44,7 @@ export class ThyImageCropperComponent implements OnInit {
      * 图片加载的错误提示
      * @default 图片加载错误
      */
-    @Input() thyImageErrorMessage: string = '图片加载错误';
+    @Input() thyImageErrorMessage: string = this.locale().imageErrorMessage;
 
     /**
      * 图片裁剪模式

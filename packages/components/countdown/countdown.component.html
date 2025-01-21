@@ -3,7 +3,5 @@
     {{ text }}
   </button>
 } @else {
-  <span class="countdown-progress"
-    >已发送，<span class="text-primary">{{ seconds }}</span> 秒后重新获取</span
-  >
+  <span class="countdown-progress" [innerHTML]="locale().sended | thyI18n: { seconds: seconds }"></span>
 }

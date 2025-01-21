@@ -13,6 +13,7 @@ import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyUploadModule } from 'ngx-tethys/upload';
 import { ThyButtonModule } from 'ngx-tethys/button';
 import { FormsModule } from '@angular/forms';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-image-cropper-dialog',
@@ -36,11 +37,13 @@ import { FormsModule } from '@angular/forms';
     ]
 })
 export class ThyImageCropperDialogComponent implements OnInit {
+    locale = injectLocale();
+
     /**
      * 标题
      * @default 图片
      */
-    @Input('thyTitle') title: string = '图片';
+    @Input('thyTitle') title: string = this.locale().image;
 
     /**
      * 预览大小（支持多个预览）
@@ -55,7 +58,7 @@ export class ThyImageCropperDialogComponent implements OnInit {
     /**
      * 上传提示文案
      */
-    @Input('thyUploadTips') uploadTips: string = '最佳尺寸 120 x 120 像素';
+    @Input('thyUploadTips') uploadTips: string = this.locale().uploadTips;
 
     /**
      * 上传指定文件后缀类型

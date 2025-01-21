@@ -10,6 +10,7 @@ import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
 import { DOCUMENT } from '@angular/common';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-video-controls',
@@ -73,7 +74,7 @@ import { DOCUMENT } from '@angular/common';
                     (thyActiveChange)="actionActiveChange($event)"
                     class="controls-playback-rate"
                     href="javascript:;"
-                    >倍速</a
+                    >{{ locale().speed }}</a
                 >
             </div>
         </div>
@@ -117,6 +118,8 @@ import { DOCUMENT } from '@angular/common';
     ]
 })
 export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) implements OnInit {
+    locale = injectLocale();
+
     /**
      * 进度主题类型 primary | success | info | warning | danger
      */

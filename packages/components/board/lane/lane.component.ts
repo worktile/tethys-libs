@@ -11,7 +11,7 @@ import {
     viewChildren
 } from '@angular/core';
 import { ThyBoardEntryComponent } from '../entry/entry.component';
-import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { NgStyle, NgTemplateOutlet } from '@angular/common';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import {
@@ -27,6 +27,7 @@ import {
 import { CdkDrag, DragDropModule } from '@angular/cdk/drag-drop';
 import { Observable, of } from 'rxjs';
 import { SafeAny } from 'ngx-tethys/types';
+import { injectLocale } from '@tethys/pro/i18n';
 
 const emptyLaneHeight = 200;
 
@@ -35,12 +36,14 @@ const emptyLaneHeight = 200;
     templateUrl: 'lane.component.html',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgStyle, NgClass, NgTemplateOutlet, DragDropModule, ThyIcon, ThyFlexibleText, ThyBoardEntryComponent],
+    imports: [NgStyle, NgTemplateOutlet, DragDropModule, ThyIcon, ThyFlexibleText, ThyBoardEntryComponent],
     host: {
         class: 'thy-board-lane-container'
     }
 })
 export class ThyBoardLaneComponent implements OnInit {
+    locale = injectLocale();
+
     entryComponents = viewChildren(ThyBoardEntryComponent);
 
     public isBatchOperation = false;

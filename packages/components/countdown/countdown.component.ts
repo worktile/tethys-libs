@@ -1,7 +1,8 @@
-import { Component, HostBinding, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { interval, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { ThyButtonModule } from 'ngx-tethys/button';
+import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-countdown',
@@ -11,10 +12,12 @@ import { ThyButtonModule } from 'ngx-tethys/button';
         class: 'thy-countdown'
     },
     standalone: true,
-    imports: [ThyButtonModule]
+    imports: [ThyButtonModule, ThyI18nPipe]
 })
 export class ThyCountdownComponent implements OnInit, OnDestroy {
-    @Input() text = '获取短信验证码';
+    locale = injectLocale();
+
+    @Input() text = this.locale().getSMSCode;
 
     @Input() disabled = false;
 

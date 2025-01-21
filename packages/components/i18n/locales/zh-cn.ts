@@ -8,7 +8,7 @@ export const zhCnLocale: ThyI18nLocaleConfig = {
         count: '个',
         forbidDropInEntry: '不能到达此列',
         expandedAll: '全部展开',
-        foldUpAll: '全部展开',
+        foldUpAll: '全部收起',
         lane: '泳道',
         wipLimitStatistics: '共 {{count}} 个 / 在制品限制 {{wipLimit}} 个',
         countStatistics: '共 {{count}} 个',
@@ -17,7 +17,7 @@ export const zhCnLocale: ThyI18nLocaleConfig = {
         emptyGroup: '未分组',
 
         getSMSCode: '获取短信验证码',
-        sended: '已发送',
+        sended: '已发送，<span class="text-primary">{{ seconds }}</span> 秒后重新获取',
 
         imageErrorMessage: '图片加载错误',
         upload: '上传',

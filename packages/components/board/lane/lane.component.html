@@ -23,7 +23,7 @@
           @if (lane()?.expanded) {
             <span class="text-muted flex-shrink-0"
               ><span class="text-secondary mr-1">{{ lane()?.cards?.length || 0 }}</span
-              >个</span
+              >{{ locale().count }}</span
             >
           }
         </div>

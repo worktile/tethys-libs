@@ -3,6 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { ThyVideoControlsComponent } from './controls.component';
 import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-base.component';
+import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-video-player',
@@ -36,6 +37,8 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     @ViewChild('controls') controls!: ThyVideoControlsComponent;
 
+    locale = injectLocale();
+
     /**
      * 媒体资源的url
      */
@@ -49,8 +52,8 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     @Input() thyAutoPlay: boolean = false;
 
     public errorTips = {
-        formatError: '该视频暂不支持预览，请升级浏览器版本或下载查看',
-        networkError: '当前网络异常，请刷新后重试'
+        formatError: this.locale().videoFormatError,
+        networkError: this.locale().networkError
     };
 
     playBackRates = DEFAULT_PLAYBACK_RATES;
