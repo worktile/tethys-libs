@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.2.0](https://github.com/tethys-org/libs/compare/v18.1.0...v18.2.0) (2025-01-22)
+
+### Features
+
+- **components:** translate components ([b7f9e10](https://github.com/tethys-org/libs/commit/b7f9e10aaa92a3a0317619235065f677ded2e719))
+
 # [18.1.0](https://github.com/tethys-org/libs/compare/v18.0.18...v18.1.0) (2025-01-17)
 
 ### Features
