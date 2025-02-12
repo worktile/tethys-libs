@@ -61,13 +61,10 @@ export class PassportLoginComponent implements OnInit {
             form.validator.addError('用户名密码输入错误');
             return;
         }
-        this.authService
-            .authenticate(
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-            )
-            .subscribe(() => {
-                this.router.navigateByUrl('/dashboard');
-            });
+        this.authService.authenticate(
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+        );
+        this.router.navigateByUrl('/dashboard');
     }
 
     loginByMobile(form: ThyFormDirective) {}

@@ -16,12 +16,11 @@ export interface ThyAuthTokenClass<T = ThyAuthToken> {
     new (raw: SafeAny, createdAt?: Date | null): T;
 }
 
-export function thyAuthCreateToken<T extends ThyAuthToken>(tokenClass: ThyAuthTokenClass<T>, value: SafeAny, createdAt?: Date | null) {
-    return new tokenClass(value, createdAt);
-}
-
 export class ThyAuthTokenBase<T = unknown> extends ThyAuthToken<T> {
-    constructor(protected readonly token: string, protected createdAt?: Date) {
+    constructor(
+        protected readonly token: string,
+        protected createdAt?: Date
+    ) {
         super();
         try {
             this.parsePayload();

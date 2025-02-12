@@ -1,6 +1,6 @@
 import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { SafeAny } from '../types';
-import { thyAuthCreateToken, ThyAuthToken, ThyAuthTokenClass } from '../token/token';
+import { ThyAuthToken, ThyAuthTokenClass } from '../token/token';
 
 export abstract class ThyTokenStorage {
     abstract get(key: string): ThyAuthToken;
@@ -12,8 +12,7 @@ export const THY_AUTH_FALLBACK_TOKEN = new InjectionToken<ThyAuthTokenClass>('Au
 
 @Injectable()
 export class ThyTokenLocalStorage extends ThyTokenStorage {
-    constructor(
-        @Inject(THY_AUTH_FALLBACK_TOKEN) private fallbackClass: ThyAuthTokenClass) {
+    constructor(@Inject(THY_AUTH_FALLBACK_TOKEN) private fallbackClass: ThyAuthTokenClass) {
         super();
     }
 
@@ -29,7 +28,7 @@ export class ThyTokenLocalStorage extends ThyTokenStorage {
             tokenCreatedAt = new Date(Number(tokenPack.createdAt));
         }
 
-        return thyAuthCreateToken(tokenClass, tokenValue, tokenCreatedAt);
+        return new tokenClass(tokenValue, tokenCreatedAt);
     }
 
     set(key: string, value: ThyAuthToken | null): boolean {

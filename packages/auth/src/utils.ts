@@ -2,12 +2,12 @@ import { DOCUMENT } from '@angular/common';
 import { Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThyAuthConfig } from './auth.config';
-import { thyAuthCreateToken, ThyAuthIllegalJWTTokenError, ThyAuthToken, ThyAuthTokenClass } from './token/token';
+import { ThyAuthIllegalJWTTokenError, ThyAuthToken, ThyAuthTokenClass } from './token/token';
 import { SafeAny } from './types';
 
 export function redirectToLogin(options: ThyAuthConfig, injector: Injector, url?: string): void {
     const router = injector.get<Router>(Router);
-    if (options.tokenInvalidRedirect === true) {
+    if (options.tokenInvalidRedirect === true && location.pathname !== options.loginUrl) {
         setTimeout(() => {
             const loginUrl = `${options.loginUrl}?${options.referrerKey}=${url || router.url}`;
             if (/^https?:\/\//g.test(options.loginUrl!)) {
@@ -34,7 +34,7 @@ export function urlBase64Decode(str: string): string {
             break;
         }
         default: {
-            throw new Error('\'atob\' failed: The string to be decoded is not correctly encoded.');
+            throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
         }
     }
     return b64DecodeUnicode(output);
@@ -96,14 +96,18 @@ function b64DecodeUnicode(str: string): string {
     );
 }
 
-export function createToken<T extends ThyAuthToken>(tokenClass: ThyAuthTokenClass<T>, value: SafeAny, failWhenInvalidToken?: boolean): T {
-    const token = thyAuthCreateToken<T>(tokenClass, value);
+export function createAuthToken<T extends ThyAuthToken>(
+    tokenClass: ThyAuthTokenClass<T>,
+    value: SafeAny,
+    failWhenInvalidToken?: boolean
+): T {
+    const token = new tokenClass(value);
     // At this point, nbAuthCreateToken failed with NbAuthIllegalTokenError which MUST be intercepted by strategies
     // Or token is created. It MAY be created even if backend did not return any token, in this case it is !Valid
     if (failWhenInvalidToken && !token.isValid()) {
         // If we require a valid token (i.e. isValid), then we MUST throw NbAuthIllegalTokenError so that the strategies
         // intercept it
-        //   throw new ThyAuthIllegalTokenError('Token is empty or invalid.');
+        throw new ThyAuthIllegalJWTTokenError('Token is empty or invalid.');
     }
     return token;
 }
