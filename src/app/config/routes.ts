@@ -4,6 +4,7 @@ import { WorkplaceComponent } from '../features/dashboard/workplace/workplace.co
 import { UserListComponent } from '../features/user/list/list.component';
 import { BasicLayoutComponent } from '../layout/basic/basic.component';
 import { InsightComponent } from '../features/dashboard/insight/insight.component';
+import { AppTodosComponent } from '../features/todos/todos.component';
 
 export const ROUTES: Routes = [
     {
@@ -68,14 +69,14 @@ export const ROUTES: Routes = [
                         data: {
                             title: '搜索列表'
                         },
-                        component: UserListComponent,
+                        component: AppTodosComponent,
                         children: [
                             {
                                 path: 'articles',
                                 data: {
                                     title: '搜索文章'
                                 },
-                                component: UserListComponent
+                                component: AppTodosComponent
                             }
                         ]
                     }

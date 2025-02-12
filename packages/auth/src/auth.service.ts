@@ -4,57 +4,48 @@ import { SafeAny } from './types';
 import { ThyAuthToken, ThyAuthTokenClass } from './token/token';
 import { THY_AUTH_FALLBACK_TOKEN } from './token/token-storage.service';
 import { ThyTokenService } from './token/token.service';
-import { createToken } from './utils';
+import { createAuthToken } from './utils';
 
 @Injectable()
 export class ThyAuthService {
-    constructor(protected tokenService: ThyTokenService, @Inject(THY_AUTH_FALLBACK_TOKEN) private fallbackClass: ThyAuthTokenClass) {}
+    constructor(
+        protected tokenService: ThyTokenService,
+        @Inject(THY_AUTH_FALLBACK_TOKEN) private fallbackClass: ThyAuthTokenClass
+    ) {}
 
     /**
      * Retrieves current authenticated token stored
      * @returns {Observable<any>}
      */
-    getToken(): Observable<ThyAuthToken> {
+    getToken(): ThyAuthToken {
         return this.tokenService.get();
     }
 
     /**
      * Returns true if auth token is present in the token storage
-     * @returns {Observable<boolean>}
+     * @returns {boolean}
      */
-    isAuthenticated(): Observable<boolean> {
-        return this.getToken().pipe(
-            map((token: ThyAuthToken) => {
-                return (token.isValid && token.isValid()) || false;
-            })
-        );
+    isAuthenticated(): boolean {
+        const token = this.getToken();
+        return (token.isValid && token.isValid()) || false;
     }
 
-    setToken(token: ThyAuthToken<string>) {
+    setToken(token: ThyAuthToken<string>): void {
         if (token) {
-            return this.tokenService.set(token!).pipe(
-                map(() => {
-                    return token;
-                })
-            );
+            this.tokenService.set(token!);
         }
-        return of(token);
     }
 
-    authenticate(token: string): Observable<SafeAny> {
-        return this.processResultToken(token);
+    authenticate(token: string): void {
+        this.processResultToken(token);
     }
 
     private processResultToken(token: string) {
-        const processToken = createToken(this.fallbackClass, token);
+        const processToken = createAuthToken(this.fallbackClass, token);
         if (processToken.getValue()) {
-            return this.tokenService.set(processToken).pipe(
-                map(() => {
-                    return processToken;
-                })
-            );
+            this.tokenService.set(processToken);
         }
-        return of(processToken);
+        return processToken;
     }
 
     /**

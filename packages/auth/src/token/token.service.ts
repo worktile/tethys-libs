@@ -13,7 +13,10 @@ export class ThyTokenService implements OnDestroy {
     private interval$: Subscription = new Subscription();
     private refresh$ = new Subject<ThyAuthToken>();
 
-    constructor(protected tokenStorage: ThyTokenStorage, @Optional() @Inject(THY_AUTH_CONFIG) config?: ThyAuthConfig) {
+    constructor(
+        protected tokenStorage: ThyTokenStorage,
+        @Optional() @Inject(THY_AUTH_CONFIG) config?: ThyAuthConfig
+    ) {
         this._options = mergeConfig(config);
         this.publishStoredToken();
     }
@@ -37,9 +40,9 @@ export class ThyTokenService implements OnDestroy {
      * Returns observable of current token
      * @returns {Observable<ThyAuthToken>}
      */
-    get(): Observable<ThyAuthToken> {
+    get(): ThyAuthToken {
         const token = this.tokenStorage.get(this.options.tokenStoreKey!);
-        return of(token);
+        return token;
     }
 
     /**
@@ -48,10 +51,9 @@ export class ThyTokenService implements OnDestroy {
      * @param {ThyAuthToken} token
      * @returns {Observable<any>}
      */
-    set(token: ThyAuthToken): Observable<null> {
+    set(token: ThyAuthToken): void {
         this.tokenStorage.set(this.options.tokenStoreKey!, token);
         this.publishStoredToken();
-        return of(null);
     }
 
     /**
@@ -99,8 +101,8 @@ export class ThyTokenService implements OnDestroy {
                         return null;
                     }
 
-                    const curTime = new Date().valueOf() + refreshOffset!;
-                    return expired <= curTime ? item : null;
+                    const currentTime = new Date().valueOf() + refreshOffset!;
+                    return expired <= currentTime ? item : null;
                 }),
                 filter((v) => v != null)
             )
