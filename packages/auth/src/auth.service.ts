@@ -5,6 +5,7 @@ import { ThyAuthToken, ThyAuthTokenClass } from './token/token';
 import { THY_AUTH_FALLBACK_TOKEN } from './token/token-storage.service';
 import { ThyTokenService } from './token/token.service';
 import { createAuthToken } from './utils';
+import { HttpHeaders, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class ThyAuthService {
@@ -60,5 +61,21 @@ export class ThyAuthService {
      */
     onAuthenticationChange(): Observable<boolean> {
         return this.onTokenChange().pipe(map((token: ThyAuthToken | null) => token!.isValid()));
+    }
+
+    getBearerAuthorizationStr(): string {
+        const token = this.getToken();
+        return token.isValid() ? `Bearer ${token.getValue()}` : '';
+    }
+
+    getBearerAuthorizationHeader(): HttpHeaders {
+        return new HttpHeaders().set('Authorization', this.getBearerAuthorizationStr());
+    }
+
+    cloneReqWithBearerAuthorization<T>(req: HttpRequest<T>): HttpRequest<T> {
+        const newReq = req.clone({
+            headers: this.getBearerAuthorizationHeader()
+        });
+        return newReq;
     }
 }

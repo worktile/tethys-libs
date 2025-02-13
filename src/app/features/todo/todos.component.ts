@@ -1,19 +1,21 @@
 import { asyncBehavior } from '@tethys/cdk/behaviors';
 import { Component, inject, OnInit } from '@angular/core';
-import { TodosStore } from './todos.store';
+import { TodoModel, TodosStore } from './todos.store';
 import { SharedModule } from '../../shared';
 import { ThyContentDirective } from 'ngx-tethys/layout';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-todos',
     templateUrl: './todos.component.html',
     imports: [SharedModule],
-    providers: [TodosStore],
     hostDirectives: [ThyContentDirective],
     standalone: true
 })
 export class AppTodosComponent implements OnInit {
     protected todosStore = inject(TodosStore);
+
+    protected router = inject(Router);
 
     protected searchText: string = '';
 
@@ -23,9 +25,13 @@ export class AppTodosComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchTodos.execute();
+        debugger;
     }
 
     search() {}
 
-    onRowClick($event: any) {}
+    onRowClick({ row }: { row: TodoModel }) {
+        debugger;
+        this.router.navigateByUrl(`/todos/${row.id}`);
+    }
 }

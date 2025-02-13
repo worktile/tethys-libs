@@ -1,0 +1,8 @@
+@let todo = todosStore.activeEntity() || {};
+<thy-content-main>
+  <div class="content-main-header d-flex">详情</div>
+  <div class="content-main-body">
+    Id: {{ todo.id }} <br />
+    Title: {{ todo.title }}
+  </div>
+</thy-content-main>

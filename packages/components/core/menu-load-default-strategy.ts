@@ -3,6 +3,10 @@ import { ThyMenuLoadStrategy, ThyMenuRoute } from './menu';
 import { inject, Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
+function routeIsActual(route: Route) {
+    return route.path || (!route.path && !route.redirectTo);
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -14,7 +18,7 @@ export class ThyMenuLoadDefaultStrategy implements ThyMenuLoadStrategy {
     private parseMenuByRoute(parentRoute: Route, parentMenu?: ThyMenuRoute): ThyMenuRoute[] {
         const routes = parentRoute?.children
             ?.filter((route) => {
-                return route.path && route.data && route.data.title;
+                return routeIsActual(route) && route.data && route.data.title;
             })
             .map((route) => {
                 const result: ThyMenuRoute = {
@@ -23,7 +27,8 @@ export class ThyMenuLoadDefaultStrategy implements ThyMenuLoadStrategy {
                     path: route.path,
                     parent: parentMenu
                 };
-                (result.children = this.parseMenuByRoute(route, result)), this.menuByRouteMap.set(route, result);
+                result.children = this.parseMenuByRoute(route, result);
+                this.menuByRouteMap.set(route, result);
                 return result;
             });
         return routes as ThyMenuRoute[];

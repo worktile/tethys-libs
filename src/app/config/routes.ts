@@ -1,10 +1,13 @@
-import { Routes } from '@angular/router';
+import { Routes, ɵEmptyOutletComponent as EmptyOutletComponent } from '@angular/router';
 import { ThyAuthJWTGuard } from '@tethys/auth';
+import { ThyLayoutEmptyRouterOutlet } from '@tethys/pro/layout';
 import { WorkplaceComponent } from '../features/dashboard/workplace/workplace.component';
 import { UserListComponent } from '../features/user/list/list.component';
 import { BasicLayoutComponent } from '../layout/basic/basic.component';
 import { InsightComponent } from '../features/dashboard/insight/insight.component';
-import { AppTodosComponent } from '../features/todos/todos.component';
+import { AppTodosComponent } from '../features/todo/todos.component';
+import { AppTodoComponent } from '../features/todo/todo/todo.component';
+import { TodosStore } from '../features/todo/todos.store';
 
 export const ROUTES: Routes = [
     {
@@ -46,7 +49,7 @@ export const ROUTES: Routes = [
                 // loadChildren: () => import('../features/dashboard/dashboard.module').then((m) => m.DashboardModule)
             },
             {
-                path: 'users',
+                path: '',
                 data: {
                     title: '列表',
                     icon: 'list'
@@ -54,29 +57,31 @@ export const ROUTES: Routes = [
                 children: [
                     {
                         path: '',
-                        redirectTo: 'manage',
+                        redirectTo: 'users',
                         pathMatch: 'full'
                     },
                     {
-                        path: 'manage',
+                        path: 'users',
                         data: {
                             title: '用户管理'
                         },
                         component: UserListComponent
                     },
                     {
-                        path: 'search',
+                        path: 'todos',
                         data: {
-                            title: '搜索列表'
+                            title: '待办列表'
                         },
-                        component: AppTodosComponent,
+                        component: ThyLayoutEmptyRouterOutlet,
+                        providers: [TodosStore],
                         children: [
                             {
-                                path: 'articles',
-                                data: {
-                                    title: '搜索文章'
-                                },
+                                path: '',
                                 component: AppTodosComponent
+                            },
+                            {
+                                path: ':id',
+                                component: AppTodoComponent
                             }
                         ]
                     }

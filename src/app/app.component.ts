@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, Injector } from '@angular/core';
+import { ThyGlobalStore } from '@tethys/pro/core';
 
 @Component({
     selector: 'app-root',
@@ -8,4 +9,8 @@ import { Component } from '@angular/core';
         class: 'thy-layout'
     }
 })
-export class AppComponent {}
+export class AppComponent {
+    constructor() {
+        const globalStore = inject(ThyGlobalStore);
+    }
+}

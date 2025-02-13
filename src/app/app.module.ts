@@ -10,7 +10,7 @@ import { SharedModule } from './shared';
 import { registerLocaleData } from '@angular/common';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from './layout/layout.module';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { withInterceptorsFromDi, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authJWTInterceptor, ThyAuthModule } from '@tethys/auth';
 import { UserModule } from './features/user/user.module';
 import { THY_SITE_SETTINGS } from '@tethys/pro/core';
@@ -42,7 +42,7 @@ registerLocaleData(localeZH);
                 footerAlign: 'left'
             }
         },
-        provideHttpClient(withInterceptors([authJWTInterceptor])),
+        provideHttpClient(withInterceptors([authJWTInterceptor]), withInterceptorsFromDi()),
         {
             provide: THY_SITE_SETTINGS,
             useValue: DEFAULT_GLOBAL_SETTING
