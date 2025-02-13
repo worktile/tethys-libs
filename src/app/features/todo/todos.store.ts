@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { EntityStore, EntityState, Action } from '@tethys/store';
 import { tap } from 'rxjs';
@@ -16,12 +16,12 @@ export class TodosStore extends EntityStore<TodosStoreState, TodoModel> {
     private http = inject(HttpClient);
 
     constructor() {
-        super({});
+        super({ entities: [] }, { idKey: 'id' });
     }
 
     @Action()
     fetchTodos() {
-        return this.http.get('https://jsonplaceholder.typicode.com/todos').pipe(
+        return this.http.get('https://jsonplaceholder.typicode.com/todos', {}).pipe(
             tap((data) => {
                 this.update({
                     entities: data as TodoModel[]

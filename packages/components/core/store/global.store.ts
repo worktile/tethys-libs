@@ -10,11 +10,11 @@ import { Route } from '@angular/router';
     providedIn: 'root'
 })
 export class ThyGlobalStore extends Store<ThyGlobalInfo> {
-    private menuLoadStrategy = inject(THY_MENU_LOAD_STRATEGY, { optional: true });
+    private menuCustomLoadStrategy = inject(THY_MENU_LOAD_STRATEGY, { optional: true });
     private menuDefaultLoadStrategy = inject(ThyMenuLoadDefaultStrategy);
 
-    private get loadStrategy() {
-        return this.menuLoadStrategy || this.menuDefaultLoadStrategy;
+    private get menuLoadStrategy() {
+        return this.menuCustomLoadStrategy || this.menuDefaultLoadStrategy;
     }
 
     public config: ThySiteSettings = inject(THY_SITE_SETTINGS);
@@ -25,7 +25,7 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
 
     @Action()
     initialize() {
-        this.loadStrategy.load().subscribe((menus) => {
+        this.menuLoadStrategy.load().subscribe((menus) => {
             this.initializeMenus(menus);
         });
     }
@@ -38,7 +38,7 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
     @Action()
     pureUpdateActiveMenuByRoute(route: Route | undefined | null) {
         if (route) {
-            const menu = this.loadStrategy.getMenuByRoute(route);
+            const menu = this.menuLoadStrategy.getMenuByRoute(route);
             this.update({ activeMenu: menu });
         }
     }

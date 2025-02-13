@@ -22,16 +22,9 @@ export const authJWTInterceptor: HttpInterceptorFn = (req, next) => {
     if (isAnonymous(req, options)) return next(req);
 
     const authService = inject(ThyAuthService);
-    const authenticated = authService.isAuthenticated();
-    if (authenticated) {
-        const token = authService.getToken();
-        const authorizationStr = `Bearer ${token.getValue()}`;
-        const newReq = req.clone({
-            setHeaders: {
-                Authorization: authorizationStr
-            }
-        });
-        return next(newReq);
+
+    if (authService.isAuthenticated()) {
+        return next(authService.cloneReqWithBearerAuthorization(req));
     } else {
         redirectToLogin(options, inject(Injector));
         const err$ = new Observable((observer: Observer<HttpEvent<SafeAny>>) => {

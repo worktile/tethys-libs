@@ -9,7 +9,6 @@ import { ThyAvatarModule } from 'ngx-tethys/avatar';
 import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProLayoutComponent } from './layout.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
-import { THY_SITE_SETTINGS_PROVIDER } from '@tethys/pro/core';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { ThyPopoverModule } from 'ngx-tethys/popover';
 
@@ -28,6 +27,6 @@ const TETHYS_MODULES = [
 @NgModule({
     imports: [...TETHYS_MODULES, RouterModule, CommonModule, ...COMPONENTS],
     exports: [...COMPONENTS],
-    providers: [THY_SITE_SETTINGS_PROVIDER, ThyMenu]
+    providers: []
 })
 export class ThyProLayoutModule {}
