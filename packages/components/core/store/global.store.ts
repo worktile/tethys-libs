@@ -9,7 +9,7 @@ import { Route } from '@angular/router';
 @Injectable({
     providedIn: 'root'
 })
-export class ThyGlobalStore extends Store<ThyGlobalInfo> {
+export class ThyGlobalStore<T extends ThyGlobalInfo = ThyGlobalInfo> extends Store<T> {
     private menuCustomLoadStrategy = inject(THY_MENU_LOAD_STRATEGY, { optional: true });
     private menuDefaultLoadStrategy = inject(ThyMenuLoadDefaultStrategy);
 
@@ -32,20 +32,25 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
 
     @Action()
     initializeMenus(menus: ThyMenuRoute[]) {
-        this.update({ menus });
+        this.update((state) => {
+            return {
+                ...state,
+                menus
+            };
+        });
     }
 
     @Action()
     pureUpdateActiveMenuByRoute(route: Route | undefined | null) {
         if (route) {
             const menu = this.menuLoadStrategy.getMenuByRoute(route);
-            this.update({ activeMenu: menu });
+            this.update({ activeMenu: menu } as Partial<T>);
         }
     }
 
     @Action()
     pureUpdateActiveMenu(menu: ThyMenuRoute) {
-        this.update({ activeMenu: menu });
+        this.update({ activeMenu: menu } as Partial<T>);
     }
 
     @Action()
@@ -55,7 +60,7 @@ export class ThyGlobalStore extends Store<ThyGlobalInfo> {
                 ...this.snapshot.config,
                 ...config
             }
-        });
+        } as Partial<T>);
         for (const key in config) {
             if (key === 'layout') {
                 this.changeTheme();
