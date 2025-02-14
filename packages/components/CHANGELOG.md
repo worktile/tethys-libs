@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.2.1](https://github.com/tethys-org/libs/compare/v18.2.0...v18.2.1) (2025-02-14)
+
+### Features
+
+- add ThyLayoutEmptyRouterOutlet and cloneReqWithBearerAuthorization ([c88d590](https://github.com/tethys-org/libs/commit/c88d590498612aabaec1e0e7cd6849310a6ce26d))
+- **core:** add generic to ThyGlobalStore ([059aab7](https://github.com/tethys-org/libs/commit/059aab7398588103c6b19cb54a70871c8b573a20))
+
 # [18.2.0](https://github.com/tethys-org/libs/compare/v18.1.0...v18.2.0) (2025-01-22)
 
 ### Features
