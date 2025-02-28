@@ -6,7 +6,6 @@ import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
 import { cache } from '@tethys/cache';
-console.log(cache);
 
 @Component({
     selector: 'thy-pro-layout',
