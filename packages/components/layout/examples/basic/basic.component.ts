@@ -8,22 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class ThyProLayoutBasicExampleComponent implements OnInit {
     menus = [
         {
-            data: {
-                title: '菜单1',
-                icon: 'menu'
-            }
+            title: '菜单1',
+            icon: 'menu'
         },
         {
-            data: {
-                title: '菜单2',
-                icon: 'menu'
-            },
+            title: '菜单2',
+            icon: 'menu',
             children: [
                 {
-                    data: {
-                        title: '菜单2',
-                        icon: 'menu'
-                    }
+                    title: '菜单2',
+                    icon: 'menu'
                 }
             ]
         }

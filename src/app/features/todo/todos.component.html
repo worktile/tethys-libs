@@ -1,6 +1,6 @@
 <thy-content-main>
-  <div class="content-main-header d-flex">
-    <div class="flex-grow-1">
+  <thy-pro-content-main-header>
+    <ng-template #headerSearch>
       <thy-input-search
         name="search"
         [thySize]="''"
@@ -9,13 +9,16 @@
         [thySearchFocus]="true"
         [(ngModel)]="searchText"
       ></thy-input-search>
-    </div>
-    <!-- <thy-space>
+    </ng-template>
+    <ng-template #headerOperation>
+      <!-- <thy-space>
         <button *thySpaceItem (click)="openAddUser()" thyIcon="plus" thyButton="primary">新建用户</button>
         <button *thySpaceItem thyButton="outline-default">导出用户</button>
       </thy-space> -->
-  </div>
-  <div class="content-main-body">
+    </ng-template>
+  </thy-pro-content-main-header>
+
+  <thy-pro-content-main-body>
     <thy-table
       [thyLoadingDone]="fetchTodos.loadingDone()"
       [thyModel]="todosStore.state().entities"
@@ -33,5 +36,5 @@
       <thy-table-column thyTitle="标题" thyModelKey="title"></thy-table-column>
       <thy-table-column thyTitle="状态" thyModelKey="completed" thyHeaderClassName="text-center"></thy-table-column>
     </thy-table>
-  </div>
+  </thy-pro-content-main-body>
 </thy-content-main>
