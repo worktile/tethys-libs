@@ -1,0 +1,4 @@
+---
+background: '#fafafa'
+compact: true
+---

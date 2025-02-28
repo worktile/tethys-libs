@@ -1,0 +1,47 @@
+.thy-pro-content-main-header {
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: row;
+
+    .header-body {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .header-tips {
+            margin-bottom: 20px;
+        }
+
+        .header-content {
+            flex: auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 36px;
+
+            .thy-input-search {
+                width: 300px;
+                margin-right: 40px;
+            }
+
+            .header-content-view {
+                flex: 1;
+
+                // 统一处理header下使用action组件的间距
+                .thy-action {
+                    margin-right: 20px;
+                }
+            }
+
+            .header-content-operation {
+                flex: auto;
+            }
+        }
+    }
+}
+
+.thy-pro-content-main-body {
+    display: flex;
+    flex: auto;
+    padding: 12px 20px;
+}

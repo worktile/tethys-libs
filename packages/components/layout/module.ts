@@ -11,8 +11,9 @@ import { ThyProLayoutComponent } from './layout.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { ThyPopoverModule } from 'ngx-tethys/popover';
+import { ThyContentMainBody, ThyContentMainHeader } from './content-main/content-main';
 
-const COMPONENTS = [ThyProHeaderComponent, ThyProLayoutComponent, ThyProSidebarComponent];
+const COMPONENTS = [ThyProHeaderComponent, ThyProLayoutComponent, ThyProSidebarComponent, ThyContentMainHeader, ThyContentMainBody];
 
 const TETHYS_MODULES = [
     ThyLayoutModule,

@@ -6,6 +6,7 @@ import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
 import { cache } from '@tethys/cache';
+console.log(cache);
 
 @Component({
     selector: 'thy-pro-layout',
@@ -73,7 +74,6 @@ export class ThyProLayoutComponent implements OnInit {
 
     constructor(
         public globalStore: ThyGlobalStore,
-        private router: Router,
         public route: ActivatedRoute
     ) {
         this.globalStore.initialize();

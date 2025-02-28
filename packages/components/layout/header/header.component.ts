@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, inject, model } from '@angular/core';
 import { ThyGlobalStore } from '@tethys/pro/core';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
@@ -24,9 +24,11 @@ export class ThyProHeaderComponent implements OnInit {
 
     public isCollapsed = model<boolean>();
 
-    activeMenu = this.globalStore.select((state) => state.activeMenu);
+    protected globalStore = inject(ThyGlobalStore);
 
-    constructor(public globalStore: ThyGlobalStore) {}
+    protected activeMenu = this.globalStore.select((state) => state.activeMenu);
+
+    constructor() {}
 
     ngOnInit(): void {}
 

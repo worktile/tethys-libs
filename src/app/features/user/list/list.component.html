@@ -1,21 +1,24 @@
 <thy-content-main>
-  <div class="content-main-header d-flex">
-    <div class="flex-grow-1">
+  <thy-pro-content-main-header [thyCount]="userListStore.entities().length" thyCountUnitName="个用户">
+    <ng-template #headerSearch>
       <thy-input-search
         name="search"
         [thySize]="''"
-        placeholder="搜索用户(按Enter搜索)"
+        placeholder="搜索(按Enter)"
         (keydown.enter)="search()"
         [thySearchFocus]="true"
         [(ngModel)]="searchText"
       ></thy-input-search>
-    </div>
-    <thy-space>
-      <button *thySpaceItem (click)="openAddUser()" thyIcon="plus" thyButton="primary">新建用户</button>
-      <button *thySpaceItem thyButton="outline-default">导出用户</button>
-    </thy-space>
-  </div>
-  <div class="content-main-body">
+    </ng-template>
+    <ng-template #headerOperation>
+      <thy-space>
+        <button *thySpaceItem (click)="openAddUser()" thyIcon="plus" thyButton="primary">新建用户</button>
+        <button *thySpaceItem thyButton="outline-default">导出用户</button>
+      </thy-space>
+    </ng-template>
+  </thy-pro-content-main-header>
+
+  <thy-pro-content-main-body>
     <thy-table
       [thyModel]="userListStore.snapshot.entities"
       [thyTheme]="'bordered'"
@@ -43,5 +46,5 @@
         </ng-template>
       </thy-table-column>
     </thy-table>
-  </div>
+  </thy-pro-content-main-body>
 </thy-content-main>

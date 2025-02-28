@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, QueryList, TemplateRef, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit, QueryList, TemplateRef, ViewChildren } from '@angular/core';
 import { InputBoolean } from 'ngx-tethys/core';
 import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
@@ -47,9 +47,11 @@ export class ThyProSidebarComponent implements OnInit {
 
     @ViewChildren(ThyPopoverDirective) menuPopovers!: QueryList<ThyPopoverDirective>;
 
+    protected globalStore = inject(ThyGlobalStore);
+
     activeMenu = this.globalStore.select((state) => state.activeMenu);
 
-    constructor(public globalStore: ThyGlobalStore) {}
+    constructor() {}
 
     ngOnInit(): void {
         this.initCurrentMenuGroup();
