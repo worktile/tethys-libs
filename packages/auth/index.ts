@@ -8,3 +8,4 @@ export * from './src/token/jwt.token';
 export * from './src/interceptors/jwt-interceptor';
 export * from './src/guard/jwt.guard';
 export * from './src/auth.module';
+export * from './src/http-context-token';

@@ -17,8 +17,6 @@ export class ThyGlobalStore<T extends ThyGlobalInfo = ThyGlobalInfo> extends Sto
         return this.menuCustomLoadStrategy || this.menuDefaultLoadStrategy;
     }
 
-    public config: ThySiteSettings = inject(THY_SITE_SETTINGS);
-
     constructor() {
         super({});
     }
@@ -56,8 +54,8 @@ export class ThyGlobalStore<T extends ThyGlobalInfo = ThyGlobalInfo> extends Sto
     @Action()
     pureUpdateSettings(config: Partial<ThySiteSettings>) {
         this.update({
-            config: {
-                ...this.snapshot.config,
+            settings: {
+                ...this.snapshot.settings,
                 ...config
             }
         } as Partial<T>);

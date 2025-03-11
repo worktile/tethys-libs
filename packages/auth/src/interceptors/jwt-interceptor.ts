@@ -7,8 +7,12 @@ import { ThyAuthToken } from '../token/token';
 import { ThyTokenService } from '../token/token.service';
 import { SafeAny } from '../types';
 import { redirectToLogin } from '../utils';
+import { ALLOW_ANONYMOUS } from '../http-context-token';
 
 export function isAnonymous(req: HttpRequest<unknown>, options: ThyAuthConfig): boolean {
+    if (req.context.get(ALLOW_ANONYMOUS)) {
+        return true;
+    }
     if (Array.isArray(options.ignores)) {
         for (const item of options.ignores) {
             if (item.test(req.url)) return true;
