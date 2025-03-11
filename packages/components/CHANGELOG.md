@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.2.2](https://github.com/tethys-org/libs/compare/v18.2.1...v18.2.2) (2025-03-11)
+
+### Features
+
+- **auth:** add ALLOW_ANONYMOUS http-content-token and rename config to settings ([d7fedc3](https://github.com/tethys-org/libs/commit/d7fedc36d5c01bbb0f36b1e3541ee7ee9b1854b5))
+- **components:** add thy-pro-content-main-header and thy-pro-content-main-body to layout #TINFR-1574 ([bf8fe98](https://github.com/tethys-org/libs/commit/bf8fe98be21f03c659f8601e7c6239beec942d36)), closes [#TINFR-1574](https://github.com/tethys-org/libs/issues/TINFR-1574)
+
 ## [18.2.1](https://github.com/tethys-org/libs/compare/v18.2.0...v18.2.1) (2025-02-14)
 
 ### Features
