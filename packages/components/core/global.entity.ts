@@ -17,7 +17,7 @@ export interface ThySiteSettings {
 }
 
 export interface ThyGlobalInfo {
-    config: ThySiteSettings;
+    settings: ThySiteSettings;
     menus: ThyMenuRoute[];
     activeMenu?: ThyMenuRoute;
 }
