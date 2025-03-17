@@ -6,7 +6,6 @@ import { ThyLayoutDirective } from 'ngx-tethys/layout';
     selector: 'thy-layout-empty-router-outlet',
     template: `<router-outlet></router-outlet>`,
     imports: [RouterOutlet],
-    standalone: true,
     hostDirectives: [ThyLayoutDirective]
 })
 export class ThyLayoutEmptyRouterOutlet {}

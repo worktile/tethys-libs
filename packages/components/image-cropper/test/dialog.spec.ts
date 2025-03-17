@@ -14,7 +14,6 @@ import { ThyCropperViewMode } from '../cropper.entity';
         [thyUploadTips]="uploadTips"
         [thyConfirmAction]="confirmAction()"
     ></thy-image-cropper-dialog>`,
-    standalone: true,
     imports: [ThyImageCropperModule]
 })
 export class ThyImageCropperDialogTestBasicComponent {

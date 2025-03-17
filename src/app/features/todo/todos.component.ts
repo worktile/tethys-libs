@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
     selector: 'app-todos',
     templateUrl: './todos.component.html',
     imports: [SharedModule, ThyContentMainHeader, ThyContentMainBody],
-    hostDirectives: [ThyContentDirective],
-    standalone: true
+    hostDirectives: [ThyContentDirective]
 })
 export class AppTodosComponent implements OnInit {
     protected todosStore = inject(TodosStore);

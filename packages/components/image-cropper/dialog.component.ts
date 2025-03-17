@@ -22,7 +22,6 @@ import { injectLocale } from '@tethys/pro/i18n';
         class: 'thy-dialog-content thy-image-cropper-dialog',
         '[class.thy-image-cropper-dialog-round]': 'shape === "round"'
     },
-    standalone: true,
     imports: [
         ThyDialogModule,
         ThyImageCropperComponent,

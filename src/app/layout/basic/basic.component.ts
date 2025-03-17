@@ -9,7 +9,8 @@ import { ThyGlobalStore } from '@tethys/pro/core';
     styleUrls: ['./basic.component.scss'],
     host: {
         class: 'thy-layout'
-    }
+    },
+    standalone: false
 })
 export class BasicLayoutComponent implements OnInit {
     constructor(

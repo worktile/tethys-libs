@@ -6,7 +6,6 @@ import { ThyLayoutModule, ThyLayoutDirective } from 'ngx-tethys/layout';
     selector: 'app-insight',
     templateUrl: './insight.component.html',
     styleUrls: ['./insight.component.scss'],
-    standalone: true,
     imports: [ThyLayoutModule, RouterOutlet],
     hostDirectives: [ThyLayoutDirective]
 })

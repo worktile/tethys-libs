@@ -12,7 +12,8 @@ import { regex } from '../../../constants';
     styleUrls: ['./login.component.scss'],
     host: {
         class: 'app-passport-login'
-    }
+    },
+    standalone: false
 })
 export class PassportLoginComponent implements OnInit {
     model: {

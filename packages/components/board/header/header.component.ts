@@ -22,7 +22,6 @@ import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
 @Component({
     selector: 'thy-board-header',
     templateUrl: 'header.component.html',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ThyFlexibleText, ThyIcon, ThyTooltipDirective, NgTemplateOutlet, ThyAction, NgClass, NgStyle, ThyI18nPipe],
     host: {

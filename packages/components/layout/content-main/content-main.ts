@@ -33,7 +33,6 @@ import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
             }
         </div>
     `,
-    standalone: true,
     host: {
         class: 'thy-pro-content-main-header'
     },

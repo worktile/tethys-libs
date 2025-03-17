@@ -32,7 +32,6 @@ import { injectLocale } from '@tethys/pro/i18n';
             </thy-audio-controls>
         </div>
     `,
-    standalone: true,
     imports: [ThyAudioControlsComponent]
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit {

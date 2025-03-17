@@ -16,7 +16,6 @@ import { ThyCropperViewMode } from '../cropper.entity';
         (thyCropDataChanged)="cropDataChange()"
         style="width: 500px; height: 300px"
     ></thy-image-cropper>`,
-    standalone: true,
     imports: [ThyImageCropperModule]
 })
 export class ThyImageCropperTestBasicComponent {

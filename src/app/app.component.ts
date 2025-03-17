@@ -7,7 +7,8 @@ import { ThyGlobalStore } from '@tethys/pro/core';
     styleUrls: ['./app.component.scss'],
     host: {
         class: 'thy-layout'
-    }
+    },
+    standalone: false
 })
 export class AppComponent {
     constructor() {

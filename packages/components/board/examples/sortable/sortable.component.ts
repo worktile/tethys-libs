@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ThyBoardCard, ThyBoardDragPredicateEvent, ThyBoardDragStartEvent, ThyBoardDropActionEvent, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
-import { entries, items, lanes } from '../mock';
+import {
+    ThyBoardCard,
+    ThyBoardDragPredicateEvent,
+    ThyBoardDragStartEvent,
+    ThyBoardDropActionEvent,
+    ThyBoardEntry,
+    ThyBoardLane
+} from '@tethys/pro/board';
 import { delay, of } from 'rxjs';
+import { entries, items, lanes } from '../mock';
 
 interface CardInfo extends ThyBoardCard {
     title: string;
@@ -10,7 +17,8 @@ interface CardInfo extends ThyBoardCard {
 @Component({
     selector: 'thy-pro-board-sortable-example',
     templateUrl: './sortable.component.html',
-    styleUrls: ['./sortable.component.scss']
+    styleUrls: ['./sortable.component.scss'],
+    standalone: false
 })
 export class ThyProBoardSortableExampleComponent implements OnInit {
     entries: ThyBoardEntry[] = [...entries];
@@ -40,7 +48,7 @@ export class ThyProBoardSortableExampleComponent implements OnInit {
             ];
         }, 2000);
     }
-    
+
     thyDragStart(event: ThyBoardDragStartEvent) {
         console.log(`开始拖动：`, event);
     }
@@ -55,7 +63,7 @@ export class ThyProBoardSortableExampleComponent implements OnInit {
         console.log(`拖动到：`, event);
         return of(false).pipe(delay(1000));
     };
-    
+
     clickBottom(entry: ThyBoardEntry) {
         this.bottomHeights[entry._id].bottom = this.bottomHeights[entry._id].bottom === 22 ? 100 : 22;
     }
