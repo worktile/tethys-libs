@@ -3529,7 +3529,14 @@
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.2.tgz#821f8442f4175d8f0467b9daf26e3a18e2d02af2"
   integrity sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==
 
-"@tethys/cdk@18.0.0", "@tethys/cdk@^18.0.0":
+"@tethys/cdk@19.0.0-next.0":
+  version "19.0.0-next.0"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-19.0.0-next.0.tgz#02717d5ea084d1eaa3759c10a3e019b6c281b64b"
+  integrity sha512-h2PDGKmvU7y+IxtX5bI9/w6rW13w9drWjaEW/i1Nh6gOtgtCcNTYc5mgROAHp2i7LE/ULniQEskFNbyGpzJpyQ==
+  dependencies:
+    tslib "^2.3.0"
+
+"@tethys/cdk@^18.0.0":
   version "18.0.0"
   resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-18.0.0.tgz#5e24bccca3d477e66871525122d535b4066ee491"
   integrity sha512-V3gR3/RaHsUfT54e9U8Owsyq85B2BvPfxFm7Nhs4FXGHabGVR9ObhrPv5zsOwuzIcOgOsmIqjo8tu9iq0TyHeA==
@@ -10833,10 +10840,10 @@ ng-packagr@^18.2.0:
   optionalDependencies:
     rollup "^4.18.0"
 
-ngx-tethys@18.0.0:
-  version "18.0.0"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-18.0.0.tgz#3007d03b25289fce72e736638262474b694f0cc6"
-  integrity sha512-iwlWy76h4p83rpF/PHLDcSCrG3Xv4V6DSHZE7fH/simnHSybY1bPwRFXWMH5DBEM4Fz5B8WEZqmt2vpqyMZiRQ==
+ngx-tethys@19.0.0-next.0:
+  version "19.0.0-next.0"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-19.0.0-next.0.tgz#fd760491387476ec974d3bacccea6423dc4e297a"
+  integrity sha512-bXOP6KaBHNqev7COIsn0yVtPM2VLMndLrs3Kl2TS9lCxtP6YtU+Hv1Y/ZxWHQaMJxjdcPgWgJAy3EzUEYKdSyg==
   dependencies:
     tslib "^2.3.0"
 
