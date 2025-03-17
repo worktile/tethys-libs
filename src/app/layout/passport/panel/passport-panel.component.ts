@@ -3,7 +3,8 @@ import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/co
 @Component({
     selector: 'app-passport-panel',
     templateUrl: './passport-panel.component.html',
-    styleUrls: ['./passport-panel.component.scss']
+    styleUrls: ['./passport-panel.component.scss'],
+    standalone: false
 })
 export class PassportPanelLayoutComponent implements OnInit {
     @Input() heading: string = '';

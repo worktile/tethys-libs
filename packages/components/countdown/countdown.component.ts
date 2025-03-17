@@ -11,7 +11,6 @@ import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
     host: {
         class: 'thy-countdown'
     },
-    standalone: true,
     imports: [ThyButtonModule, ThyI18nPipe]
 })
 export class ThyCountdownComponent implements OnInit, OnDestroy {

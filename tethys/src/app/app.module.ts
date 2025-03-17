@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, inject, NgModule } from '@angular/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { DomSanitizer, BrowserModule } from '@angular/platform-browser';
 import { THY_SITE_SETTINGS, ThySiteSettings } from '@tethys/pro/core';
 import { ThyProLayoutModule } from '@tethys/pro/layout';
@@ -52,12 +52,10 @@ function initializeApp(iconRegistry: ThyIconRegistry, sanitizer: DomSanitizer) {
 @NgModule({
     declarations: [],
     providers: [
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeApp,
-            deps: [ThyIconRegistry, DomSanitizer],
-            multi: true
-        },
+        provideAppInitializer(() => {
+            const initializerFn = initializeApp(inject(ThyIconRegistry), inject(DomSanitizer));
+            return initializerFn();
+        }),
         {
             provide: THY_SITE_SETTINGS,
             useValue: DEFAULT_GLOBAL_SETTING

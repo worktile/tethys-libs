@@ -86,7 +86,6 @@ import { injectLocale } from '@tethys/pro/i18n';
             }
         </thy-dropdown-menu>
     `,
-    standalone: true,
     imports: [ThyIconModule, ThyFlexibleTextModule, ThyDropdownModule, ThyActionModule, ThyMediaProgressComponent, ThyTimeFormatPipe]
 })
 export class ThyAudioControlsComponent extends ThyVideoControlsComponent implements OnInit {

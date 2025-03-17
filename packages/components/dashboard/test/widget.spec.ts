@@ -6,7 +6,6 @@ import { By } from '@angular/platform-browser';
 @Component({
     selector: 'thy-widget-header-basic-test',
     template: ` <thy-dashboard-widget-header [thyTitle]="title" [thyDescription]="description"> </thy-dashboard-widget-header> `,
-    standalone: true,
     imports: [ThyProDashboardModule]
 })
 export class ThyWidgetHeaderBasicTestComponent {

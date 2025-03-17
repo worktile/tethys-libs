@@ -6,7 +6,6 @@ import { NgStyle } from '@angular/common';
 @Component({
     selector: 'thy-board-skeleton',
     templateUrl: './skeleton.component.html',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [ThySkeletonRectangle, NgStyle],
     host: {

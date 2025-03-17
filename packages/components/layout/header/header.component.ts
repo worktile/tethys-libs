@@ -14,7 +14,6 @@ import { injectLocale } from '@tethys/pro/i18n';
     host: {
         class: 'thy-pro-header'
     },
-    standalone: true,
     imports: [ThyLayoutModule, ThyActionModule, ThyTooltipModule, NgTemplateOutlet, ThyIcon, AsyncPipe]
 })
 export class ThyProHeaderComponent implements OnInit {

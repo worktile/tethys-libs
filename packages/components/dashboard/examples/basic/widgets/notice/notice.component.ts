@@ -3,7 +3,8 @@ import { ThyDashboardWidgetComponent, ThyWidgetItem } from '@tethys/pro/dashboar
 
 @Component({
     selector: 'thy-dashboard-basic-notice-widget',
-    templateUrl: './notice.component.html'
+    templateUrl: './notice.component.html',
+    standalone: false
 })
 export class ThyDashboardBasicNoticeWidgetComponent extends ThyDashboardWidgetComponent implements OnInit {
     constructor() {

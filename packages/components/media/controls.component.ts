@@ -106,7 +106,6 @@ import { injectLocale } from '@tethys/pro/i18n';
             }
         </thy-dropdown-menu>
     `,
-    standalone: true,
     imports: [
         FormsModule,
         ThyIconModule,
