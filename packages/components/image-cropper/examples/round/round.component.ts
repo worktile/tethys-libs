@@ -3,7 +3,8 @@ import { ThyDialog } from 'ngx-tethys/dialog';
 
 @Component({
     selector: 'thy-image-cropper-round-example',
-    templateUrl: './round.component.html'
+    templateUrl: './round.component.html',
+    standalone: false
 })
 export class ThyImageCropperRoundExampleComponent implements OnInit {
     constructor(public dialog: ThyDialog) {}

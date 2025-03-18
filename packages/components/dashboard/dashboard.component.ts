@@ -19,7 +19,6 @@ import { ThyViewOutletDirective } from 'ngx-tethys/shared';
     templateUrl: './dashboard.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: { class: 'thy-dashboard' },
-    standalone: true,
     imports: [GridsterComponent, GridsterItemComponent, ThyViewOutletDirective]
 })
 export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {

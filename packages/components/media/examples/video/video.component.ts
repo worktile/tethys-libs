@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'thy-pro-media-video-example',
-    templateUrl: './video.component.html'
+    templateUrl: './video.component.html',
+    standalone: false
 })
 export class ThyProMediaVideoExampleComponent implements OnInit {
     constructor() {}

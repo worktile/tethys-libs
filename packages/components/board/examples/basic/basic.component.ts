@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {
     ThyBoardCard,
+    ThyBoardDragPredicateEvent,
     ThyBoardDragStartEvent,
     ThyBoardDropActionEvent,
-    ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane
 } from '@tethys/pro/board';
-import { entries, items, lanes } from '../mock';
 import { delay, of } from 'rxjs';
+import { entries, items, lanes } from '../mock';
 
 interface CardInfo extends ThyBoardCard {
     title: string;
@@ -17,7 +17,8 @@ interface CardInfo extends ThyBoardCard {
 @Component({
     selector: 'thy-pro-board-basic-example',
     templateUrl: './basic.component.html',
-    styleUrls: ['./basic.component.scss']
+    styleUrls: ['./basic.component.scss'],
+    standalone: false
 })
 export class ThyProBoardBasicExampleComponent implements OnInit {
     entries: ThyBoardEntry[] = [...entries];

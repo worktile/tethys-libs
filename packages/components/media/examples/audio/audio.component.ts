@@ -3,7 +3,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'thy-pro-media-audio-example',
-    templateUrl: './audio.component.html'
+    templateUrl: './audio.component.html',
+    standalone: false
 })
 export class ThyProMediaAudioExampleComponent implements OnInit {
     constructor(private sanitizer: DomSanitizer) {}

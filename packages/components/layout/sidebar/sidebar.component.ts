@@ -16,7 +16,6 @@ import { SafeAny } from 'ngx-tethys/types';
     host: {
         class: 'thy-layout thy-pro-sidebar'
     },
-    standalone: true,
     imports: [ThyLayoutModule, NgClass, NgTemplateOutlet, ThyMenuModule, ThyPopoverModule, RouterLinkActive, RouterLink]
 })
 export class ThyProSidebarComponent implements OnInit {

@@ -7,7 +7,6 @@ import { TodosStore } from '../todos.store';
 @Component({
     selector: 'app-todo-detail',
     templateUrl: './todo.component.html',
-    standalone: true,
     hostDirectives: [ThyContentDirective],
     imports: [SharedModule]
 })

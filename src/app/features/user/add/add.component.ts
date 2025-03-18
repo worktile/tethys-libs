@@ -4,7 +4,8 @@ import { ThyDialog } from 'ngx-tethys/dialog';
 @Component({
     selector: 'app-user-add',
     templateUrl: './add.component.html',
-    styleUrls: ['./add.component.scss']
+    styleUrls: ['./add.component.scss'],
+    standalone: false
 })
 export class UserAddComponent implements OnInit {
     constructor(private dialog: ThyDialog) {}

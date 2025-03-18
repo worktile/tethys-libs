@@ -16,7 +16,6 @@ import { injectLocale } from '@tethys/pro/i18n';
 @Component({
     selector: 'thy-board-sortable-entry',
     templateUrl: 'sortable.component.html',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {

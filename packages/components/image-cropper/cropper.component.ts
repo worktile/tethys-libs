@@ -14,7 +14,6 @@ import { injectLocale } from '@tethys/pro/i18n';
     host: {
         '[class.thy-image-cropper-round]': 'thyShape === "round"'
     },
-    standalone: true,
     imports: [ThyLoadingModule]
 })
 export class ThyImageCropperComponent implements OnInit {

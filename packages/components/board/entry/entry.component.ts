@@ -35,7 +35,6 @@ import { helpers } from 'ngx-tethys/util';
 @Component({
     selector: 'thy-board-entry',
     templateUrl: 'entry.component.html',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {

@@ -10,7 +10,8 @@ interface CardInfo extends ThyBoardCard {
     templateUrl: './card.component.html',
     host: {
         class: 'card-container'
-    }
+    },
+    standalone: false
 })
 export class ThyBoardBasicCardComponent implements OnInit {
     card = input.required<CardInfo>();

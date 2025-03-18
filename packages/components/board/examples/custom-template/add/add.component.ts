@@ -10,7 +10,8 @@ interface CardInfo extends ThyBoardCard {
     templateUrl: './add.component.html',
     host: {
         class: 'card-add-container'
-    }
+    },
+    standalone: false
 })
 export class ThyBoardCustomTemplateAddComponent implements OnInit {
     @HostBinding('class.card-add-container--creating') isCreating = false;
@@ -23,16 +24,16 @@ export class ThyBoardCustomTemplateAddComponent implements OnInit {
 
     goAddStep() {
         this.isAdded = true;
-        this.isCreating=true
+        this.isCreating = true;
     }
 
     create(event: Event) {
         this.isAdded = false;
-        this.isCreating=false
+        this.isCreating = false;
     }
 
     cancel() {
         this.isAdded = false;
-        this.isCreating=false
+        this.isCreating = false;
     }
 }

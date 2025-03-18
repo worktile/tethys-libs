@@ -1,11 +1,11 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, inject, model } from '@angular/core';
 import { ThyGlobalStore } from '@tethys/pro/core';
-import { ThyIcon } from 'ngx-tethys/icon';
-import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
-import { ThyTooltipModule } from 'ngx-tethys/tooltip';
-import { ThyActionModule } from 'ngx-tethys/action';
-import { ThyLayoutModule } from 'ngx-tethys/layout';
 import { injectLocale } from '@tethys/pro/i18n';
+import { ThyActionModule } from 'ngx-tethys/action';
+import { ThyIcon } from 'ngx-tethys/icon';
+import { ThyLayoutModule } from 'ngx-tethys/layout';
+import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 
 @Component({
     selector: 'thy-pro-header',
@@ -14,8 +14,7 @@ import { injectLocale } from '@tethys/pro/i18n';
     host: {
         class: 'thy-pro-header'
     },
-    standalone: true,
-    imports: [ThyLayoutModule, ThyActionModule, ThyTooltipModule, NgTemplateOutlet, ThyIcon, AsyncPipe]
+    imports: [ThyLayoutModule, ThyActionModule, ThyTooltipModule, NgTemplateOutlet, ThyIcon]
 })
 export class ThyProHeaderComponent implements OnInit {
     locale = injectLocale();

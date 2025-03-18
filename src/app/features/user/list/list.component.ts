@@ -12,7 +12,6 @@ import { ThyContentMainHeader, ThyContentMainBody } from '@tethys/pro/layout';
     selector: 'app-user-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss'],
-    standalone: true,
     imports: [SharedModule, ThyContentMainHeader, ThyContentMainBody],
     hostDirectives: [ThyContentDirective]
 })

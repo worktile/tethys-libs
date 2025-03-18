@@ -27,7 +27,6 @@ import { injectLocale } from '@tethys/pro/i18n';
         }
         <thy-video-controls #controls [thyMedia]="video" [thyProgressType]="thyProgressType"></thy-video-controls>
     `,
-    standalone: true,
     imports: [ThyVideoControlsComponent]
 })
 export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit, OnDestroy {

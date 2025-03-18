@@ -34,7 +34,6 @@ const emptyLaneHeight = 200;
 @Component({
     selector: 'thy-board-lane',
     templateUrl: 'lane.component.html',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgStyle, NgTemplateOutlet, DragDropModule, ThyIcon, ThyFlexibleText, ThyBoardEntryComponent],
     host: {

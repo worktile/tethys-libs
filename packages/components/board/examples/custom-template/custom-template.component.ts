@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThyBoardCard, ThyBoardDragPredicateEvent, ThyBoardDropActionEvent, ThyBoardEntry, ThyBoardLane } from '@tethys/pro/board';
-import { entries, items, lanes } from '../mock';
 import { delay, of } from 'rxjs';
+import { entries, items, lanes } from '../mock';
 
 interface CardInfo extends ThyBoardCard {
     title: string;
@@ -10,7 +10,8 @@ interface CardInfo extends ThyBoardCard {
 @Component({
     selector: 'thy-pro-board-custom-template-example',
     templateUrl: './custom-template.component.html',
-    styleUrls: ['./custom-template.component.scss']
+    styleUrls: ['./custom-template.component.scss'],
+    standalone: false
 })
 export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
     entries: ThyBoardEntry[] = [...entries];
@@ -51,7 +52,8 @@ export class ThyProBoardCustomTemplateExampleComponent implements OnInit {
 
     clickBottom(entry: ThyBoardEntry, lane?: ThyBoardLane) {
         if (lane) {
-            this.hasLanesBottomHeights[lane._id + entry._id].bottom = this.hasLanesBottomHeights[lane._id + entry._id].bottom === 22 ? 100 : 22;
+            this.hasLanesBottomHeights[lane._id + entry._id].bottom =
+                this.hasLanesBottomHeights[lane._id + entry._id].bottom === 22 ? 100 : 22;
         } else {
             this.singleBottomHeights[entry._id].bottom = this.singleBottomHeights[entry._id].bottom === 22 ? 100 : 22;
         }
