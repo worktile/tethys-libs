@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.0.0-next.0](https://github.com/tethys-org/libs/compare/v18.2.2...v19.0.0-next.0) (2025-03-19)
+
+**Note:** Version bump only for package libs
+
 ## [18.2.2](https://github.com/tethys-org/libs/compare/v18.2.1...v18.2.2) (2025-03-11)
 
 ### Features
