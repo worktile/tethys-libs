@@ -1,8 +1,7 @@
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
-import { THY_MENU_LOAD_STRATEGY } from './menu';
-import { ThyMenuLoadDefaultStrategy } from './menu-load-default-strategy';
+import { THY_MENU_LOAD_STRATEGY, ThyMenuLoadStrategy } from './menu';
 
-export function provideMenuLoadStrategy(factory: () => ThyMenuLoadDefaultStrategy): EnvironmentProviders {
+export function provideMenuLoadStrategy(factory: () => ThyMenuLoadStrategy): EnvironmentProviders {
     return makeEnvironmentProviders([
         {
             provide: THY_MENU_LOAD_STRATEGY,
