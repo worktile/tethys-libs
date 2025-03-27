@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ThyLayoutModule, ThyLayoutDirective } from 'ngx-tethys/layout';
+import { ThyLayoutDirective, ThyLayoutModule } from 'ngx-tethys/layout';
 
 @Component({
     selector: 'app-insight',
     templateUrl: './insight.component.html',
     styleUrls: ['./insight.component.scss'],
-    imports: [ThyLayoutModule, RouterOutlet],
+    imports: [ThyLayoutModule],
     hostDirectives: [ThyLayoutDirective]
 })
 export class InsightComponent implements OnInit {
