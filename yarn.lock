@@ -3553,13 +3553,6 @@
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.2.tgz#821f8442f4175d8f0467b9daf26e3a18e2d02af2"
   integrity sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==
 
-"@tethys/cdk@^18.0.0":
-  version "18.2.7"
-  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-18.2.7.tgz#49e9e9d14a1f379295f8f0c5aca18f000215b97f"
-  integrity sha512-CKckRDR+FGRyNyFsghcSf/4UCLI9Y5uC3E6puMDq7W00KEn+kDoGfxUpWQSDTuUd/mLe5/RaXO+GDbkKBdUfRA==
-  dependencies:
-    tslib "^2.3.0"
-
 "@tethys/cdk@^19.0.0":
   version "19.0.0"
   resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-19.0.0.tgz#4d309dfb0312e6cd7942fd05a70baa27e1a9e141"
@@ -3572,12 +3565,11 @@
   resolved "https://registry.npmjs.org/@tethys/icons/-/icons-1.4.69.tgz#fba983b1237fe3c230bd6bf0e2ff471437a070aa"
   integrity sha512-suauYSb6QIE9YCRMbeIVzceAfxdZxCe0WwPyUkbCTJxyIAwMY1YFDiJzVNwKQ8227UHy7Z2tUdxgUWXmpiRVgA==
 
-"@tethys/store@18.0.0-next.1":
-  version "18.0.0-next.1"
-  resolved "https://registry.npmjs.org/@tethys/store/-/store-18.0.0-next.1.tgz#c65ee9dc4b4a9e1b0914b099564243ac8bade792"
-  integrity sha512-ZKWSUdF4aAd/tiHlmoenmQhtHonpyokALGp09uiNEDrO+yE3ihrtZzMd4Bew8g4N+NK0Wtw11nCL9rSK5eNS5w==
+"@tethys/store@19.0.0":
+  version "19.0.0"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-19.0.0.tgz#40866f4d0a5894d2a1e55a22a07a2ca9260cd847"
+  integrity sha512-VjHzOPgErRA5+OAylndGvM/sVx/AMKmpcI2H3B6+aIG/ijtyPM5ZZhV0rIiY6RFVLXTzzDof690uLWcwbZvh0Q==
   dependencies:
-    "@tethys/cdk" "^18.0.0"
     tslib "^2.0.0"
 
 "@tootallnate/once@1":

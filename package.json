@@ -56,7 +56,7 @@
     "@angular/router": "^19.2.2",
     "@tethys/cdk": "^19.0.0",
     "@tethys/icons": "1.4.69",
-    "@tethys/store": "18.0.0-next.1",
+    "@tethys/store": "19.0.0",
     "@types/extend": "^3.0.1",
     "angular-gridster2": "18.0.1",
     "cropperjs": "1.5.13",
