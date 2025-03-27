@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -32,10 +33,13 @@ describe('mediaComponent', () => {
     let audioFixture: ComponentFixture<ThyAudioTestBasicComponent>;
     let videoDebugElement: DebugElement;
     let audioDebugElement: DebugElement;
+    let httpClientSpy: { get: jasmine.Spy };
 
     beforeEach(waitForAsync(() => {
+        httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
         TestBed.configureTestingModule({
-            imports: [ThyProMediaModule, ThyVideoTestBasicComponent, ThyAudioTestBasicComponent]
+            imports: [ThyProMediaModule, ThyVideoTestBasicComponent, ThyAudioTestBasicComponent],
+            providers: [{ provide: HttpClient, useValue: httpClientSpy }]
         }).compileComponents();
     }));
 
