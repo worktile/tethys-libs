@@ -5,6 +5,7 @@ import { THY_SITE_SETTINGS } from '../settings.config';
 import { THY_MENU_LOAD_STRATEGY, ThyMenuRoute } from '../menu';
 import { ThyMenuLoadDefaultStrategy } from '../menu-load-default-strategy';
 import { Route } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -23,9 +24,11 @@ export class ThyGlobalStore<T extends ThyGlobalInfo = ThyGlobalInfo> extends Sto
 
     @Action()
     initialize() {
-        this.menuLoadStrategy.load().subscribe((menus) => {
-            this.initializeMenus(menus);
-        });
+        return this.menuLoadStrategy.load().pipe(
+            tap((menus) => {
+                this.initializeMenus(menus);
+            })
+        );
     }
 
     @Action()

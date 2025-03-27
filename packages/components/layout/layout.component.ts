@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef, model } from '@angular/core';
 import { ActivatedRoute, Route, Router, Routes, RouterOutlet } from '@angular/router';
 import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { NgTemplateOutlet } from '@angular/common';
@@ -27,12 +27,7 @@ export class ThyProLayoutComponent implements OnInit {
      */
     @Input() thyLogo!: string;
 
-    /**
-     * 菜单数据
-     */
-    @Input() set thyMenus(value: ThyMenuRoute[]) {
-        this.menus = value;
-    }
+    menus = model<ThyMenuRoute[]>([]);
 
     /**
      *  menu 菜单的头部点击事件
@@ -64,8 +59,6 @@ export class ThyProLayoutComponent implements OnInit {
      */
     @ContentChild('footer') public footerTemplate!: TemplateRef<any>;
 
-    public menus!: ThyMenuRoute[];
-
     public isCollapsed = cache.signal('menu-is-collapsed', {
         defaultValue: false
     });
@@ -74,14 +67,16 @@ export class ThyProLayoutComponent implements OnInit {
         public globalStore: ThyGlobalStore,
         public route: ActivatedRoute
     ) {
-        this.globalStore.initialize();
         const activeRoute = this.route.firstChild?.firstChild?.routeConfig;
-        this.globalStore.pureUpdateActiveMenuByRoute(activeRoute);
+        this.globalStore.initialize().subscribe((menus) => {
+            this.globalStore.pureUpdateActiveMenuByRoute(activeRoute);
+            this.menus.update((value) => {
+                return value && value.length ? value : menus;
+            });
+        });
     }
 
-    ngOnInit(): void {
-        this.menus = this.menus && this.menus.length ? this.menus : this.globalStore.snapshot.menus;
-    }
+    ngOnInit(): void {}
 
     collapsedChange(isCollapsed: boolean) {
         this.isCollapsed.set(isCollapsed);
