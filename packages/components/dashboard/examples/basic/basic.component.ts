@@ -6,7 +6,8 @@ import { ThyDashboardBasicNoticeWidgetComponent } from './widgets/notice/notice.
 @Component({
     selector: 'thy-dashboard-basic-example',
     templateUrl: './basic.component.html',
-    styleUrls: ['./basic.component.scss']
+    styleUrls: ['./basic.component.scss'],
+    standalone: false
 })
 export class ThyDashboardBasicExampleComponent implements OnInit {
     widgets = [

@@ -14,7 +14,6 @@ import { cache } from '@tethys/cache';
     host: {
         class: 'thy-layout thy-layout--has-sidebar thy-pro-layout'
     },
-    standalone: true,
     imports: [ThyLayoutModule, ThyProSidebarComponent, ThyProHeaderComponent, RouterOutlet, NgTemplateOutlet]
 })
 export class ThyProLayoutComponent implements OnInit {

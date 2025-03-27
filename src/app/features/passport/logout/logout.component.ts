@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
     templateUrl: './logout.component.html',
     host: {
         class: 'app-passport-logout'
-    }
+    },
+    standalone: false
 })
 export class PassportLogoutComponent implements OnInit {
     constructor(public router: Router) {}

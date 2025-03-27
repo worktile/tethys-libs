@@ -7,7 +7,6 @@ import { ThyContentDirective } from 'ngx-tethys/layout';
     selector: 'app-workplace',
     templateUrl: './workplace.component.html',
     styleUrls: ['./workplace.component.scss'],
-    standalone: true,
     imports: [ThyCard, ThyCardHeader, ThyCardContent, ThyFlex, ThyFlexItem],
     hostDirectives: [ThyContentDirective]
 })

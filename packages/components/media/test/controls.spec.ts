@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { ThyVideoControlsComponent } from '../controls.component';
@@ -66,7 +67,8 @@ describe('ThyVideoControlsComponent', () => {
             imports: [ThyVideoControlsComponent],
             providers: [
                 { provide: ChangeDetectorRef, useValue: { markForCheck: () => {} } },
-                { provide: ElementRef, useValue: { nativeElement: mediaElementMock } }
+                { provide: ElementRef, useValue: { nativeElement: mediaElementMock } },
+                provideHttpClient()
             ]
         }).compileComponents();
 

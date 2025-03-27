@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {
     ThyBoardCard,
+    ThyBoardDragPredicateEvent,
     ThyBoardDragStartEvent,
     ThyBoardDropActionEvent,
-    ThyBoardDragPredicateEvent,
     ThyBoardEntry,
     ThyBoardLane
 } from '@tethys/pro/board';
-import { entries, items, lanes } from '../mock';
 import { delay, of } from 'rxjs';
+import { entries, items, lanes } from '../mock';
 
 interface CardInfo extends ThyBoardCard {
     title: string;
@@ -17,7 +17,8 @@ interface CardInfo extends ThyBoardCard {
 @Component({
     selector: 'thy-pro-board-virtual-scroll-example',
     templateUrl: './virtual-scroll.component.html',
-    styleUrls: ['./virtual-scroll.component.scss']
+    styleUrls: ['./virtual-scroll.component.scss'],
+    standalone: false
 })
 export class ThyProBoardVirtualScrollExampleComponent implements OnInit {
     entries: ThyBoardEntry[] = [...entries];

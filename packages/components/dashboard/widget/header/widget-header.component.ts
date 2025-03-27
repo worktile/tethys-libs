@@ -7,7 +7,6 @@ import { NgClass } from '@angular/common';
     templateUrl: './widget-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: { class: 'thy-dashboard-widget-header' },
-    standalone: true,
     imports: [NgClass, ThySharedModule]
 })
 export class ThyDashboardWidgetHeaderComponent implements OnInit {

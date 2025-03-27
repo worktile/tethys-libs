@@ -134,23 +134,23 @@
       "prefix": "tethys",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tethys",
+            "outputPath": {
+              "base": "dist/tethys"
+            },
             "index": "tethys/src/index.html",
-            "main": "tethys/src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tethys/tsconfig.app.json",
             "assets": ["tethys/src/favicon.ico", "tethys/src/assets"],
             "styles": ["tethys/src/styles.scss"],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true,
-            "allowedCommonJsDependencies": ["docsearch.js"]
+            "allowedCommonJsDependencies": ["docsearch.js"],
+            "browser": "tethys/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -165,8 +165,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",

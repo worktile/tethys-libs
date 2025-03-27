@@ -5,7 +5,8 @@ import { of } from 'rxjs';
 
 @Component({
     selector: 'thy-open-with-dialog-example',
-    templateUrl: './open-with-dialog.component.html'
+    templateUrl: './open-with-dialog.component.html',
+    standalone: false
 })
 export class ThyOpenWithDialogExampleComponent implements OnInit {
     constructor(public dialog: ThyDialog) {}

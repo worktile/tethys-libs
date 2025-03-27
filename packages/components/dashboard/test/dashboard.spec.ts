@@ -16,7 +16,6 @@ import { ThyDashboardBasicLinksWidgetComponent } from '../examples/basic/widgets
         >
         </thy-dashboard>
     `,
-    standalone: true,
     imports: [ThyProDashboardModule]
 })
 export class ThyDashboardBasicTestComponent {

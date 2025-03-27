@@ -38,7 +38,6 @@ import { ThyDragDropRegistry } from './scroll/drag-drop-registry';
 @Component({
     selector: 'thy-board',
     templateUrl: 'board.component.html',
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         CdkDropListGroup,

@@ -18,7 +18,6 @@ import { ThyMediaProgressComponent } from '../progress.component';
             (thyAfterChange)="afterProgressChange($event)"
         ></thy-media-progress>
     `,
-    standalone: true,
     imports: [ThyMediaProgressComponent]
 })
 class ThyTestProgressComponent {

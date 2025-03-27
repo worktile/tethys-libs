@@ -1,3 +1,4 @@
+import { provideHttpClient } from '@angular/common/http';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -14,7 +15,6 @@ import { ThyCropperViewMode } from '../cropper.entity';
         [thyUploadTips]="uploadTips"
         [thyConfirmAction]="confirmAction()"
     ></thy-image-cropper-dialog>`,
-    standalone: true,
     imports: [ThyImageCropperModule]
 })
 export class ThyImageCropperDialogTestBasicComponent {
@@ -43,7 +43,8 @@ describe('imageCropperComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ThyImageCropperModule, ThyImageCropperDialogTestBasicComponent]
+            imports: [ThyImageCropperModule, ThyImageCropperDialogTestBasicComponent],
+            providers: [provideHttpClient()]
         }).compileComponents();
     }));
 
