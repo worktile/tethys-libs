@@ -45,7 +45,7 @@
   "publishConfig": {},
   "dependencies": {
     "@angular/animations": "^19.2.2",
-    "@angular/cdk": "^19.2.0",
+    "@angular/cdk": "^19.2.3",
     "@angular/cdk-experimental": "^19.2.0",
     "@angular/common": "^19.2.2",
     "@angular/compiler": "^19.2.2",
@@ -54,7 +54,7 @@
     "@angular/platform-browser": "^19.2.2",
     "@angular/platform-browser-dynamic": "^19.2.2",
     "@angular/router": "^19.2.2",
-    "@tethys/cdk": "^19.0.0",
+    "@tethys/cdk": "^19.0.1",
     "@tethys/icons": "1.4.69",
     "@tethys/store": "19.0.0",
     "@types/extend": "^3.0.1",
@@ -63,7 +63,7 @@
     "date-fns": "^4.1.0",
     "@date-fns/tz": "1.2.0",
     "extend": "^3.0.2",
-    "ngx-tethys": "19.0.0",
+    "ngx-tethys": "19.0.1",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

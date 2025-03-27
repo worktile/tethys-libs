@@ -195,14 +195,13 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/cdk@^19.2.0":
-  version "19.2.3"
-  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-19.2.3.tgz#9881449edab344330a078d6a4c9d01f3b0db7002"
-  integrity sha512-hTyYjdx9T572TblqlLDv54U7ro1/HXr3/2a++A+t8ZkcKLyI+/0Yfu6OsrWTpl2OsRYFZ0QwvbyI8ZLUIZPkqQ==
+"@angular/cdk@^19.2.3":
+  version "19.2.7"
+  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-19.2.7.tgz#3f71a8b4dba9ea483303f18a0b98aeb48cf86203"
+  integrity sha512-+Dx1WGEWMO3OYDKr2w/Z5xOCsdjkRuG7Z18ve8eeBOHayRaC0KbYoXkvPxUiJo233CJWEzKQ/qF13C54GGWnng==
   dependencies:
-    tslib "^2.3.0"
-  optionalDependencies:
     parse5 "^7.1.2"
+    tslib "^2.3.0"
 
 "@angular/cli@^19.2.3":
   version "19.2.3"
@@ -3553,10 +3552,10 @@
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.2.tgz#821f8442f4175d8f0467b9daf26e3a18e2d02af2"
   integrity sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==
 
-"@tethys/cdk@^19.0.0":
-  version "19.0.0"
-  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-19.0.0.tgz#4d309dfb0312e6cd7942fd05a70baa27e1a9e141"
-  integrity sha512-H0hNbU/Mlrrp5CA5+emBqmes6/NwJ+EnpDffRcmfbo2uurnrY9cYRTJbdlqjAqzEHpfnKMMB/ek+v04HMhd1Yg==
+"@tethys/cdk@^19.0.1":
+  version "19.0.1"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-19.0.1.tgz#d9d30372916f12f0b904a4aba1c2deab4a0fac2f"
+  integrity sha512-zP1D/9kGqQDfl2KwiYhm91JQEV9jCRjT48Ds28x97bPFIftXKpH69x7GbRLQuhrWmi29Q7ZDaZaFElekz7ZBzg==
   dependencies:
     tslib "^2.3.0"
 
@@ -10915,10 +10914,10 @@ ng-packagr@^19.2.0:
   optionalDependencies:
     rollup "^4.24.0"
 
-ngx-tethys@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-19.0.0.tgz#8d7441fb5b3d68d90f73ac13fe7d8560023c4f3c"
-  integrity sha512-wb7m42/gq3AJjbX7ks50wFZhGfMufbmUOBbhFbgUmZefMYYauXm+ortGnhDzx2Xp0NkgbBSv6wDIIsJ8qlooAA==
+ngx-tethys@19.0.1:
+  version "19.0.1"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-19.0.1.tgz#0c5c38682f7e8e85ea00e24e83f514124897b4a7"
+  integrity sha512-Mzn3Q2vy9hxlFueUfz+GBCnvx17C29f0zMflV9jcsMSBO/PEidXvH+5U4vczWDqUGzr7QpZ8UI9QwOdg2j66MQ==
   dependencies:
     tslib "^2.3.0"
 
