@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -40,14 +40,11 @@ describe('imageCropperComponent', () => {
     let component: ThyImageCropperDialogTestBasicComponent;
     let fixture: ComponentFixture<ThyImageCropperDialogTestBasicComponent>;
     let debugElement: DebugElement;
-    let httpClientSpy: { get: jasmine.Spy };
 
     beforeEach(waitForAsync(() => {
-        httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-
         TestBed.configureTestingModule({
             imports: [ThyImageCropperModule, ThyImageCropperDialogTestBasicComponent],
-            providers: [{ provide: HttpClient, useValue: httpClientSpy }]
+            providers: [provideHttpClient()]
         }).compileComponents();
     }));
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ComponentFixture, fakeAsync, flush, TestBed } from '@angular/core/testing';
 import { ThyVideoControlsComponent } from '../controls.component';
@@ -7,11 +7,8 @@ describe('ThyVideoControlsComponent', () => {
     let component: ThyVideoControlsComponent;
     let fixture: ComponentFixture<ThyVideoControlsComponent>;
     let mediaElementMock: HTMLMediaElement;
-    let httpClientSpy: { get: jasmine.Spy };
 
     beforeEach(async () => {
-        httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-
         // Mock HTMLMediaElement
         mediaElementMock = document.createElement('video') as HTMLMediaElement;
 
@@ -71,7 +68,7 @@ describe('ThyVideoControlsComponent', () => {
             providers: [
                 { provide: ChangeDetectorRef, useValue: { markForCheck: () => {} } },
                 { provide: ElementRef, useValue: { nativeElement: mediaElementMock } },
-                { provide: HttpClient, useValue: httpClientSpy }
+                provideHttpClient()
             ]
         }).compileComponents();
 
