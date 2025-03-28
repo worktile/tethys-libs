@@ -15,7 +15,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
-    "lib": ["es2018", "dom"],
+    "lib": ["ES2020", "dom"],
     "paths": {
       "@tethys/auth": ["./packages/auth/index"],
       "@tethys/cache": ["./packages/cache/index"],

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.0.0](https://github.com/tethys-org/libs/compare/v18.2.2...v19.0.0) (2025-03-27)
+
+### Features
+
+- upgrade ng to 19 ([#174](https://github.com/tethys-org/libs/issues/174)) ([40585da](https://github.com/tethys-org/libs/commit/40585da6db48c0eb31fe393cc3ce839d2d42cff2)), closes [#TINFR-1639](https://github.com/tethys-org/libs/issues/TINFR-1639) [#172](https://github.com/tethys-org/libs/issues/172)
+
 # [19.0.0-next.0](https://github.com/tethys-org/libs/compare/v18.2.2...v19.0.0-next.0) (2025-03-19)
 
 **Note:** Version bump only for package @tethys/auth
