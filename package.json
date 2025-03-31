@@ -58,7 +58,7 @@
     "@tethys/icons": "1.4.69",
     "@tethys/store": "19.0.0",
     "@types/extend": "^3.0.1",
-    "angular-gridster2": "18.0.1",
+    "angular-gridster2": "19.0.0",
     "cropperjs": "1.5.13",
     "date-fns": "^4.1.0",
     "@date-fns/tz": "1.2.0",
