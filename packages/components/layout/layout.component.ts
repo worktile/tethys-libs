@@ -27,7 +27,9 @@ export class ThyProLayoutComponent implements OnInit {
      */
     @Input() thyLogo!: string;
 
-    menus = model<ThyMenuRoute[]>([]);
+    menus = model<ThyMenuRoute[]>([], {
+        alias: 'thyMenus'
+    });
 
     /**
      *  menu 菜单的头部点击事件
