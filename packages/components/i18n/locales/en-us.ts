@@ -5,7 +5,7 @@ export const enUsLocale: ThyI18nLocaleConfig = {
     translations: {
         inProgress: 'In progress',
         completed: 'Completed',
-        count: 'pcs',
+        count: '',
         forbidDropInEntry: 'Cannot reach this entry',
         expandedAll: 'Expand all',
         foldUpAll: 'Fold up all',
