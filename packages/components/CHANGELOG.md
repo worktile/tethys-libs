@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.2](https://github.com/tethys-org/libs/compare/v19.0.1...v19.0.2) (2025-04-21)
+
+### Bug Fixes
+
+- **components:** 看板栏收起后标题展示无意义字符 #TINFR-1878 ([#178](https://github.com/tethys-org/libs/issues/178)) ([a308e71](https://github.com/tethys-org/libs/commit/a308e713ee041a9cce1c3b50dfed51a6ecd6eeda)), closes [#TINFR-1878](https://github.com/tethys-org/libs/issues/TINFR-1878)
+
 ## [19.0.1](https://github.com/tethys-org/libs/compare/v19.0.0...v19.0.1) (2025-03-31)
 
 **Note:** Version bump only for package @tethys/pro
