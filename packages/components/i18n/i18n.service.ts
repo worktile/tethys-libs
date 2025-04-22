@@ -19,12 +19,28 @@ export class ThyI18nService {
         [ThyI18nLocale.ruRu]: ruRuLocale.translations
     };
 
-    private defaultLocale: ThyI18nLocale = inject(THY_I18N_DEFAULT_LOCALE_TOKEN, { optional: true }) || ThyI18nLocale.zhCn;
+    private defaultLocale: ThyI18nLocale = inject(THY_I18N_DEFAULT_LOCALE_TOKEN, { optional: true }) || this.getDefaultLocaleId();
 
     private locale: WritableSignal<ThyI18nTranslation> = signal(this.locales[this.defaultLocale]);
 
     private normalizeLocale(id: string) {
         return (id?.toLowerCase() as ThyI18nLocale) ?? ThyI18nLocale.zhCn;
+    }
+
+    private getDefaultLocaleId(): ThyI18nLocale {
+        let defaultLocaleId = ThyI18nLocale.zhCn;
+        const allLocales = [
+            ThyI18nLocale.zhCn,
+            ThyI18nLocale.zhTw,
+            ThyI18nLocale.enUs,
+            ThyI18nLocale.jaJp,
+            ThyI18nLocale.deDe,
+            ThyI18nLocale.ruRu
+        ];
+        if (typeof window !== 'undefined' && window?.navigator?.language) {
+            defaultLocaleId = window.navigator?.language?.toLowerCase() as ThyI18nLocale;
+        }
+        return allLocales.includes(this.normalizeLocale(defaultLocaleId) as ThyI18nLocale) ? defaultLocaleId : ThyI18nLocale.zhCn;
     }
 
     /**
