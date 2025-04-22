@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.2.3](https://github.com/tethys-org/libs/compare/v18.2.2...v18.2.3) (2025-04-22)
+
+### Bug Fixes
+
+- **components:** 看板栏收起后标题展示无意义字符 #TINFR-1878 ([#178](https://github.com/tethys-org/libs/issues/178)) ([e688d3e](https://github.com/tethys-org/libs/commit/e688d3e98bdc2b39536b05ea7e697ee9061cda8c)), closes [#TINFR-1878](https://github.com/tethys-org/libs/issues/TINFR-1878)
+
+### Features
+
+- **components:** use window language #TINFR-1711 ([03ec80b](https://github.com/tethys-org/libs/commit/03ec80b4c6ee167e1219eb09e218edc6ec903554)), closes [#TINFR-1711](https://github.com/tethys-org/libs/issues/TINFR-1711)
+
 ## [18.2.2](https://github.com/tethys-org/libs/compare/v18.2.1...v18.2.2) (2025-03-11)
 
 ### Features

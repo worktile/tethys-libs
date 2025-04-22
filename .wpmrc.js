@@ -1,5 +1,5 @@
 module.exports = {
-    allowBranch: ['master', 'release-*', 'release-auto-*'],
+    allowBranch: ['master', 'release-*', 'release-auto-*', 'v18.x'],
     bumpFiles: [
         'package.json',
         './packages/auth/package.json',
