@@ -8,11 +8,11 @@ export const enUsLocale: ThyI18nLocaleConfig = {
         count: '',
         forbidDropInEntry: 'Cannot reach this entry',
         expandedAll: 'Expand all',
-        foldUpAll: 'Fold up all',
+        foldUpAll: 'Collapse all',
         lane: 'Lane',
-        wipLimitStatistics: 'Total {{count}} pcs / WIP limit {{wipLimit}} pcs',
-        countStatistics: 'Total {{count}} pcs',
-        foldUp: 'Fold up',
+        wipLimitStatistics: 'Total {{count}} / WIP limit {{wipLimit}}',
+        countStatistics: 'Total {{count}}',
+        foldUp: 'Collapse',
         expand: 'Expand',
         emptyGroup: 'Ungrouped',
 
@@ -34,9 +34,9 @@ export const enUsLocale: ThyI18nLocaleConfig = {
         setting: 'Settings',
         secondaryTitle: 'Secondary title',
 
-        speed: 'speed',
-        audioFormatError: 'This audio is not supported for preview. Please upgrade your browser version or download to view.',
+        speed: 'Speed',
+        audioFormatError: 'This audio is not currently supported for preview, upgrade your browser version or download to view.',
         networkError: 'The current network is abnormal. Please refresh and try again.',
-        videoFormatError: 'This video is not supported for preview. Please upgrade your browser version or download to view.'
+        videoFormatError: 'This video is not currently supported for preview, upgrade your browser version or download to view.'
     }
 };
