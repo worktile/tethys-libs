@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.2.4](https://github.com/tethys-org/libs/compare/v18.2.3...v18.2.4) (2025-04-23)
+
+### Bug Fixes
+
+- **components:** fix cards couldn't be dropped into empty columns ([b1e880b](https://github.com/tethys-org/libs/commit/b1e880b9101a2d2d43840d91c5d9939c253288cc))
+
 ## [18.2.3](https://github.com/tethys-org/libs/compare/v18.2.2...v18.2.3) (2025-04-22)
 
 ### Bug Fixes
