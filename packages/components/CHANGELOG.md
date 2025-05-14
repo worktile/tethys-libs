@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.3](https://github.com/tethys-org/libs/compare/v19.0.2...v19.0.3) (2025-05-14)
+
+### Bug Fixes
+
+- **components:** fix cards couldn't be dropped into empty columns ([f6578fd](https://github.com/tethys-org/libs/commit/f6578fd8281374e7531fda995a2988bf84e3af80))
+
+### Features
+
+- **components:** use window language #TINFR-1711 ([68abe76](https://github.com/tethys-org/libs/commit/68abe769e690d6ed24775635747d7c34fda6f68a)), closes [#TINFR-1711](https://github.com/tethys-org/libs/issues/TINFR-1711)
+
 ## [19.0.2](https://github.com/tethys-org/libs/compare/v19.0.1...v19.0.2) (2025-04-21)
 
 ### Bug Fixes
