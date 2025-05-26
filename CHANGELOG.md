@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.4](https://github.com/tethys-org/libs/compare/v19.0.3...v19.0.4) (2025-05-26)
+
+### Features
+
+- support dark theme #TINFR-1051 ([#187](https://github.com/tethys-org/libs/issues/187)) ([fe0394a](https://github.com/tethys-org/libs/commit/fe0394aa16560031dc02cd485cc84f929ba666d0)), closes [#TINFR-1051](https://github.com/tethys-org/libs/issues/TINFR-1051)
+
 ## [19.0.3](https://github.com/tethys-org/libs/compare/v19.0.2...v19.0.3) (2025-05-14)
 
 ### Bug Fixes
