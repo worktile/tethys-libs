@@ -54,7 +54,7 @@ $progress-pointer-color: basic.$primary !default;
         z-index: 1;
         position: absolute;
         left: 0;
-        background-color: basic.$white;
+        background-color: basic.$bg-default;
     }
     &-buffer {
         position: absolute;
@@ -68,7 +68,6 @@ $progress-pointer-color: basic.$primary !default;
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background-color: basic.$white;
         transition: all 0.3s ease-in-out;
         background-color: $progress-pointer-color;
     }

@@ -1,7 +1,7 @@
 @use 'ngx-tethys/styles/basic.scss';
 
 .thy-pro-sidebar {
-    background: basic.$dark;
+    background: basic.$menu-theme-dark-bg-color;
     .thy-layout-sidebar &-header {
         min-height: 70px;
 
@@ -17,16 +17,6 @@
             display: inline-block;
         }
     }
-    .thy-popover-origin-active,
-    &-menu-group.active {
-        background: basic.$menu-theme-dark-hover-bg-color;
-    }
-
-    .thy-pro-sidebar-submenu.thy-menu-group {
-        .thy-menu-group-header .thy-menu-group-title {
-            color: basic.$gray-300;
-        }
-    }
 
     .sidebar-footer {
         border-top: none;
@@ -36,8 +26,5 @@
 .thy-menu-grop-popover {
     .thy-menu .thy-menu-group .thy-menu-group-header {
         font-size: basic.$font-size-base;
-        .thy-menu-group-title {
-            color: basic.$gray-300;
-        }
     }
 }
