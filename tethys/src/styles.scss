@@ -1,6 +1,7 @@
 @use '@docgeni/template/styles/index.scss' as docgeni;
 @use 'ngx-tethys/styles/index.scss' as tethys;
 @use '../../packages/components/styles/index.scss' as tethys-pro;
+@use 'ngx-tethys/styles/variables.scss';
 
 .dg-navbar {
     .navbar-brand {
@@ -20,7 +21,7 @@
             padding-left: 12%;
             text-align: unset;
             .dg-launch-title {
-                color: #1e3042;
+                color: variables.$gray-600;
             }
             .dg-launch-action {
                 &:hover {

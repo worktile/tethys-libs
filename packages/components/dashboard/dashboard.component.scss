@@ -8,6 +8,8 @@
             border-radius: 2px;
             outline: 1px solid variables.$gray-200;
             padding: 24px 28px;
+            background: variables.$bg-default;
+
             &.gridster-item-moving {
                 z-index: 2 !important;
             }
@@ -39,7 +41,7 @@
         }
 
         .gridster-preview {
-            background: rgba(0, 0, 0, 0.1);
+            background: rgba(variables.$black, 0.1);
         }
 
         .empty-block {

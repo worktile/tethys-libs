@@ -6,7 +6,7 @@
     overflow: hidden;
     padding: 12px 20px 8px;
     transition: all 0.3s ease;
-    background-image: linear-gradient(180deg, rgba(51, 51, 51, 0.3) 0%, rgba(51, 51, 51, 0.8) 100%);
+    background-image: linear-gradient(180deg, rgba(basic.$gray-800, 0.3) 0%, rgba(basic.$gray-800, 0.8) 100%);
     .controls-main {
         display: flex;
         align-items: center;
@@ -54,7 +54,7 @@
     }
 
     .thy-media-progress .thy-media-progress-rail .thy-media-progress-pointer {
-        background-color: basic.$white;
+        background-color: basic.$bg-default;
     }
 
     &-audio {
@@ -62,7 +62,7 @@
         padding: 0 20px;
         display: flex;
         align-items: center;
-        background: basic.$white;
+        background: basic.$bg-panel;
         border: 1px solid basic.$gray-200;
         border-radius: 4px;
         .controls-main {
@@ -118,7 +118,7 @@
                         max-width: 100%;
                         width: unset;
                         font-size: 0.875rem;
-                        color: basic.$black;
+                        color: basic.$gray-800;
                     }
                     .file-size {
                         white-space: nowrap;

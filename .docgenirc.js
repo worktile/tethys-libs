@@ -37,5 +37,6 @@ module.exports = {
             apiMode: 'automatic',
             categories: []
         }
-    ]
+    ],
+    switchTheme: true
 };

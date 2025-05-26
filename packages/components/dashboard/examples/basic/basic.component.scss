@@ -1,4 +1,6 @@
+@use 'ngx-tethys/styles/variables.scss';
+
 .dashboard-container {
     height: 800px;
-    border: 1px solid #eee;
+    border: 1px solid variables.$gray-200;
 }

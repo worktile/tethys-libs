@@ -5,6 +5,7 @@
     "baseUrl": "./",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
