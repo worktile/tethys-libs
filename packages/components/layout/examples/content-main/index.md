@@ -1,4 +1,3 @@
 ---
-background: '#fafafa'
 compact: true
 ---
