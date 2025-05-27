@@ -25,7 +25,7 @@
           ></ng-template>
         </div>
       }
-      @if (boardEntry.virtualScroll() && (cards() ?? []).length > 0) {
+      @if (boardEntry.virtualScroll()) {
         <cdk-virtual-scroll-viewport
           entry
           [minBufferPx]="500"
