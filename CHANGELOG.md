@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.6](https://github.com/tethys-org/libs/compare/v19.0.5...v19.0.6) (2025-05-28)
+
+### Bug Fixes
+
+- **components:** update height calculation for virtual scroll to use getBoundingClientRect #PJM-22223 ([72f4e5e](https://github.com/tethys-org/libs/commit/72f4e5e16ef6015d2e8bc57fbc7279179fba2ff4)), closes [#PJM-22223](https://github.com/tethys-org/libs/issues/PJM-22223)
+
 ## [19.0.5](https://github.com/tethys-org/libs/compare/v19.0.4...v19.0.5) (2025-05-28)
 
 ### Bug Fixes
