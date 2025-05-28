@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.5](https://github.com/tethys-org/libs/compare/v19.0.4...v19.0.5) (2025-05-28)
+
+### Bug Fixes
+
+- **components:** fix height of multiple lanes #TINFR-2119 ([4470833](https://github.com/tethys-org/libs/commit/44708331d5d61a186aa6a46c28b832406d5e1836)), closes [#TINFR-2119](https://github.com/tethys-org/libs/issues/TINFR-2119)
+
 ## [19.0.4](https://github.com/tethys-org/libs/compare/v19.0.3...v19.0.4) (2025-05-26)
 
 ### Features
