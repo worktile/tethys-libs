@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.7](https://github.com/tethys-org/libs/compare/v19.0.6...v19.0.7) (2025-07-04)
+
+### Bug Fixes
+
+- **components:** fix board fold up scroll bug ([#193](https://github.com/tethys-org/libs/issues/193)) ([c1b30c2](https://github.com/tethys-org/libs/commit/c1b30c24e2ff39997bc21da6f56dace107cff0fe))
+
 ## [19.0.6](https://github.com/tethys-org/libs/compare/v19.0.5...v19.0.6) (2025-05-28)
 
 ### Bug Fixes

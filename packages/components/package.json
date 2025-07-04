@@ -1,6 +1,6 @@
 {
   "name": "@tethys/pro",
-  "version": "19.0.6",
+  "version": "19.0.7",
   "license": "MIT",
   "dependencies": {
     "cropperjs": "1.5.13"
