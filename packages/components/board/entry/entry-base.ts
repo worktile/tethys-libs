@@ -1,26 +1,25 @@
+import { SharedResizeObserver } from '@angular/cdk/observers/private';
 import {
+    afterNextRender,
+    computed,
     Directive,
+    effect,
     ElementRef,
+    inject,
+    input,
     NgZone,
     Renderer2,
-    afterNextRender,
-    effect,
-    viewChild,
-    inject,
-    WritableSignal,
     signal,
-    input,
-    computed,
-    untracked
+    untracked,
+    viewChild,
+    WritableSignal
 } from '@angular/core';
-import { ThyBoardCard, ThyBoardEntryStatus } from '../entities';
-import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
-import { combineLatest, debounceTime, Observable } from 'rxjs';
-import { SharedResizeObserver } from '@angular/cdk/observers/private';
-import { ThyBoardEntryAbstract } from '../entities';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ThyBoardEntryDragDrop } from './entry-drag-drop';
 import { helpers } from 'ngx-tethys/util';
+import { combineLatest, debounceTime, Observable } from 'rxjs';
+import { ThyBoardCard, ThyBoardEntryAbstract, ThyBoardEntryStatus } from '../entities';
+import { ThyBoardEntryVirtualScroll } from '../scroll/entry-virtual-scroll';
+import { ThyBoardEntryDragDrop } from './entry-drag-drop';
 
 @Directive()
 export abstract class ThyBoardEntryBase extends ThyBoardEntryDragDrop {
@@ -187,7 +186,7 @@ export abstract class ThyBoardEntryBase extends ThyBoardEntryDragDrop {
                         this.entryBody()!.nativeElement.style.transform = '';
                     }
                 } else {
-                    if (!!this.entryBody()!.nativeElement.style.transform) {
+                    if (this.entryBody() && !!this.entryBody()!.nativeElement.style.transform) {
                         this.entryBody()!.nativeElement.style.transform = '';
                     }
 
