@@ -1,7 +1,7 @@
 import { DragDropRegistry, DragRef } from '@angular/cdk/drag-drop';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, NgZone, OnDestroy } from '@angular/core';
+
+import { Inject, Injectable, NgZone, OnDestroy, DOCUMENT } from '@angular/core';
 import { SafeAny } from 'ngx-tethys/types';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 
 @Injectable()
 export class ThyDragDropRegistry<I extends { previewClass?: string | string[] | undefined; isDragging(): boolean } & DragRef, C>
-    extends DragDropRegistry<I, C>
+    extends DragDropRegistry
     implements OnDestroy
 {
     private ngZone: NgZone;
@@ -37,7 +37,7 @@ export class ThyDragDropRegistry<I extends { previewClass?: string | string[] | 
         this.ngZone.runOutsideAngular(() => {
             this._scrollSubscription = this._scrollDispatcher.scrolled().subscribe((event: void | CdkScrollable) => {
                 if (event) {
-                    this.scroll.next({ target: event.getElementRef().nativeElement } as SafeAny);
+                    this['_scroll'].next({ target: event.getElementRef().nativeElement } as SafeAny);
                 }
             });
         });

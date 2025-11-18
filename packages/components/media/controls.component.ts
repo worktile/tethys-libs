@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, inject, InjectionToken, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, inject, InjectionToken, Input, OnInit, DOCUMENT } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { ThyActionModule } from 'ngx-tethys/action';
@@ -9,7 +9,7 @@ import { ThySliderType } from 'ngx-tethys/slider';
 import { DEFAULT_PLAYBACK_RATES } from './media-base.component';
 import { ThyTimeFormatPipe, ThyVolumeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
-import { DOCUMENT } from '@angular/common';
+
 import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
