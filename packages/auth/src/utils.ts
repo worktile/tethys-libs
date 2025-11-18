@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Injector } from '@angular/core';
+import { Injector, DOCUMENT } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThyAuthConfig } from './auth.config';
 import { ThyAuthIllegalJWTTokenError, ThyAuthToken, ThyAuthTokenClass } from './token/token';

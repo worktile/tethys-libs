@@ -1,9 +1,9 @@
 <app-passport-panel heading="登录">
   <ng-template #description>
-    @if (stepper.selected === step1) {
+    @if (stepper.steps()[stepper.selectedIndex()] === step1) {
       通过帐号密码登录团队，或切换为 <a href="javascript:;" (click)="stepper.next()">手机验证码登录</a>
     }
-    @if (stepper.selected === step2) {
+    @if (stepper.steps()[stepper.selectedIndex()] === step2) {
       通过手机验证码登录团队，或切换为 <a href="javascript:;" (click)="stepper.previous()">帐号密码登录</a>
     }
   </ng-template>
@@ -18,7 +18,7 @@
             [(ngModel)]="model.account"
             required
             placeholder="请输入用户名（admin）"
-            [thyAutofocus]="stepper.selected === step1"
+            [thyAutofocus]="stepper.steps()[stepper.selectedIndex()] === step1"
           />
         </thy-form-group>
         <thy-form-group thyLabelText="密码" thyLabelRequired>
@@ -64,7 +64,7 @@
             required
             [pattern]="mobilePattern"
             placeholder="请输入手机号"
-            [thyAutofocus]="stepper.selected === step2"
+            [thyAutofocus]="stepper.steps()[stepper.selectedIndex()] === step2"
           />
         </thy-form-group>
         <thy-form-group thyLabelText="验证码" thyLabelRequired>
