@@ -852,18 +852,10 @@
     ts-morph "12.1.0"
     typescript "5.9.3"
 
-"@docgeni/template@^2.6.0":
+"@docgeni/template@^2.6.0", "@docgeni/template@~2.6.0":
   version "2.6.0"
   resolved "https://registry.npmjs.org/@docgeni/template/-/template-2.6.0.tgz#3c753246a385ce9566073f6c89f067bffc825aad"
   integrity sha512-pdmvvyAK7ChzolG4dIqs0JwIvHs2yFHF9TAnE6EwgDXTjr3U2msPZQ0iwsUFksoxkSIzGWqOh3xHDZmXiRvZNg==
-  dependencies:
-    docsearch.js "2.6.3"
-    tslib "^2.3.0"
-
-"@docgeni/template@~2.6.0-next.0":
-  version "2.6.0-next.0"
-  resolved "https://registry.npmjs.org/@docgeni/template/-/template-2.6.0-next.0.tgz#189f1ef9339667b67916e0b4011e68507bc986e7"
-  integrity sha512-fuP8MNkeZgmhfyRR2gG6llxZpgWkXbd65ubOx1y8qd49RgiavJJueu1vrsLklR9rSxCMJD25ECuhFkPYaLWh0g==
   dependencies:
     docsearch.js "2.6.3"
     tslib "^2.3.0"
@@ -3178,10 +3170,10 @@
   resolved "https://registry.npmjs.org/@socket.io/component-emitter/-/component-emitter-3.1.2.tgz#821f8442f4175d8f0467b9daf26e3a18e2d02af2"
   integrity sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==
 
-"@tethys/cdk@^20.0.0-next.2":
-  version "20.0.0-next.2"
-  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-20.0.0-next.2.tgz#b531eae856e82459d110c0998abc76c8d9356027"
-  integrity sha512-JQXr7XoPUDDyESMbuG1jSrdiIRYFxO8ZugI1NuR6yxaTVUYQtk+I6nFfDWY7znhezIsj2xlOeiW7BHhLViUc1g==
+"@tethys/cdk@^20.0.0":
+  version "20.0.0"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-20.0.0.tgz#84e9ce6cd14fa48dcacf66ddf2438655117d5655"
+  integrity sha512-LaIgf468QOoJ8CoyZpRwELM/2rtu6UC6DPLJJyCNN6rqu7Of+d4Pg5oGQmFXdpiYI4z0rdCRB3/8qRd86NEnWg==
   dependencies:
     tslib "^2.3.0"
 
@@ -3190,10 +3182,10 @@
   resolved "https://registry.npmjs.org/@tethys/icons/-/icons-1.4.79.tgz#ae940dd484efbb1b4484d7e99203e2ca347aad6f"
   integrity sha512-B6JnTXG4vzN7g/5QG5KMJu2HOIoG7xI27KWE3xsa6K7a5wLNlOxmU874FdWYyM+mD0jtRprUstSrAYTszd088w==
 
-"@tethys/store@20.0.0-next.0":
-  version "20.0.0-next.0"
-  resolved "https://registry.npmjs.org/@tethys/store/-/store-20.0.0-next.0.tgz#83394177e5ef829c6d718f859928447846c67c99"
-  integrity sha512-Vw47NA9qZem3RLO1iDT8bB60czzc/dIwF6C3YUClrCCNRPLJipLqWCGNLERPcrPzwXlT66IAJh6oIuBcIBtZAw==
+"@tethys/store@20.0.0":
+  version "20.0.0"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-20.0.0.tgz#af9f536936e2339130d09c153e53656da5df88ee"
+  integrity sha512-V8L508I10zLgYn5kQGvGAiilz6CHmF6Gk06CvZUmcMXMY1I5IN+09zUFfuUWFS6ZQ/vLJEljivXGTU3QZwqtaA==
   dependencies:
     tslib "^2.0.0"
 
