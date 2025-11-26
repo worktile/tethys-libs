@@ -64,7 +64,7 @@
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "extend": "^3.0.2",
-    "ngx-tethys": "20.0.0-next.2",
+    "ngx-tethys": "20.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -75,7 +75,7 @@
     "@angular/compiler-cli": "^20.3.12",
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-angular": "^16.2.3",
-    "@docgeni/cli": "~2.6.0-next.0",
+    "@docgeni/cli": "~2.6.0",
     "@docgeni/template": "~2.6.0-next.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^24.10.0",
