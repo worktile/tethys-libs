@@ -1,21 +1,21 @@
 <thy-sidebar [thyCollapsible]="true" [thyCollapsed]="isCollapsed()" [thyCollapsedWidth]="61">
   <thy-pro-sidebar
     [menus]="menus()"
-    [logo]="thyLogo"
-    [title]="thyTitle"
+    [logo]="thyLogo()"
+    [title]="thyTitle()"
     [isCollapsed]="isCollapsed()"
-    [headerTemplate]="menuHeaderTemplate"
-    [menuTemplate]="menuTemplate"
-    [footerTemplate]="menuFooterTemplate"
+    [headerTemplate]="menuHeaderTemplate()"
+    [menuTemplate]="menuTemplate()"
+    [footerTemplate]="menuFooterTemplate()"
   >
   </thy-pro-sidebar>
 </thy-sidebar>
 <thy-layout>
-  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate" [(isCollapsed)]="isCollapsed"></thy-pro-header>
+  <thy-pro-header [headerRightContentTemplate]="headerRightContentTemplate()" [(isCollapsed)]="isCollapsed"></thy-pro-header>
   <router-outlet></router-outlet>
   <thy-sidebar-footer>
-    @if (footerTemplate) {
-      <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
+    @if (footerTemplate()) {
+      <ng-container [ngTemplateOutlet]="footerTemplate()"></ng-container>
     }
   </thy-sidebar-footer>
 </thy-layout>

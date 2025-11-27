@@ -16,7 +16,7 @@ export class ThyVideoTestBasicComponent {
 
 @Component({
     selector: 'thy-test-audio-basic',
-    template: ` <thy-audio-player [thySrc]="src" [thyFileName]="fileName"></thy-audio-player> `,
+    template: ` <thy-audio-player [thySrc]="src" [thyFileName]="fileName" [thyFileSize]="fileSize"></thy-audio-player> `,
     imports: [ThyProMediaModule]
 })
 export class ThyAudioTestBasicComponent {
@@ -24,6 +24,8 @@ export class ThyAudioTestBasicComponent {
     src = 'assets/media/mp3.mp3';
 
     fileName = '';
+
+    fileSize = 100;
 }
 
 describe('mediaComponent', () => {

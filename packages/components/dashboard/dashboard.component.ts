@@ -1,18 +1,31 @@
-import { EventEmitter, OnChanges, Output, SimpleChanges, NgZone, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    NgZone,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    SimpleChanges,
+    input,
+    output,
+    viewChild
+} from '@angular/core';
 import {
     CompactType,
     DisplayGrid,
-    GridsterConfig,
-    GridsterItem,
     GridType,
     GridsterComponent,
+    GridsterConfig,
+    GridsterItem,
     GridsterItemComponent
 } from 'angular-gridster2';
-import { ThyWidgetItem, WidgetGridsterItem, ThyWidgetVieOutletWithContext, ThyWidgetViewOutlet } from './dashboard.class';
-import { debounceTime, takeUntil } from 'rxjs/operators';
-import { Observable, Subject, of } from 'rxjs';
 import { ThyViewOutletDirective } from 'ngx-tethys/shared';
+import { Observable, Subject, of } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { ThyWidgetItem, ThyWidgetVieOutletWithContext, ThyWidgetViewOutlet, WidgetGridsterItem } from './dashboard.class';
 
 @Component({
     selector: 'thy-dashboard',
@@ -25,35 +38,31 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
     /**
      * 仪表盘部件对应组件或模版映射
      */
-    @Input() thyWidgetViews: Record<string, ThyWidgetViewOutlet | ThyWidgetVieOutletWithContext> = {};
+    readonly thyWidgetViews = input<Record<string, ThyWidgetViewOutlet | ThyWidgetVieOutletWithContext>>({});
 
     /**
      * 仪表盘部件是否允许拖拽
      */
-    @Input() thyDraggable: boolean = false;
+    readonly thyDraggable = input<boolean>(false);
 
     /**
      * 仪表盘部件数据
      */
-    @Input() set thyWidgets(value: ThyWidgetItem[]) {
-        this.widgets = value || [];
-    }
+    readonly thyWidgets = input<ThyWidgetItem[]>([]);
 
     /**
      * 部件变更
      */
-    @Output() thyWidgetsChange: EventEmitter<ThyWidgetItem[]> = new EventEmitter();
+    readonly thyWidgetsChange = output<ThyWidgetItem[]>();
 
     /**
      * 仪表盘整体大小发生变化
      */
-    @Output() thyResizeChange: EventEmitter<void> = new EventEmitter();
+    readonly thyResizeChange = output<void>();
 
-    @ViewChild('gridster', { static: true, read: ElementRef }) gridster!: ElementRef<HTMLElement>;
+    readonly gridster = viewChild.required('gridster', { read: ElementRef });
 
     public widgetGridsterItems: WidgetGridsterItem[] = [];
-
-    private widgets!: ThyWidgetItem[];
 
     private ngUnsubscribe$ = new Subject<void>();
 
@@ -71,14 +80,15 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
         useTransformPositioning: false,
         outerMargin: true,
         itemChangeCallback: (item: GridsterItem) => {
-            const changedWidget = this.widgets.find((widget) => {
+            const widgets = this.thyWidgets();
+            const changedWidget = widgets.find((widget) => {
                 return widget._id === item.widget._id;
             });
 
             if (changedWidget) {
                 changedWidget.position = { x: item.x, y: item.y };
                 changedWidget.size = { cols: item.cols, rows: item.rows };
-                this.thyWidgetsChange.emit(this.widgets);
+                this.thyWidgetsChange.emit(widgets);
             }
         }
     };
@@ -89,8 +99,8 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
     ) {}
 
     ngOnInit(): void {
-        this.setDraggable(this.thyDraggable);
-        this.widgetGridsterItems = this.buildWidgetGridsterItems(this.widgets);
+        this.setDraggable(this.thyDraggable());
+        this.widgetGridsterItems = this.buildWidgetGridsterItems(this.thyWidgets());
         if (this.config.api && this.config.api.resize) {
             this.config.api.resize();
         }
@@ -98,7 +108,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
 
     ngAfterViewInit() {
         this.ngZone.runOutsideAngular(() => {
-            this.createResizeObserver(this.gridster.nativeElement)
+            this.createResizeObserver(this.gridster().nativeElement)
                 .pipe(debounceTime(100), takeUntil(this.ngUnsubscribe$))
                 .subscribe(() => {
                     if (this.config.api && this.config.api.resize) {
@@ -111,10 +121,10 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!changes.thyWidgets?.firstChange) {
-            this.widgetGridsterItems = this.buildWidgetGridsterItems(this.widgets);
+            this.widgetGridsterItems = this.buildWidgetGridsterItems(this.thyWidgets());
         }
         if (!changes.thyDraggable?.firstChange) {
-            this.setDraggable(this.thyDraggable);
+            this.setDraggable(this.thyDraggable());
             undefined;
         }
     }
@@ -139,7 +149,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
 
     private buildWidgetGridsterItems(widgets: ThyWidgetItem[]) {
         return (widgets || []).map((widget) => {
-            const widgetView = this.thyWidgetViews[widget.type];
+            const widgetView = this.thyWidgetViews()[widget.type];
             const gridsterItem: WidgetGridsterItem = {
                 x: widget.position?.x,
                 y: widget.position?.y,

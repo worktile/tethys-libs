@@ -11,10 +11,10 @@
     <span class="title-name ml-1">{{ activeMenu()?.title }}</span>
   </ng-template>
   <ng-template #headerOperation>
-    @if (headerRightContentTemplate) {
-      <ng-container [ngTemplateOutlet]="headerRightContentTemplate"></ng-container>
+    @if (headerRightContentTemplate()) {
+      <ng-container [ngTemplateOutlet]="headerRightContentTemplate()"></ng-container>
     }
-    @if (!headerRightContentTemplate) {
+    @if (!headerRightContentTemplate()) {
       <thy-actions thySize="xs">
         <a href="javascript:;" [thyTooltip]="locale().notify" thyAction thyIcon="bell"></a>
         <a href="javascript:;" [thyTooltip]="locale().help" thyAction>

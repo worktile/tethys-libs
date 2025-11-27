@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnInit, QueryList, TemplateRef, ViewChildren } from '@angular/core';
-import { InputBoolean } from 'ngx-tethys/core';
-import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
-import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
-import { ThyPopoverConfig, ThyPopoverDirective, ThyPopoverModule } from 'ngx-tethys/popover';
-import { RouterLinkActive, RouterLink } from '@angular/router';
-import { ThyMenuModule } from 'ngx-tethys/menu';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, effect, inject, input, OnInit, TemplateRef, viewChildren } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
+import { ThyMenuModule } from 'ngx-tethys/menu';
+import { ThyPopoverDirective, ThyPopoverModule } from 'ngx-tethys/popover';
 import { SafeAny } from 'ngx-tethys/types';
+import { ThyProLayoutMenu, ThyProLayoutMenus } from '../layout.entity';
 
 @Component({
     selector: 'thy-pro-sidebar',
@@ -19,45 +18,44 @@ import { SafeAny } from 'ngx-tethys/types';
     imports: [ThyLayoutModule, NgClass, NgTemplateOutlet, ThyMenuModule, ThyPopoverModule, RouterLinkActive, RouterLink]
 })
 export class ThyProSidebarComponent implements OnInit {
-    @Input() menus!: ThyProLayoutMenus;
+    readonly menus = input.required<ThyProLayoutMenus>();
 
-    @Input() logo!: string;
+    readonly logo = input.required<string>();
 
-    @Input() title!: string;
+    readonly title = input.required<string>();
 
-    @Input() @InputBoolean() set isCollapsed(value: boolean) {
-        this.sidebarCollapsed = value;
-        if (this.currentRootMenuGroup) {
-            this.changeMenuGroupCollapsed(this.currentRootMenuGroup, false);
-        }
-    }
+    readonly isCollapsed = input<boolean>(false);
 
-    @Input() public headerTemplate!: TemplateRef<SafeAny>;
+    public readonly headerTemplate = input<TemplateRef<SafeAny>>();
 
-    @Input() public menuTemplate!: TemplateRef<SafeAny>;
+    public readonly menuTemplate = input<TemplateRef<SafeAny>>();
 
-    @Input() public footerTemplate!: TemplateRef<SafeAny>;
+    public readonly footerTemplate = input<TemplateRef<SafeAny>>();
 
     public currentRootMenuGroup!: ThyProLayoutMenu;
 
-    public sidebarCollapsed!: boolean;
-
     public menuGroupElement!: HTMLElement;
 
-    @ViewChildren(ThyPopoverDirective) menuPopovers!: QueryList<ThyPopoverDirective>;
+    readonly menuPopovers = viewChildren(ThyPopoverDirective);
 
     protected globalStore = inject(ThyGlobalStore);
 
     activeMenu = this.globalStore.select((state) => state.activeMenu);
 
-    constructor() {}
+    constructor() {
+        effect(() => {
+            if (this.currentRootMenuGroup) {
+                this.changeMenuGroupCollapsed(this.currentRootMenuGroup, false);
+            }
+        });
+    }
 
     ngOnInit(): void {
         this.initCurrentMenuGroup();
     }
 
     getMenuGroupElement(event: MouseEvent) {
-        if (this.isCollapsed) {
+        if (this.isCollapsed()) {
             this.menuGroupElement = event.target as HTMLElement;
         }
     }
@@ -65,7 +63,7 @@ export class ThyProSidebarComponent implements OnInit {
     initCurrentMenuGroup() {}
 
     setActiveMenu(menuGroup: ThyProLayoutMenu, activeLinkMenu: ThyMenuRoute) {
-        this.menuPopovers?.forEach((item) => {
+        this.menuPopovers()?.forEach((item) => {
             item.popoverOpened && item.hide();
         });
         this.changeMenuGroupCollapsed(menuGroup, false);

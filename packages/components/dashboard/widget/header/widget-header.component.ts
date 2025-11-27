@@ -1,4 +1,4 @@
-import { OnInit, Component, Input, ContentChild, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+import { OnInit, Component, TemplateRef, ChangeDetectionStrategy, input, contentChild } from '@angular/core';
 import { ThySharedModule } from 'ngx-tethys/shared';
 import { NgClass } from '@angular/common';
 
@@ -10,11 +10,11 @@ import { NgClass } from '@angular/common';
     imports: [NgClass, ThySharedModule]
 })
 export class ThyDashboardWidgetHeaderComponent implements OnInit {
-    @Input() thyTitle!: string | TemplateRef<any>;
+    readonly thyTitle = input.required<string | TemplateRef<any>>();
 
-    @Input() thyDescription!: string | TemplateRef<any>;
+    readonly thyDescription = input.required<string | TemplateRef<any>>();
 
-    @ContentChild('operation') operationTemplateRef!: TemplateRef<any>;
+    readonly operationTemplateRef = contentChild.required<TemplateRef<any>>('operation');
 
     constructor() {}
 

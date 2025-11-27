@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, inject, InjectionToken, Input, OnInit, DOCUMENT } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, inject, InjectionToken, OnInit, DOCUMENT, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { ThyActionModule } from 'ngx-tethys/action';
@@ -22,7 +22,7 @@ import { injectLocale } from '@tethys/pro/i18n';
             class="controls-progress"
             [thyProgressValue]="progressValue"
             [thyBufferedValue]="bufferedValue"
-            [thyProgressType]="progressType"
+            [thyProgressType]="progressType()"
             (thyMoveStart)="onMouseStart()"
             (thyMoveEnd)="onMouseEnd()"
             (thyMoveMove)="onMouseMove()"
@@ -86,7 +86,7 @@ import { injectLocale } from '@tethys/pro/i18n';
                 <thy-media-progress
                     class="volume-progress"
                     [thyDirection]="'vertical'"
-                    [thyProgressType]="progressType"
+                    [thyProgressType]="progressType()"
                     [thyProgressValue]="mediaHtmlElement?.volume | thyVolumeFormat"
                     (thyAfterChange)="afterVolumeChange($event)"
                 ></thy-media-progress>
@@ -122,19 +122,19 @@ export class ThyVideoControlsComponent extends mixinUnsubscribe(MixinBase) imple
     /**
      * 进度主题类型 primary | success | info | warning | danger
      */
-    @Input('thyProgressType') progressType!: ThySliderType;
+    readonly progressType = input.required<ThySliderType>({ alias: 'thyProgressType' });
 
     /**
      * 媒体组件
      */
-    @Input('thyMedia') media!: ElementRef;
+    readonly media = input.required<ElementRef>({ alias: 'thyMedia' });
 
     public get isPlaying(): boolean {
         return !!this.mediaHtmlElement?.duration && !this.mediaHtmlElement?.paused;
     }
 
     public get mediaHtmlElement(): HTMLMediaElement | undefined {
-        return this.media?.nativeElement;
+        return this.media()?.nativeElement;
     }
 
     /**

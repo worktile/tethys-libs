@@ -1,9 +1,20 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnInit,
+    input,
+    model,
+    viewChild
+} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { injectLocale } from '@tethys/pro/i18n';
 import { ThyAudioControlsComponent } from './audio-controls.component';
 import { ThyVideoControlsComponent } from './controls.component';
 import { ThyMediaPlayerBaseComponent } from './media-base.component';
-import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-audio-player',
@@ -15,7 +26,7 @@ import { injectLocale } from '@tethys/pro/i18n';
                     class="audio"
                     [src]="fileSrc"
                     [muted]="false"
-                    [autoplay]="thyAutoPlay"
+                    [autoplay]="thyAutoPlay()"
                     (loadedmetadata)="onLoadedmetadata($event)"
                     (error)="onError($event)"
                     (canplay)="onCanPlay()"
@@ -25,9 +36,9 @@ import { injectLocale } from '@tethys/pro/i18n';
                 #controls
                 [thyMedia]="audio"
                 [thyErrorTips]="errorTipText"
-                [thyProgressType]="thyProgressType"
-                [thyFileName]="fileName"
-                [thyFileSize]="thyFileSize"
+                [thyProgressType]="thyProgressType()"
+                [thyFileName]="thyFileName()"
+                [thyFileSize]="thyFileSize()"
             >
             </thy-audio-controls>
         </div>
@@ -37,9 +48,9 @@ import { injectLocale } from '@tethys/pro/i18n';
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit {
     @HostBinding('class') class = 'thy-audio-player thy-media-player';
 
-    @ViewChild('audioElement') audioElement!: ElementRef<HTMLAudioElement>;
+    readonly audioElement = viewChild.required<ElementRef<HTMLAudioElement>>('audioElement');
 
-    @ViewChild('controls') controls!: ThyVideoControlsComponent;
+    readonly controls = viewChild.required<ThyVideoControlsComponent>('controls');
 
     locale = injectLocale();
 
@@ -53,26 +64,22 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     /**
      * 当下载到足够播放的媒体文件，是否可以自动播放
      */
-    @Input() thyAutoPlay: boolean = false;
+    readonly thyAutoPlay = input<boolean>(false);
 
     /**
      * 文件大小
      */
-    @Input() thyFileSize!: number;
+    readonly thyFileSize = input.required<number | string>();
 
     /**
      * 文件名称
      */
-    @Input() set thyFileName(name: string) {
-        this.fileName = name;
-    }
+    readonly thyFileName = model<string>('');
 
     public errorTips = {
         formatError: this.locale().audioFormatError,
         networkError: this.locale().networkError
     };
-
-    public fileName!: string;
 
     public audio!: ElementRef;
 
@@ -84,7 +91,7 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     }
 
     ngAfterViewInit() {
-        this.audio = this.audioElement;
+        this.audio = this.audioElement();
         this.cdr.detectChanges();
     }
 
@@ -97,8 +104,8 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
         const match = src.match(/([^\/]+\.mp3|[^\/]+\.(wav|ogg|flac|aac|m4a))$/i);
 
-        this.fileName = this.fileName || (match && match[0]) || '';
+        this.thyFileName.set(this.thyFileName() || (match && match[0]) || '');
 
-        this.controls.onCanPlay && this.controls.onCanPlay();
+        this.controls()?.onCanPlay && this.controls()?.onCanPlay();
     }
 }

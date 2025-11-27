@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, input } from '@angular/core';
+import { injectLocale } from '@tethys/pro/i18n';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
 import { ThyFlexibleTextModule } from 'ngx-tethys/flexible-text';
@@ -6,7 +7,6 @@ import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyVideoControlsComponent } from './controls.component';
 import { ThyTimeFormatPipe } from './media.pipe';
 import { ThyMediaProgressComponent } from './progress.component';
-import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-audio-controls',
@@ -25,16 +25,16 @@ import { injectLocale } from '@tethys/pro/i18n';
                     <thy-icon [class.paused-image]="!isPlaying" [thyIconName]="isPlaying ? 'pause' : 'play-fill'"></thy-icon>
                 </a>
                 <div class="controls-content">
-                    @if (!errorTips) {
-                        <div class="file-description" [class.hidden]="!fileName">
-                            <thy-flexible-text class="file-name" [thyTooltipContent]="fileName"> {{ fileName }}</thy-flexible-text>
-                            @if (fileSize) {
-                                <span class="file-size">{{ fileSize }}</span>
+                    @if (!errorTips()) {
+                        <div class="file-description" [class.hidden]="!fileName()">
+                            <thy-flexible-text class="file-name" [thyTooltipContent]="fileName()"> {{ fileName() }}</thy-flexible-text>
+                            @if (fileSize()) {
+                                <span class="file-size">{{ fileSize() }}</span>
                             }
                         </div>
                     } @else {
-                        <thy-flexible-text [thyTooltipContent]="errorTips" class="error-tip">
-                            {{ errorTips }}
+                        <thy-flexible-text [thyTooltipContent]="errorTips()" class="error-tip">
+                            {{ errorTips() }}
                         </thy-flexible-text>
                     }
 
@@ -47,7 +47,7 @@ import { injectLocale } from '@tethys/pro/i18n';
                             class="controls-progress"
                             [thyProgressValue]="progressValue"
                             [thyBufferedValue]="bufferedValue"
-                            [thyProgressType]="progressType"
+                            [thyProgressType]="progressType()"
                             (thyMoveStart)="onMouseStart()"
                             (thyMoveEnd)="onMouseEnd()"
                             (thyAfterChange)="afterProgressChange($event)"
@@ -56,7 +56,7 @@ import { injectLocale } from '@tethys/pro/i18n';
                 </div>
                 <div class="controls-right">
                     <a
-                        [class.hidden]="errorTips"
+                        [class.hidden]="errorTips()"
                         thyAction
                         thyDropdownActive="active"
                         [thyDropdown]="menu"
@@ -91,11 +91,11 @@ import { injectLocale } from '@tethys/pro/i18n';
 export class ThyAudioControlsComponent extends ThyVideoControlsComponent implements OnInit {
     locale = injectLocale();
 
-    @Input('thyFileName') fileName!: string;
+    readonly fileName = input.required<string>({ alias: 'thyFileName' });
 
-    @Input('thyFileSize') fileSize!: number;
+    readonly fileSize = input.required<number | string>({ alias: 'thyFileSize' });
 
-    @Input('thyErrorTips') errorTips!: string;
+    readonly errorTips = input.required<string>({ alias: 'thyErrorTips' });
 
     constructor(private changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
