@@ -51,9 +51,7 @@ export class ThyImageCropperDialogComponent implements OnInit {
     /**
      * 图片资源
      */
-    readonly thyImage = input<File | string>('', { alias: 'thyImage' });
-
-    readonly image = model<File | string>('');
+    readonly image = model<File | string>('', { alias: 'thyImage' });
 
     /**
      * 上传提示文案
@@ -117,14 +115,7 @@ export class ThyImageCropperDialogComponent implements OnInit {
         public dialog: ThyDialog,
         @Optional() public dialogContainer: ThyDialogContainer,
         private ngZone: NgZone
-    ) {
-        // effect(() => {
-        //     const image = this.thyImage();
-        //     if (image) {
-        //         this.image.set(image);
-        //     }
-        // });
-    }
+    ) {}
 
     ngOnInit(): void {}
 

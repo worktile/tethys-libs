@@ -1,5 +1,15 @@
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, inject, input, OnInit, TemplateRef, viewChildren } from '@angular/core';
+import {
+    booleanAttribute,
+    ChangeDetectionStrategy,
+    Component,
+    effect,
+    inject,
+    input,
+    OnInit,
+    TemplateRef,
+    viewChildren
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
@@ -24,7 +34,7 @@ export class ThyProSidebarComponent implements OnInit {
 
     readonly title = input.required<string>();
 
-    readonly isCollapsed = input<boolean>(false);
+    readonly isCollapsed = input<boolean, unknown>(false, { transform: booleanAttribute });
 
     public readonly headerTemplate = input<TemplateRef<SafeAny>>();
 

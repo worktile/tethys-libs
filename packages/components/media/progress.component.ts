@@ -222,9 +222,6 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
                 pluck(dimension),
                 map((position: number, index) => this.mousePositionToAdaptiveValue(position)),
                 tap(() => {
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
                     this.thyMoveStart.emit();
                 })
             );
@@ -233,9 +230,6 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
         this.dragEndListener = this.ngZone.runOutsideAngular(() => {
             return fromEvent(document, 'mouseup').pipe(
                 tap(() => {
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
                     this.thyMoveEnd.emit();
                 })
             );
@@ -247,18 +241,12 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
                 tap((e: MouseEvent) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
                     this.thyMove.emit();
                 }),
                 pluck(dimension),
                 map((position: number) => this.mousePositionToAdaptiveValue(position)),
                 distinctUntilChanged(),
                 tap(() => {
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
-                    // TODO: The 'emit' function requires a mandatory void argument
                     this.thyMove.emit();
                 }),
                 takeUntil(this.dragEndListener as Observable<Event>)

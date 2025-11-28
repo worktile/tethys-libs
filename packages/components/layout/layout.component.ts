@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { cache } from '@tethys/cache';
 import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { ThyLayoutModule } from 'ngx-tethys/layout';
+import { SafeAny } from 'ngx-tethys/types';
 import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
 
@@ -26,6 +27,8 @@ export class ThyProLayoutComponent implements OnInit {
      * logo
      */
     readonly thyLogo = input.required<string>();
+
+    readonly trigger = input<null | undefined | SafeAny>(null, { alias: 'thyTrigger' });
 
     readonly menus = model<ThyMenuRoute[]>([], {
         alias: 'thyMenus'

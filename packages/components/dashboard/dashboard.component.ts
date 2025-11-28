@@ -100,7 +100,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
 
     ngOnInit(): void {
         this.setDraggable(this.thyDraggable());
-        this.widgetGridsterItems = this.buildWidgetGridsterItems(this.thyWidgets());
+        this.widgetGridsterItems = this.buildWidgetGridsterItems();
         if (this.config.api && this.config.api.resize) {
             this.config.api.resize();
         }
@@ -121,7 +121,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!changes.thyWidgets?.firstChange) {
-            this.widgetGridsterItems = this.buildWidgetGridsterItems(this.thyWidgets());
+            this.widgetGridsterItems = this.buildWidgetGridsterItems();
         }
         if (!changes.thyDraggable?.firstChange) {
             this.setDraggable(this.thyDraggable());
@@ -147,9 +147,11 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
               });
     }
 
-    private buildWidgetGridsterItems(widgets: ThyWidgetItem[]) {
+    private buildWidgetGridsterItems() {
+        const widgets = this.thyWidgets();
+        const widgetViews = this.thyWidgetViews();
         return (widgets || []).map((widget) => {
-            const widgetView = this.thyWidgetViews()[widget.type];
+            const widgetView = widgetViews[widget.type];
             const gridsterItem: WidgetGridsterItem = {
                 x: widget.position?.x,
                 y: widget.position?.y,

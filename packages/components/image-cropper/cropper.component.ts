@@ -36,7 +36,7 @@ export class ThyImageCropperComponent implements OnInit {
     /**
      * 图片资源
      */
-    readonly thyImage = input.required<File | string>({ alias: 'thyImage' });
+    readonly thyImage = input.required<File | string>();
 
     /**
      * 图片加载的错误提示
