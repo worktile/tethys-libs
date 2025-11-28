@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Inject, inject, InjectionToken, OnInit, DOCUMENT, input } from '@angular/core';
+import { ChangeDetectorRef, Component, DOCUMENT, ElementRef, inject, input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { ThyActionModule } from 'ngx-tethys/action';
