@@ -1,7 +1,7 @@
 <thy-loading [thyDone]="loadingDone"></thy-loading>
 
 @if (loadError) {
-  <div class="alert alert-warning">{{ thyImageErrorMessage }}</div>
+  <div class="alert alert-warning">{{ thyImageErrorMessage() }}</div>
 }
 
 <div class="cropper-content" [class.image-ready]="loadingDone">

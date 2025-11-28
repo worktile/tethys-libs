@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Directive, OnInit, input, output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { isString } from '@tethys/cdk';
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
@@ -49,12 +49,12 @@ export class ThyMediaPlayerBaseComponent extends mixinUnsubscribe(MixinBase) imp
     /**
      * 进度类型
      */
-    @Input() thyProgressType: ThySliderType = 'primary';
+    readonly thyProgressType = input<ThySliderType>('primary');
 
     /**
      * 媒体元数据被加载完成后触发 能拿到媒体尺寸、时长等
      */
-    @Output() thyLoadedMetadata: EventEmitter<HTMLVideoElement | HTMLAudioElement> = new EventEmitter();
+    readonly thyLoadedMetadata = output<HTMLVideoElement | HTMLAudioElement>();
 
     constructor(public sanitizer: DomSanitizer) {
         super();

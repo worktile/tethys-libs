@@ -62,11 +62,11 @@ describe('imageCropperComponent', () => {
         });
 
         it('should get correct thyUploadTips when set thyUploadTips', () => {
-            expect(component.dialog.uploadTips).toEqual(component.uploadTips);
+            expect(component.dialog.uploadTips()).toEqual(component.uploadTips);
 
             component.uploadTips = '自定义的提示信息';
             fixture.detectChanges();
-            expect(component.dialog.uploadTips).toEqual(component.uploadTips);
+            expect(component.dialog.uploadTips()).toEqual(component.uploadTips);
         });
 
         it('should get correct previewSizes when set thyPreviewSizes', () => {

@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef, model } from '@angular/core';
-import { ActivatedRoute, Route, Router, Routes, RouterOutlet } from '@angular/router';
-import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
 import { NgTemplateOutlet } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit, TemplateRef, contentChild, input, model, output } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { cache } from '@tethys/cache';
+import { ThyGlobalStore, ThyMenuRoute } from '@tethys/pro/core';
+import { ThyLayoutModule } from 'ngx-tethys/layout';
+import { SafeAny } from 'ngx-tethys/types';
 import { ThyProHeaderComponent } from './header/header.component';
 import { ThyProSidebarComponent } from './sidebar/sidebar.component';
-import { ThyLayoutModule } from 'ngx-tethys/layout';
-import { cache } from '@tethys/cache';
 
 @Component({
     selector: 'thy-pro-layout',
@@ -20,46 +21,48 @@ export class ThyProLayoutComponent implements OnInit {
     /**
      * 标题
      */
-    @Input() thyTitle!: string;
+    readonly thyTitle = input.required<string>();
 
     /**
      * logo
      */
-    @Input() thyLogo!: string;
+    readonly thyLogo = input.required<string>();
 
-    menus = model<ThyMenuRoute[]>([], {
+    readonly trigger = input<null | undefined | SafeAny>(null, { alias: 'thyTrigger' });
+
+    readonly menus = model<ThyMenuRoute[]>([], {
         alias: 'thyMenus'
     });
 
     /**
      *  menu 菜单的头部点击事件
      */
-    @Output() menuHeaderClick: EventEmitter<Event> = new EventEmitter();
+    readonly menuHeaderClick = output<Event>();
 
     /**
      *  自定义标题和 logo
      */
-    @ContentChild('menuHeader') public menuHeaderTemplate!: TemplateRef<HTMLElement>;
+    public readonly menuHeaderTemplate = contentChild<TemplateRef<HTMLElement>>('menuHeader');
 
     /**
      * 自定义菜单显示
      */
-    @ContentChild('menuList') public menuTemplate!: TemplateRef<HTMLElement>;
+    public readonly menuTemplate = contentChild<TemplateRef<HTMLElement>>('menuList');
 
     /**
      * 自定义菜单栏底部内容
      */
-    @ContentChild('menuFooter') menuFooterTemplate!: TemplateRef<any>;
+    readonly menuFooterTemplate = contentChild<TemplateRef<any>>('menuFooter');
 
     /**
      * 自定义右上角内容
      */
-    @ContentChild('headerRightContent') public headerRightContentTemplate!: TemplateRef<any>;
+    public readonly headerRightContentTemplate = contentChild<TemplateRef<any>>('headerRightContent');
 
     /**
      * 自定义 footer
      */
-    @ContentChild('footer') public footerTemplate!: TemplateRef<any>;
+    public readonly footerTemplate = contentChild<TemplateRef<any>>('footer');
 
     public isCollapsed = cache.signal('menu-is-collapsed', {
         defaultValue: false

@@ -1,22 +1,24 @@
+@let sidebarCollapsed = isCollapsed();
+
 <thy-sidebar-header class="thy-pro-sidebar-header" [ngClass]="{ 'justify-content-center': sidebarCollapsed }">
-  @if (headerTemplate) {
+  @if (headerTemplate()) {
     <ng-container
-      [ngTemplateOutlet]="headerTemplate"
-      [ngTemplateOutletContext]="{ value: { logo: this.logo, title: this.title } }"
+      [ngTemplateOutlet]="headerTemplate()"
+      [ngTemplateOutletContext]="{ value: { logo: this.logo(), title: this.title() } }"
     ></ng-container>
   } @else {
-    <img class="header-logo" [src]="logo" />
+    <img class="header-logo" [src]="logo()" />
     @if (!sidebarCollapsed) {
-      <span class="header-title text-truncate">{{ title }}</span>
+      <span class="header-title text-truncate">{{ title() }}</span>
     }
   }
 </thy-sidebar-header>
 <thy-sidebar-content>
-  @if (menuTemplate) {
-    <ng-container [ngTemplateOutlet]="menuTemplate" [ngTemplateOutletContext]="{ menus }"> </ng-container>
+  @if (menuTemplate()) {
+    <ng-container [ngTemplateOutlet]="menuTemplate()" [ngTemplateOutletContext]="{ menus: menus() }"> </ng-container>
   } @else {
     <thy-menu [thyCollapsed]="sidebarCollapsed" thyTheme="dark">
-      @for (menu of menus; track $index) {
+      @for (menu of menus(); track $index) {
         <thy-menu-group
           [thyShowIcon]="true"
           [thyCollapsed]="menu.isCollapsed || false"
@@ -71,7 +73,7 @@
 </ng-template>
 
 <thy-sidebar-footer>
-  @if (footerTemplate) {
-    <ng-container [ngTemplateOutlet]="footerTemplate"></ng-container>
+  @if (footerTemplate()) {
+    <ng-container [ngTemplateOutlet]="footerTemplate()"></ng-container>
   }
 </thy-sidebar-footer>

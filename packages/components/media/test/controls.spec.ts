@@ -74,7 +74,8 @@ describe('ThyVideoControlsComponent', () => {
 
         fixture = TestBed.createComponent(ThyVideoControlsComponent);
         component = fixture.componentInstance;
-        component.media = new ElementRef(mediaElementMock);
+        fixture.componentRef.setInput('thyMedia', new ElementRef(mediaElementMock));
+        fixture.componentRef.setInput('thyProgressType', 'primary');
         fixture.detectChanges();
     });
 

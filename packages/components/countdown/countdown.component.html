@@ -1,6 +1,6 @@
 @if (seconds === 0) {
-  <button [disabled]="disabled" thyButton="primary" thySize="sm" (click)="onClick()">
-    {{ text }}
+  <button [disabled]="disabled()" thyButton="primary" thySize="sm" (click)="onClick()">
+    {{ text() }}
   </button>
 } @else {
   <span class="countdown-progress" [innerHTML]="locale().sended | thyI18n: { seconds: seconds }"></span>
