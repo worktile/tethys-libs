@@ -1,9 +1,9 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { AfterViewInit, booleanAttribute, ContentChildren, Directive, Input, input, QueryList } from '@angular/core';
+import { AfterViewInit, booleanAttribute, ContentChildren, Directive, input, QueryList } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { animationFrameScheduler, asapScheduler, auditTime } from 'rxjs';
-import { ThyBoardLaneComponent } from '../lane/lane.component';
 import { ThyBoardLane } from '../entities';
+import { ThyBoardLaneComponent } from '../lane/lane.component';
 
 const SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? animationFrameScheduler : asapScheduler;
 
@@ -19,7 +19,7 @@ export class ThyBoardBodyScrollableDirective extends CdkScrollable implements Af
      * @default false
      * @type boolean
      */
-    @Input({ transform: booleanAttribute }) thyBoardBodyScrollable: boolean = false;
+    readonly thyBoardBodyScrollable = input<boolean, unknown>(false, { transform: booleanAttribute });
 
     /**
      * 泳道列表
@@ -31,7 +31,7 @@ export class ThyBoardBodyScrollableDirective extends CdkScrollable implements Af
     private takeUntilDestroyed = takeUntilDestroyed();
 
     ngAfterViewInit(): void {
-        if (!this.thyBoardBodyScrollable) {
+        if (!this.thyBoardBodyScrollable()) {
             this.ngZone.runOutsideAngular(() => {
                 this.elementScrolled()
                     .pipe(auditTime(0, SCROLL_SCHEDULER), this.takeUntilDestroyed)

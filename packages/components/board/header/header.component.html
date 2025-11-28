@@ -6,9 +6,9 @@
           href="javascript:;"
           class="link-muted pr-2"
           (click)="expandAllLane()"
-          [thyTooltip]="allLanesExpanded ? locale().foldUpAll : locale().expandedAll"
+          [thyTooltip]="allLanesExpanded() ? locale().foldUpAll : locale().expandedAll"
         >
-          <thy-icon [thyIconName]="allLanesExpanded ? 'stow' : 'open'"></thy-icon>
+          <thy-icon [thyIconName]="allLanesExpanded() ? 'stow' : 'open'"></thy-icon>
         </a>
       }
 
