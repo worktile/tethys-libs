@@ -1,12 +1,12 @@
-<thy-dialog-header [thyTitle]="locale().upload + title"></thy-dialog-header>
+<thy-dialog-header [thyTitle]="locale().upload + title()"></thy-dialog-header>
 <thy-dialog-body class="cropper-dialog-body">
   <div class="cropper-content-container">
     <thy-image-cropper
       #cropper
-      [thyImage]="image"
-      [thyAspectRatio]="aspectRatio"
-      [thyViewMode]="viewMode"
-      [thyShape]="shape"
+      [thyImage]="image()"
+      [thyAspectRatio]="aspectRatio()"
+      [thyViewMode]="viewMode()"
+      [thyShape]="shape()"
       [thyScale]="scale"
       [thyRotate]="rotate"
     ></thy-image-cropper>
@@ -25,20 +25,20 @@
     <div class="avatar-text-desc">
       <thy-file-select
         thyStopPropagation
-        [thySizeThreshold]="uploadSizeThreshold"
-        [thyAcceptType]="uploadAcceptType"
+        [thySizeThreshold]="uploadSizeThreshold()"
+        [thyAcceptType]="uploadAcceptType()"
         (thyOnFileSelect)="selectImage($event)"
       >
         <a href="javascript:;" class="link-has-icon pl-0"><thy-icon thyIconName="upload" class="mr-1"></thy-icon>{{ locale().reupload }}</a>
       </thy-file-select>
-      <span class="text-desc">{{ uploadTips }}</span>
+      <span class="text-desc">{{ uploadTips() }}</span>
     </div>
   </div>
   <div class="preview-container">
     {{ locale().preview }}
     <div class="text-center">
-      @if (previewSizes && previewSizes?.length) {
-        @for (size of previewSizes; track $index) {
+      @if (previewSizes() && previewSizes().length) {
+        @for (size of previewSizes(); track $index) {
           <div class="preview-image-warp" [ngStyle]="size | thyCropperSizeStyle"></div>
           <div class="preview-image-size">{{ size | thyCropperSizeText }}</div>
         }

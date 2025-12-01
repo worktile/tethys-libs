@@ -1,9 +1,21 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnDestroy,
+    OnInit,
+    input,
+    viewChild
+} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { useHostRenderer } from '@tethys/cdk/dom';
+import { injectLocale } from '@tethys/pro/i18n';
+import { coerceBooleanProperty } from 'ngx-tethys/util';
 import { ThyVideoControlsComponent } from './controls.component';
 import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-base.component';
-import { injectLocale } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-video-player',
@@ -14,7 +26,7 @@ import { injectLocale } from '@tethys/pro/i18n';
                 class="media-content"
                 [src]="fileSrc"
                 [muted]="true"
-                [autoplay]="thyAutoPlay"
+                [autoplay]="thyAutoPlay()"
                 (loadedmetadata)="onLoadedmetadata($event)"
                 (error)="onError($event)"
                 (canplay)="onCanPlay()"
@@ -25,16 +37,16 @@ import { injectLocale } from '@tethys/pro/i18n';
                 {{ errorTipText }}
             </div>
         }
-        <thy-video-controls #controls [thyMedia]="video" [thyProgressType]="thyProgressType"></thy-video-controls>
+        <thy-video-controls #controls [thyMedia]="video" [thyProgressType]="thyProgressType()"></thy-video-controls>
     `,
     imports: [ThyVideoControlsComponent]
 })
 export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit, OnDestroy {
     @HostBinding('class') class = 'thy-video-player thy-media-player';
 
-    @ViewChild('videoElement') videoElement!: ElementRef;
+    readonly videoElement = viewChild.required<ElementRef>('videoElement');
 
-    @ViewChild('controls') controls!: ThyVideoControlsComponent;
+    readonly controls = viewChild.required<ThyVideoControlsComponent>('controls');
 
     locale = injectLocale();
 
@@ -48,7 +60,7 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     /**
      * 当下载到足够播放的媒体文件，是否可以自动播放
      */
-    @Input() thyAutoPlay: boolean = false;
+    readonly thyAutoPlay = input(false, { transform: coerceBooleanProperty });
 
     public errorTips = {
         formatError: this.locale().videoFormatError,
@@ -71,13 +83,13 @@ export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent impleme
     ngOnInit(): void {}
 
     ngAfterViewInit() {
-        this.video = this.videoElement;
+        this.video = this.videoElement();
         this.cdr.detectChanges();
     }
 
     onCanPlay() {
         this.showErrorTip = false;
-        this.controls.onCanPlay && this.controls.onCanPlay();
+        this.controls()?.onCanPlay && this.controls()?.onCanPlay();
     }
 
     onLoadedmetadata(event: Event) {

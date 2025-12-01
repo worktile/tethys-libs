@@ -4,12 +4,13 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    EventEmitter,
-    Input,
     NgZone,
     OnInit,
-    Output,
-    ViewChild
+    effect,
+    input,
+    numberAttribute,
+    output,
+    viewChild
 } from '@angular/core';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { MixinBase, mixinUnsubscribe } from 'ngx-tethys/core';
@@ -21,8 +22,8 @@ import { Observable, Subscription, distinctUntilChanged, fromEvent, map, pluck, 
     selector: 'thy-media-progress',
     host: {
         class: 'thy-media-progress',
-        '[class.thy-media-progress-vertical]': 'thyDirection === "vertical"',
-        '[class.thy-media-progress-horizontal]': 'thyDirection === "horizontal"'
+        '[class.thy-media-progress-vertical]': 'thyDirection() === "vertical"',
+        '[class.thy-media-progress-horizontal]': 'thyDirection() === "horizontal"'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
@@ -36,69 +37,54 @@ import { Observable, Subscription, distinctUntilChanged, fromEvent, map, pluck, 
     standalone: true
 })
 export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) implements OnInit, AfterViewInit {
-    @ViewChild('progressRail', { static: true }) progressRail: ElementRef | undefined;
+    readonly progressRail = viewChild<ElementRef>('progressRail');
 
-    @ViewChild('progressTrack', { static: true }) progressTrack: ElementRef | undefined;
+    readonly progressTrack = viewChild<ElementRef>('progressTrack');
 
-    @ViewChild('progressBuffer', { static: true }) progressBuffer: ElementRef | undefined;
+    readonly progressBuffer = viewChild<ElementRef>('progressBuffer');
 
     /**
      * 进度值
      */
-    @Input() set thyProgressValue(value: number) {
-        this.setValue(value);
-    }
+    readonly thyProgressValue = input<number, unknown>(0, { transform: numberAttribute });
 
     /**
      * 缓存值
      */
-    @Input() set thyBufferedValue(value: number) {
-        if (this.progressBuffer && value) {
-            const validValue = value <= 0 ? 0 : value >= 100 ? 100 : value;
-            (this.progressBuffer as ElementRef).nativeElement.style[this.dimension] = `${validValue}%`;
-        }
-    }
+    readonly thyBufferedValue = input<number, unknown>(0, { transform: numberAttribute });
 
     /**
      * 进度条方向
      */
-    @Input() thyDirection: 'horizontal' | 'vertical' = 'horizontal';
+    readonly thyDirection = input<'horizontal' | 'vertical'>('horizontal');
 
     /**
      * 进度主题类型 primary | success | info | warning | danger
      */
-    @Input() set thyProgressType(type: ThySliderType | undefined) {
-        if (type) {
-            if (this.typeClassName) {
-                this.hostRenderer.removeClass(this.typeClassName);
-            }
-            this.hostRenderer.addClass(type ? `thy-media-progress-${type}` : '');
-            this.typeClassName = `thy-media-progress-${type}`;
-        }
-    }
+    readonly thyProgressType = input<ThySliderType | undefined>();
 
     /**
      * 移动结束后回调
      */
-    @Output() thyAfterChange = new EventEmitter<number>();
+    readonly thyAfterChange = output<number>();
 
     /**
      * 移动开始
      */
-    @Output() thyMoveStart = new EventEmitter<void>();
+    readonly thyMoveStart = output<void>();
 
     /**
      * 移动中
      */
-    @Output() thyMove = new EventEmitter<void>();
+    readonly thyMove = output<void>();
 
     /**
      * 移动结束
      */
-    @Output() thyMoveEnd = new EventEmitter<void>();
+    readonly thyMoveEnd = output<void>();
 
     get dimension() {
-        return this.thyDirection === 'horizontal' ? 'width' : 'height';
+        return this.thyDirection() === 'horizontal' ? 'width' : 'height';
     }
 
     private dragStartListener: Observable<number> | undefined;
@@ -119,8 +105,36 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
 
     progressValue = 0;
 
-    constructor(private cdr: ChangeDetectorRef, private ref: ElementRef, private ngZone: NgZone) {
+    constructor(
+        private cdr: ChangeDetectorRef,
+        private ref: ElementRef,
+        private ngZone: NgZone
+    ) {
         super();
+        effect(() => {
+            const value = this.thyProgressValue() as number;
+            this.setValue(value);
+        });
+
+        effect(() => {
+            const progressBuffer = this.progressBuffer();
+            const bufferedValue = this.thyBufferedValue() as number;
+            if (progressBuffer && bufferedValue) {
+                const validValue = bufferedValue <= 0 ? 0 : bufferedValue >= 100 ? 100 : bufferedValue;
+                (progressBuffer as ElementRef).nativeElement.style[this.dimension] = `${validValue}%`;
+            }
+        });
+
+        effect(() => {
+            const type = this.thyProgressType() as ThySliderType;
+            if (type) {
+                if (this.typeClassName) {
+                    this.hostRenderer.removeClass(this.typeClassName);
+                }
+                this.hostRenderer.addClass(type ? `thy-media-progress-${type}` : '');
+                this.typeClassName = `thy-media-progress-${type}`;
+            }
+        });
     }
 
     ngOnInit(): void {
@@ -140,7 +154,7 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     private updateTrackAndPointer() {
-        (this.progressTrack as ElementRef).nativeElement.style[this.dimension] = `${this.progressValue}%`;
+        (this.progressTrack() as ElementRef).nativeElement.style[this.dimension] = `${this.progressValue}%`;
         this.cdr.markForCheck();
     }
 
@@ -198,7 +212,7 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     private registerMouseEventsListeners() {
-        const dimension = this.thyDirection === 'vertical' ? 'pageY' : 'pageX';
+        const dimension = this.thyDirection() === 'vertical' ? 'pageY' : 'pageX';
         this.dragStartListener = this.ngZone.runOutsideAngular(() => {
             return (fromEvent(this.ref.nativeElement, 'mousedown') as Observable<MouseEvent>).pipe(
                 tap((e: MouseEvent) => {
@@ -222,7 +236,7 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
         });
 
         this.dragMoveListener = this.ngZone.runOutsideAngular(() => {
-            const dimension = this.thyDirection === 'vertical' ? 'pageY' : 'pageX';
+            const dimension = this.thyDirection() === 'vertical' ? 'pageY' : 'pageX';
             return (fromEvent(document, 'mousemove') as Observable<MouseEvent>).pipe(
                 tap((e: MouseEvent) => {
                     e.stopPropagation();
@@ -241,9 +255,9 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     }
 
     private mousePositionToAdaptiveValue(position: number): number {
-        const dimension = this.thyDirection === 'vertical' ? 'clientHeight' : 'clientWidth';
+        const dimension = this.thyDirection() === 'vertical' ? 'clientHeight' : 'clientWidth';
         const progressStartPosition = this.getProgressPagePosition();
-        const progressLength = (this.progressRail as ElementRef).nativeElement[dimension];
+        const progressLength = (this.progressRail() as ElementRef).nativeElement[dimension];
         const ratio = this.convertPointerPositionToRatio(position, progressStartPosition, progressLength);
         return parseFloat((ratio * 100).toFixed(2));
     }
@@ -251,7 +265,7 @@ export class ThyMediaProgressComponent extends mixinUnsubscribe(MixinBase) imple
     private getProgressPagePosition(): number {
         const rect = this.ref.nativeElement.getBoundingClientRect();
         const window = this.ref.nativeElement.ownerDocument.defaultView;
-        const orientFields: string[] = this.thyDirection === 'vertical' ? ['bottom', 'pageYOffset'] : ['left', 'pageXOffset'];
+        const orientFields: string[] = this.thyDirection() === 'vertical' ? ['bottom', 'pageYOffset'] : ['left', 'pageXOffset'];
         // const orientFields: string[] = ['left', 'pageXOffset'];
         return rect[orientFields[0]] + window[orientFields[1]];
     }

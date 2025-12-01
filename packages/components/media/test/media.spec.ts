@@ -16,7 +16,7 @@ export class ThyVideoTestBasicComponent {
 
 @Component({
     selector: 'thy-test-audio-basic',
-    template: ` <thy-audio-player [thySrc]="src" [thyFileName]="fileName"></thy-audio-player> `,
+    template: ` <thy-audio-player [thySrc]="src" [thyFileName]="fileName" [thyFileSize]="fileSize"></thy-audio-player> `,
     imports: [ThyProMediaModule]
 })
 export class ThyAudioTestBasicComponent {
@@ -24,6 +24,8 @@ export class ThyAudioTestBasicComponent {
     src = 'assets/media/mp3.mp3';
 
     fileName = '';
+
+    fileSize = '1.7 MB';
 }
 
 describe('mediaComponent', () => {
@@ -87,17 +89,17 @@ describe('mediaComponent', () => {
         }));
 
         it('should show correct fileName', fakeAsync(() => {
-            expect(audioComponent.audioPlayer?.fileName).toEqual('');
+            expect(audioComponent.audioPlayer?.thyFileName()).toEqual('');
 
             audioComponent.audioPlayer?.onCanPlay();
             audioFixture.detectChanges();
-            expect(audioComponent.audioPlayer?.fileName).toEqual('mp3.mp3');
+            expect(audioComponent.audioPlayer?.thyFileName()).toEqual('mp3.mp3');
 
             audioComponent.fileName = 'test.mp3';
             audioComponent.audioPlayer?.onCanPlay();
             audioFixture.detectChanges();
 
-            expect(audioComponent.audioPlayer?.fileName).toEqual('test.mp3');
+            expect(audioComponent.audioPlayer?.thyFileName()).toEqual('test.mp3');
         }));
     });
 

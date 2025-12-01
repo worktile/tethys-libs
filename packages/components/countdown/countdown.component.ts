@@ -1,8 +1,9 @@
-import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnDestroy, OnInit } from '@angular/core';
+import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
+import { ThyButtonModule } from 'ngx-tethys/button';
+import { coerceBooleanProperty } from 'ngx-tethys/util';
 import { interval, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
-import { ThyButtonModule } from 'ngx-tethys/button';
-import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-countdown',
@@ -16,11 +17,11 @@ import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
 export class ThyCountdownComponent implements OnInit, OnDestroy {
     locale = injectLocale();
 
-    @Input() text = this.locale().getSMSCode;
+    readonly text = input(this.locale().getSMSCode);
 
-    @Input() disabled = false;
+    readonly disabled = input(false, { transform: coerceBooleanProperty });
 
-    @Input() sendAction: () => Observable<boolean> = () => of(false);
+    readonly sendAction = input<() => Observable<boolean>>(() => of(false));
 
     public seconds = 0;
 
@@ -37,7 +38,7 @@ export class ThyCountdownComponent implements OnInit, OnDestroy {
     ngOnInit() {}
 
     onClick() {
-        if (this.disabled) {
+        if (this.disabled()) {
             return;
         }
         this.start();
@@ -54,8 +55,9 @@ export class ThyCountdownComponent implements OnInit, OnDestroy {
                 this.seconds = value;
             });
 
-        if (this.sendAction) {
-            this.sendAction()
+        const sendAction = this.sendAction();
+        if (sendAction) {
+            sendAction()
                 .pipe(
                     catchError(() => {
                         this.reset();

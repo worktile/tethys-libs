@@ -1,23 +1,23 @@
+import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
-    Input,
-    OnInit,
-    TemplateRef,
-    booleanAttribute,
     computed,
+    ElementRef,
     input,
-    output
+    model,
+    OnInit,
+    output,
+    TemplateRef
 } from '@angular/core';
+import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
+import { ThyAction } from 'ngx-tethys/action';
 import { ThyFlexibleText } from 'ngx-tethys/flexible-text';
 import { ThyIcon } from 'ngx-tethys/icon';
 import { ThyTooltipDirective } from 'ngx-tethys/tooltip';
-import { ThyBoardEntry } from '../entities';
-import { NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { ThyAction } from 'ngx-tethys/action';
 import { SafeAny } from 'ngx-tethys/types';
-import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
+import { ThyBoardEntry } from '../entities';
 
 @Component({
     selector: 'thy-board-header',
@@ -35,7 +35,7 @@ export class ThyBoardHeaderComponent implements OnInit {
 
     hasLane = input(false, { transform: booleanAttribute });
 
-    @Input({ transform: booleanAttribute }) allLanesExpanded = true;
+    readonly allLanesExpanded = model<boolean>(true);
 
     headerTemplateRef = input<TemplateRef<SafeAny>>();
 
@@ -73,8 +73,8 @@ export class ThyBoardHeaderComponent implements OnInit {
     ngOnInit() {}
 
     expandAllLane() {
-        this.allLanesExpanded = !this.allLanesExpanded;
-        this.expandAllLanes.emit(this.allLanesExpanded);
+        this.allLanesExpanded.set(!this.allLanesExpanded());
+        this.expandAllLanes.emit(this.allLanesExpanded());
     }
 
     expandBoardEntry(event: ThyBoardEntry) {

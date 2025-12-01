@@ -98,7 +98,7 @@ describe('ThyMediaProgressComponent', () => {
     it('should update progress on mouse down and move', () => {
         const pointerElement = debugElement.query(By.css('.thy-media-progress-pointer')).nativeElement;
         const progress = debugElement.injector.get(ThyMediaProgressComponent);
-        const position = (progress.progressRail as ElementRef).nativeElement.clientWidth + 100;
+        const position = (progress.progressRail() as ElementRef).nativeElement.clientWidth + 100;
         expect(component.afterChangeSpy).not.toHaveBeenCalled();
 
         dispatchMouseEvent(pointerElement, 'mousedown', position);
@@ -113,7 +113,7 @@ describe('ThyMediaProgressComponent', () => {
     it('should trigger events', () => {
         const pointerElement = debugElement.query(By.css('.thy-media-progress-pointer')).nativeElement;
         const progress = debugElement.injector.get(ThyMediaProgressComponent);
-        const position = (progress.progressRail as ElementRef).nativeElement.clientWidth;
+        const position = (progress.progressRail() as ElementRef).nativeElement.clientWidth;
         expect(component.mouseStartSpy).not.toHaveBeenCalled();
         expect(component.mouseEndSpy).not.toHaveBeenCalled();
 

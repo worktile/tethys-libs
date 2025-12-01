@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, ContentChild, input, OnInit, TemplateRef } from '@angular/core';
 
 @Component({
     selector: 'app-passport-panel',
@@ -7,7 +7,7 @@ import { Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/co
     standalone: false
 })
 export class PassportPanelLayoutComponent implements OnInit {
-    @Input() heading: string = '';
+    readonly heading = input<string>('');
 
     @ContentChild('description') descriptionTemplateRef!: TemplateRef<any>;
 
