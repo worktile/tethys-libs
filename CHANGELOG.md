@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.0.1](https://github.com/tethys-org/libs/compare/v20.0.0...v20.0.1) (2025-12-01)
+
+### Features
+
+- **components:** migrate to signal ([#199](https://github.com/tethys-org/libs/issues/199)) ([976d7d8](https://github.com/tethys-org/libs/commit/976d7d82e1b7371411c0195b7ff5c3b968178f39))
+
 # [20.0.0](https://github.com/tethys-org/libs/compare/v20.0.0-next.0...v20.0.0) (2025-11-26)
 
 **Note:** Version bump only for package libs
