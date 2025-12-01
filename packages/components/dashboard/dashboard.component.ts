@@ -23,6 +23,7 @@ import {
     GridsterItemComponent
 } from 'angular-gridster2';
 import { ThyViewOutletDirective } from 'ngx-tethys/shared';
+import { coerceBooleanProperty } from 'ngx-tethys/util';
 import { Observable, Subject, of } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { ThyWidgetItem, ThyWidgetVieOutletWithContext, ThyWidgetViewOutlet, WidgetGridsterItem } from './dashboard.class';
@@ -43,7 +44,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
     /**
      * 仪表盘部件是否允许拖拽
      */
-    readonly thyDraggable = input<boolean>(false);
+    readonly thyDraggable = input(false, { transform: coerceBooleanProperty });
 
     /**
      * 仪表盘部件数据

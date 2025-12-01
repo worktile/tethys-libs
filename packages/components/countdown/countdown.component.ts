@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, OnDestroy, OnInit } from '@angular/core';
+import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
+import { ThyButtonModule } from 'ngx-tethys/button';
+import { coerceBooleanProperty } from 'ngx-tethys/util';
 import { interval, Observable, of } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
-import { ThyButtonModule } from 'ngx-tethys/button';
-import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
 
 @Component({
     selector: 'thy-countdown',
@@ -18,7 +19,7 @@ export class ThyCountdownComponent implements OnInit, OnDestroy {
 
     readonly text = input(this.locale().getSMSCode);
 
-    readonly disabled = input(false);
+    readonly disabled = input(false, { transform: coerceBooleanProperty });
 
     readonly sendAction = input<() => Observable<boolean>>(() => of(false));
 

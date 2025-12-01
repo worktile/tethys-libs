@@ -52,7 +52,7 @@ export class ThyImageCropperComponent implements OnInit {
     /**
      * 图片裁剪宽高比
      */
-    readonly thyAspectRatio = input<number>();
+    readonly thyAspectRatio = input<number, unknown>(undefined, { transform: numberAttribute });
 
     /**
      * 设置裁剪形状
