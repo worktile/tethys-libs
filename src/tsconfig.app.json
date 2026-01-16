@@ -11,7 +11,6 @@
     "moduleResolution": "bundler",
     "esModuleInterop": false,
     "importHelpers": true,
-    "lib": ["es2018", "dom"],
     "types": ["node"],
     "paths": {
       "@tethys/pro/*": ["../packages/components/*"],

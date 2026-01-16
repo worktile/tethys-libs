@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyImageCropperDialogComponent, ThyImageCropperModule } from '@tethys/pro/image-cropper';
@@ -44,7 +44,7 @@ describe('imageCropperComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ThyImageCropperModule, ThyImageCropperDialogTestBasicComponent],
-            providers: [provideHttpClient()]
+            providers: [provideHttpClient(), provideZoneChangeDetection()]
         }).compileComponents();
     }));
 
