@@ -1,4 +1,4 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyImageCropperComponent, ThyImageCropperModule } from '@tethys/pro/image-cropper';
@@ -39,7 +39,8 @@ describe('imageCropperComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ThyImageCropperModule, ThyImageCropperTestBasicComponent]
+            imports: [ThyImageCropperModule, ThyImageCropperTestBasicComponent],
+            providers: [provideZoneChangeDetection()]
         }).compileComponents();
     }));
 

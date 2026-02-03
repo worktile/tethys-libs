@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, input, OnDestroy, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    inject,
+    input,
+    OnDestroy,
+    OnInit,
+    signal,
+    WritableSignal
+} from '@angular/core';
 import { injectLocale, ThyI18nPipe } from '@tethys/pro/i18n';
 import { ThyButtonModule } from 'ngx-tethys/button';
 import { coerceBooleanProperty } from 'ngx-tethys/util';
@@ -23,15 +33,11 @@ export class ThyCountdownComponent implements OnInit, OnDestroy {
 
     readonly sendAction = input<() => Observable<boolean>>(() => of(false));
 
-    public seconds = 0;
+    public readonly seconds: WritableSignal<number> = signal(0);
 
     public subscription: any;
 
-    public get started() {
-        return this.seconds !== 0;
-    }
-
-    private time = 60;
+    private readonly time: WritableSignal<number> = signal(60);
 
     constructor() {}
 
@@ -45,14 +51,14 @@ export class ThyCountdownComponent implements OnInit, OnDestroy {
     }
 
     private start() {
-        this.seconds = this.time;
+        this.seconds.set(this.time());
         this.subscription = interval(1000)
             .pipe(
-                take(this.time),
-                map((value: number) => this.time - 1 - value)
+                take(this.time()),
+                map((value: number) => this.time() - 1 - value)
             )
             .subscribe((value: number) => {
-                this.seconds = value;
+                this.seconds.set(value);
             });
 
         const sendAction = this.sendAction();
@@ -73,8 +79,8 @@ export class ThyCountdownComponent implements OnInit, OnDestroy {
     }
 
     reset() {
-        this.time = 60;
-        this.seconds = 0;
+        this.time.set(60);
+        this.seconds.set(0);
         if (this.subscription) {
             this.subscription.unsubscribe();
         }

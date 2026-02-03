@@ -25,7 +25,7 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
                 <audio
                     #audioElement
                     class="audio"
-                    [src]="fileSrc"
+                    [src]="thySrc"
                     [muted]="false"
                     [autoplay]="thyAutoPlay()"
                     (loadedmetadata)="onLoadedmetadata($event)"
@@ -57,10 +57,9 @@ export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent impleme
 
     /**
      * 媒体资源的url
+     * angular 21.0.4 到 21.1.0 版本中，当 audio[src] 经过 bypassSecurityTrustResourceUrl 转换后，编译阶段不会清理
      */
-    @Input() set thySrc(src: string | SafeUrl) {
-        this.fileSrc = src;
-    }
+    @Input() thySrc: string | SafeUrl = '';
 
     /**
      * 当下载到足够播放的媒体文件，是否可以自动播放

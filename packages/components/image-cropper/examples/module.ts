@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { ThyImageCropperModule } from '@tethys/pro/image-cropper';
 import { ThyButtonModule } from 'ngx-tethys/button';
+import { ThyDialogModule } from 'ngx-tethys/dialog';
 import { ThyNotifyModule, ThyNotifyService } from 'ngx-tethys/notify';
 import { ThySpaceModule } from 'ngx-tethys/space';
 import { ThyFileSizeExceedsContext, ThyUploadModule, THY_UPLOAD_DEFAULT_OPTIONS } from 'ngx-tethys/upload';
@@ -22,5 +23,5 @@ export default {
             }
         }
     ],
-    imports: [ThyImageCropperModule, ThyButtonModule, ThySpaceModule, ThyUploadModule, ThyNotifyModule]
+    imports: [ThyImageCropperModule, ThyButtonModule, ThySpaceModule, ThyUploadModule, ThyNotifyModule, ThyDialogModule]
 };
