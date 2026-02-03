@@ -17,6 +17,7 @@ import { DOCGENI_SITE_PROVIDERS } from './content/index';
 import { RootComponent } from './content/index';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ThyI18nService } from '@tethys/pro/i18n';
+import { ThyDialogModule } from 'ngx-tethys/dialog';
 
 const TETHYS_MODULES = [
     ThyLayoutModule,
@@ -26,7 +27,8 @@ const TETHYS_MODULES = [
     ThyActionModule,
     ThyAvatarModule,
     ThyTooltipModule,
-    ThyProLayoutModule
+    ThyProLayoutModule,
+    ThyDialogModule
 ];
 
 export const DEFAULT_GLOBAL_SETTING: ThySiteSettings = {

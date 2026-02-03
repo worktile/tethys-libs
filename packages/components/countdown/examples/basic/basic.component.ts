@@ -13,6 +13,6 @@ export class ThyProCountdownBasicExampleComponent implements OnInit {
     ngOnInit(): void {}
 
     sendAction = () => {
-        return of(false).pipe(delay(1000));
+        return of(false).pipe(delay(30000));
     };
 }
