@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.0.0](https://github.com/tethys-org/libs/compare/v20.0.1...v21.0.0) (2026-02-03)
+
+### Features
+
+- bump angular 21 ([#201](https://github.com/tethys-org/libs/issues/201)) ([e71ef7b](https://github.com/tethys-org/libs/commit/e71ef7b0d0da5953adb0465fdd6bb7d1d1d59310))
+
 ## [20.0.1](https://github.com/tethys-org/libs/compare/v20.0.0...v20.0.1) (2025-12-01)
 
 ### Features
