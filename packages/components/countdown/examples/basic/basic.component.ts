@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { delay, of } from 'rxjs';
 
 @Component({
     selector: 'thy-pro-layout-basic-example',
@@ -10,4 +11,8 @@ export class ThyProCountdownBasicExampleComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {}
+
+    sendAction = () => {
+        return of(false).pipe(delay(1000));
+    };
 }
