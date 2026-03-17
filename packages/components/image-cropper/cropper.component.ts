@@ -8,6 +8,7 @@ import {
     input,
     numberAttribute,
     output,
+    signal,
     viewChild
 } from '@angular/core';
 import { isString } from '@tethys/cdk';
@@ -79,7 +80,7 @@ export class ThyImageCropperComponent implements OnInit {
      */
     readonly thyImageReady = output<boolean>();
 
-    public loadingDone = false;
+    public loadingDone = signal(false);
 
     public cropper: Cropper | undefined;
 
@@ -105,7 +106,7 @@ export class ThyImageCropperComponent implements OnInit {
         checkCrossOrigin: true,
         preview: '.preview-image-warp',
         ready: (event) => {
-            this.loadingDone = true;
+            this.loadingDone.set(true);
             (this.cropper as Cropper).crop();
             return;
         }
@@ -182,7 +183,7 @@ export class ThyImageCropperComponent implements OnInit {
 
     onError(event?: Event) {
         this.loadError = true;
-        this.loadingDone = true;
+        this.loadingDone.set(true);
     }
 
     crop = () => {
@@ -198,7 +199,7 @@ export class ThyImageCropperComponent implements OnInit {
     };
 
     setImageSrc() {
-        this.loadingDone = false;
+        this.loadingDone.set(false);
         const reader = new FileReader();
         reader.onloadend = () => {
             const cropperRef = this.cropper;
