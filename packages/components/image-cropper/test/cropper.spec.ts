@@ -105,7 +105,7 @@ describe('imageCropperComponent', () => {
             fixture.detectChanges();
 
             expect(component.imageCropper.loadError).toEqual(true);
-            expect(component.imageCropper.loadingDone).toEqual(true);
+            expect(component.imageCropper.loadingDone()).toEqual(true);
         });
 
         it('should call cropDataChange when crop', (done: any) => {
