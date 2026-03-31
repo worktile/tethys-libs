@@ -13,15 +13,7 @@ import {
     output,
     viewChild
 } from '@angular/core';
-import {
-    CompactType,
-    DisplayGrid,
-    GridType,
-    GridsterComponent,
-    GridsterConfig,
-    GridsterItem,
-    GridsterItemComponent
-} from 'angular-gridster2';
+import { CompactType, DisplayGrid, GridType, Gridster, GridsterConfig, GridsterItem, GridsterItemConfig } from 'angular-gridster2';
 import { ThyViewOutletDirective } from 'ngx-tethys/shared';
 import { coerceBooleanProperty } from 'ngx-tethys/util';
 import { Observable, Subject, of } from 'rxjs';
@@ -33,7 +25,7 @@ import { ThyWidgetItem, ThyWidgetVieOutletWithContext, ThyWidgetViewOutlet, Widg
     templateUrl: './dashboard.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: { class: 'thy-dashboard' },
-    imports: [GridsterComponent, GridsterItemComponent, ThyViewOutletDirective]
+    imports: [Gridster, GridsterItem, ThyViewOutletDirective]
 })
 export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
     /**
@@ -80,7 +72,7 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
         disablePushOnDrag: true,
         useTransformPositioning: false,
         outerMargin: true,
-        itemChangeCallback: (item: GridsterItem) => {
+        itemChangeCallback: (item: GridsterItemConfig) => {
             const widgets = this.thyWidgets();
             const changedWidget = widgets.find((widget) => {
                 return widget._id === item.widget._id;

@@ -3,7 +3,6 @@ import { ThyActionModule } from 'ngx-tethys/action';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { GridsterModule } from 'angular-gridster2';
 import { ThyIconModule } from 'ngx-tethys/icon';
 import { ThyTooltipModule } from 'ngx-tethys/tooltip';
 import { ThyDashboardWidgetHeaderComponent } from './widget/header/widget-header.component';
@@ -17,7 +16,6 @@ const TETHYS_MODULES = [ThyTooltipModule, ThyIconModule, ThyActionModule, ThySha
         ...TETHYS_MODULES,
         RouterModule,
         CommonModule,
-        GridsterModule,
         ThyDashboardComponent,
         ThyDashboardWidgetHeaderComponent,
         ThyDashboardWidgetBodyComponent
