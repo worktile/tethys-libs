@@ -2967,10 +2967,10 @@
   resolved "https://registry.npmmirror.com/@tethys/icons/-/icons-1.4.79.tgz#ae940dd484efbb1b4484d7e99203e2ca347aad6f"
   integrity sha512-B6JnTXG4vzN7g/5QG5KMJu2HOIoG7xI27KWE3xsa6K7a5wLNlOxmU874FdWYyM+mD0jtRprUstSrAYTszd088w==
 
-"@tethys/store@20.0.0":
-  version "20.0.0"
-  resolved "https://registry.npmmirror.com/@tethys/store/-/store-20.0.0.tgz#af9f536936e2339130d09c153e53656da5df88ee"
-  integrity sha512-V8L508I10zLgYn5kQGvGAiilz6CHmF6Gk06CvZUmcMXMY1I5IN+09zUFfuUWFS6ZQ/vLJEljivXGTU3QZwqtaA==
+"@tethys/store@21.0.0-next.1":
+  version "21.0.0-next.1"
+  resolved "https://registry.npmmirror.com/@tethys/store/-/store-21.0.0-next.1.tgz#60f4852e83cbd95c136f0343dd738c98a42aebc1"
+  integrity sha512-V0d0IZ2rsrGe+GZHDjtAu9bcHdXTvdCEuo3CDZScJTol+JKOm8BfikQN2B3rwtK2XxnYs0jCYG+vNCRh11r4wQ==
   dependencies:
     tslib "^2.0.0"
 
@@ -3563,10 +3563,10 @@ algoliasearch@^3.24.5:
     semver "^5.1.0"
     tunnel-agent "^0.6.0"
 
-angular-gridster2@19.0.0:
-  version "19.0.0"
-  resolved "https://registry.npmmirror.com/angular-gridster2/-/angular-gridster2-19.0.0.tgz#39aaad9ed1cb5f480cdd6adedfa9e73bf64c59b6"
-  integrity sha512-82SHZzwOmGRvR77VtbpV5Eh7CoTtxLslwOVzTYB3qNQIGGFaOsS8nRAuYpZOlZpVc+n6fBz1HU0yP0icnQ9ppg==
+angular-gridster2@21.0.0:
+  version "21.0.0"
+  resolved "https://registry.npmmirror.com/angular-gridster2/-/angular-gridster2-21.0.0.tgz#9dcc479ee22cb47308269aae69cdacf701cb057c"
+  integrity sha512-rGq0hYzwXHh85pXez4g3aZtgimUPVBmI1lRRQjlAW8E8LZIVLSiQEPLackS3bLNGoeTdpEuPtYYZMAPCQJejmw==
   dependencies:
     tslib "^2.4.0"
 

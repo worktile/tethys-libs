@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.1-next.2](https://github.com/tethys-org/libs/compare/v21.0.1-next.1...v21.0.1-next.2) (2026-03-31)
+
+### Features
+
+- upgrade @tethys/store@21.0.0-next.1 and angular-gridster2@21.0.0 ([#209](https://github.com/tethys-org/libs/issues/209)) ([ceb9858](https://github.com/tethys-org/libs/commit/ceb98585cb8650ddbeb92cb63b54e148551ccb62))
+
 **Note:** Version bump only for package libs
 
 ## [21.0.1-next.0](https://github.com/tethys-org/libs/compare/v21.0.0...v21.0.1-next.0) (2026-03-06)
