@@ -2955,10 +2955,10 @@
   resolved "https://registry.npmmirror.com/@standard-schema/spec/-/spec-1.1.0.tgz#a79b55dbaf8604812f52d140b2c9ab41bc150bb8"
   integrity sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==
 
-"@tethys/cdk@^21.0.0-next.0":
-  version "21.0.0-next.0"
-  resolved "https://registry.npmmirror.com/@tethys/cdk/-/cdk-21.0.0-next.0.tgz#bd1fbdd79f754ae144c933ec05c0ce32269865cb"
-  integrity sha512-cedy/qDWY5/2Gx4qelC4GQMg5m9dllPpAW6B6EjZI80+MFxCnfZGeS8wCU90wSkUApXoCAhGbKjg+BF0nhNjNQ==
+"@tethys/cdk@^21.0.0":
+  version "21.0.0"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-21.0.0.tgz#16cbbb136144fb761b253471eb0170ca2b38fda6"
+  integrity sha512-84FMUHYosJGe85B5tQZacYCmTB99gOLxQU3iGvH+/FxhE6rUonvk3E5j9/LivcmmoBeNWO+2CYF8As3qiW3NmA==
   dependencies:
     tslib "^2.3.0"
 
@@ -2967,10 +2967,10 @@
   resolved "https://registry.npmmirror.com/@tethys/icons/-/icons-1.4.79.tgz#ae940dd484efbb1b4484d7e99203e2ca347aad6f"
   integrity sha512-B6JnTXG4vzN7g/5QG5KMJu2HOIoG7xI27KWE3xsa6K7a5wLNlOxmU874FdWYyM+mD0jtRprUstSrAYTszd088w==
 
-"@tethys/store@21.0.0-next.1":
-  version "21.0.0-next.1"
-  resolved "https://registry.npmmirror.com/@tethys/store/-/store-21.0.0-next.1.tgz#60f4852e83cbd95c136f0343dd738c98a42aebc1"
-  integrity sha512-V0d0IZ2rsrGe+GZHDjtAu9bcHdXTvdCEuo3CDZScJTol+JKOm8BfikQN2B3rwtK2XxnYs0jCYG+vNCRh11r4wQ==
+"@tethys/store@21.0.0":
+  version "21.0.0"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-21.0.0.tgz#d20c14aec667de44c1139b226932a30071d2cbdd"
+  integrity sha512-5B7N1qMy8tibQ5c9mMhsCeA7W/PdJiV2lUXgdxefyX9V/yYetg6k9MZ/9G6dBCCdIEivhoQRIqGScFqgcTo4xA==
   dependencies:
     tslib "^2.0.0"
 
@@ -9722,10 +9722,10 @@ ng-packagr@^21.1.0:
   optionalDependencies:
     rollup "^4.24.0"
 
-ngx-tethys@21.0.0-next.0:
-  version "21.0.0-next.0"
-  resolved "https://registry.npmmirror.com/ngx-tethys/-/ngx-tethys-21.0.0-next.0.tgz#1ef4023921e72fb007c6efa549d63bca7c0f3d93"
-  integrity sha512-PNu3ruoeM0RZbXbIjOQIWbxDN+RO90CRdynzRjYyPRrPiCZrY8rIE3bzLn80Hs/wlGBi6QRXFEzuHnwvKjJhiQ==
+ngx-tethys@21.0.0:
+  version "21.0.0"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-21.0.0.tgz#b0fa5616a984d51ca2b1b7d166e83d634f4ca5b9"
+  integrity sha512-b1bdd8fB9GwT/kZyRZZcQV1IySxiD1QgvJMSE1HgkWE9TblTUIDTzNjszqZ6Xr413oXB9iHM2ggLvlP3LAC7jQ==
   dependencies:
     tslib "^2.3.0"
 
