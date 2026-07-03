@@ -5,10 +5,8 @@ import {
     Component,
     ElementRef,
     NgZone,
-    OnChanges,
     OnDestroy,
-    OnInit,
-    SimpleChanges,
+    effect,
     input,
     output,
     viewChild
@@ -27,7 +25,7 @@ import { ThyWidgetItem, ThyWidgetVieOutletWithContext, ThyWidgetViewOutlet, Widg
     host: { class: 'thy-dashboard' },
     imports: [Gridster, GridsterItem, ThyViewOutletDirective]
 })
-export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ThyDashboardComponent implements AfterViewInit, OnDestroy {
     /**
      * 仪表盘部件对应组件或模版映射
      */
@@ -89,14 +87,20 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
     constructor(
         private cdr: ChangeDetectorRef,
         private ngZone: NgZone
-    ) {}
+    ) {
+        effect(
+            () => {
+                this.widgetGridsterItems = this.buildWidgetGridsterItems();
+            },
+            { allowSignalWrites: true }
+        );
 
-    ngOnInit(): void {
-        this.setDraggable(this.thyDraggable());
-        this.widgetGridsterItems = this.buildWidgetGridsterItems();
-        if (this.config.api && this.config.api.resize) {
-            this.config.api.resize();
-        }
+        effect(
+            () => {
+                this.setDraggable(this.thyDraggable());
+            },
+            { allowSignalWrites: true }
+        );
     }
 
     ngAfterViewInit() {
@@ -110,16 +114,6 @@ export class ThyDashboardComponent implements OnInit, OnChanges, AfterViewInit, 
                     this.thyResizeChange.emit();
                 });
         });
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (!changes.thyWidgets?.firstChange) {
-            this.widgetGridsterItems = this.buildWidgetGridsterItems();
-        }
-        if (!changes.thyDraggable?.firstChange) {
-            this.setDraggable(this.thyDraggable());
-            undefined;
-        }
     }
 
     trackBy(index: number, item: WidgetGridsterItem) {

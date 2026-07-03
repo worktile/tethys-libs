@@ -32,12 +32,12 @@
             }
         }
         .gridster-column {
-            border-left: 1px dashed rgba(variables.$gray-500, 0.3);
-            border-right: 1px dashed rgba(variables.$gray-500, 0.3);
+            border-left: 1px dashed color-mix(in srgb, variables.$gray-500 30%, transparent);
+            border-right: 1px dashed color-mix(in srgb, variables.$gray-500 30%, transparent);
         }
         .gridster-row {
-            border-top: 1px dashed rgba(variables.$gray-500, 0.3);
-            border-bottom: 1px dashed rgba(variables.$gray-500, 0.3);
+            border-top: 1px dashed color-mix(in srgb, variables.$gray-500 30%, transparent);
+            border-bottom: 1px dashed color-mix(in srgb, variables.$gray-500 30%, transparent);
         }
 
         .gridster-preview {
