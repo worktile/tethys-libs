@@ -1,4 +1,4 @@
-import { Component, DebugElement, ElementRef, provideZoneChangeDetection } from '@angular/core';
+import { Component, DebugElement, ElementRef, provideZoneChangeDetection, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -18,6 +18,7 @@ import { ThyMediaProgressComponent } from '../progress.component';
             (thyAfterChange)="afterProgressChange($event)"
         ></thy-media-progress>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyMediaProgressComponent]
 })
 class ThyTestProgressComponent {

@@ -8,7 +8,8 @@ import {
     OnInit,
     input,
     model,
-    viewChild
+    viewChild,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { injectLocale } from '@tethys/pro/i18n';
@@ -44,6 +45,7 @@ import { ThyMediaPlayerBaseComponent } from './media-base.component';
             </thy-audio-controls>
         </div>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyAudioControlsComponent]
 })
 export class ThyAudioPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit {

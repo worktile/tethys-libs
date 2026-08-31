@@ -8,7 +8,8 @@ import {
     OnDestroy,
     OnInit,
     input,
-    viewChild
+    viewChild,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { useHostRenderer } from '@tethys/cdk/dom';
@@ -39,6 +40,7 @@ import { DEFAULT_PLAYBACK_RATES, ThyMediaPlayerBaseComponent } from './media-bas
         }
         <thy-video-controls #controls [thyMedia]="video" [thyProgressType]="thyProgressType()"></thy-video-controls>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyVideoControlsComponent]
 })
 export class ThyVideoPlayerComponent extends ThyMediaPlayerBaseComponent implements OnInit, AfterViewInit, OnDestroy {

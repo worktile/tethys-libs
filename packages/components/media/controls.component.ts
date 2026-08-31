@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DOCUMENT, ElementRef, inject, input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DOCUMENT, ElementRef, inject, input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { useHostRenderer } from '@tethys/cdk/dom';
 import { ThyActionModule } from 'ngx-tethys/action';
@@ -106,6 +106,7 @@ import { injectLocale } from '@tethys/pro/i18n';
             }
         </thy-dropdown-menu>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         FormsModule,
         ThyIconModule,

@@ -21,14 +21,6 @@ module.exports = (config) => {
 
         // list of files / patterns to exclude
         exclude: [],
-
-        // preprocess matching files before serving them to the browser
-        // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
-        // preprocessors: {
-        //   '**/src/*.ts': ['karma-typescript'],
-        //   '**/test/*.spec.ts': ['karma-typescript']
-        // },
-
         karmaTypescriptConfig: {
             compilerOptions: {
                 module: 'commonjs'

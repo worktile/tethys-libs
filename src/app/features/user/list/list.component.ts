@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ThyDialog } from 'ngx-tethys/dialog';
 import { ThyTableRowEvent } from 'ngx-tethys/table';
 import { UserAddComponent } from '../add/add.component';
@@ -13,6 +13,7 @@ import { ThyContentMainHeader, ThyContentMainBody } from '@tethys/pro/layout';
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss'],
     imports: [SharedModule, ThyContentMainHeader, ThyContentMainBody],
+    changeDetection: ChangeDetectionStrategy.Eager,
     hostDirectives: [ThyContentDirective]
 })
 export class UserListComponent implements OnInit {

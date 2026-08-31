@@ -9,7 +9,8 @@ import {
     numberAttribute,
     output,
     signal,
-    viewChild
+    viewChild,
+    ChangeDetectionStrategy
 } from '@angular/core';
 import { isString } from '@tethys/cdk';
 import Cropper from 'cropperjs';
@@ -25,6 +26,7 @@ import { ThyLoadingModule } from 'ngx-tethys/loading';
     host: {
         '[class.thy-image-cropper-round]': 'thyShape() === "round"'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyLoadingModule]
 })
 export class ThyImageCropperComponent implements OnInit {

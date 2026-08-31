@@ -1,5 +1,17 @@
 import { NgStyle } from '@angular/common';
-import { Component, inject, input, model, NgZone, numberAttribute, OnInit, Optional, output, viewChild } from '@angular/core';
+import {
+    Component,
+    inject,
+    input,
+    model,
+    NgZone,
+    numberAttribute,
+    OnInit,
+    Optional,
+    output,
+    viewChild,
+    ChangeDetectionStrategy
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { injectLocale } from '@tethys/pro/i18n';
 import { ThyButtonModule } from 'ngx-tethys/button';
@@ -21,6 +33,7 @@ import { ThyCropperSizeStylePipe, ThyCropperSizeTextPipe } from './cropper.pipe'
         class: 'thy-dialog-content thy-image-cropper-dialog',
         '[class.thy-image-cropper-dialog-round]': 'shape() === "round"'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [
         ThyDialogModule,
         ThyImageCropperComponent,
