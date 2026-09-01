@@ -18,6 +18,12 @@ export class ThyBoardCustomTemplateAddComponent implements OnInit {
 
     isAdded = false;
 
+    title = '';
+
+    titleMaxLength = 255;
+
+    saving = false;
+
     constructor() {}
 
     ngOnInit() {}

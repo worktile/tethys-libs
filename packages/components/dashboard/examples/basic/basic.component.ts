@@ -10,7 +10,7 @@ import { ThyDashboardBasicNoticeWidgetComponent } from './widgets/notice/notice.
     standalone: false
 })
 export class ThyDashboardBasicExampleComponent implements OnInit {
-    widgets = [
+    widgets: ThyWidgetItem[] = [
         {
             _id: '63c0d6f08e1cc40c3e41ad30',
             name: '公告',
@@ -18,7 +18,9 @@ export class ThyDashboardBasicExampleComponent implements OnInit {
             size: {
                 cols: 5,
                 rows: 3
-            }
+            },
+            position: { x: 0, y: 0 },
+            minSize: { cols: 2, rows: 2 }
         },
         {
             _id: '63c0d6f08e1cc40c3e41ad31',
@@ -27,7 +29,9 @@ export class ThyDashboardBasicExampleComponent implements OnInit {
             size: {
                 cols: 4,
                 rows: 3
-            }
+            },
+            position: { x: 5, y: 0 },
+            minSize: { cols: 2, rows: 2 }
         }
     ];
 

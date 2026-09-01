@@ -3500,10 +3500,10 @@
   resolved "https://registry.npmjs.org/@tethys/icons/-/icons-1.4.97.tgz#4a3c47db01bbf9896216624033561b4c0f12c56b"
   integrity sha512-kBgaVA1Ra8hQ1vVhm2eo/DsnXFMygNhGMHF6N/WLFeOn8KGrKdN2qk8oeXN1bJ3wwG3ok2IPn4iUoJh33z+yNg==
 
-"@tethys/store@21.0.0":
-  version "21.0.0"
-  resolved "https://registry.npmjs.org/@tethys/store/-/store-21.0.0.tgz#d20c14aec667de44c1139b226932a30071d2cbdd"
-  integrity sha512-5B7N1qMy8tibQ5c9mMhsCeA7W/PdJiV2lUXgdxefyX9V/yYetg6k9MZ/9G6dBCCdIEivhoQRIqGScFqgcTo4xA==
+"@tethys/store@22.0.0-next.0":
+  version "22.0.0-next.0"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-22.0.0-next.0.tgz#07516f6b7faca0f718459851f32edcce4328a87d"
+  integrity sha512-5wD/Bke4Qncq0/HWbxcpRASblROrxAH9fQx2baCsJLk50vhmjwtOR43aRETfAmqShjznqkh9JlfiK+Lqc671bQ==
   dependencies:
     tslib "^2.0.0"
 

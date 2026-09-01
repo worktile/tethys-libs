@@ -14,7 +14,6 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocgeniTemplateModule } from '@docgeni/template';
 import { DOCGENI_SITE_PROVIDERS } from './content/index';
-import { RootComponent } from './content/index';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ThyI18nService } from '@tethys/pro/i18n';
 import { ThyDialogModule } from 'ngx-tethys/dialog';
@@ -67,8 +66,7 @@ function initializeApp(iconRegistry: ThyIconRegistry, sanitizer: DomSanitizer) {
         ...DOCGENI_SITE_PROVIDERS
     ],
     imports: [...TETHYS_MODULES, BrowserModule, BrowserAnimationsModule, DocgeniTemplateModule, RouterModule.forRoot([])],
-    exports: [],
-    bootstrap: [RootComponent]
+    exports: []
 })
 export class AppModule {
     router = inject(Router);

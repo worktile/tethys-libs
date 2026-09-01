@@ -97,7 +97,7 @@ export class ThyProBoardDragExampleComponent implements OnInit {
         );
     };
 
-    thyCardDroppableZonesAction = (event: ThyBoardDragPredicateEvent) => {
+    thyCardDroppableZonesAction = (event: ThyBoardDragStartEvent) => {
         return of(true).pipe(
             map(() => {
                 const zones: { laneId: string; entryId: string; droppableZones: { _id: string; name: string }[] }[] = [];
