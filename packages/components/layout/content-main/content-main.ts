@@ -1,4 +1,4 @@
-import { Component, OnInit, viewChild, contentChild, input, TemplateRef } from '@angular/core';
+import { Component, OnInit, viewChild, contentChild, input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 
 @Component({
@@ -36,6 +36,7 @@ import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
     host: {
         class: 'thy-pro-content-main-header'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NgTemplateOutlet]
 })
 export class ThyContentMainHeader implements OnInit {
@@ -60,6 +61,7 @@ export class ThyContentMainHeader implements OnInit {
     host: {
         class: 'thy-pro-content-main-body'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: true
 })
 export class ThyContentMainBody implements OnInit {

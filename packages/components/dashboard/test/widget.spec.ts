@@ -1,11 +1,12 @@
 import { ThyDashboardWidgetHeaderComponent, ThyProDashboardModule } from '@tethys/pro/dashboard';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'thy-widget-header-basic-test',
     template: ` <thy-dashboard-widget-header [thyTitle]="title" [thyDescription]="description"> </thy-dashboard-widget-header> `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyProDashboardModule]
 })
 export class ThyWidgetHeaderBasicTestComponent {

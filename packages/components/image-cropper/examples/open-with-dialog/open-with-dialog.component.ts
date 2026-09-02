@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThyImageCropperDialogComponent } from '@tethys/pro/image-cropper';
 import { ThyDialog, ThyDialogSizes } from 'ngx-tethys/dialog';
+import { ThyFileSelectEvent } from 'ngx-tethys/upload';
 import { of } from 'rxjs';
 
 @Component({
@@ -15,7 +16,7 @@ export class ThyOpenWithDialogExampleComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    selectImage(image: { files: FileList[] }) {
+    selectImage(image: ThyFileSelectEvent) {
         if (image.files.length > 0) {
             this.dialog.open(ThyImageCropperDialogComponent, {
                 size: ThyDialogSizes.md,

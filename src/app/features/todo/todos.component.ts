@@ -1,5 +1,5 @@
 import { asyncBehavior } from '@tethys/cdk/behaviors';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { TodoModel, TodosStore } from './todos.store';
 import { SharedModule } from '../../shared';
 import { ThyContentDirective } from 'ngx-tethys/layout';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
     selector: 'app-todos',
     templateUrl: './todos.component.html',
     imports: [SharedModule, ThyContentMainHeader, ThyContentMainBody],
+    changeDetection: ChangeDetectionStrategy.Eager,
     hostDirectives: [ThyContentDirective]
 })
 export class AppTodosComponent implements OnInit {

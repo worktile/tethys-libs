@@ -1,14 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc/site",
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "importHelpers": true,
     "target": "ES2022",
     "types": ["node"],

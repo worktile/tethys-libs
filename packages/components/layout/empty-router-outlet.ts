@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThyLayoutDirective } from 'ngx-tethys/layout';
 
@@ -6,6 +6,7 @@ import { ThyLayoutDirective } from 'ngx-tethys/layout';
     selector: 'thy-layout-empty-router-outlet',
     template: `<router-outlet></router-outlet>`,
     imports: [RouterOutlet],
+    changeDetection: ChangeDetectionStrategy.Eager,
     hostDirectives: [ThyLayoutDirective]
 })
 export class ThyLayoutEmptyRouterOutlet {}

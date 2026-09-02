@@ -1,5 +1,5 @@
-import { provideHttpClient } from '@angular/common/http';
-import { Component, DebugElement, provideZoneChangeDetection, ViewChild } from '@angular/core';
+import { provideHttpClient, withXhr } from '@angular/common/http';
+import { Component, DebugElement, provideZoneChangeDetection, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyImageCropperDialogComponent, ThyImageCropperModule } from '@tethys/pro/image-cropper';
@@ -15,6 +15,7 @@ import { ThyCropperViewMode } from '../cropper.entity';
         [thyUploadTips]="uploadTips"
         [thyConfirmAction]="confirmAction()"
     ></thy-image-cropper-dialog>`,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyImageCropperModule]
 })
 export class ThyImageCropperDialogTestBasicComponent {
@@ -44,7 +45,7 @@ describe('imageCropperComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ThyImageCropperModule, ThyImageCropperDialogTestBasicComponent],
-            providers: [provideHttpClient(), provideZoneChangeDetection()]
+            providers: [provideHttpClient(withXhr()), provideZoneChangeDetection()]
         }).compileComponents();
     }));
 

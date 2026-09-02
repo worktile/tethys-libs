@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, OnInit } from '@angular/core';
+import { Component, effect, inject, input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThyContentDirective } from 'ngx-tethys/layout';
 import { SharedModule } from '../../../shared';
@@ -8,6 +8,7 @@ import { TodosStore } from '../todos.store';
     selector: 'app-todo-detail',
     templateUrl: './todo.component.html',
     hostDirectives: [ThyContentDirective],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [SharedModule]
 })
 export class AppTodoComponent implements OnInit {

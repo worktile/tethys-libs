@@ -1,4 +1,4 @@
-import { Component, DebugElement, provideZoneChangeDetection, ViewChild } from '@angular/core';
+import { Component, DebugElement, provideZoneChangeDetection, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyImageCropperComponent, ThyImageCropperModule } from '@tethys/pro/image-cropper';
@@ -16,6 +16,7 @@ import { ThyCropperViewMode } from '../cropper.entity';
         (thyCropDataChanged)="cropDataChange()"
         style="width: 500px; height: 300px"
     ></thy-image-cropper>`,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyImageCropperModule]
 })
 export class ThyImageCropperTestBasicComponent {

@@ -49,7 +49,13 @@
 <ng-template #menuItems let-menu let-path="path">
   @for (menuItem of menu.children; track $index) {
     @if (!menuItem.children?.length) {
-      <a thyMenuItem class="ml-2" [routerLink]="[path, menuItem?.path]" (click)="setActiveMenu(menu, menuItem)" routerLinkActive="active">
+      <a
+        thyMenuItem
+        class="ml-2"
+        [routerLink]="[path, menuItem?.path]"
+        (click)="setActiveMenu(menu, menuItem)"
+        routerLinkActive="active"
+      >
         <span thyMenuItemName> {{ menuItem?.title }} </span>
       </a>
     }
@@ -61,7 +67,12 @@
 </ng-template>
 
 <ng-template #submenuGroup let-menuItem let-path="path">
-  <thy-menu-group class="px-2 thy-pro-sidebar-submenu" [thyCollapsed]="false" [thyCollapsible]="true" [thyTitle]="menuItem?.title!">
+  <thy-menu-group
+    class="px-2 thy-pro-sidebar-submenu"
+    [thyCollapsed]="false"
+    [thyCollapsible]="true"
+    [thyTitle]="menuItem?.title!"
+  >
     <ng-template [ngTemplateOutlet]="menuItems" [ngTemplateOutletContext]="{ $implicit: menuItem, path: path }"> </ng-template>
   </thy-menu-group>
 </ng-template>

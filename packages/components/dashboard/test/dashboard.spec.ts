@@ -1,5 +1,5 @@
 import { ThyDashboardComponent, ThyProDashboardModule, ThyWidgetItem } from '@tethys/pro/dashboard';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyDashboardBasicNoticeWidgetComponent } from '../examples/basic/widgets/notice/notice.component';
@@ -16,6 +16,7 @@ import { ThyDashboardBasicLinksWidgetComponent } from '../examples/basic/widgets
         >
         </thy-dashboard>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyProDashboardModule]
 })
 export class ThyDashboardBasicTestComponent {

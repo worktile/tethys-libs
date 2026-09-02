@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThyAuthService } from '@tethys/auth';
 import { ThyGlobalStore } from '@tethys/pro/core';
@@ -13,6 +13,7 @@ import { regex } from '../../../constants';
     host: {
         class: 'app-passport-login'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class PassportLoginComponent implements OnInit {

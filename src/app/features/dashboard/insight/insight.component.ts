@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ThyLayoutDirective, ThyLayoutModule } from 'ngx-tethys/layout';
 
 @Component({
@@ -6,6 +6,7 @@ import { ThyLayoutDirective, ThyLayoutModule } from 'ngx-tethys/layout';
     templateUrl: './insight.component.html',
     styleUrls: ['./insight.component.scss'],
     imports: [ThyLayoutModule],
+    changeDetection: ChangeDetectionStrategy.Eager,
     hostDirectives: [ThyLayoutDirective]
 })
 export class InsightComponent implements OnInit {

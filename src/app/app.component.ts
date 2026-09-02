@@ -1,4 +1,4 @@
-import { Component, inject, Injector } from '@angular/core';
+import { Component, inject, Injector, ChangeDetectionStrategy } from '@angular/core';
 import { ThyGlobalStore } from '@tethys/pro/core';
 
 @Component({
@@ -8,6 +8,7 @@ import { ThyGlobalStore } from '@tethys/pro/core';
     host: {
         class: 'thy-layout'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent {

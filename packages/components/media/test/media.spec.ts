@@ -1,5 +1,5 @@
-import { provideHttpClient } from '@angular/common/http';
-import { Component, DebugElement, ViewChild } from '@angular/core';
+import { provideHttpClient, withXhr } from '@angular/common/http';
+import { Component, DebugElement, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThyAudioPlayerComponent, ThyProMediaModule, ThyVideoPlayerComponent } from '@tethys/pro/media';
@@ -7,6 +7,7 @@ import { ThyAudioPlayerComponent, ThyProMediaModule, ThyVideoPlayerComponent } f
 @Component({
     selector: 'thy-test-video-basic',
     template: ` <thy-video-player [thySrc]="src"></thy-video-player> `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyProMediaModule]
 })
 export class ThyVideoTestBasicComponent {
@@ -17,6 +18,7 @@ export class ThyVideoTestBasicComponent {
 @Component({
     selector: 'thy-test-audio-basic',
     template: ` <thy-audio-player [thySrc]="src" [thyFileName]="fileName" [thyFileSize]="fileSize"></thy-audio-player> `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyProMediaModule]
 })
 export class ThyAudioTestBasicComponent {
@@ -39,7 +41,7 @@ describe('mediaComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ThyProMediaModule, ThyVideoTestBasicComponent, ThyAudioTestBasicComponent],
-            providers: [provideHttpClient()]
+            providers: [provideHttpClient(withXhr())]
         }).compileComponents();
     }));
 

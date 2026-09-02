@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, input } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, input, ChangeDetectionStrategy } from '@angular/core';
 import { injectLocale } from '@tethys/pro/i18n';
 import { ThyActionModule } from 'ngx-tethys/action';
 import { ThyDropdownModule } from 'ngx-tethys/dropdown';
@@ -86,6 +86,7 @@ import { ThyMediaProgressComponent } from './progress.component';
             }
         </thy-dropdown-menu>
     `,
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [ThyIconModule, ThyFlexibleTextModule, ThyDropdownModule, ThyActionModule, ThyMediaProgressComponent, ThyTimeFormatPipe]
 })
 export class ThyAudioControlsComponent extends ThyVideoControlsComponent implements OnInit {

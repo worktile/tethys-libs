@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThyTokenService } from '@tethys/auth';
 import { ThyGlobalStore } from '@tethys/pro/core';
@@ -10,6 +10,7 @@ import { ThyGlobalStore } from '@tethys/pro/core';
     host: {
         class: 'thy-layout'
     },
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class BasicLayoutComponent implements OnInit {
