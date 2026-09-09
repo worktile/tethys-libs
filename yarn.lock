@@ -3488,10 +3488,10 @@
   resolved "https://registry.npmmirror.com/@standard-schema/spec/-/spec-1.1.0.tgz#a79b55dbaf8604812f52d140b2c9ab41bc150bb8"
   integrity sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==
 
-"@tethys/cdk@^22.0.0-next.0":
-  version "22.0.0-next.0"
-  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-22.0.0-next.0.tgz#c21500a1f9a5045ffd7f7bda532dae461f28cfe0"
-  integrity sha512-tAg4E+3TEDSjpPE17askw93D4bcoeXl+lCdU6nuoszHbf8xyMBj4Q1Kn7yhradY1zPKHCvzLHLQ42H8KXqP3Tg==
+"@tethys/cdk@^22.0.0":
+  version "22.0.0"
+  resolved "https://registry.npmjs.org/@tethys/cdk/-/cdk-22.0.0.tgz#7c8dea7c4aacdf58f38aa708aa5cb5f75dfd1b38"
+  integrity sha512-0szA23FlJOJ8KpGPYhrcDqtgKIXNPDzXHdTzXr0J+trPEeQTuFzjRndLz0MoQ18k1aqrHLGrX6/3Pllbj+vIiA==
   dependencies:
     tslib "^2.3.0"
 
@@ -3500,10 +3500,10 @@
   resolved "https://registry.npmjs.org/@tethys/icons/-/icons-1.4.97.tgz#4a3c47db01bbf9896216624033561b4c0f12c56b"
   integrity sha512-kBgaVA1Ra8hQ1vVhm2eo/DsnXFMygNhGMHF6N/WLFeOn8KGrKdN2qk8oeXN1bJ3wwG3ok2IPn4iUoJh33z+yNg==
 
-"@tethys/store@22.0.0-next.0":
-  version "22.0.0-next.0"
-  resolved "https://registry.npmjs.org/@tethys/store/-/store-22.0.0-next.0.tgz#07516f6b7faca0f718459851f32edcce4328a87d"
-  integrity sha512-5wD/Bke4Qncq0/HWbxcpRASblROrxAH9fQx2baCsJLk50vhmjwtOR43aRETfAmqShjznqkh9JlfiK+Lqc671bQ==
+"@tethys/store@22.0.0":
+  version "22.0.0"
+  resolved "https://registry.npmjs.org/@tethys/store/-/store-22.0.0.tgz#8084f044f391b0519de1faa8de69f7466f3e8ea3"
+  integrity sha512-cz3dN8aInBpPpZrf27NDxpEmKgFLKCvNJ085R27C9ofXb97bTSmiHZeXxzA3napmqcQbCEs1GxLaQoptuJZhrA==
   dependencies:
     tslib "^2.0.0"
 
@@ -10046,10 +10046,10 @@ ng-packagr@^22.1.1:
   optionalDependencies:
     rollup "^4.24.0"
 
-ngx-tethys@22.0.0-next.0:
-  version "22.0.0-next.0"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-22.0.0-next.0.tgz#bd4906ea73d3fabe2748f2a76f51ce9b42b2bad4"
-  integrity sha512-xjA7PlkeKc8WHWv7s/8UEgbNia/l+mmgiUYXz1q6LOR31cMyfruf9h5H4H4nlEv8Bamad+rKG+spGSs1z7tLJA==
+ngx-tethys@22.0.0:
+  version "22.0.0"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-22.0.0.tgz#d785614a2b29a1a8647de110a9ea6cc5aad5c218"
+  integrity sha512-lHdkSiVyaj+35ogLyAra5kBt9Eq8OKPf84ftK2StiepGtdj4WVhAbq/mVolme2noK6BaJDaCbFtq9fu1ETX52w==
   dependencies:
     tslib "^2.3.0"
 
