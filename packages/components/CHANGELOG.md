@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.0.0](https://github.com/tethys-org/libs/compare/v22.0.0-next.0...v22.0.0) (2026-09-09)
+
+### Bug Fixes
+
+- **components:** replace link-secondary with thyAppearance link ([a85bc2e](https://github.com/tethys-org/libs/commit/a85bc2efa85d449dc7c159c5105b281e7148f69d))
+
 # [22.0.0-next.0](https://github.com/tethys-org/libs/compare/v21.0.3...v22.0.0-next.0) (2026-09-02)
 
 **Note:** Version bump only for package @tethys/pro
