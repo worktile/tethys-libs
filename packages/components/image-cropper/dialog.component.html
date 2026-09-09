@@ -48,6 +48,6 @@
 </thy-dialog-body>
 
 <thy-dialog-footer thyShowBorderTop="true" [thyAlign]="'right'">
-  <button class="cancel" thyButton="link-secondary" (click)="close()">{{ locale().cancel }}</button>
+  <button class="cancel" thyButton="default" thyAppearance="link" (click)="close()">{{ locale().cancel }}</button>
   <button thyButton="primary" [thyLoading]="saving" [thyLoadingText]="locale().uploading" (click)="save()">{{ locale().ok }}</button>
 </thy-dialog-footer>
