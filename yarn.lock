@@ -10046,10 +10046,10 @@ ng-packagr@^22.1.1:
   optionalDependencies:
     rollup "^4.24.0"
 
-ngx-tethys@22.0.0:
-  version "22.0.0"
-  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-22.0.0.tgz#d785614a2b29a1a8647de110a9ea6cc5aad5c218"
-  integrity sha512-lHdkSiVyaj+35ogLyAra5kBt9Eq8OKPf84ftK2StiepGtdj4WVhAbq/mVolme2noK6BaJDaCbFtq9fu1ETX52w==
+ngx-tethys@22.0.1:
+  version "22.0.1"
+  resolved "https://registry.npmjs.org/ngx-tethys/-/ngx-tethys-22.0.1.tgz#549a4015e462e0723cb7eb97487377e42d23c1b8"
+  integrity sha512-pE6njP/nWpP6xrACJloaPUnto5HluuPyzc8SGXRUscXZR56MWVwPaeJeclTG+zqtNpO6Q6R7QK+oiZ3LVmOR/w==
   dependencies:
     tslib "^2.3.0"
 

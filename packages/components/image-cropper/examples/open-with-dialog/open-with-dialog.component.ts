@@ -12,7 +12,7 @@ import { of } from 'rxjs';
 export class ThyOpenWithDialogExampleComponent implements OnInit {
     constructor(public dialog: ThyDialog) {}
 
-    image = 'https://cdn.worktile.com/open-sources/ngx-tethys/logos/tethys.png?100';
+    image = 'https://cdn-tc.worktile.com/open-sources/ngx-tethys/logos/tethys.png';
 
     ngOnInit(): void {}
 

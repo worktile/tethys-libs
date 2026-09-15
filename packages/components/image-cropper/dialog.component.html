@@ -20,7 +20,7 @@
         [(ngModel)]="scale"
         thySize="sm"
       ></thy-slider>
-      <div><button thyButtonIcon="rotate-right" class="pl-2" (click)="setRotate()"></button></div>
+      <div><button thyButtonIcon="rotate-right" class="pl-2" (click)="setRotate()" thySize="lg"></button></div>
     </div>
     <div class="avatar-text-desc">
       <thy-file-select
@@ -48,6 +48,8 @@
 </thy-dialog-body>
 
 <thy-dialog-footer thyShowBorderTop="true" [thyAlign]="'right'">
-  <button class="cancel" thyButton="default" thyAppearance="link" (click)="close()">{{ locale().cancel }}</button>
-  <button thyButton="primary" [thyLoading]="saving" [thyLoadingText]="locale().uploading" (click)="save()">{{ locale().ok }}</button>
+  <button class="cancel" thyButton="default" thyAppearance="link" (click)="close()" thySize="lg">{{ locale().cancel }}</button>
+  <button thyButton="primary" [thyLoading]="saving" [thyLoadingText]="locale().uploading" (click)="save()" thySize="lg">
+    {{ locale().ok }}
+  </button>
 </thy-dialog-footer>
