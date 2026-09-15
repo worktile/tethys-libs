@@ -9,7 +9,7 @@ import { ThyDialog } from 'ngx-tethys/dialog';
 export class ThyImageCropperBasicExampleComponent implements OnInit {
     constructor(public dialog: ThyDialog) {}
 
-    image = 'https://cdn.worktile.com/open-sources/ngx-tethys/logos/tethys.png?100';
+    image = 'https://cdn-tc.worktile.com/open-sources/ngx-tethys/logos/tethys.png';
 
     ngOnInit(): void {}
 }

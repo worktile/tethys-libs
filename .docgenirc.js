@@ -8,7 +8,7 @@ module.exports = {
     description: '',
     docsDir: 'docs',
     repoUrl: 'git+https://github.com/worktile/tethys-libs.git',
-    logoUrl: 'https://cdn.worktile.com/open-sources/ngx-tethys/logos/tethys.png?100',
+    logoUrl: 'https://cdn-tc.worktile.com/open-sources/ngx-tethys/logos/tethys.png',
     navs: [
         null,
         {

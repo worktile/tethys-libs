@@ -24,11 +24,11 @@
         <thy-form-group thyLabelText="密码" thyLabelRequired>
           <thy-input
             thySize="lg"
-            type="password"
+            thyType="password"
             name="password"
             [(ngModel)]="model.password"
             required
-            placeholder="请输入密码（123456）"
+            thyPlaceholder="请输入密码（123456）"
           ></thy-input>
         </thy-form-group>
         <thy-form-group>
@@ -68,7 +68,7 @@
           />
         </thy-form-group>
         <thy-form-group thyLabelText="验证码" thyLabelRequired>
-          <thy-input thySize="lg" type="code" name="code" [(ngModel)]="model.code" required placeholder="请输入验证码">
+          <thy-input thySize="lg" thyType="code" name="code" [(ngModel)]="model.code" required thyPlaceholder="请输入验证码">
             <ng-template #append>
               <button [disabled]="!!form.controls.mobile.invalid" thyButton="primary" thySize="sm">获取验证码</button>
               <!-- <thy-countdown #countdown>
